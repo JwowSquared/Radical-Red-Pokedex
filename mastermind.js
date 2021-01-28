@@ -61,9 +61,9 @@ function newGame() {
 					alert("Only complete guesses can be submitted.");
 				}
 			}
-		}
-		if (idx > 9) {
-			alert("You Lose! Solution was " + solution + ".");
+			if (idx > 9) {
+				alert("You Lose! Solution was " + solution + ".");
+			}
 		}
 	}, false);
 	next = document.getElementsByClassName("next")[0];
