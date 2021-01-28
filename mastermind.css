@@ -1,0 +1,77 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+h1 {
+	text-align: center;
+	margin: 20px;
+}
+
+.restart {
+	width: 90px;
+	height: 90px;
+	border: solid 3px black;
+	text-align: center;
+	line-height: 90px;
+	font-size: 15px;
+	background-color: #00910a;
+	position: absolute;
+	left: 30px;
+	top: 30px;
+}
+
+.next {
+	width: 90px;
+	height: 90px;
+	border: solid 3px black;
+	text-align: center;
+	line-height: 90px;
+	font-size: 30px;
+	background-color: #00910a;
+	position: absolute;
+	left: 30px;
+	top: 160px;
+}
+
+.next:hover, .restart:hover {
+	background-color: #3dba46;
+}
+
+#board {
+	width: 700px;
+	margin: auto;
+	background-color: #777;
+	overflow: auto;
+	border: solid 4px black;
+	position: relative;
+	padding-top: 50px;
+}
+
+.row {
+	padding: 30px;
+	clear: left;
+}
+
+.holder, .guess {
+	width: 100px;
+	height: 100px;
+	float: left;
+}
+
+.guess {
+	border: solid 2px black;
+	margin-left: 25px;
+	border-radius: 50px;
+	background-color: DarkSlateGray;
+}
+
+.peg {
+	background-color: CadetBlue;
+	width: 38px;
+	height: 38px;
+	margin: 5px;
+	border: solid thin black;
+	border-radius: 20px;
+	float: left;
+}
