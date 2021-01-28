@@ -1,4 +1,4 @@
-[2;2R[2;2R globals
+// declare globals
 var colors = ["red", "blue", "yellow", "green", "black", "white"];
 var next;
 var code;
