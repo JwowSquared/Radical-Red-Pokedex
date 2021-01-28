@@ -1,16 +1,21 @@
-// declare globals
+[2;2R[2;2R globals
 var colors = ["red", "blue", "yellow", "green", "black", "white"];
 var next;
 var code;
-var solution;
+var solution = "";
 var idx;
 var gameLive;
 
 //This is the only function I call directly
+alert("Welcome to Mastermind!\nGuess the combination of 4 random colors.\nClick the circles to cycle through the colors!");
 newGame();
 
 // a whole bunch of functions
 function newGame() {
+	if (solution != "") {
+		alert("Previous solution was " + solution + ".");
+	}
+
 	code = genCode();
 	solution = genSolution();
 	idx = -1;
