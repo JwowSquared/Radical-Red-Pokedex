@@ -63,6 +63,7 @@ function newGame() {
 			}
 			if (idx > 9) {
 				alert("You Lose! Solution was " + solution + ".");
+				solution = "";
 			}
 		}
 	}, false);
