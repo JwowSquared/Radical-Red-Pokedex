@@ -1,5 +1,3 @@
-//What is happening
-
 var colors = ["red", "blue", "yellow", "green", "black", "white"];
 var next;
 var code;
@@ -55,6 +53,7 @@ function newGame() {
 					if (checkWin(fullGuess)) {
 						gameLive = false;
 						alert("You Won! Solution was " + solution + ".");
+						solution = "";
 					} else {
 						idx++;
 					}
