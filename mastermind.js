@@ -1,4 +1,3 @@
-// declare globals
 var colors = ["red", "blue", "yellow", "green", "black", "white"];
 var next;
 var code;
