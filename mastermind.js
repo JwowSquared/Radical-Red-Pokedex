@@ -57,7 +57,9 @@ function newGame() {
 						solution = "";
 					} else {
 						idx++;
-						prepRow();
+						if (idx <= 9) {
+							prepRow();
+						}
 					}
 				} else {
 					alert("Only complete guesses can be submitted.");
