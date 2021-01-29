@@ -132,7 +132,7 @@ function cycleDown(el) {
 			i = 5;
 		}
 		else {
-			i++;
+			i--;
 		}
 		el.style.backgroundColor = colors[i];
 	}
