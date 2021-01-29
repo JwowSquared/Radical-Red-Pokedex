@@ -6,7 +6,7 @@ var idx;
 var gameLive;
 
 //This is the only function I call directly
-alert("Welcome to Mastermind!\nGuess the combination of 4 random colors.\nClick the circles to cycle through the colors!");
+alert("Welcome to Mastermind!\nGuess the combination of 4 random colors.\nLeft click the circles to cycle through the colors!\nRight click to cycle backwards!\n6 colors in total, 10 guesses!");
 newGame();
 
 // a whole bunch of functions
@@ -45,6 +45,7 @@ function newGame() {
 		if (gameLive && idx < 10) {
 			if (idx == -1) {
 				idx++;
+				prepRow();
 				this.innerHTML = "Submit";
 			} else {
 				fullGuess = getGuess();
@@ -56,6 +57,7 @@ function newGame() {
 						solution = "";
 					} else {
 						idx++;
+						prepRow();
 					}
 				} else {
 					alert("Only complete guesses can be submitted.");
@@ -110,7 +112,7 @@ function findIndex(arr, obj) {
 	return (-1);
 }
 
-function cycleColor(el) {
+function cycleUp(el) {
 	if (gameLive && checkRound(el)) {
 		var i = findIndex(colors, el.style.backgroundColor);
 		if (i == -1 || i == 5) {
@@ -120,6 +122,28 @@ function cycleColor(el) {
 			i++;
 		}
 		el.style.backgroundColor = colors[i];
+	}
+}
+
+function cycleDown(el) {
+	if (gameLive && checkRound(el)) {
+		var i = findIndex(colors, el.style.backgroundColor);
+		if (i == -1 || i == 0) {
+			i = 5;
+		}
+		else {
+			i++;
+		}
+		el.style.backgroundColor = colors[i];
+	}
+}
+
+function prepRow() {
+	var row = document.getElementsByClassName("row")[idx];
+	var slots = row.children;
+	var i;
+	for (i = 1; i < slots.length; i++) {
+		slots[i].style.backgroundColor = colors[0];
 	}
 }
 
@@ -214,7 +238,11 @@ function createBoard() {
 			guess = document.createElement("div");
 			guess.className = "guess";
 			guess.addEventListener("click", function (){
-				cycleColor(this);
+				cycleUp(this);
+			}, false);
+			guess.addEventListener("contextmenu", function (e){
+				e.preventDefault();
+				cycleDown(this);
 			}, false);
 			row.appendChild(guess);
 		}
