@@ -387,8 +387,7 @@ let rawCaps = [
 			"Route 23",
 			"Cerulean Cave",
 			"Cerulean Cave 1 F",
-			"Cerulean Cave 2 F",
-			"Cerulean Cave B 1 F"
+			"Cerulean Cave 2 F"
 		],
 		"Methods": [
 			"Raid 5 Star"
@@ -401,8 +400,7 @@ let rawCaps = [
 		"Items": {
 			"All": [
 				"ITEM_SNORLAXITE",
-				"ITEM_DIANCITE",
-				"ITEM_GARCHOMPITE"
+				"ITEM_DIANCITE"
 			],
 			"Normal": ["ITEM_CHARIZARDITE_Y"],
 			"Hardcore": ["ITEM_CHARIZARDITE_X"]
@@ -413,13 +411,16 @@ let rawCaps = [
 		"ID": 13,
 		"Normal": 80,
 		"Hardcore": 80,
-		"Locations": [],
+		"Locations": [
+			"Cerulean Cave B 1 F"
+			],
 		"Methods": [],
 		"Locked": {},
 		"Items": {
 			"All": [
 				"ITEM_MAWILITE",
-				"ITEM_HOUNDOOMINITE"
+				"ITEM_HOUNDOOMINITE",
+				"ITEM_GARCHOMPITE"
 			],
 			"Normal": [],
 			"Hardcore": []
