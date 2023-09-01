@@ -1,16 +1,70 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title></title>
-  <link href="style.css" rel="stylesheet" />
-</head>
-<body>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<h1>Radical Red Pokedex is currently unavailable at owner's request.</h1>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  <script>
-  </script>
-</body>
+    <title>Radical Red Online Pokedex</title>
+  </head>
+  <body>
+  
+    <table class="table table-striped table-dark table-bordered table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Sprite</th>
+      <th scope="col">Name</th>
+      <th scope="col">Type</th>
+      <th scope="col">Abilities</th>
+      <th scope="col">HP</th>
+      <th scope="col">Atk</th>
+      <th scope="col">Def</th>
+      <th scope="col">SpA</th>
+      <th scope="col">SpD</th>
+      <th scope="col">Spe</th>
+      <th scope="col">BST</th>
+    </tr>
+  </thead>
+  <tbody id="speciesTable">
+  </tbody>
+</table>
+
+    <!-- Optional JavaScript -->
+	<script src="data/species.js"></script>
+	<script src="data/abilities.js"></script>
+	<script src="data/moves.js"></script>
+	<script src="data/locations.js"></script>
+	<script>
+	
+	const speciesTable = document.getElementById("speciesTable");
+	
+	for (key in species) {
+		let currentRow = document.createElement("tr");
+		let mon = species[key];
+		currentRow.innerHTML = `<th scope="col">${mon.dexNum}</th>
+		<th scope="col"><img src=${mon.sprite} height=64 width=64></th>
+		<th scope="col">${mon.name}</th>
+		<th scope="col">${mon.types[0]}${mon.types[1]}</th>
+		<th scope="col">${abilities[mon.abilities[0]].name}${abilities[mon.abilities[1]].name}${abilities[mon.abilities[2]].name}</th>
+		<th scope="col">${mon.stats[0]}</th>
+		<th scope="col">${mon.stats[1]}</th>
+		<th scope="col">${mon.stats[2]}</th>
+		<th scope="col">${mon.stats[3]}</th>
+		<th scope="col">${mon.stats[4]}</th>
+		<th scope="col">${mon.stats[5]}</th>
+		<th scope="col">${mon.stats[6]}</th>`;
+		speciesTable.appendChild(currentRow);
+	}
+	
+	
+	</script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
 </html>
