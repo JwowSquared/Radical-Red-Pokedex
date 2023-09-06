@@ -1,0 +1,158 @@
+body {
+	background-color: #222222;
+}
+
+#tableWrapper {
+    max-width: 1200px;
+    margin-inline: auto;
+	margin-top: 10rem;
+    text-align: center;
+    
+}
+
+.table {
+	width: 90%;
+	margin-inline: auto;
+	user-select: none;
+	cursor: pointer;
+	box-shadow: black 2px 2px 8px 0px;
+}
+
+.sortLocked {
+	cursor: auto;
+}
+
+.active, th[ID]:hover {
+	background: rgba(255, 255, 255, 0.075);
+}
+
+.sortAscending::before {
+	content: "↑";
+}
+.sortDescending::before {
+	content: "↓";
+}
+
+.table td, .table th {
+	padding: 0.4rem;
+	vertical-align: middle!important;
+}
+
+.table th {
+	font-weight: 700;
+}
+
+.speciesRow {
+	height: 85.8px;
+}
+
+.speciesDexIDCell {
+	min-width: 67.9px;
+	font-weight: 700;
+}
+
+td.speciesSpriteCell {
+	padding: 0px;
+}
+
+.speciesSprite {
+	height: 64px;
+	width: 64px;
+}
+
+.speciesNameCell {
+	min-width: 120.6px;
+}
+
+.speciesRegion, .speciesForm {
+	font-style: italic;
+}
+
+.speciesName {
+	font-weight: 700;
+}
+
+.speciesTypeCell {
+	min-width: 165.4px;
+}
+
+.speciesType {
+	width: 70.3px;
+	padding: 2px;
+	display: inline-block;
+	border-radius: 5px;
+	margin: 2px 3px;
+	font-weight: 550;
+	text-shadow: 1px 1px black;
+}
+
+.speciesAbilitiesCell {
+	min-width: 148.2px;
+	font-style: italic;
+}
+
+.speciesAbilityHidden {
+	font-weight: 700;
+}
+
+.speciesStatCell {
+	min-width: 51.1px;
+}
+
+.speciesStatLabel {
+	font-style: italic;
+}
+
+@media (max-width: 991.98px) {
+	
+	.table {
+		min-width: 487px;
+	}
+	
+	.sortLocked {
+		display: none;
+	}
+	
+	.table td {
+		border: none;
+	}
+	
+	.table th[ID] {
+		display: inline-block;
+		width: 20%;
+		border: none;
+	}
+	
+	.speciesRow {
+		display: block;
+		position: relative;
+		height: 168px;
+	}
+	
+	.speciesRow td {
+		display: inline-block;
+	}
+	
+	.speciesDexIDCell {
+		position: absolute;
+		left: 26%;
+		top: 15px;
+	}
+	
+	.speciesSpriteCell, .speciesNameCell, .speciesTypeCell {
+		width: 33%;
+	}
+	
+	.speciesAbilitiesCell {
+		width: 100%;
+	}
+	
+	.speciesAbilityPrimary, .speciesAbilitySecondary, .speciesAbilityHidden {
+		display: inline-block;
+		width: 33%;
+	}
+	
+	.speciesStatCell {
+		width: 14%;
+	}
+}
