@@ -16,6 +16,8 @@ body {
 	user-select: none;
 	cursor: pointer;
 	box-shadow: black 2px 2px 8px 0px;
+	position: relative;
+	z-index: 0;
 }
 
 .sortLocked {
@@ -38,7 +40,14 @@ body {
 	vertical-align: middle!important;
 }
 
-.table th {
+.sortControl {
+	background-color: rgb(42, 48, 54);
+	position: sticky;
+	top: -1px;
+	z-index: 1;
+}
+
+.sortControl th {
 	font-weight: 700;
 }
 

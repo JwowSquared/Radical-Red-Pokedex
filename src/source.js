@@ -10,15 +10,15 @@ const propComparator = (library, property) =>
 const subpropComparator = (library, property, subproperty) =>
   (a, b) => library[a.key][property][subproperty] == library[b.key][property][subproperty] ? 0 : library[a.key][property][subproperty] < library[b.key][property][subproperty] ? -1 : 1;
 
+document.getElementById("speciesInput").oninput = function () {
+	searchSpecies(this.value);
+};
 document.getElementById("sortDexID").onclick = function() {
 	sortSpeciesTracker(this, "dexID");
 };
 document.getElementById("sortName").onclick = function() {
 	sortSpeciesTracker(this, "name");
 };
-//document.getElementById("sortType").onclick = function() {
-//	sortSpeciesTracker(this, "type", "primary");
-//};
 document.getElementById("sortAbility").onclick = function() {
 	sortSpeciesTracker(this, "ability", "primary");
 };
@@ -49,6 +49,28 @@ window.onscroll = function(ev) {
        loadChunk(false);
     }
 };
+
+function searchSpecies(inputValue) {
+	
+	clearFilter("input");
+	if (inputValue.length < 2)
+		return;
+	
+	for (const target of speciesTracker) {
+		if (!species[target.key].name.toLowerCase().includes(inputValue))
+			target.filters.push("input");
+	}
+	loadChunk(true);
+}
+
+function clearFilter(name) {
+	for (const target of speciesTracker) {
+		for (let i = 0; i < target.filters.length; i++) {
+			if (name === target.filters[i])
+				target.filters.splice(i, 1);
+		}
+	}
+}
 
 function sortSpeciesTracker(sortCategory, property, subproperty=null) {
 	sortTracker(sortCategory, speciesTracker, species, property, subproperty);
@@ -99,6 +121,7 @@ function loadChunk(toClear) {
 	if (toClear) {
 		speciesTableBody.innerText = "";
 		trackerIndex = 0;
+		window.scrollTo(0, 0);
 	}
 	
 	while (rowsAdded < rowsToAdd && trackerIndex < speciesTracker.length) {
