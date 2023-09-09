@@ -1,4 +1,11 @@
-let spriteFolder = "https://raw.githubusercontent.com/JwowSquared/JwowSquared.github.io/master/data/frontspr/";
+let repo = "JwowSquared/JwowSquared.github.io";
+
+let species = {};
+let sprites = {};
+let abilities = {};
+let moves = {};
+let locations = {};
+let types = {};
 
 let speciesTableBody = document.querySelector("#speciesTable > tbody");
 let speciesTracker = [];
@@ -53,13 +60,14 @@ window.onscroll = function(ev) {
 function searchSpecies(inputValue) {
 	
 	clearFilter("input");
-	if (inputValue.length < 2)
-		return;
 	
-	for (const target of speciesTracker) {
-		if (!species[target.key].name.toLowerCase().includes(inputValue))
-			target.filters.push("input");
+	if (inputValue.length > 1) {
+		for (const target of speciesTracker) {
+			if (!species[target.key].name.toLowerCase().includes(inputValue))
+				target.filters.push("input");
+		}
 	}
+	
 	loadChunk(true);
 }
 
@@ -102,7 +110,35 @@ function sortTracker(sortCategory, tracker, library, property, subproperty) {
 	loadChunk(true);
 }
 
-function onStartup() {
+async function onStartup() {
+	
+	let requests = [];
+	requests.push(new Request(`https://raw.githubusercontent.com/${repo}/master/data/species.js`));
+	requests.push(new Request(`https://raw.githubusercontent.com/${repo}/master/data/sprites.js`));
+	requests.push(new Request(`https://raw.githubusercontent.com/${repo}/master/data/abilities.js`));
+	requests.push(new Request(`https://raw.githubusercontent.com/${repo}/master/data/moves.js`));
+	requests.push(new Request(`https://raw.githubusercontent.com/${repo}/master/data/locations.js`));
+	requests.push(new Request(`https://raw.githubusercontent.com/${repo}/master/data/types.js`));
+	
+	const cache = await caches.open("rrdex 1");
+	
+	let responses = [];
+	for (let i = 0; i < requests.length; i++) {
+		let response = await cache.match(requests[i]);
+		if (!response) {
+			response = await fetch(requests[i]);
+			cache.put(requests[i], response);
+		}
+		responses.push(response);
+	}
+	
+	species = responses[0].json();
+	sprites = responses[1].json();
+	abilities = responses[2].json();
+	moves = responses[3].json();
+	locations = responses[4].json();
+	types = responses[5].json();
+	
 	setupTables();
 	document.getElementById("sortDexID").click();
 	loadChunk(true);
@@ -131,6 +167,35 @@ function loadChunk(toClear) {
 		}
 		trackerIndex++;
 	}
+}
+
+function getSprite(key) {
+	if (sprites[key])
+		return sprites[key];
+	
+	const canvas = document.createElement("canvas");
+	canvas.width = 64;
+	canvas.height = 64;
+	const ctx = canvas.getContext("2d");
+	const img = new Image();
+	img.onload = function () {
+		ctx.drawImage(img, 0, 0);
+		const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+	
+		for ( let i = 0; i < imageData.data.length; i += 4) {
+			if (imageData.data[i] === imageData.data[0] && 
+				imageData.data[i + 1] === imageData.data[1] &&
+				imageData.data[i + 2] === imageData.data[2])
+				imageData.data[i + 3] = 0;
+		}
+		ctx.putImageData(imageData, 0, 0);
+		img.onload = null;
+		img.src = canvas.toDataURL();
+	}
+	sprites[key] = img;
+	img.crossOrigin = "";
+	img.src = spriteFolder + species[key].sprite;
+	return img;
 }
 
 function displaySpeciesPanel(key) {
@@ -169,12 +234,8 @@ function appendSpriteCell(row, key) {
 	cell.scope = "col";
 	cell.className = "speciesSpriteCell";
 	
-	let img = document.createElement("img");
-	img.className = "speciesSprite";
-	img.src = spriteFolder + species[key].sprite;
-	//remove background somehow?
+	cell.appendChild(getSprite(key));
 	
-	cell.appendChild(img);
 	row.appendChild(cell);
 }
 

@@ -2,10 +2,26 @@ body {
 	background-color: #222222;
 }
 
+#speciesControl {
+	padding: 30px;
+}
+
+#speciesInput {
+	display: block;
+    margin: auto;
+    padding: 0.2rem;
+    border-radius: 3px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-sizing: border-box;
+    background: none;
+    color: white;
+    font-weight: 550;
+    width: 300px;
+}
+
 #tableWrapper {
     max-width: 1200px;
     margin-inline: auto;
-	margin-top: 10rem;
     text-align: center;
     
 }
@@ -24,7 +40,7 @@ body {
 	cursor: auto;
 }
 
-.active, th[ID]:hover {
+.active, th[ID]:hover, #speciesInput:hover, #speciesInput:focus {
 	background: rgba(255, 255, 255, 0.075);
 }
 
@@ -133,9 +149,11 @@ td.speciesSpriteCell {
 	}
 	
 	.speciesRow {
-		display: block;
 		position: relative;
-		height: 168px;
+		height: 180px;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
 	}
 	
 	.speciesRow td {
@@ -144,12 +162,19 @@ td.speciesSpriteCell {
 	
 	.speciesDexIDCell {
 		position: absolute;
-		left: 26%;
-		top: 15px;
+		left: 21%;
+		top: 24px;
 	}
 	
 	.speciesSpriteCell, .speciesNameCell, .speciesTypeCell {
 		width: 33%;
+	}
+	
+	td.speciesNameCell {
+		height: 84.8px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
 	
 	.speciesAbilitiesCell {

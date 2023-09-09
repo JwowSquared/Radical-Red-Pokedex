@@ -1,4 +1,4 @@
-let types = {
+{
     "TYPE_NORMAL": {
         "defensive": {
             "TYPE_NORMAL": 1,
@@ -40,7 +40,8 @@ let types = {
             "TYPE_STEEL": 0.5,
             "TYPE_FAIRY": 1
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/normal.gif"
+        "name": "Normal",
+        "color": "#A8A77A"
     },
     "TYPE_FIRE": {
         "defensive": {
@@ -83,7 +84,8 @@ let types = {
             "TYPE_STEEL": 2,
             "TYPE_FAIRY": 1
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/fire.gif"
+        "name": "Fire",
+        "color": "#EE8130"
     },
     "TYPE_WATER": {
         "defensive": {
@@ -126,7 +128,8 @@ let types = {
             "TYPE_STEEL": 1,
             "TYPE_FAIRY": 1
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/water.gif"
+        "name": "Water",
+        "color": "#6390F0"
     },
     "TYPE_ELECTRIC": {
         "defensive": {
@@ -169,7 +172,8 @@ let types = {
             "TYPE_STEEL": 1,
             "TYPE_FAIRY": 1
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/electric.gif"
+        "name": "Electric",
+        "color": "#cf9a09"
     },
     "TYPE_GRASS": {
         "defensive": {
@@ -212,7 +216,8 @@ let types = {
             "TYPE_STEEL": 0.5,
             "TYPE_FAIRY": 1
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/grass.gif"
+        "name": "Grass",
+        "color": "#62a13d"
     },
     "TYPE_ICE": {
         "defensive": {
@@ -255,7 +260,8 @@ let types = {
             "TYPE_STEEL": 0.5,
             "TYPE_FAIRY": 1
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/ice.gif"
+        "name": "Ice",
+        "color": "#65a19e"
     },
     "TYPE_FIGHTING": {
         "defensive": {
@@ -298,7 +304,8 @@ let types = {
             "TYPE_STEEL": 2,
             "TYPE_FAIRY": 0.5
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/fighting.gif"
+        "name": "Fighting",
+        "color": "#C22E28"
     },
     "TYPE_POISON": {
         "defensive": {
@@ -341,7 +348,8 @@ let types = {
             "TYPE_STEEL": 0,
             "TYPE_FAIRY": 2
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/poison.gif"
+        "name": "Poison",
+        "color": "#A33EA1"
     },
     "TYPE_GROUND": {
         "defensive": {
@@ -384,7 +392,8 @@ let types = {
             "TYPE_STEEL": 2,
             "TYPE_FAIRY": 1
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/ground.gif"
+        "name": "Ground",
+        "color": "#b1954f"
     },
     "TYPE_FLYING": {
         "defensive": {
@@ -427,7 +436,8 @@ let types = {
             "TYPE_STEEL": 0.5,
             "TYPE_FAIRY": 1
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/flying.gif"
+        "name": "Flying",
+        "color": "#8571be"
     },
     "TYPE_PSYCHIC": {
         "defensive": {
@@ -470,7 +480,8 @@ let types = {
             "TYPE_STEEL": 0.5,
             "TYPE_FAIRY": 1
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/psychic.gif"
+        "name": "Psychic",
+        "color": "#F95587"
     },
     "TYPE_BUG": {
         "defensive": {
@@ -513,7 +524,8 @@ let types = {
             "TYPE_STEEL": 0.5,
             "TYPE_FAIRY": 0.5
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/bug.gif"
+        "name": "Bug",
+        "color": "#808f13"
     },
     "TYPE_ROCK": {
         "defensive": {
@@ -556,7 +568,8 @@ let types = {
             "TYPE_STEEL": 0.5,
             "TYPE_FAIRY": 1
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/rock.gif"
+        "name": "Rock",
+        "color": "#B6A136"
     },
     "TYPE_GHOST": {
         "defensive": {
@@ -599,7 +612,8 @@ let types = {
             "TYPE_STEEL": 1,
             "TYPE_FAIRY": 1
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/ghost.gif"
+        "name": "Ghost",
+        "color": "#735797"
     },
     "TYPE_DRAGON": {
         "defensive": {
@@ -642,7 +656,8 @@ let types = {
             "TYPE_STEEL": 0.5,
             "TYPE_FAIRY": 0
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/dragon.gif"
+        "name": "Dragon",
+        "color": "#6F35FC"
     },
     "TYPE_DARK": {
         "defensive": {
@@ -685,7 +700,8 @@ let types = {
             "TYPE_STEEL": 1,
             "TYPE_FAIRY": 0.5
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/dark.gif"
+        "name": "Dark",
+        "color": "#705746"
     },
     "TYPE_STEEL": {
         "defensive": {
@@ -728,7 +744,8 @@ let types = {
             "TYPE_STEEL": 0.5,
             "TYPE_FAIRY": 2
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/steel.gif"
+        "name": "Steel",
+        "color": "#8c8c9e"
     },
     "TYPE_FAIRY": {
         "defensive": {
@@ -771,6 +788,7 @@ let types = {
             "TYPE_STEEL": 0.5,
             "TYPE_FAIRY": 1
         },
-        "sprite": "https://www.serebii.net/pokedex-bw/type/fairy.gif"
+        "name": "Fairy",
+        "color": "#D685AD"
     }
 }
