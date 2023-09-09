@@ -831,84 +831,115 @@ let regionalForms = [
 	["SPECIES_TAUROS_P_WATER", "Paldean"]
 ]
 
-for (const key in species) {
-    if (species[key].changes.length > 0) {
-        let oldAbilities = {};
-        let oldStats = {};
-        let oldType = {};
-        for (const change of species[key].changes) {
-            if (change[0] === "abilities") {
-                oldAbilities.primary = change[1][0];
-                oldAbilities.secondary = change[1][1];
-                oldAbilities.hidden = change[1][2];
-            }
-            if (change[0] === "type1")
-                oldType.primary = change[1];
-            if (change[0] === "type2")
-                oldType.secondary = change[1];
-            if (change[0] === "baseHP")
-                oldStats.HP = Number(change[1]);
-            if (change[0] === "baseAttack")
-                oldStats.attack = Number(change[1]);
-            if (change[0] === "baseDefense")
-                oldStats.defense = Number(change[1]);
-            if (change[0] === "baseSpAttack")
-                oldStats.specialAttack = Number(change[1]);
-            if (change[0] === "baseSpDefense")
-                oldStats.specialDefense = Number(change[1]);
-            if (change[0] === "baseSpeed")
-                oldStats.speed = Number(change[1]);
-        }
+function convertChanges {
+	for (const key in species) {
+		if (species[key].changes.length > 0) {
+			let oldAbilities = {};
+			let oldStats = {};
+			let oldType = {};
+			for (const change of species[key].changes) {
+				if (change[0] === "abilities") {
+					oldAbilities.primary = change[1][0];
+					oldAbilities.secondary = change[1][1];
+					oldAbilities.hidden = change[1][2];
+				}
+				if (change[0] === "type1")
+					oldType.primary = change[1];
+				if (change[0] === "type2")
+					oldType.secondary = change[1];
+				if (change[0] === "baseHP")
+					oldStats.HP = Number(change[1]);
+				if (change[0] === "baseAttack")
+					oldStats.attack = Number(change[1]);
+				if (change[0] === "baseDefense")
+					oldStats.defense = Number(change[1]);
+				if (change[0] === "baseSpAttack")
+					oldStats.specialAttack = Number(change[1]);
+				if (change[0] === "baseSpDefense")
+					oldStats.specialDefense = Number(change[1]);
+				if (change[0] === "baseSpeed")
+					oldStats.speed = Number(change[1]);
+			}
+	
+			let changes = [];
+			
+			if (oldAbilities.primary || oldAbilities.secondary || oldAbilities.hidden) {
+				if (!oldAbilities.primary)
+					oldAbilities.primary = species[key].ability.primary;
+				if (!oldAbilities.secondary)
+					oldAbilities.secondary = species[key].ability.secondary;
+				if (!oldAbilities.hidden)
+					oldAbilities.hidden = species[key].ability.hidden;
+	
+				if (oldAbilities.primary === "ABILITY_NONE")
+					delete oldAbilities.primary;
+				if (oldAbilities.secondary === "ABILITY_NONE")
+					delete oldAbilities.secondary;
+				if (oldAbilities.hidden === "ABILITY_NONE")
+					delete oldAbilities.hidden;
+	
+				changes.push("ability", oldAbilities);
+			}
+				
+			if (oldType.primary || oldType.secondary) {
+				if (!oldType.primary)
+					oldType.primary = species[key].type.primary;
+				if (!oldType.secondary)
+					oldType.secondary = species[key].type.secondary;
+	
+				if (oldType.primary === oldType.secondary)
+					delete oldType.secondary;
+	
+				changes.push("type", oldType);
+			}
+				
+			if (oldStats.HP || oldStats.attack || oldStats.defense || oldStats.specialAttack || oldStats.specialDefense || oldStats.speed) {
+				if (!oldStats.HP)
+					oldStats.HP = species[key].stats.HP;
+				if (!oldStats.attack)
+					oldStats.attack = species[key].stats.attack;
+				if (!oldStats.defense)
+					oldStats.defense = species[key].stats.defense;
+				if (!oldStats.specialAttack)
+					oldStats.specialAttack = species[key].stats.specialAttack;
+				if (!oldStats.specialDefense)
+					oldStats.specialDefense = species[key].stats.specialDefense;
+				if (!oldStats.speed)
+					oldStats.speed = species[key].stats.speed;
+	
+				changes.push("stats", oldStats);
+			}
+	
+			species[key].changes = changes;
+		}
+	}
+}
 
-        let changes = [];
-        
-        if (oldAbilities.primary || oldAbilities.secondary || oldAbilities.hidden) {
-            if (!oldAbilities.primary)
-                oldAbilities.primary = species[key].ability.primary;
-            if (!oldAbilities.secondary)
-                oldAbilities.secondary = species[key].ability.secondary;
-            if (!oldAbilities.hidden)
-                oldAbilities.hidden = species[key].ability.hidden;
-
-            if (oldAbilities.primary === "ABILITY_NONE")
-                delete oldAbilities.primary;
-            if (oldAbilities.secondary === "ABILITY_NONE")
-                delete oldAbilities.secondary;
-            if (oldAbilities.hidden === "ABILITY_NONE")
-                delete oldAbilities.hidden;
-
-            changes.push("ability", oldAbilities);
-        }
-            
-        if (oldType.primary || oldType.secondary) {
-            if (!oldType.primary)
-                oldType.primary = species[key].type.primary;
-            if (!oldType.secondary)
-                oldType.secondary = species[key].type.secondary;
-
-            if (oldType.primary === oldType.secondary)
-                delete oldType.secondary;
-
-            changes.push("type", oldType);
-        }
-            
-        if (oldStats.HP || oldStats.attack || oldStats.defense || oldStats.specialAttack || oldStats.specialDefense || oldStats.speed) {
-            if (!oldStats.HP)
-                oldStats.HP = species[key].stats.HP;
-            if (!oldStats.attack)
-                oldStats.attack = species[key].stats.attack;
-            if (!oldStats.defense)
-                oldStats.defense = species[key].stats.defense;
-            if (!oldStats.specialAttack)
-                oldStats.specialAttack = species[key].stats.specialAttack;
-            if (!oldStats.specialDefense)
-                oldStats.specialDefense = species[key].stats.specialDefense;
-            if (!oldStats.speed)
-                oldStats.speed = species[key].stats.speed;
-
-            changes.push("stats", oldStats);
-        }
-
-        species[key].changes = changes;
-    }
+function getSprite(key) {
+	if (sprites[key])
+		return sprites[key];
+	
+	const canvas = document.createElement("canvas");
+	canvas.width = 64;
+	canvas.height = 64;
+	const ctx = canvas.getContext("2d");
+	const img = new Image();
+	img.onload = function () {
+		ctx.drawImage(img, 0, 0);
+		const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+	
+		for ( let i = 0; i < imageData.data.length; i += 4) {
+			if (imageData.data[i] === imageData.data[0] && 
+				imageData.data[i + 1] === imageData.data[1] &&
+				imageData.data[i + 2] === imageData.data[2])
+				imageData.data[i + 3] = 0;
+		}
+		ctx.putImageData(imageData, 0, 0);
+		img.onload = null;
+		img.src = canvas.toDataURL();
+	}
+	sprites[key] = img;
+	img.crossOrigin = "";
+	img.src = spriteFolder + species[key].sprite;
+	return img;
 }
