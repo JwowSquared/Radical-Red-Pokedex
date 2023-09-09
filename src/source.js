@@ -111,37 +111,58 @@ function sortTracker(sortCategory, tracker, library, property, subproperty) {
 	loadChunk(true);
 }
 
+function showMessage(parent, message) {
+	let p = document.createElement("p");
+	p.innerText = message;
+	parent.append(p);
+}
+
 async function onStartup() {
 	
-	let requests = [];
-	requests.push(new Request(`https://raw.githubusercontent.com/${repo}/master/data/species.js`));
-	requests.push(new Request(`https://raw.githubusercontent.com/${repo}/master/data/sprites.js`));
-	requests.push(new Request(`https://raw.githubusercontent.com/${repo}/master/data/abilities.js`));
-	requests.push(new Request(`https://raw.githubusercontent.com/${repo}/master/data/moves.js`));
-	requests.push(new Request(`https://raw.githubusercontent.com/${repo}/master/data/locations.js`));
-	requests.push(new Request(`https://raw.githubusercontent.com/${repo}/master/data/types.js`));
-	requests.push(new Request(`https://raw.githubusercontent.com/${repo}/master/data/caps.js`));
-	
-	const cache = await caches.open("rrdex release 1.0");
-	
-	let responses = [];
-	for (let i = 0; i < requests.length; i++) {
-		let response = await cache.match(requests[i]);
-		if (!response) {
-			response = await fetch(requests[i]);
-			await cache.put(requests[i], response);
+	let loadingScreen = document.getElementById("loadingScreen");
+	let files = [
+		"species",
+		"sprites",
+		"abilities",
+		"moves",
+		"locations",
+		"types",
+		"caps"
+	];
+	try {
+		let requests = [];
+		for (let i = 0; i < files.length; i++)
+			requests.push(new Request(`https://raw.githubusercontent.com/${repo}/master/data/${files[i]}.js`));
+		
+		const cache = await caches.open("rrdex release 1.0");
+		
+		let responses = [];
+		for (let i = 0; i < requests.length; i++) {
+			showMessage(loadingScreen, `Loading ${files[i]}...`);
+			let response = await cache.match(requests[i]);
+			if (!response) {
+				response = await fetch(requests[i]);
+				await cache.put(requests[i], response);
+			}
+			responses.push(await cache.match(requests[i]));
 		}
-		responses.push(await cache.match(requests[i]));
-	}
-
-	species = await responses[0].json();
-	sprites = await responses[1].json();
-	abilities = await responses[2].json();
-	moves = await responses[3].json();
-	locations = await responses[4].json();
-	types = await responses[5].json();
-	caps = await responses[6].json();
 	
+		showMessage(loadingScreen, "Parsing JSON...");
+		species = await responses[0].json();
+		sprites = await responses[1].json();
+		abilities = await responses[2].json();
+		moves = await responses[3].json();
+		locations = await responses[4].json();
+		types = await responses[5].json();
+		caps = await responses[6].json();
+	}
+	catch (e) {
+		showMessage(loadingScreen, "Error encountered. Please wait a few minutes and refresh the page.");
+		showMessage("If that doesn't work, ping @Jwow in the Radical Red discord.");
+		return;
+	}
+	loadingScreen.className = "hide";
+	document.querySelector("main").className = "";
 	setupTables();
 	document.getElementById("sortDexID").click();
 }
