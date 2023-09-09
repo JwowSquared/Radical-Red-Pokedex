@@ -1,4 +1,4 @@
-let abilities = {
+{
     "ABILITY_NONE": {
         "name": "-------",
         "description": "No special ability.",

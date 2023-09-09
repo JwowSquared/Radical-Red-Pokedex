@@ -120,24 +120,26 @@ async function onStartup() {
 	requests.push(new Request(`https://raw.githubusercontent.com/${repo}/master/data/locations.js`));
 	requests.push(new Request(`https://raw.githubusercontent.com/${repo}/master/data/types.js`));
 	
-	const cache = await caches.open("rrdex 1");
+	const cache = await caches.open("rrdex 1c");
 	
 	let responses = [];
 	for (let i = 0; i < requests.length; i++) {
 		let response = await cache.match(requests[i]);
+		console.log(response);
 		if (!response) {
 			response = await fetch(requests[i]);
 			cache.put(requests[i], response);
+			response = await cache.match(requests[i]);
 		}
 		responses.push(response);
 	}
 	
-	species = responses[0].json();
-	sprites = responses[1].json();
-	abilities = responses[2].json();
-	moves = responses[3].json();
-	locations = responses[4].json();
-	types = responses[5].json();
+	species = await responses[0].json();
+	sprites = await responses[1].json();
+	abilities = await responses[2].json();
+	moves = await responses[3].json();
+	locations = await responses[4].json();
+	types = await responses[5].json();
 	
 	setupTables();
 	document.getElementById("sortDexID").click();

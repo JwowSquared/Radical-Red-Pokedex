@@ -1,4 +1,4 @@
-let moves = {
+{
     "MOVE_NONE": {
         "name": "None",
         "changes": [],

@@ -1,4 +1,4 @@
-let locations = {
+{
     "Pallet Town": {
         "Surfing": {
             "SPECIES_TENTACOOL": 90,
