@@ -20,27 +20,21 @@
 	  <div id="speciesControl">
 		<input type="text" id="speciesInput">
 	  </div>
-      <div id="tableWrapper">
-        <table id="speciesTable" class="align-middle table table-striped table-dark table-hover">
-          <thead>
-            <tr class="sortControl">
-              <th scope="col" id="sortDexID">#</th>
-              <th scope="col" class="sortLocked"></th>
-              <th scope="col" id="sortName">Name</th>
-              <th scope="col" class="sortLocked">Type</th>
-              <th scope="col" id="sortAbility">Abilities</th>
-              <th scope="col" id="sortHP">HP</th>
-              <th scope="col" id="sortAtk">Atk</th>
-              <th scope="col" id="sortDef">Def</th>
-              <th scope="col" id="sortSpA">SpA</th>
-              <th scope="col" id="sortSpD">SpD</th>
-              <th scope="col" id="sortSpe">Spe</th>
-              <th scope="col" id="sortBST">BST</th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
+	  <div id="speciesPanel">
+		<div id="speciesPanelPrimaryInfo">
+		</div>
+		<div id="speciesPanelLearnsets">
+		  <div id="speciesLearnsetLevelUpTable" class="tableWrapper">
+		  </div>
+		  <div id="speciesLearnsetTMHMTable" class="tableWrapper">
+		  </div>
+		  <div id="speciesLearnsetTutorTable" class="tableWrapper">
+		  </div>
+		  <div id="speciesLearnsetEggMovesTable" class="tableWrapper">
+		  </div>
+		</div>
+	  </div>
+      <div id="speciesTable" class="tableWrapper">
       </div>
 	</main>
     <!-- Optional JavaScript -->

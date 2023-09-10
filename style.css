@@ -33,11 +33,10 @@ body {
     width: 300px;
 }
 
-#tableWrapper {
+.tableWrapper {
     max-width: 1200px;
     margin-inline: auto;
     text-align: center;
-    
 }
 
 .table {
@@ -50,11 +49,22 @@ body {
 	z-index: 0;
 }
 
+.sortControls {
+	background-color: rgb(42, 48, 54);
+	position: sticky;
+	top: -1px;
+	z-index: 1;
+	font-weight: 700;
+}
+
+.table thead th {
+	border: none;
+}
+
 .sortLocked {
 	cursor: auto;
 }
-
-.active, th[ID]:hover, #speciesInput:hover, #speciesInput:focus {
+.active, .sortOption:hover, #speciesInput:hover, #speciesInput:focus {
 	background: rgba(255, 255, 255, 0.075);
 }
 
@@ -68,17 +78,6 @@ body {
 .table td, .table th {
 	padding: 0.4rem;
 	vertical-align: middle!important;
-}
-
-.sortControl {
-	background-color: rgb(42, 48, 54);
-	position: sticky;
-	top: -1px;
-	z-index: 1;
-}
-
-.sortControl th {
-	font-weight: 700;
 }
 
 .speciesRow {
@@ -156,7 +155,7 @@ td.speciesSpriteCell {
 		border: none;
 	}
 	
-	.table th[ID] {
+	.sortOption {
 		display: inline-block;
 		width: 20%;
 		border: none;

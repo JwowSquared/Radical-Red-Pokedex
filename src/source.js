@@ -8,9 +8,11 @@ let locations = null;
 let types = null;
 let caps = null;
 
-let speciesTableBody = document.querySelector("#speciesTable > tbody");
-let speciesTracker = [];
-let trackerIndex = 0;
+let trackers = {};
+
+function compareBasic(a, b) {
+	return a == b ? 0 : a < b ? -1 : 1;
+}
 
 const propComparator = (library, property) =>
   (a, b) => library[a.key][property] == library[b.key][property] ? 0 : library[a.key][property] < library[b.key][property] ? -1 : 1;
@@ -18,97 +20,13 @@ const propComparator = (library, property) =>
 const subpropComparator = (library, property, subproperty) =>
   (a, b) => library[a.key][property][subproperty] == library[b.key][property][subproperty] ? 0 : library[a.key][property][subproperty] < library[b.key][property][subproperty] ? -1 : 1;
 
-document.getElementById("speciesInput").oninput = function () {
-	searchSpecies(this.value);
-};
-document.getElementById("sortDexID").onclick = function() {
-	sortSpeciesTracker(this, "dexID");
-};
-document.getElementById("sortName").onclick = function() {
-	sortSpeciesTracker(this, "name");
-};
-document.getElementById("sortAbility").onclick = function() {
-	sortSpeciesTracker(this, "ability", "primary");
-};
-document.getElementById("sortHP").onclick = function() {
-	sortSpeciesTracker(this, "stats", "HP");
-};
-document.getElementById("sortAtk").onclick = function() {
-	sortSpeciesTracker(this, "stats", "attack");
-};
-document.getElementById("sortDef").onclick = function() {
-	sortSpeciesTracker(this, "stats", "defense");
-};
-document.getElementById("sortSpA").onclick = function() {
-	sortSpeciesTracker(this, "stats", "specialAttack");
-};
-document.getElementById("sortSpD").onclick = function() {
-	sortSpeciesTracker(this, "stats", "specialDefense");
-};
-document.getElementById("sortSpe").onclick = function() {
-	sortSpeciesTracker(this, "stats", "speed");
-};
-document.getElementById("sortBST").onclick = function() {
-	sortSpeciesTracker(this, "stats", "total");
-};
-
-window.onscroll = function(ev) {
-    if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
-       loadChunk(false);
-    }
-};
-
-function searchSpecies(inputValue) {
-	
-	clearFilter("input");
-	
-	if (inputValue.length > 1) {
-		for (const target of speciesTracker) {
-			if (!species[target.key].name.toLowerCase().includes(inputValue))
-				target.filters.push("input");
+function clearFilter(tracker, targetFilter) {
+	for (const [value, filters] of tracker.data) {
+		for (let i = 0; i < filters.length; i++) {
+			if (filters[i] === targetFilter)
+				filters.splice(i, 1);
 		}
 	}
-	
-	loadChunk(true);
-}
-
-function clearFilter(name) {
-	for (const target of speciesTracker) {
-		for (let i = 0; i < target.filters.length; i++) {
-			if (name === target.filters[i])
-				target.filters.splice(i, 1);
-		}
-	}
-}
-
-function sortSpeciesTracker(sortCategory, property, subproperty=null) {
-	sortTracker(sortCategory, speciesTracker, species, property, subproperty);
-}
-
-function sortTracker(sortCategory, tracker, library, property, subproperty) {
-	
-	let prevClass = sortCategory.className;
-	
-	for (const element of sortCategory.parentNode.querySelectorAll("th[ID]"))
-		element.className = "";
-	
-	sortCategory.className = "active sortAscending";
-	
-	if (prevClass === "") {
-		if (subproperty === null)
-			tracker.sort(propComparator(library, property));
-		else
-			tracker.sort(subpropComparator(library, property, subproperty));
-	}
-	else {
-		if (prevClass === "active sortAscending") {
-			sortCategory.className = "active sortDescending";
-		}
-	
-		tracker.reverse();
-	}
-	
-	loadChunk(true);
 }
 
 function showMessage(parent, message) {
@@ -158,53 +76,159 @@ async function onStartup() {
 	}
 	catch (e) {
 		showMessage(loadingScreen, "Error encountered. Please wait a few minutes and refresh the page.");
-		showMessage("If that doesn't work, ping @Jwow in the Radical Red discord.");
+		showMessage(loadingScreen, "If that doesn't work, ping @JwowSquared in the Radical Red discord.");
+		console.log(e);
 		return;
 	}
 	loadingScreen.className = "hide";
 	document.querySelector("main").className = "";
-	setupTables();
-	document.getElementById("sortDexID").click();
-}
-
-function setupTables() {
-	for (const key in species) {
-		speciesTracker.push({"key": key, "filters": []});
-	}
-}
-
-function loadChunk(toClear) {
-	let rowsToAdd = 50;
-	let rowsAdded = 0;
 	
-	if (toClear) {
-		speciesTableBody.innerText = "";
-		trackerIndex = 0;
-		window.scrollTo(0, 0);
-	}
+	setupTable("speciesTable", species, displaySpeciesRow, 50, sortSpeciesRow, [
+		["#", ["dexID"]],
+		["Sprite", []],
+		["Name", ["name"]],
+		["Type", []],
+		["Abilities", ["abilities", "primary"]],
+		["HP", ["stats", "HP"]],
+		["Atk", ["stats", "attack"]],
+		["Def", ["stats", "defense"]],
+		["SpA", ["stats", "specialAttack"]],
+		["SpD", ["stats", "specialDefense"]],
+		["Spe", ["stats", "speed"]],
+		["BST", ["stats", "total"]]
+	]);
 	
-	while (rowsAdded < rowsToAdd && trackerIndex < speciesTracker.length) {
-		if (speciesTracker[trackerIndex].filters.length === 0) {
-			appendSpeciesToTable(speciesTracker[trackerIndex].key);
-			rowsAdded++;
+	populateTable("speciesTable", Object.keys(species));
+	
+	window.onscroll = function(ev) {
+		if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+		loadChunk(trackers["speciesTable"], false);
 		}
-		trackerIndex++;
+	};
+}
+
+function setupTable(name, library, displayMethod, maxRows, sortMethod, sortOptions) {
+	let wrapper = document.getElementById(name);
+	if (!wrapper) {
+		console.log(`Table ${name} could not be created, wrapper missing.`);
+		return;
 	}
+	let table = document.createElement("table");
+	let thead = document.createElement("thead");
+	let tbody = document.createElement("tbody");
+	table.className = "align-middle table table-striped table-dark table-hover";
+	table.append(thead);
+	table.append(tbody);
+	wrapper.append(table);
+	
+	trackers[name] = {};
+	let tracker = trackers[name];
+	tracker.body = tbody;
+	tracker.library = library;
+	tracker.displayMethod = displayMethod;
+	tracker.maxRows = maxRows;
+	
+	let sortControls = document.createElement("tr");
+	sortControls.className = "sortControls";
+	thead.append(sortControls);
+	
+	for (const [sortLabel, sortProperties] of sortOptions) {
+		let sortOption = document.createElement("th");
+		sortControls.append(sortOption);
+		sortOption.innerText = sortLabel;
+		sortOption.className = "sortLocked";
+		if (sortProperties.length === 0)
+			continue;
+		sortOption.className = "sortOption";
+		sortOption.onclick = function () {
+			sortTracker(this, trackers[name], sortMethod, sortProperties);
+		};
+	}
+	tracker.sortControls = sortControls.getElementsByClassName("sortOption");
 }
 
-function displaySpeciesPanel(key) {
-	console.log(key);
+function populateTable(name, data) {
+	let tracker = trackers[name];
+	if (!tracker) {
+		console.log(`Tracker ${name} does not exist; cannot populate.`);
+		return;
+	}
+	
+	tracker.data = [];
+	for (const element of data)
+		tracker.data.push({"value": element, "filters": []});
+	
+	tracker.sortControls[0].click();
 }
 
-function appendSpeciesToTable(key) {
+function sortTracker(selectedOption, tracker, sortMethod, sortProperties) {
+	let prevClass = selectedOption.className;
+	
+	for (const option of tracker.sortControls)
+		option.className = "sortOption";
+	
+	selectedOption.className = "sortOption active sortAscending";
+	
+	if (prevClass === "sortOption") {
+		sortMethod(tracker, sortProperties);
+	}
+	else {
+		if (prevClass === "sortOption active sortAscending") {
+			selectedOption.className = "sortOption active sortDescending";
+		}
+	
+		tracker.data.reverse();
+	}
+	
+	loadChunk(tracker, true);
+}
 
+function basicCompare (a, b) {
+	return a == b ? 0 : a < b ? -1 : 1;
+}
+
+function sortSpeciesRow(tracker, properties) {
+	let library = tracker.library;
+	let compare = basicCompare;
+	function tiebreaker (a, b) {
+		let comp = basicCompare(library[a.value].dexID, library[b.value].dexID);
+		if (comp !== 0)
+			return comp;
+
+		comp = basicCompare(library[a.value].form.siblings.indexOf(a.value), library[b.value].form.siblings.indexOf(b.value));
+		if (comp !== 0)
+			return comp;
+		
+		comp = basicCompare(library[a.value].form.cousins.indexOf(a.value), library[b.value].form.cousins.indexOf(b.value));
+		return comp; //theoretically impossible for two species to still be equal at this point
+	};
+	if (properties.length === 1) {
+		let property = properties[0];
+		compare = function (a, b) {
+			let comp = library[a.value][property] == library[b.value][property] ? 0 : library[a.value][property] < library[b.value][property] ? -1 : 1;
+			return comp == 0 ? tiebreaker(a, b) : comp;
+		};
+	}
+	else if (properties.length === 2) {
+		let property = properties[0];
+		let subproperty = properties[1];
+		compare = function (a, b) {
+			let comp = library[a.key][property][subproperty] == library[b.key][property][subproperty] ? 0 : library[a.key][property][subproperty] < library[b.key][property][subproperty] ? -1 : 1;
+			return comp == 0 ? tiebreaker(a, b) : comp;
+		};
+	}
+	
+	tracker.data.sort(compare);
+}
+
+function displaySpeciesRow(tracker, key) {
 	let currentRow = document.createElement("tr");
 	currentRow.id = key;
 	currentRow.className = "speciesRow";
 	currentRow.onclick = function() {
 		displaySpeciesPanel(key);
 	};
-	speciesTableBody.appendChild(currentRow);
+	tracker.body.appendChild(currentRow);
 	
 	let dexIDCell = document.createElement("td");
 	dexIDCell.scope = "col";
@@ -221,6 +245,178 @@ function appendSpeciesToTable(key) {
 	appendAbilitiesCell(currentRow, key);
 	
 	appendStatCells(currentRow, key);
+}
+
+function loadChunk(tracker, toClear) {
+	let rowsAdded = 0;
+	
+	if (toClear) {
+		tracker.body.innerText = "";
+		tracker.index = 0;
+		window.scrollTo(0, 0); //wtf do i do about this?
+	}
+	
+	let data = tracker.data;
+	let i = tracker.index;
+	for (j = data.length, k = tracker.maxRows; rowsAdded < k && i < j; i++) {
+		if (data[i].filters.length === 0) {
+			tracker.displayMethod(tracker, data[i].value);
+			rowsAdded++;
+		}
+	}
+	tracker.index = i;
+}
+
+function displaySpeciesPanel(key) {
+	speciesPanel.innerText = "";
+	
+	//sprite
+	speciesPanel.append(buildSpeciesSprite(key));
+	
+	//name
+	speciesPanel.append(buildSpeciesName(key));
+	
+	//dexID
+	speciesPanel.append(buildSpeciesDexID(key));
+	
+	//type
+	speciesPanel.append(buildSpeciesType(key));
+	
+	//abilities
+	speciesPanel.append(buildSpeciesAbilities(key));
+	
+	//stats
+	speciesPanel.append(buildSpeciesStats(key));
+	
+	//changes
+	speciesPanel.append(buildSpeciesChanges(key));
+	
+	//family
+	speciesPanel.append(buildSpeciesFamily(key));
+	
+	//items
+	speciesPanel.append(buildSpeciesItems(key));
+	
+	//egg groups
+	speciesPanel.append(buildSpeciesEggGroups(key));
+	
+	//defensive
+	speciesPanel.append(buildSpeciesDefensiveCoverage(key));
+	
+	//offensive
+	speciesPanel.append(buildSpeciesOffensiveCoverage(key));
+	
+	//level up
+	speciesPanel.append(buildSpeciesLearnsetLevelUp(key));
+	
+	//tmhm
+	speciesPanel.append(buildSpeciesLearnsetTMHM(key));
+	
+	//tutor
+	speciesPanel.append(buildSpeciesLearnsetTutor(key));
+	
+	//egg moves
+	speciesPanel.append(buildSpeciesLearnsetEggMoves(key));
+	
+	window.scrollTo(0, 0);
+}
+
+
+function buildSpeciesSprite(key) {
+	let container = document.createElement("div");
+	container.className = "speciesSpriteContainer";
+	
+	let img = document.createElement("img");
+	img.className = "speciesSprite";
+	img.alt = species[key].name;
+	img.src = sprites[key].sprite;
+	
+	container.append(img);
+	return container;
+	
+}
+
+function buildSpeciesName(key) {
+	let container = document.createElement("div");
+	container.className = "speciesNameContainer";
+	
+	if (species[key].form.region) {
+		let region = document.createElement("div");
+		region.className = "speciesRegion";
+		region.textContent = species[key].form.region;
+		container.appendChild(region);
+	}
+	
+	let name = document.createElement("div");
+	name.className = "speciesName";
+	name.textContent = species[key].name;
+	container.appendChild(name);
+
+	
+	if (species[key].form.name) {
+		let form = document.createElement("div");
+		form.className = "speciesForm";
+		form.textContent = species[key].form.name;
+		container.appendChild(form);
+	}
+
+	return container;
+}
+
+function buildSpeciesDexID(key) {
+	
+}
+
+function buildSpeciesType(key) {
+	
+}
+
+function buildSpeciesAbilities(key) {
+	
+}
+
+function buildSpeciesStats(key) {
+	
+}
+
+function buildSpeciesChanges(key) {
+	
+}
+
+function buildSpeciesFamily(key) {
+	
+}
+
+function buildSpeciesItems(key) {
+	
+}
+
+function buildSpeciesEggGroups(key) {
+	
+}
+
+function buildSpeciesDefensiveCoverage(key) {
+	
+}
+
+function buildSpeciesOffensiveCoverage(key) {
+	
+}
+
+function buildSpeciesLearnsetLevelUp(key) {
+	
+}
+
+function buildSpeciesLearnsetTMHM(key) {
+	
+}
+
+function buildSpeciesLearnsetTutor(key) {
+	
+}
+
+function buildSpeciesLearnsetEggMoves(key) {
+
 }
 
 function appendSpriteCell(row, key) {
