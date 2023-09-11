@@ -10,11 +10,11 @@ function sortSpeciesRow(tracker, properties) {
 		if (comp !== 0)
 			return comp;
 
-		comp = basicCompare(library[a.value].form.siblings.indexOf(a.value), library[b.value].form.siblings.indexOf(b.value));
+		comp = basicCompare(library[a.value].forms.siblings.indexOf(a.value), library[b.value].forms.siblings.indexOf(b.value));
 		if (comp !== 0)
 			return comp;
 		
-		comp = basicCompare(library[a.value].form.cousins.indexOf(a.value), library[b.value].form.cousins.indexOf(b.value));
+		comp = basicCompare(library[a.value].forms.cousins.indexOf(a.value), library[b.value].forms.cousins.indexOf(b.value));
 		return comp; //theoretically impossible for two species to still be equal at this point
 	};
 	if (properties.length === 1) {
@@ -33,5 +33,45 @@ function sortSpeciesRow(tracker, properties) {
 		};
 	}
 	
+	tracker.data.sort(compare);
+}
+
+function sortLevelUpMovesRow(tracker, property) {
+	let library = tracker.library;
+	let compare = basicCompare;
+	property = property[0];
+	function tiebreaker (a, b) {
+		console.log(library[a.value[0]][property], library[b.value[0]][property]);
+		let comp = basicCompare(library[a.value[0]].name, library[b.value[0]].name);
+		return comp;
+	};
+	if (property === "level") {
+		compare = function (a, b) {
+			let comp = basicCompare(a.value[1], b.value[1]);
+			return comp == 0 ? tiebreaker(a, b) : comp;
+		};
+	}
+	else {
+		compare = function (a, b) {
+			let comp = library[a.value[0]][property] == library[b.value[0]][property] ? 0 : library[a.value[0]][property] < library[b.value[0]][property] ? -1 : 1;
+			return comp == 0 ? tiebreaker(a, b) : comp;
+		};
+	}
+	tracker.data.sort(compare);
+}
+
+function sortMovesRow(tracker, property) {
+	let library = tracker.library;
+	let compare = basicCompare;
+	property = property[0];
+	function tiebreaker (a, b) {
+		let comp = basicCompare(library[a.value].name, library[b.value].name);
+		return comp;
+	};
+	compare = function (a, b) {
+		let comp = library[a.value][property] == library[b.value][property] ? 0 : library[a.value][property] < library[b.value][property] ? -1 : 1;
+		return comp == 0 ? tiebreaker(a, b) : comp;
+	};
+
 	tracker.data.sort(compare);
 }

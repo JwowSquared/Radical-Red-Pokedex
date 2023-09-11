@@ -49,6 +49,8 @@ function populateTable(name, data) {
 	for (const element of data)
 		tracker.data.push({"value": element, "filters": []});
 	
+	for (const control of tracker.sortControls)
+		control.className = "sortOption";
 	tracker.sortControls[0].click();
 }
 

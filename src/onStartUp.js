@@ -56,6 +56,47 @@ async function onStartup() {
 	
 	await fetchData();
 	
+	setupTable("speciesLearnsetLevelUpTable", moves, displayLevelUpMovesRow, Object.keys(moves).length, sortLevelUpMovesRow, [
+		["Level", ["level"]],
+		["Name", ["name"]],
+		["Type", ["type"]],
+		["Split", ["split"]],
+		["Power", ["power"]],
+		["Acc", ["accuracy"]],
+		["PP", ["PP"]],
+		["Description", []],
+	]);
+	
+	setupTable("speciesLearnsetTMHMTable", moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
+		["Name", ["name"]],
+		["Type", ["type"]],
+		["Split", ["split"]],
+		["Power", ["power"]],
+		["Acc", ["accuracy"]],
+		["PP", ["PP"]],
+		["Description", []],
+	]);
+	
+	setupTable("speciesLearnsetTutorTable", moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
+		["Name", ["name"]],
+		["Type", ["type"]],
+		["Split", ["split"]],
+		["Power", ["power"]],
+		["Acc", ["accuracy"]],
+		["PP", ["PP"]],
+		["Description", []],
+	]);
+	
+	setupTable("speciesLearnsetEggMovesTable", moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
+		["Name", ["name"]],
+		["Type", ["type"]],
+		["Split", ["split"]],
+		["Power", ["power"]],
+		["Acc", ["accuracy"]],
+		["PP", ["PP"]],
+		["Description", []],
+	]);
+	
 	setupTable("speciesTable", species, displaySpeciesRow, 50, sortSpeciesRow, [
 		["#", ["dexID"]],
 		["Sprite", []],
