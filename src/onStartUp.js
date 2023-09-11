@@ -14,7 +14,7 @@ async function fetchData() {
 		for (let i = 0; i < files.length; i++)
 			requests.push(new Request(`https://raw.githubusercontent.com/${repo}/master/data/${files[i]}.js`));
 		
-		const cache = await caches.open("rrdex release 1.0");
+		const cache = await caches.open(version);
 		
 		let responses = [];
 		for (let i = 0; i < requests.length; i++) {

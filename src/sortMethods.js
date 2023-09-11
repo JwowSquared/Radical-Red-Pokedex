@@ -28,7 +28,7 @@ function sortSpeciesRow(tracker, properties) {
 		let property = properties[0];
 		let subproperty = properties[1];
 		compare = function (a, b) {
-			let comp = library[a.key][property][subproperty] == library[b.key][property][subproperty] ? 0 : library[a.key][property][subproperty] < library[b.key][property][subproperty] ? -1 : 1;
+			let comp = library[a.value][property][subproperty] == library[b.value][property][subproperty] ? 0 : library[a.value][property][subproperty] < library[b.value][property][subproperty] ? -1 : 1;
 			return comp == 0 ? tiebreaker(a, b) : comp;
 		};
 	}
