@@ -7,7 +7,9 @@ async function fetchData() {
 		"moves",
 		"locations",
 		"types",
-		"caps"
+		"caps",
+		"eggGroups",
+		"items"
 	];
 	try {
 		let requests = [];
@@ -35,6 +37,8 @@ async function fetchData() {
 		locations = await responses[4].json();
 		types = await responses[5].json();
 		caps = await responses[6].json();
+		eggGroups = await responses[7].json();
+		items = await responses[8].json();
 	}
 	catch (e) {
 		showMessage(loadingScreen, "Error encountered. Please wait a few minutes and refresh the page.");
@@ -119,6 +123,8 @@ async function onStartup() {
 		loadChunk(trackers["speciesTable"], false);
 		}
 	};
+	
+	setupFilters();
 }
 
 function loadChunk(tracker, toClear) {

@@ -41,8 +41,11 @@ function sortLevelUpMovesRow(tracker, property) {
 	let compare = basicCompare;
 	property = property[0];
 	function tiebreaker (a, b) {
-		console.log(library[a.value[0]][property], library[b.value[0]][property]);
-		let comp = basicCompare(library[a.value[0]].name, library[b.value[0]].name);
+		let comp = basicCompare(a.value[1], b.value[1]);
+		if (comp !== 0)
+			return comp;
+		
+		comp = basicCompare(library[a.value[0]].name, library[b.value[0]].name);
 		return comp;
 	};
 	if (property === "level") {
