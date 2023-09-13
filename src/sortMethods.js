@@ -7,15 +7,7 @@ function sortSpeciesRow(tracker, properties) {
 	let compare = basicCompare;
 	function tiebreaker (a, b) {
 		let comp = basicCompare(library[a.value].dexID, library[b.value].dexID);
-		if (comp !== 0)
-			return comp;
-
-		comp = basicCompare(library[a.value].forms.siblings.indexOf(a.value), library[b.value].forms.siblings.indexOf(b.value));
-		if (comp !== 0)
-			return comp;
-		
-		comp = basicCompare(library[a.value].forms.cousins.indexOf(a.value), library[b.value].forms.cousins.indexOf(b.value));
-		return comp; //theoretically impossible for two species to still be equal at this point
+		return comp;
 	};
 	if (properties.length === 1) {
 		let property = properties[0];

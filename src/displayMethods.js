@@ -10,7 +10,7 @@ function displaySpeciesRow(tracker, key) {
 	let dexIDCell = document.createElement("td");
 	dexIDCell.scope = "col";
 	dexIDCell.className = "speciesDexIDCell";
-	dexIDCell.textContent = mon.dexID;
+	dexIDCell.textContent = Math.trunc(mon.dexID);
 	currentRow.appendChild(dexIDCell);
 
 	appendSpriteCell(currentRow, mon);
@@ -148,24 +148,24 @@ function buildSpeciesName(mon) {
 	let container = document.createElement("div");
 	container.className = "speciesNameContainer";
 	
-	if (mon.forms.region) {
-		let region = document.createElement("div");
-		region.className = "speciesRegion";
-		region.textContent = mon.forms.region;
-		container.appendChild(region);
+	if (mon.name.specifier) {
+		let specifier = document.createElement("div");
+		specifier.className = "speciesSpecifier";
+		specifier.textContent = mon.name.specifier;
+		container.appendChild(specifier);
 	}
 	
 	let name = document.createElement("div");
 	name.className = "speciesName";
-	name.textContent = mon.name;
+	name.textContent = mon.name.name;
 	container.appendChild(name);
 
 	
-	if (mon.forms.name) {
-		let form = document.createElement("div");
-		form.className = "speciesForm";
-		form.textContent = mon.forms.name;
-		container.appendChild(form);
+	if (mon.name.classification) {
+		let classification = document.createElement("div");
+		classification.className = "speciesClassification";
+		classification.textContent = mon.name.classification;
+		container.appendChild(classification);
 	}
 
 	return container;
@@ -246,24 +246,24 @@ function appendNameCell(row, mon) {
 	cell.scope = "col";
 	cell.className = "speciesNameCell";
 	
-	if (mon.forms.region) {
-		let region = document.createElement("div");
-		region.className = "speciesRegion";
-		region.textContent = mon.forms.region;
-		cell.appendChild(region);
+	if (mon.name.specifier) {
+		let specifier = document.createElement("div");
+		specifier.className = "speciesSpecifier";
+		specifier.textContent = mon.name.specifier;
+		cell.appendChild(specifier);
 	}
 	
 	let name = document.createElement("div");
 	name.className = "speciesName";
-	name.textContent = mon.name;
+	name.textContent = mon.name.name;
 	cell.appendChild(name);
 
 	
-	if (mon.forms.name) {
-		let form = document.createElement("div");
-		form.className = "speciesForm";
-		form.textContent = mon.forms.name;
-		cell.appendChild(form);
+	if (mon.name.classification) {
+		let classification = document.createElement("div");
+		classification.className = "speciesClassification";
+		classification.textContent = mon.name.classification;
+		cell.appendChild(classification);
 	}
 
 	row.appendChild(cell);
