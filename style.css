@@ -64,6 +64,7 @@ body {
 .sortLocked {
 	cursor: auto;
 }
+
 .active, .sortOption:hover, #speciesInput:hover, #speciesInput:focus {
 	background: rgba(255, 255, 255, 0.075);
 }
@@ -71,6 +72,7 @@ body {
 .sortAscending::before {
 	content: "↑";
 }
+
 .sortDescending::before {
 	content: "↓";
 }
@@ -114,6 +116,10 @@ td.speciesSpriteCell {
 	min-width: 165.4px;
 }
 
+#speciesPanelLearnsets .speciesTypeCell {
+	min-width: 89px;
+}
+
 .speciesType {
 	width: 70.3px;
 	padding: 2px;
@@ -147,7 +153,7 @@ td.speciesSpriteCell {
 		min-width: 487px;
 	}
 	
-	.sortLocked {
+	.sortLocked, .moveDescription {
 		display: none;
 	}
 	
@@ -155,7 +161,7 @@ td.speciesSpriteCell {
 		border: none;
 	}
 	
-	.sortOption {
+	#speciesTable .sortOption {
 		display: inline-block;
 		width: 20%;
 		border: none;
@@ -179,7 +185,7 @@ td.speciesSpriteCell {
 		top: 24px;
 	}
 	
-	.speciesSpriteCell, .speciesNameCell, .speciesTypeCell {
+	.speciesSpriteCell, .speciesNameCell, #speciesTable .speciesTypeCell {
 		width: 33%;
 	}
 	

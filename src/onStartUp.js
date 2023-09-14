@@ -104,7 +104,7 @@ async function onStartup() {
 	setupTable("speciesTable", species, displaySpeciesRow, 50, sortSpeciesRow, [
 		["#", ["dexID"]],
 		["Sprite", []],
-		["Name", ["name"]],
+		["Name", ["name", "name"]],
 		["Type", []],
 		["Abilities", ["abilities", "primary"]],
 		["HP", ["stats", "HP"]],
@@ -131,9 +131,9 @@ function loadChunk(tracker, toClear) {
 	let rowsAdded = 0;
 	
 	if (toClear) {
+		tracker.sortControls[0].parentNode.parentNode.scrollIntoView({behavior: "smooth", block: "nearest"});
 		tracker.body.innerText = "";
 		tracker.index = 0;
-		window.scrollTo(0, 0); //wtf do i do about this?
 	}
 	
 	let data = tracker.data;
