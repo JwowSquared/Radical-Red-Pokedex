@@ -1,49 +1,68 @@
 function setupFilters() {
 
 	let listContainer = document.getElementById("speciesLists");
-	let filterLists = {
-		"filterName": [],
-		"filterRegional": [],
-		"filterForm": [],
-		"filterType": [],
-		"filterEggGroup": [],
-		"filterMove": [],
-		"filterMoveOfType": [],
-		"filterAbility": [],
-		"filterItem": [],
-		"filterLevelCap": []
-	};
+	let filterCategories = [
+		"name",
+		"region",
+		"form",
+		"type",
+		"move",
+		"movetype",
+		"ability",
+		"egg",
+		"item",
+		"cap",
+		"toggle"
+	];
 	
-	for (const key in caps) {
-		filterLists["filterLevelCap"].push(caps[key].name);
+	let filterLists = {};
+	for (let i = 0; i < filterCategories.length; i++)
+		filterLists[filterCategories[i]] = [];
+
+	for (const key in species) {
+		let mon = species[key];
+		filterLists["name"].push(mon.name.name);
+		if (mon.name.region)
+			filterLists["region"].push(mon.name.region);
+		if (mon.name.form)
+			filterLists["form"].push(mon.name.form);
 	}
 	
+	filterLists["name"] = [...new Set(filterLists["name"])];
+	filterLists["region"] = [...new Set(filterLists["region"])];
+	filterLists["form"] = [...new Set(filterLists["form"])];
+
 	for (const key in types) {
-		filterLists["filterType"].push(types[key].name);
+		filterLists["type"].push(types[key].name);
 	}
+	filterLists["movetype"] = filterLists["type"];
 	
 	for (const key in moves) {
-		filterLists["filterMove"].push(moves[key].name);
+		filterLists["move"].push(moves[key].name);
 	}
 	
 	for (const key in abilities) {
-		filterLists["filterAbility"].push(abilities[key].name);
+		filterLists["ability"].push(abilities[key].name);
 	}
 	
-	for (const key in species) {
-		let mon = species[key];
-		filterLists["filterName"].push(mon.name.name);
-		if (mon.name.region)
-			filterLists["filterRegional"].push(mon.name.region);
-		if (mon.name.form)
-			filterLists["filterForm"].push(mon.name.form);
+	for (const key in eggGroups) {
+		filterLists["egg"].push(eggGroups[key].name);
 	}
 	
-	filterLists["filterRegional"] = [...new Set(filterLists["filterRegional"])];
-	filterLists["filterForm"] = [...new Set(filterLists["filterForm"])];
+	for (const key in items) {
+		filterLists["item"].push(items[key].name);
+	}
 	
-	let masterlist = document.createElement("datalist");
-	masterlist.id = "filterAll";
+	for (let i = 0; i < caps.length; i++) {
+		filterLists["cap"].push(caps[i].Name);
+	}
+	
+	filterLists["toggle"] = [
+		"Hardcore",
+		"Changed",
+		"Evolved"
+	];
+	
 	for (const key in filterLists) {
 		let datalist = document.createElement("datalist");
 		datalist.id = key;
@@ -51,8 +70,38 @@ function setupFilters() {
 			let option = document.createElement("option");
 			option.value = element;
 			datalist.append(option);
-			masterlist.append(option);
 		}
 		listContainer.append(datalist);
 	}
+	
+	
+	
+	let selectFilterCategory = document.getElementById("speciesFilterCategory");
+	for (let i = 0; i < filterCategories.length; i++) {
+		let option = document.createElement("option");
+		option.value = filterCategories[i];
+		option.innerText = filterCategories[i];
+		selectFilterCategory.append(option);
+	}
+	selectFilterCategory.addEventListener("change", function(event) {
+		event.preventDefault();
+		console.log("select ", selectFilterCategory.value);
+	});
+	
+	let speciesInput = document.getElementById("speciesFilterInput");
+	speciesInput.setAttribute("list", "name");
+	speciesInput.addEventListener("change", function(event) {
+		event.preventDefault();
+		let input = speciesInput.value.trim();
+		if (filterCategories.indexOf(input) !== -1) {
+			speciesInput.setAttribute("list", input);
+			speciesInput.value = " ";
+			return;
+		}
+		filterSpecies(input);
+	});
+}
+
+function filterSpecies(input) {
+	console.log("filter ", input);
 }

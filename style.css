@@ -18,19 +18,49 @@ body {
 
 #speciesControl {
 	padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+	justify-content: center;
 }
 
-#speciesInput {
+#speciesFilterInput, #speciesFilterCategory, #speciesFilterSeparator {
 	display: block;
-    margin: auto;
     padding: 0.2rem;
     border-radius: 3px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    box-sizing: border-box;
-    background: none;
+    border: 2px solid gray;
+	background: none;
     color: white;
     font-weight: 550;
-    width: 300px;
+	appearance: none;
+	margin: 0;
+}
+
+#speciesFilterCategory {
+	text-align: center;
+	border-right: none;
+	border-radius: 3px 0 0 3px;
+	width: 81px;
+}
+
+#speciesFilterCategory option {
+	background: black;
+}
+
+#speciesFilterSeparator {
+	border-radius: 0;
+	border-left: none;
+	border-right: none;
+}
+
+#speciesFilterInput {
+	border-left: none;
+	border-radius: 0 3px 3px 0;
+	width: 145px;
+}
+
+#speciesFilterInput::-webkit-calendar-picker-indicator {
+  display: none !important;
 }
 
 .tableWrapper {
@@ -65,7 +95,7 @@ body {
 	cursor: auto;
 }
 
-.active, .sortOption:hover, #speciesInput:hover, #speciesInput:focus {
+.active, .sortOption:hover, #speciesFilterInput:hover, #speciesFilterButton:hover, #speciesFilterInput:focus {
 	background: rgba(255, 255, 255, 0.075);
 }
 
