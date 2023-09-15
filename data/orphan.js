@@ -995,7 +995,7 @@ function getSprite(key) {
 }
 
 for (const img of myImages) {
-    img.crossOrigin = "";
+    img.crossOrigin = "anonymous";
     const canvas = document.createElement("canvas");
 	canvas.width = 64;
 	canvas.height = 64;

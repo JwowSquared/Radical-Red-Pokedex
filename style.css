@@ -145,11 +145,11 @@ td.speciesSpriteCell {
 	min-width: 165.4px;
 }
 
-#speciesPanelLearnsets .speciesTypeCell {
+#speciesPanelLearnsets .speciesTypeCell, .moveSplitCell {
 	min-width: 89px;
 }
 
-.typeWrapper {
+.typeWrapper, .splitWrapper {
 	width: 70.3px;
 	padding: 2px;
 	display: inline-block;

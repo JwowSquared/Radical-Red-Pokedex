@@ -34,7 +34,7 @@ function displayLevelUpMovesRow(tracker, movePair) {
 		buildBasicCell("moveLevel", level),
 		buildBasicCell("moveName", move.name),
 		buildTypeCell("moveType", move.type),
-		buildSpriteCell("moveSplit", move.split),
+		buildSplitCell("moveSplit", move.split),
 		buildBasicCell("movePower", move.power),
 		buildBasicCell("moveAccuracy", move.accuracy),
 		buildBasicCell("movePP", move.PP),
@@ -51,7 +51,7 @@ function displayMovesRow(tracker, key) {
 	currentRow.append(
 		buildBasicCell("moveName", move.name),
 		buildTypeCell("moveType", move.type),
-		buildSpriteCell("moveSplit", move.split),
+		buildSplitCell("moveSplit", move.split),
 		buildBasicCell("movePower", move.power),
 		buildBasicCell("moveAccuracy", move.accuracy),
 		buildBasicCell("movePP", move.PP),
@@ -73,7 +73,7 @@ function buildSpriteCell(className, spriteKey, alt="") {
 	let img = document.createElement("img");
 	img.className = className;
 	img.alt = alt;
-	img.src = sprites[spriteKey].sprite;
+	img.src = sprites[spriteKey];
 	
 	cell.append(img);
 	return cell;
@@ -82,7 +82,7 @@ function buildSpriteCell(className, spriteKey, alt="") {
 function buildSpeciesNameCell(mon) {
 	let cell = buildBasicCell("speciesNameCell");
 	
-	if (mon.family.cousins)
+	if (species[mon.family.ancestor].family.region !== mon.family.region)
 		cell.append(buildBasicWrapper("speciesRegion", regions[mon.family.region].variant));
 	
 	cell.append(buildBasicWrapper("speciesName", mon.name));
@@ -116,6 +116,28 @@ function buildTypeWrapper(type) {
 	wrapper.className = "typeWrapper";
 	wrapper.style.backgroundColor = types[type].color;
 	wrapper.textContent = types[type].name;
+	
+	return wrapper;
+}
+
+function buildSplitCell(className, split) {
+	let cell = buildBasicCell(className + "Cell");
+	
+	cell.append(buildSplitWrapper(split));
+	
+	return cell;
+}
+
+function buildSplitWrapper(split) {
+	let splits = {
+		"SPLIT_PHYSICAL": {"name": "Physical", "color": "#f75231"},
+		"SPLIT_SPECIAL": {"name": "Special", "color": "#5273ad"},
+		"SPLIT_STATUS": {"name": "Status", "color": "#ada594"}
+	};
+	let wrapper = document.createElement("div");
+	wrapper.className = "splitWrapper";
+	wrapper.style.backgroundColor = splits[split].color;
+	wrapper.textContent = splits[split].name;
 	
 	return wrapper;
 }
