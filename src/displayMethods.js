@@ -9,16 +9,16 @@ function displaySpeciesRow(tracker, key) {
 	
 	currentRow.append(
 		buildBasicCell("speciesDexIDCell", Math.trunc(mon.dexID)),
-		buildSpriteCell(mon),
-		buildNameCell(mon),
+		buildSpriteCell("speciesSprite", mon.ID),
+		buildSpeciesNameCell(mon),
 		buildTypeCell("speciesType", mon.type.primary, mon.type.secondary),
-		buildAbilitiesCell(currentRow, mon),
+		buildSpeciesAbilityCell(mon),
 		buildStatCell("HP", mon.stats.HP),
 		buildStatCell("Atk", mon.stats.attack),
 		buildStatCell("Def", mon.stats.defense),
 		buildStatCell("SpA", mon.stats.specialAttack),
 		buildStatCell("SpD", mon.stats.specialDefense),
-		buildStatCell("Spe", mon.stats.speeed),
+		buildStatCell("Spe", mon.stats.speed),
 		buildStatCell("BST", mon.stats.total)
 	);
 }
@@ -120,7 +120,7 @@ function buildTypeWrapper(type) {
 	return wrapper;
 }
 
-function buildAbilitiesCell(mon) {
+function buildSpeciesAbilityCell(mon) {
 	let cell = buildBasicCell("speciesAbilitiesCell");
 	
 	if (mon.abilities.primary)
@@ -151,40 +151,40 @@ function displaySpeciesPanel(mon) {
 	speciesPanel.innerText = "";
 	
 	//sprite
-	speciesPanel.append(buildSpeciesSprite(mon));
-	
-	//name
-	speciesPanel.append(buildSpeciesName(mon));
-	
-	//dexID
-	speciesPanel.append(buildSpeciesDexID(mon));
-	
-	//type
-	speciesPanel.append(buildSpeciesType(mon));
-	
-	//abilities
-	speciesPanel.append(buildSpeciesAbilities(mon));
-	
-	//stats
-	speciesPanel.append(buildSpeciesStats(mon));
-	
-	//changes
-	speciesPanel.append(buildSpeciesChanges(mon));
-	
-	//family
-	speciesPanel.append(buildSpeciesFamily(mon));
-	
-	//items
-	speciesPanel.append(buildSpeciesItems(mon));
-	
-	//egg groups
-	speciesPanel.append(buildSpeciesEggGroups(mon));
-	
-	//defensive
-	speciesPanel.append(buildSpeciesDefensiveCoverage(mon));
-	
-	//offensive
-	speciesPanel.append(buildSpeciesOffensiveCoverage(mon));
+	//speciesPanel.append(buildSpeciesSprite(mon));
+	//
+	////name
+	//speciesPanel.append(buildSpeciesName(mon));
+	//
+	////dexID
+	//speciesPanel.append(buildSpeciesDexID(mon));
+	//
+	////type
+	//speciesPanel.append(buildSpeciesType(mon));
+	//
+	////abilities
+	//speciesPanel.append(buildSpeciesAbilities(mon));
+	//
+	////stats
+	//speciesPanel.append(buildSpeciesStats(mon));
+	//
+	////changes
+	//speciesPanel.append(buildSpeciesChanges(mon));
+	//
+	////family
+	//speciesPanel.append(buildSpeciesFamily(mon));
+	//
+	////items
+	//speciesPanel.append(buildSpeciesItems(mon));
+	//
+	////egg groups
+	//speciesPanel.append(buildSpeciesEggGroups(mon));
+	//
+	////defensive
+	//speciesPanel.append(buildSpeciesDefensiveCoverage(mon));
+	//
+	////offensive
+	//speciesPanel.append(buildSpeciesOffensiveCoverage(mon));
 	
 	//level up
 	populateTable("speciesLearnsetLevelUpTable", mon.learnset.levelup);

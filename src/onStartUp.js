@@ -62,69 +62,7 @@ async function onStartup() {
 	
 	await fetchData();
 	
-	setupTable("speciesLearnsetLevelUpTable", moves, displayLevelUpMovesRow, Object.keys(moves).length, sortLevelUpMovesRow, [
-		["Level", ["level"]],
-		["Name", ["name"]],
-		["Type", ["type"]],
-		["Split", ["split"]],
-		["Power", ["power"]],
-		["Acc", ["accuracy"]],
-		["PP", ["PP"]],
-		["Description", []],
-	]);
-	
-	setupTable("speciesLearnsetTMHMTable", moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
-		["Name", ["name"]],
-		["Type", ["type"]],
-		["Split", ["split"]],
-		["Power", ["power"]],
-		["Acc", ["accuracy"]],
-		["PP", ["PP"]],
-		["Description", []],
-	]);
-	
-	setupTable("speciesLearnsetTutorTable", moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
-		["Name", ["name"]],
-		["Type", ["type"]],
-		["Split", ["split"]],
-		["Power", ["power"]],
-		["Acc", ["accuracy"]],
-		["PP", ["PP"]],
-		["Description", []],
-	]);
-	
-	setupTable("speciesLearnsetEggMovesTable", moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
-		["Name", ["name"]],
-		["Type", ["type"]],
-		["Split", ["split"]],
-		["Power", ["power"]],
-		["Acc", ["accuracy"]],
-		["PP", ["PP"]],
-		["Description", []],
-	]);
-	
-	setupTable("speciesTable", species, displaySpeciesRow, 50, sortSpeciesRow, [
-		["#", ["dexID"]],
-		["Sprite", []],
-		["Name", ["name", "name"]],
-		["Type", []],
-		["Abilities", ["abilities", "primary"]],
-		["HP", ["stats", "HP"]],
-		["Atk", ["stats", "attack"]],
-		["Def", ["stats", "defense"]],
-		["SpA", ["stats", "specialAttack"]],
-		["SpD", ["stats", "specialDefense"]],
-		["Spe", ["stats", "speed"]],
-		["BST", ["stats", "total"]]
-	]);
-	
-	populateTable("speciesTable", Object.keys(species));
-	
-	window.onscroll = function(ev) {
-		if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
-		loadChunk(trackers["speciesTable"], false);
-		}
-	};
+	setupTables();
 	
 	setupFilters();
 }

@@ -149,7 +149,7 @@ td.speciesSpriteCell {
 	min-width: 89px;
 }
 
-.speciesType {
+.typeWrapper {
 	width: 70.3px;
 	padding: 2px;
 	display: inline-block;

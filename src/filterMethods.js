@@ -3,7 +3,7 @@ function setupFilters() {
 	let listContainer = document.getElementById("speciesLists");
 	let filterConfigs = [
 		["filterName", "Name", species, "name", "name"],
-		["filterRegion", "Region", species, "name", "region"],
+		["filterRegion", "Region", regions, "name"],
 		["filterForm", "Form", species, "name", "form"],
 		["filterType", "Type", types, "name"],
 		["filterMove", "Move", moves, "name"],
@@ -25,14 +25,21 @@ function setupFilters() {
 			if (subproperty)
 				page = page[subproperty];
 			if (page)
-				filterLists[key].push([book, page]);
+				filter.list.push({key:book, text:page});
 		}
+		const ids = filter.list.map(({ title }) => title);
+		const filtered = books.filter(({ title }, index) =>
+		!ids.includes(title, index + 1));
+ 
+console.log(filtered);
+		filter.list = filter.list.filter(el => ![...new Set(filter.)]);
 	}
 	filterLists["Toggle"] = [
 		["TOGGLE_HARDCORE", "Hardcore"],
 		["TOGGLE_CHANGED", "Changed"],
 		["TOGGLE_EVOLVED", "Evolved"],
-		["TOGGLE_LEVELUP", "Levelup"]
+		["TOGGLE_LEVELUP", "Levelup"],
+		["TOGGLE_REGIONAL", "Regional"]
 	];
 	
 	for (const key in filterLists) {
