@@ -943,3 +943,24 @@ function getSprite(key) {
 	img.src = spriteFolder + species[key].sprite;
 	return img;
 }
+
+let dexBreakpoints = [151, 251, 386, 493, 649, 721, 809, 898, 905, 9999];
+let regionBreakpoints = Object.keys(regions);
+for (const key in species) {
+    let mon = species[key];
+    let idx = 0;
+    while (mon.dexID > dexBreakpoints[idx])
+        idx++;
+    mon.regionCode = regionBreakpoints[idx];
+    if (mon.name.region)
+        mon.regionCode = Object.keys(regions).find(x => mon.name.region === regions[x].variantName);
+}
+
+for (const key in species) { 
+    let mon = species[key];
+    if (mon.name.form)
+        mon.form = mon.name.form;
+    mon.name = mon.name.name;
+    mon.region = mon.regionCode;
+    delete mon.regionCode;
+}
