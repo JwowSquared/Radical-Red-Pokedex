@@ -1,5 +1,5 @@
 let repo = "JwowSquared/JwowSquared.github.io";
-let version = "rrdex release 1.0.6";
+let version = "rrdex release 1.0.7";
 
 let species = null;
 let sprites = null;
@@ -10,5 +10,6 @@ let types = null;
 let caps = null;
 let eggGroups = null;
 let items = null;
+let regions = null;
 
 let trackers = {};

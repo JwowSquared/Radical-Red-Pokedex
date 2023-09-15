@@ -9,7 +9,8 @@ async function fetchData() {
 		"types",
 		"caps",
 		"eggGroups",
-		"items"
+		"items",
+		"regions"
 	];
 	try {
 		let requests = [];
@@ -39,6 +40,7 @@ async function fetchData() {
 		caps = await responses[6].json();
 		eggGroups = await responses[7].json();
 		items = await responses[8].json();
+		regions = await responses[9].json();
 	}
 	catch (e) {
 		showMessage(loadingScreen, "Error encountered. Please wait a few minutes and refresh the page.");
