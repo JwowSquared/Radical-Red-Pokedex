@@ -1,34 +1,33 @@
 function setupFilters() {
 
 	let listContainer = document.getElementById("speciesLists");
-	let filterCategories = [
-		"name",
-		"region",
-		"form",
-		"type",
-		"move",
-		"movetype",
-		"ability",
-		"egg",
-		"item",
-		"cap",
-		"toggle"
+	let filterConfigs = [
+		["Name", [species, "name", "name"]],
+		["Region", [species, "name", "region"]],
+		["Form", [species, "name", "form"]],
+		["Type", [types, "name"]],
+		["Move", [moves, "name"]],
+		["Move Type", [types, "name"]],
+		["Ability", [abilities, "name"]],
+		["Egg Group", [eggGroups, "name"]],
+		["Held Item", [items, "name"]],
+		["Level Cap", [caps, "Name"]]
 	];
 	
 	let filterLists = {};
 	for (let i = 0; i < filterCategories.length; i++)
-		filterLists[filterCategories[i]] = [];
+		filterLists[filterNames[i]] = [];
 
 	for (const key in species) {
 		let mon = species[key];
-		filterLists["name"].push(mon.name.name);
+		filterLists[filterNames[0]].push(mon.name.name);
 		if (mon.name.region)
-			filterLists["region"].push(mon.name.region);
+			filterLists["Region"].push(mon.name.region);
 		if (mon.name.form)
-			filterLists["form"].push(mon.name.form);
+			filterLists["Form"].push(mon.name.form);
 	}
 	
-	filterLists["name"] = [...new Set(filterLists["name"])];
+	filterLists["Name"] = [...new Set(filterLists["Name"])];
 	filterLists["region"] = [...new Set(filterLists["region"])];
 	filterLists["form"] = [...new Set(filterLists["form"])];
 
@@ -57,11 +56,12 @@ function setupFilters() {
 		filterLists["cap"].push(caps[i].Name);
 	}
 	
-	filterLists["toggle"] = [
+	filterConfigs.push("Toggle", [
 		"Hardcore",
 		"Changed",
-		"Evolved"
-	];
+		"Evolved",
+		"Levelup"
+	]);
 	
 	for (const key in filterLists) {
 		let datalist = document.createElement("datalist");
