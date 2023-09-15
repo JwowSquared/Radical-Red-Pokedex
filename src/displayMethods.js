@@ -7,21 +7,20 @@ function displaySpeciesRow(tracker, key) {
 	};
 	tracker.body.appendChild(currentRow);
 	
-	let dexIDCell = document.createElement("td");
-	dexIDCell.scope = "col";
-	dexIDCell.className = "speciesDexIDCell";
-	dexIDCell.textContent = Math.trunc(mon.dexID);
-	currentRow.appendChild(dexIDCell);
-
-	appendSpriteCell(currentRow, mon);
-	
-	appendNameCell(currentRow, mon);
-	
-	appendTypeCell(currentRow, mon.type.primary, mon.type.secondary);
-	
-	appendAbilitiesCell(currentRow, mon);
-	
-	appendStatCells(currentRow, mon);
+	currentRow.append(
+		buildBasicCell("speciesDexIDCell", Math.trunc(mon.dexID)),
+		buildSpriteCell(mon),
+		buildNameCell(mon),
+		buildTypeCell("speciesType", mon.type.primary, mon.type.secondary),
+		buildAbilitiesCell(currentRow, mon),
+		buildStatCell("HP", mon.stats.HP),
+		buildStatCell("Atk", mon.stats.attack),
+		buildStatCell("Def", mon.stats.defense),
+		buildStatCell("SpA", mon.stats.specialAttack),
+		buildStatCell("SpD", mon.stats.specialDefense),
+		buildStatCell("Spe", mon.stats.speeed),
+		buildStatCell("BST", mon.stats.total)
+	);
 }
 
 function displayLevelUpMovesRow(tracker, movePair) {
@@ -31,14 +30,16 @@ function displayLevelUpMovesRow(tracker, movePair) {
 	currentRow.className = "movesRow";
 	tracker.body.appendChild(currentRow);
 	
-	appendBasicCell(currentRow, "moveLevel", level);
-	appendBasicCell(currentRow, "moveName", move.name);
-	appendTypeCell(currentRow, move.type);
-	appendSplitCell(currentRow, move.split);
-	appendBasicCell(currentRow, "movePower", move.power);
-	appendBasicCell(currentRow, "moveAccuracy", move.accuracy);
-	appendBasicCell(currentRow, "movePP", move.PP);
-	appendBasicCell(currentRow, "moveDescription", move.description);
+	currentRow.append(
+		buildBasicCell("moveLevel", level),
+		buildBasicCell("moveName", move.name),
+		buildTypeCell("moveType", move.type),
+		buildSpriteCell("moveSplit", move.split),
+		buildBasicCell("movePower", move.power),
+		buildBasicCell("moveAccuracy", move.accuracy),
+		buildBasicCell("movePP", move.PP),
+		buildBasicCell("moveDescription", move.description)
+	);
 }
 
 function displayMovesRow(tracker, key) {
@@ -47,31 +48,101 @@ function displayMovesRow(tracker, key) {
 	currentRow.className = "movesRow";
 	tracker.body.appendChild(currentRow);
 	
-	appendBasicCell(currentRow, "moveName", move.name);
-	appendTypeCell(currentRow, move.type);
-	appendSplitCell(currentRow, move.split);
-	appendBasicCell(currentRow, "movePower", move.power);
-	appendBasicCell(currentRow, "moveAccuracy", move.accuracy);
-	appendBasicCell(currentRow, "movePP", move.PP);
-	appendBasicCell(currentRow, "moveDescription", move.description);
+	currentRow.append(
+		buildBasicCell("moveName", move.name),
+		buildTypeCell("moveType", move.type),
+		buildSpriteCell("moveSplit", move.split),
+		buildBasicCell("movePower", move.power),
+		buildBasicCell("moveAccuracy", move.accuracy),
+		buildBasicCell("movePP", move.PP),
+		buildBasicCell("moveDescription", move.description)
+	);
 }
 
-function appendBasicCell(row, className, value) {
+function buildBasicCell(className, value="") {
 	let cell = document.createElement("td");
 	cell.scope = "col";
 	cell.className = className;
 	cell.textContent = value;
 	
-	row.appendChild(cell);
+	return cell;
 }
 
-function appendSplitCell(row, value) {
-	let cell = document.createElement("td");
-	cell.scope = "col";
-	cell.className = "moveSplit";
-	cell.textContent = "Split!";
+function buildSpriteCell(className, spriteKey, alt="") {
+	let cell = buildBasicCell(className + "Cell");
+	let img = document.createElement("img");
+	img.className = className;
+	img.alt = alt;
+	img.src = sprites[spriteKey].sprite;
 	
-	row.appendChild(cell);
+	cell.append(img);
+	return cell;
+}
+
+function buildSpeciesNameCell(mon) {
+	let cell = buildBasicCell("speciesNameCell");
+	
+	if (mon.family.cousins)
+		cell.append(buildBasicWrapper("speciesRegion", regions[mon.family.region].variant));
+	
+	cell.append(buildBasicWrapper("speciesName", mon.name));
+
+	if (mon.family.form)
+		cell.append(buildBasicWrapper("speciesForm", mon.family.form));
+
+	return cell;
+}
+
+function buildBasicWrapper(className, text) {
+	let wrapper = document.createElement("div");
+	wrapper.className = className;
+	wrapper.textContent = text;
+	
+	return wrapper;
+}
+
+function buildTypeCell(className, primary, secondary=null) {
+	let cell = buildBasicCell(className + "Cell");
+	
+	cell.append(buildTypeWrapper(primary));
+	if (secondary)
+		cell.append(buildTypeWrapper(secondary));
+	
+	return cell;
+}
+
+function buildTypeWrapper(type) {
+	let wrapper = document.createElement("div");
+	wrapper.className = "typeWrapper";
+	wrapper.style.backgroundColor = types[type].color;
+	wrapper.textContent = types[type].name;
+	
+	return wrapper;
+}
+
+function buildAbilitiesCell(mon) {
+	let cell = buildBasicCell("speciesAbilitiesCell");
+	
+	if (mon.abilities.primary)
+		cell.append(buildBasicWrapper("speciesAbilityPrimary", abilities[mon.abilities.primary].name));
+	
+	if (mon.abilities.secondary)
+		cell.append(buildBasicWrapper("speciesAbilitySecondary", abilities[mon.abilities.secondary].name));
+	
+	if (mon.abilities.hidden)
+		cell.append(buildBasicWrapper("speciesAbilityHidden", abilities[mon.abilities.hidden].name));
+
+	return cell;
+}
+
+function buildStatCell(label, value) {
+	let cell = buildBasicCell("speciesStatCell");
+	
+	cell.append(buildBasicWrapper("speciesStatLabel", label));
+	
+	cell.append(buildBasicWrapper("speciesStatValue", value));
+	
+	return cell;
 }
 
 function displaySpeciesPanel(mon) {
@@ -130,47 +201,6 @@ function displaySpeciesPanel(mon) {
 	window.scrollTo(0, 0);
 }
 
-function buildSpeciesSprite(mon) {
-	let container = document.createElement("div");
-	container.className = "speciesSpriteContainer";
-	
-	let img = document.createElement("img");
-	img.className = "speciesSprite";
-	img.alt = mon.name;
-	img.src = sprites[mon.ID].sprite;
-	
-	container.append(img);
-	return container;
-	
-}
-
-function buildSpeciesName(mon) {
-	let container = document.createElement("div");
-	container.className = "speciesNameContainer";
-	
-	if (mon.name.specifier) {
-		let specifier = document.createElement("div");
-		specifier.className = "speciesSpecifier";
-		specifier.textContent = mon.name.specifier;
-		container.appendChild(specifier);
-	}
-	
-	let name = document.createElement("div");
-	name.className = "speciesName";
-	name.textContent = mon.name.name;
-	container.appendChild(name);
-
-	
-	if (mon.name.classification) {
-		let classification = document.createElement("div");
-		classification.className = "speciesClassification";
-		classification.textContent = mon.name.classification;
-		container.appendChild(classification);
-	}
-
-	return container;
-}
-
 function buildSpeciesDexID(mon) {
 	
 }
@@ -225,119 +255,4 @@ function buildSpeciesLearnsetTutor(mon) {
 
 function buildSpeciesLearnsetEggMoves(mon) {
 
-}
-
-function appendSpriteCell(row, mon) {
-	let cell = document.createElement("td");
-	cell.scope = "col";
-	cell.className = "speciesSpriteCell";
-	
-	let img = document.createElement("img");
-	img.className = "speciesSprite";
-	img.alt = mon.name;
-	img.src = sprites[mon.ID].sprite;
-	
-	cell.appendChild(img);
-	row.appendChild(cell);
-}
-
-function appendNameCell(row, mon) {
-	let cell = document.createElement("td");
-	cell.scope = "col";
-	cell.className = "speciesNameCell";
-	
-	if (mon.name.specifier) {
-		let specifier = document.createElement("div");
-		specifier.className = "speciesSpecifier";
-		specifier.textContent = mon.name.specifier;
-		cell.appendChild(specifier);
-	}
-	
-	let name = document.createElement("div");
-	name.className = "speciesName";
-	name.textContent = mon.name.name;
-	cell.appendChild(name);
-
-	
-	if (mon.name.classification) {
-		let classification = document.createElement("div");
-		classification.className = "speciesClassification";
-		classification.textContent = mon.name.classification;
-		cell.appendChild(classification);
-	}
-
-	row.appendChild(cell);
-}
-
-function appendTypeCell(row, primary, secondary=null) {
-	let cell = document.createElement("td");
-	cell.scope = "col";
-	cell.className = "speciesTypeCell";
-	
-	let primaryType = document.createElement("div");
-	primaryType.className = "speciesType";
-	primaryType.style.backgroundColor = types[primary].color;
-	primaryType.textContent = types[primary].name;
-	cell.appendChild(primaryType);
-	
-	if (secondary) {
-		let secondaryType = document.createElement("div");
-		secondaryType.className = "speciesType";
-		secondaryType.style.backgroundColor = types[secondary].color;
-		secondaryType.textContent = types[secondary].name;
-		cell.appendChild(secondaryType);
-	}
-	
-	row.appendChild(cell);
-}
-
-function appendAbilitiesCell(row, mon) {
-	let cell = document.createElement("td");
-	cell.scope = "col";
-	cell.className = "speciesAbilitiesCell";
-	
-	if (mon.abilities.primary) {
-		let primary = document.createElement("div");
-		primary.className = "speciesAbilityPrimary";
-		primary.textContent = abilities[mon.abilities.primary].name;
-		cell.appendChild(primary);
-	}
-	
-	if (mon.abilities.secondary) {
-		let secondary = document.createElement("div");
-		secondary.className = "speciesAbilitySecondary";
-		secondary.textContent = abilities[mon.abilities.secondary].name;
-		cell.appendChild(secondary);
-	}
-	
-	if (mon.abilities.hidden) {
-		let hidden = document.createElement("div");
-		hidden.className = "speciesAbilityHidden";
-		hidden.textContent = abilities[mon.abilities.hidden].name;
-		cell.appendChild(hidden);
-	}
-
-	row.appendChild(cell);
-}
-
-function appendStatCells(row, mon) {
-	let statLabels = ["HP", "Atk", "Def", "SpA", "SpD", "Spe", "BST"];
-	let statValues = ["HP", "attack", "defense", "specialAttack", "specialDefense", "speed", "total"];
-
-	for (let i = 0; i < statValues.length; i++) {
-		let cell = document.createElement("td");
-		cell.scope = "col";
-		cell.className = "speciesStatCell";
-		
-		let statLabel = document.createElement("div");
-		statLabel.className = "speciesStatLabel";
-		statLabel.textContent = statLabels[i];
-		cell.appendChild(statLabel);
-		
-		let statValue = document.createElement("div");
-		statValue.className = "speciesStatValue";
-		statValue.textContent = mon.stats[statValues[i]];
-		cell.appendChild(statValue);
-		row.appendChild(cell);
-	}
 }
