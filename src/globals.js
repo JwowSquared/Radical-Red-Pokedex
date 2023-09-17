@@ -13,3 +13,4 @@ let items = null;
 let regions = null;
 
 let trackers = {};
+let filters = {};

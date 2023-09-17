@@ -82,7 +82,7 @@ function buildSpriteCell(className, spriteKey, alt="") {
 function buildSpeciesNameCell(mon) {
 	let cell = buildBasicCell("speciesNameCell");
 	
-	if (species[mon.family.ancestor].family.region !== mon.family.region)
+	if (mon.family.cousins && species[mon.family.cousins[0]].family.region !== mon.family.region)
 		cell.append(buildBasicWrapper("speciesRegion", regions[mon.family.region].variant));
 	
 	cell.append(buildBasicWrapper("speciesName", mon.name));
