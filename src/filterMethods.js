@@ -30,7 +30,10 @@ function setupFilters() {
 	filters["Ability"].options.sort(sortByName);
 	filters["Egg Group"].options.sort(sortByName);
 	filters["Held Item"].options.sort(sortByName);
-	filters["Name"].options.filter(x => !species[x[0]].family.cousins || species[x[0]].family.cousins[0] === x[0]);
+	//create an array filled with one of each pokemon name
+	filters["Name"].options = Array.from(new Set(filters["Name"].options.map(a => a[1])))
+	//map a new array, finding the first match of each name, once for each name, eliminating duplicates (jesus christ)
+		.map(name => { return filters["Name"].options.find(a => a[1] === name) });
 	filters["Toggle"].toggles = {};
 
 	let listContainer = document.getElementById("speciesLists");
@@ -58,21 +61,25 @@ function setupFilters() {
 	filters.active = {};
 	
 	let selectedFilter = filters["Name"];
+	let speciesInput = document.getElementById("speciesFilterInput");
+	speciesInput.setAttribute("list", selectedFilter.ID);
+	
 	selectFilterCategory.addEventListener("change", function(event) {
 		event.preventDefault();
 		selectedFilter = filters[selectFilterCategory.value];
 		speciesInput.setAttribute("list", selectedFilter.ID);
+		speciesInput.value = "";
 	});
-	
-	let speciesInput = document.getElementById("speciesFilterInput");
-	speciesInput.setAttribute("list", selectedFilter.ID);
+
 	speciesInput.addEventListener("keyup", function(event) {
 		event.preventDefault();
 		if (event.keyCode === 13) {
 			let input = speciesInput.value.trim();
-			let [key, value] = selectedFilter.options.find(x => x[1] === input);
-			if (key)
-				filterSpecies(selectedFilter, key);
+			let option = selectedFilter.options.find(x => x[1] === input);
+			if (option) {
+				selectedFilter.filter(option);
+				speciesInput.value = "";
+			}
 		};
 	});
 }
@@ -88,45 +95,25 @@ function buildFilter(name, filter, max, library) {
 	return basic;
 }
 
-function filterSpecies(selectedFilter, input) {
-	
-	selectedFilter.filter(input);
-
-	let results = Object.keys(species);
-	for (const filter of Object.values(filters.active))
-		results = results.filter(filter);
-	
-	populateTable("speciesTable", results);
+function filterName(option) {
+	let func = x => Math.trunc(species[x].dexID) === Math.trunc(species[option[0]].dexID);
+	addFilter(filters["Name"], option, func);
 }
 
-function filterName(input) {
-	let func = function(x) {
-		if (x === input)
-			return true;
-		
-		if (Math.trunc(species[x].dexID) === Math.trunc(species[input].dexID))
-			return true;
-
-		return false;
-	}
-	
-	addFilter(filters["Name"], input, func);
+function filterRegion(option) {
+	let func = x => species[x].family.region === option[0];
+	addFilter(filters["Region"], option, func);
 }
 
-function filterRegion(input) {
-	let func = x => species[x].family.region === input;
-	addFilter(filters["Region"], input, func);
+function filterType(option) {
+	let func = x => species[x].type.primary === option[0] || species[x].type.secondary === option[0];
+	addFilter(filters["Type"], option, func);
 }
 
-function filterType(input) {
-	let func = x => species[x].type.primary === input || species[x].type.secondary === input;
-	addFilter(filters["Type"], input, func);
-}
-
-function filterMove(input) {
+function filterMove(option) {
 	let filter = filters["Move"];
 	
-	if (input === "RECALC") {
+	if (option[0] === "RECALC") {
 		let activeFilters = [...filter.active];
 		for (const activeFilter of activeFilters)
 			filterMove(activeFilter);
@@ -138,9 +125,9 @@ function filterMove(input) {
 		let found = false;
 		for (const key in learnset) {
 			if (key === "levelup")
-				found = learnset.levelup.find(y => y[0] === input);
+				found = learnset.levelup.find(y => y[0] === option[0]);
 			else
-				found = learnset[key].find(y => y === input);
+				found = learnset[key].find(y => y === option[0]);
 			if (found)
 				return true;
 		}
@@ -149,15 +136,15 @@ function filterMove(input) {
 	
 	let toggles = filters["Toggle"].toggles;
 	if (toggles.TOGGLE_LEVELUP)
-		func = x => species[x].learnset.levelup.find(y => y[0] === input);
+		func = x => species[x].learnset.levelup.find(y => y[0] === option[0]);
 
-	addFilter(filter, input, func);
+	addFilter(filter, option, func);
 }
 
-function filterMoveType(input) {
+function filterMoveType(option) {
 	let filter = filters["Move Type"];
 	
-	if (input === "RECALC") {
+	if (option[0] === "RECALC") {
 		let activeFilters = [...filter.active];
 		for (const activeFilter of activeFilters)
 			filterMoveType(activeFilter);
@@ -169,9 +156,9 @@ function filterMoveType(input) {
 		let found = false;
 		for (const key in learnset) {
 			if (key === "levelup")
-				found = learnset.levelup.find(y => moves[y[0]].type === input);
+				found = learnset.levelup.find(y => moves[y[0]].type === option[0]);
 			else
-				found = learnset[key].find(y => moves[y].type === input);
+				found = learnset[key].find(y => moves[y].type === option[0]);
 			if (found)
 				return true;
 		}
@@ -180,30 +167,30 @@ function filterMoveType(input) {
 	
 	let toggles = filters["Toggle"].toggles;
 	if (toggles.TOGGLE_LEVELUP)
-		func = x => species[x].learnset.levelup.find(y => moves[y[0]].type === input);
+		func = x => species[x].learnset.levelup.find(y => moves[y[0]].type === option[0]);
 	
-	addFilter(filter, input, func);
+	addFilter(filter, option, func);
 }
 
-function filterAbilities(input) {
-	let func = x => species[x].abilities.primary === input || species[x].abilities.secondary === input || species[x].abilities.hidden === input;
-	addFilter(filters["Ability"], input, func);
+function filterAbilities(option) {
+	let func = x => species[x].abilities.primary === option[0] || species[x].abilities.secondary === option[0] || species[x].abilities.hidden === option[0];
+	addFilter(filters["Ability"], option, func);
 }
 
-function filterEggGroup(input) {
-	let func = x => x => species[x].family.eggGroup.primary === input || species[x].family.eggGroup.secondary === input;
-	addFilter(filters["Egg Group"], input, func);
+function filterEggGroup(option) {
+	let func = x => x => species[x].family.eggGroup.primary === option[0] || species[x].family.eggGroup.secondary === option[0];
+	addFilter(filters["Egg Group"], option, func);
 }
 
-function filterHeldItem(input) {
-	let func = x => species[x].items.common === input || species[x].items.rare === input;
-	addFilter(filters["Held Item"], input, func);
+function filterHeldItem(option) {
+	let func = x => species[x].items.common === option[0] || species[x].items.rare === option[0];
+	addFilter(filters["Held Item"], option, func);
 }
 
-function filterLevelCap(input) {
+function filterLevelCap(option) {
 	let filter = filters["Level Cap"];
 	
-	if (input === "RECALC") {
+	if (option[0] === "RECALC") {
 		let activeFilters = [...filter.active];
 		for (const activeFilter of activeFilters)
 			filterLevelCap(activeFilter);
@@ -215,52 +202,79 @@ function filterLevelCap(input) {
 	let difficulty = "normal";
 	if (toggles.TOGGLE_HARDCORE)
 		difficulty = "hardcore";
-	
+
 	let category = "all";
 	if (toggles.TOGGLE_ONLYNEW)
 		category = "new";
 	
-	let func = x => caps[input][difficulty].pokemon[category].contains(x);
+	let func = x => caps[option[0]][difficulty].pokemon[category].indexOf(x) !== -1;
 	
 	if (toggles.TOGGLE_EVOLVED)
-		func = x => caps[input][difficulty].pokemon[category].contains(x) && caps[input][difficulty].pokemon.evolved.contains(x);
+		func = x => caps[option[0]][difficulty].pokemon[category].indexOf(x) !== -1 && caps[option[0]][difficulty].pokemon.evolved.indexOf(x) !== -1;
 
-	addFilter(filter, input, func);
+	addFilter(filter, option, func);
 }
 
-function filterToggle(input) {
+function filterToggle(option) {
 	let filter = filters["Toggle"];
 	let toggles = filter.toggles;
 
-	if (toggles[input] === true)
-		toggles[input] = false;
+	if (toggles[option[0]] === true)
+		toggles[option[0]] = false;
 	else
-		toggles[input] = true;
+		toggles[option[0]] = true;
 	
-	if (input === "TOGGLE_CHANGED") {
-		addFilter(filter, input, x => species[x].changed != null);
+	if (option[0] === "TOGGLE_CHANGED") {
+		addFilter(filter, option, x => species[x].changed != null);
 		return;
 	}
 	
-	if (input === "TOGGLE_EVOLVED" || input === "TOGGLE_HARDCORE" || input === "TOGGLE_ONLYNEW")
+	if (option[0] === "TOGGLE_EVOLVED" || option[0] === "TOGGLE_HARDCORE" || option[0] === "TOGGLE_ONLYNEW")
 		filterLevelCap("RECALC");
-	if (input === "TOGGLE_LEVELUP") {
+	if (option[0] === "TOGGLE_LEVELUP") {
 		filterMove("RECALC");
 		filterMoveType("RECALC");
 	}
 }
 
-function addFilter(filter, input, func) {
+function addFilter(filter, option, func) {
+
+	if (filter.active.indexOf(option[0]) === -1)
+		filter.active.push(option[0]);
 	
-	if (filter.active.indexOf(input) === -1)
-		filter.active.push(input);
-	
-	if (filter.active.length >= filter.max) {
+	if (filter.active.length > filter.max) {
 		let key = filter.active.shift();
-		delete filter.active[key];
+		delete filters.active[key];
 	}
 
-	filters.active[input] = func;
+	let activeFiltersDisplay = document.getElementById("activeFilters");
+	let button = document.createElement("div");
+	button.textContent = `${filter.name}: ${option[1]}`;
+	button.className = "activeFilter";
+	button.onclick = function() {
+		removeFilter(filter, option);
+	};
+	activeFiltersDisplay.append(button);
+
+	filters.active[option[0]] = {tag: button, func: func};
+
+	let results = Object.keys(species);
+	for (const pair of Object.values(filters.active))
+		results = results.filter(pair.func);
 	
-	console.log("added new filter ", input);
+	populateTable("speciesTable", results);
+}
+
+function removeFilter(selectedFilter, option) {
+	filters.active[option[0]].tag.remove();
+	delete filters.active[option[0]];
+	
+	let idx = selectedFilter.active.indexOf(option[0]);
+	selectedFilter.active.splice(idx, 1);
+	
+	let results = Object.keys(species);
+	for (const pair of Object.values(filters.active))
+		results = results.filter(pair.func);
+	
+	populateTable("speciesTable", results);
 }

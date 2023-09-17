@@ -62,6 +62,19 @@ body {
   display: none !important;
 }
 
+#activeFilterDisplay {
+	display: flex;
+}
+
+.activeFilter {
+	color: white;
+    background-color: black;
+    padding: 0.2rem;
+    border-radius: 3px;
+    border: solid;
+    display: inline-block;
+}
+
 .tableWrapper {
     max-width: 1200px;
     margin-inline: auto;
