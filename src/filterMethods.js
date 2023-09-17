@@ -5,7 +5,9 @@ function setupFilters() {
 		"TOGGLE_LEVELUP": {name: "Levelup"},
 		"TOGGLE_EVOLVED": {name: "Evolved"},
 		"TOGGLE_HARDCORE": {name: "Hardcore"},
-		"TOGGLE_ONLYNEW": {name: "Only New"}
+		"TOGGLE_ONLYNEW": {name: "Only New"},
+		"TOGGLE_REGIONAL": {name: "Regional"},
+		"TOGGLE_MEGA": {name: "Mega"}
 	};
 
 	let filterConfigs = [
@@ -18,7 +20,7 @@ function setupFilters() {
 		["Egg Group", filterEggGroup, 1, eggGroups],
 		["Held Item", filterHeldItem, 1, items],
 		["Level Cap", filterLevelCap, 1, caps],
-		["Toggle", filterToggle, 2, toggles]
+		["Toggle", filterToggle, 7, toggles]
 	];
 	
 	for (const [name, filter, max, library] of filterConfigs) {
@@ -113,7 +115,7 @@ function filterType(option) {
 function filterMove(option) {
 	let filter = filters["Move"];
 	
-	if (option[0] === "RECALC") {
+	if (option === "RECALC") {
 		let activeFilters = [...filter.active];
 		for (const activeFilter of activeFilters)
 			filterMove(activeFilter);
@@ -144,7 +146,7 @@ function filterMove(option) {
 function filterMoveType(option) {
 	let filter = filters["Move Type"];
 	
-	if (option[0] === "RECALC") {
+	if (option === "RECALC") {
 		let activeFilters = [...filter.active];
 		for (const activeFilter of activeFilters)
 			filterMoveType(activeFilter);
@@ -190,7 +192,7 @@ function filterHeldItem(option) {
 function filterLevelCap(option) {
 	let filter = filters["Level Cap"];
 	
-	if (option[0] === "RECALC") {
+	if (option === "RECALC") {
 		let activeFilters = [...filter.active];
 		for (const activeFilter of activeFilters)
 			filterLevelCap(activeFilter);
@@ -219,16 +221,29 @@ function filterToggle(option) {
 	let filter = filters["Toggle"];
 	let toggles = filter.toggles;
 
-	if (toggles[option[0]] === true)
+	let func = x => true;
+	if (option[0] === "TOGGLE_CHANGED")
+		func = x => species[x].changelog != null;
+	else if (option[0] === "TOGGLE_EVOLVED" && filters["Level Cap"].active.length === 0)
+		func = x => !species[x].family.evolutions;
+	else if (option[0] === "TOGGLE_REGIONAL")
+		func = x => species[x].family.cousins && species[species[x].family.cousins[0]].family.region !== species[x].family.region;
+	else if (option[0] === "TOGGLE_MEGA")
+		func = x => species[x].family.form && species[x].family.form.includes("Mega");
+
+	if (toggles[option[0]] === true) {
 		toggles[option[0]] = false;
-	else
-		toggles[option[0]] = true;
-	
-	if (option[0] === "TOGGLE_CHANGED") {
-		addFilter(filter, option, x => species[x].changed != null);
-		return;
+		removeFilter(filter, option);
 	}
-	
+	else {
+		toggles[option[0]] = true;
+		addFilter(filter, option, func);
+		filters.active[option[0]].tag.onclick = function() {
+			toggles[option[0]] = false;
+			removeFilter(filter, option);
+		};
+	}
+
 	if (option[0] === "TOGGLE_EVOLVED" || option[0] === "TOGGLE_HARDCORE" || option[0] === "TOGGLE_ONLYNEW")
 		filterLevelCap("RECALC");
 	if (option[0] === "TOGGLE_LEVELUP") {

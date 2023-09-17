@@ -62,7 +62,7 @@ body {
   display: none !important;
 }
 
-#activeFilterDisplay {
+#activeFilters {
 	display: flex;
 }
 
