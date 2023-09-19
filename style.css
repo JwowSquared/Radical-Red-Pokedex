@@ -77,6 +77,19 @@ body {
 	height: 17px;
 }
 
+.infoChangelogTypesWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.infoChangelogStatBuff {
+	color: #05c905;
+}
+
+.infoChangelogStatNerf {
+	color: #f83f3f;
+}
+
 .tableName {
 	color: white;
 	font-weight: 550;

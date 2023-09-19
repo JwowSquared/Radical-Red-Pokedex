@@ -218,22 +218,41 @@ function buildWrapperChangelog(tag, className, mon) {
 	if (!mon.changelog)
 		return wrapper;
 	
+	wrapper.append(buildWrapper("div", className, "Changelog:"));
+	
 	if (mon.changelog.type) {
-		wrapper.append(buildWrapperTypes("div", className, types[mon.changelog.type.primary], types[mon.changelog.type.secondary]));
-		wrapper.append(buildWrapper("div", className + "ArrowWrapper", "→"));
-		wrapper.append(buildWrapperTypes("div", className, types[mon.type.primary], types[mon.type.secondary]));
+		let typeWrapper = buildWrapper("div", "infoChangelogTypesWrapper");
+		typeWrapper.append(buildWrapperTypes("div", "infoChangelogOldType", types[mon.changelog.type.primary], types[mon.changelog.type.secondary]));
+		typeWrapper.append(buildWrapper("div", className + "ArrowWrapper", "→"));
+		typeWrapper.append(buildWrapperTypes("div", "infoChangelogNewType", types[mon.type.primary], types[mon.type.secondary]));
+		wrapper.append(typeWrapper);
 	}
 	
 	if (mon.changelog.abilities) {
-		wrapper.append(buildWrapperAbilities("div", className, mon.changelog.abilities));
-		wrapper.append(buildWrapper("div", className + "ArrowWrapper", "→"));
-		wrapper.append(buildWrapperAbilities("div", className, mon.abilities));
+		for (const ability of ["primary", "secondary", "hidden"]) {
+			let oldAbility = abilities[mon.changelog.abilities[ability]];
+			let newAbility = abilities[mon.abilities[ability]];
+			if (oldAbility || newAbility) {
+				if (!oldAbility)
+					oldAbility = "";
+				else
+					oldAbility = oldAbility.name;
+				if (!newAbility)
+					newAbility = "";
+				else
+					newAbility = newAbility.name;
+				wrapper.append(buildWrapper("div", className, oldAbility + " → " + newAbility));
+			}
+			
+		}
 	}
 	
 	if (mon.changelog.stats) {
-		let statLabels = {HP:HP, attack:Atk, defense:Def, specialAttack:SpA, specialDefense:SpD, speed:Spe};
+		let statLabels = {HP:"HP", attack:"Atk", defense:"Def", specialAttack:"SpA", specialDefense:"SpD", speed:"Spe"};
+		
 		for (const stat in mon.changelog.stats) {
-			wrapper.append(buildWrapper("div", className, statLabels[stat] + " " + mon.changelog.stats[stat] + " → " + mon.stats[stat]));
+			let statClass =  mon.changelog.stats[stat] < mon.stats[stat] ? "infoChangelogStatBuff" : "infoChangelogStatNerf";
+			wrapper.append(buildWrapper("div", statClass, statLabels[stat] + " " + mon.changelog.stats[stat] + " → " + mon.stats[stat]));
 		}
 	}
 	
