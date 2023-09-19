@@ -232,26 +232,23 @@ function buildWrapperChangelog(tag, className, mon) {
 		for (const ability of ["primary", "secondary", "hidden"]) {
 			let oldAbility = abilities[mon.changelog.abilities[ability]];
 			let newAbility = abilities[mon.abilities[ability]];
-			if (oldAbility || newAbility) {
-				if (!oldAbility)
-					oldAbility = "";
-				else
-					oldAbility = oldAbility.name;
-				if (!newAbility)
-					newAbility = "";
-				else
-					newAbility = newAbility.name;
-				wrapper.append(buildWrapper("div", className, oldAbility + " → " + newAbility));
+			console.log(oldAbility, newAbility);
+			if (oldAbility == newAbility)
+				continue;
+			if (oldAbility && newAbility)
+				wrapper.append(buildWrapper("div", className, oldAbility.name + " → " + newAbility.name));
+			else if (newAbility)
+				wrapper.append(buildWrapper("div", "infoChangelogBuff", "+" + newAbility.name));
+			else if (oldAbility)
+				wrapper.append(buildWrapper("div", "infoChangelogNerf", "-" + oldAbility.name));
 			}
-			
-		}
 	}
 	
 	if (mon.changelog.stats) {
 		let statLabels = {HP:"HP", attack:"Atk", defense:"Def", specialAttack:"SpA", specialDefense:"SpD", speed:"Spe"};
 		
 		for (const stat in mon.changelog.stats) {
-			let statClass =  mon.changelog.stats[stat] < mon.stats[stat] ? "infoChangelogStatBuff" : "infoChangelogStatNerf";
+			let statClass =  mon.changelog.stats[stat] < mon.stats[stat] ? "infoChangelogBuff" : "infoChangelogNerf";
 			wrapper.append(buildWrapper("div", statClass, statLabels[stat] + " " + mon.changelog.stats[stat] + " → " + mon.stats[stat]));
 		}
 	}

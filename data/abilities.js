@@ -1,9 +1,4 @@
 {
-    "ABILITY_NONE": {
-        "name": "-------",
-        "description": "No special ability.",
-        "ID": "ABILITY_NONE"
-    },
     "ABILITY_STENCH": {
         "name": "Stench",
         "description": "Helps repel wild Pokémon.",
@@ -1421,5 +1416,165 @@
         "description": "Contact with this Pokemon spreads this Ability.",
         "name": "Lingeringaroma",
         "ID": "ABILITY_LINGERINGAROMA"
+    },
+    "ABILITY_BIGPECKS": {
+        "ID": "ABILITY_BIGPECKS",
+        "name": "Big Pecks",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_HEALER": {
+        "ID": "ABILITY_HEALER",
+        "name": "Healer",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_RATTLED": {
+        "ID": "ABILITY_RATTLED",
+        "name": "Rattled",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_ANTICIPATION": {
+        "ID": "ABILITY_ANTICIPATION",
+        "name": "Anticipation",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_LIGHTMETAL": {
+        "ID": "ABILITY_LIGHTMETAL",
+        "name": "Light Metal",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_PICKPOCKET": {
+        "ID": "ABILITY_PICKPOCKET",
+        "name": "Pickpocket",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_HONEYGATHER": {
+        "ID": "ABILITY_HONEYGATHER",
+        "name": "Honey Gather",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_MOODY": {
+        "ID": "ABILITY_MOODY",
+        "name": "Moody",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_NORMALIZE": {
+        "ID": "ABILITY_NORMALIZE",
+        "name": "Normalize",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_STALL": {
+        "ID": "ABILITY_STALL",
+        "name": "Stall",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_KLUTZ": {
+        "ID": "ABILITY_KLUTZ",
+        "name": "Klutz",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_FLOWERVEIL": {
+        "ID": "ABILITY_FLOWERVEIL",
+        "name": "Flower Veil",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_SYMBIOSIS": {
+        "ID": "ABILITY_SYMBIOSIS",
+        "name": "Symbiosis",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_AURABREAK": {
+        "ID": "ABILITY_AURABREAK",
+        "name": "Aura Break",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_LONGREACH": {
+        "ID": "ABILITY_LONGREACH",
+        "name": "Long Reach",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_BATTERY": {
+        "ID": "ABILITY_BATTERY",
+        "name": "Battery",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_RKS_SYSTEM": {
+        "ID": "ABILITY_RKS_SYSTEM",
+        "name": "RKS System",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_STEELWORKER": {
+        "ID": "ABILITY_STEELWORKER",
+        "name": "Steel Worker",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_MIRRORARMOR": {
+        "ID": "ABILITY_MIRRORARMOR",
+        "name": "Mirror Armor",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_BALLFETCH": {
+        "ID": "ABILITY_BALLFETCH",
+        "name": "Ball Fetch",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_POWERSPOT": {
+        "ID": "ABILITY_POWERSPOT",
+        "name": "Power Spot",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_PASTELVEIL": {
+        "ID": "ABILITY_PASTELVEIL",
+        "name": "Pastel Veil",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_MIMICRY": {
+        "ID": "ABILITY_MIMICRY",
+        "name": "Mimicry",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_MYCELIUMMIGHT": {
+        "ID": "ABILITY_MYCELIUMMIGHT",
+        "name": "Mycelium Might",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_CUD_CHEW": {
+        "ID": "ABILITY_CUD_CHEW",
+        "name": "Cud Chew",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_OPPORTUNIST": {
+        "ID": "ABILITY_OPPORTUNIST",
+        "name": "Opportunist",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_SNOW_CLOAK": {
+        "ID": "ABILITY_SNOW_CLOAK",
+        "name": "Snow Cloak",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_COMMANDER": {
+        "ID": "ABILITY_COMMANDER",
+        "name": "Commander",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_WIND_POWER": {
+        "ID": "ABILITY_WIND_POWER",
+        "name": "Wind Power",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_TANGLED_FEET": {
+        "ID": "ABILITY_TANGLED_FEET",
+        "name": "Tangled Feet",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_COSTAR": {
+        "ID": "ABILITY_COSTAR",
+        "name": "Costar",
+        "description": "Ability Removed in RR."
+    },
+    "ABILITY_GUARD_DOG": {
+        "ID": "ABILITY_GUARD_DOG",
+        "name": "Guard Dog",
+        "description": "Ability Removed in RR."
     }
 }

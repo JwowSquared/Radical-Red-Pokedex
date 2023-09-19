@@ -82,11 +82,11 @@ body {
     align-items: center;
 }
 
-.infoChangelogStatBuff {
+.infoChangelogBuff {
 	color: #05c905;
 }
 
-.infoChangelogStatNerf {
+.infoChangelogNerf {
 	color: #f83f3f;
 }
 
