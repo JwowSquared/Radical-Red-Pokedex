@@ -3,40 +3,36 @@ function setupTables() {
 		["Level", ["level"]],
 		["Name", ["name"]],
 		["Type", ["type"]],
-		["Split", ["split"]],
+		["Category", ["split"]],
 		["Power", ["power"]],
 		["Acc", ["accuracy"]],
-		["PP", ["PP"]],
 		["Description", []],
 	]);
 	
 	setupTable("speciesLearnsetTMHMTable", moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
 		["Name", ["name"]],
 		["Type", ["type"]],
-		["Split", ["split"]],
+		["Category", ["split"]],
 		["Power", ["power"]],
 		["Acc", ["accuracy"]],
-		["PP", ["PP"]],
 		["Description", []],
 	]);
 	
 	setupTable("speciesLearnsetTutorTable", moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
 		["Name", ["name"]],
 		["Type", ["type"]],
-		["Split", ["split"]],
+		["Category", ["split"]],
 		["Power", ["power"]],
 		["Acc", ["accuracy"]],
-		["PP", ["PP"]],
 		["Description", []],
 	]);
 	
 	setupTable("speciesLearnsetEggMovesTable", moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
 		["Name", ["name"]],
 		["Type", ["type"]],
-		["Split", ["split"]],
+		["Category", ["split"]],
 		["Power", ["power"]],
 		["Acc", ["accuracy"]],
-		["PP", ["PP"]],
 		["Description", []],
 	]);
 	
@@ -111,10 +107,7 @@ function populateTable(name, data) {
 		return;
 	}
 	
-	tracker.data = [];
-	for (const element of data)
-		tracker.data.push({"value": element, "filters": []});
-	
+	tracker.data = data;
 	for (const control of tracker.sortControls)
 		control.className = "sortOption";
 	tracker.sortControls[0].click();
@@ -140,13 +133,4 @@ function sortTracker(selectedOption, tracker, sortMethod, sortProperties) {
 	}
 	
 	loadChunk(tracker, true);
-}
-
-function clearFilter(tracker, targetFilter) {
-	for (const [value, filters] of tracker.data) {
-		for (let i = 0; i < filters.length; i++) {
-			if (filters[i] === targetFilter)
-				filters.splice(i, 1);
-		}
-	}
 }

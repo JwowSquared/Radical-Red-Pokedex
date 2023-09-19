@@ -17,6 +17,25 @@
 	  <p>Loading Radical Red Pokedex...</p>
 	</div>
     <main class="hide">
+	  <div id="speciesPanel" class="hide">
+	    <div id="closeSpeciesPanel">X</div>
+		<div id="speciesPanelInfoDisplay">
+		</div>
+		<div id="speciesPanelLearnsets">
+		  <div id="speciesLearnsetLevelUpTable" class="tableWrapper">
+			<div class="tableName">Moves Learned By Level Up</div>
+		  </div>
+		  <div id="speciesLearnsetTMHMTable" class="tableWrapper">
+		    <div class="tableName">Moves Learned By TM/HM</div>
+		  </div>
+		  <div id="speciesLearnsetTutorTable" class="tableWrapper">
+		    <div class="tableName">Moves Learned By Tutor</div>
+		  </div>
+		  <div id="speciesLearnsetEggMovesTable" class="tableWrapper">
+		    <div class="tableName">Moves Learned By Breeding</div>
+		  </div>
+		</div>
+	  </div>
 	  <div id="speciesControl">
 	    <select id="speciesFilterCategory"></select>
 		<label id="speciesFilterSeparator">:</label>
@@ -25,20 +44,6 @@
 		</div>
 	  </div>
 	  <div id="activeFilters">
-	  </div>
-	  <div id="speciesPanel" class="hide">
-		<div id="speciesPanelPrimaryInfo">
-		</div>
-		<div id="speciesPanelLearnsets">
-		  <div id="speciesLearnsetLevelUpTable" class="tableWrapper">
-		  </div>
-		  <div id="speciesLearnsetTMHMTable" class="tableWrapper">
-		  </div>
-		  <div id="speciesLearnsetTutorTable" class="tableWrapper">
-		  </div>
-		  <div id="speciesLearnsetEggMovesTable" class="tableWrapper">
-		  </div>
-		</div>
 	  </div>
       <div id="speciesTable" class="tableWrapper">
       </div>

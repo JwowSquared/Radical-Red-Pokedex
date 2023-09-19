@@ -16,6 +16,73 @@ body {
 	margin-top: 20px;
 }
 
+#speciesPanel {
+	user-select: none;
+}
+
+#closeSpeciesPanel {
+	width: 21px;
+    height: 23px;
+    color: white;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 6px;
+    position: sticky;
+    float: right;
+    right: 4px;
+    top: 5px;
+    z-index: 3;
+    cursor: pointer;
+}
+
+#speciesPanelInfoDisplay {
+	color: white;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	clear: right;
+}
+
+.moveTypeWrapper, .moveSplitWrapper {
+	min-width: 89px;
+}
+
+.infoSprite {
+	height: 128px;
+	width: 128px;
+	image-rendering: pixelated;
+}
+
+
+.infoStatWrapper {
+	display: flex;
+	align-items: center;
+}
+
+.infoStatLabel {
+	width: 33px;
+	text-align: left;
+}
+
+.infoStatValue {
+	width: 26px;
+	text-align: right;
+}
+
+.infoStatBar {
+	border-radius: 3px;
+	border: solid 1px black;
+	margin-left: 4px;
+	height: 17px;
+}
+
+.tableName {
+	color: white;
+	font-weight: 550;
+	font-size: 1.2rem;
+}
+
 #speciesControl {
 	padding: 30px;
     display: flex;
@@ -40,6 +107,7 @@ body {
 	text-align: center;
 	border-right: none;
 	border-radius: 3px 0 0 3px;
+	cursor: pointer;
 }
 
 #speciesFilterCategory option {
@@ -107,7 +175,7 @@ body {
 	cursor: auto;
 }
 
-.active, .sortOption:hover, #speciesFilterInput:hover, #speciesFilterButton:hover, #speciesFilterInput:focus {
+.active, .sortOption:hover, #speciesFilterInput:hover, #speciesFilterCategory:hover, #speciesFilterInput:focus {
 	background: rgba(255, 255, 255, 0.075);
 }
 
@@ -128,12 +196,12 @@ body {
 	height: 85.8px;
 }
 
-.speciesDexIDCell {
+.speciesDexIDWrapper {
 	min-width: 67.9px;
 	font-weight: 700;
 }
 
-td.speciesSpriteCell {
+td.speciesSpriteWrapper {
 	padding: 0px;
 }
 
@@ -142,27 +210,27 @@ td.speciesSpriteCell {
 	width: 64px;
 }
 
-.speciesNameCell {
+.speciesNameWrapper {
 	min-width: 120.6px;
 }
 
-.speciesRegion, .speciesForm {
+.speciesNameRegion, .speciesNameForm, .infoNameRegion, .infoNameForm {
 	font-style: italic;
 }
 
-.speciesName {
+.speciesNameName {
 	font-weight: 700;
 }
 
-.speciesTypeCell {
+.infoNameName {
+	font-size: 1.2rem;
+}
+
+.speciesTypesWrapper {
 	min-width: 165.4px;
 }
 
-#speciesPanelLearnsets .speciesTypeCell, .moveSplitCell {
-	min-width: 89px;
-}
-
-.typeWrapper, .splitWrapper {
+.typeWrapper {
 	width: 70.3px;
 	padding: 2px;
 	display: inline-block;
@@ -172,16 +240,19 @@ td.speciesSpriteCell {
 	text-shadow: 1px 1px black;
 }
 
-.speciesAbilitiesCell {
-	min-width: 148.2px;
+.speciesAbilitiesWrapper, .infoAbilitiesWrapper {
 	font-style: italic;
 }
 
-.speciesAbilityHidden {
+.speciesAbilitiesWrapper {
+	min-width: 148.2px;
+}
+
+.speciesAbilitiesHidden, .infoAbilitiesHidden {
 	font-weight: 700;
 }
 
-.speciesStatCell {
+.speciesStatWrapper {
 	min-width: 51.1px;
 }
 
@@ -195,7 +266,7 @@ td.speciesSpriteCell {
 		min-width: 487px;
 	}
 	
-	.sortLocked, .moveDescription {
+	.sortLocked, .moveDescriptionWrapper {
 		display: none;
 	}
 	
@@ -221,33 +292,33 @@ td.speciesSpriteCell {
 		display: inline-block;
 	}
 	
-	.speciesDexIDCell {
+	.speciesDexIDWrapper {
 		position: absolute;
 		left: 21%;
 		top: 24px;
 	}
 	
-	.speciesSpriteCell, .speciesNameCell, #speciesTable .speciesTypeCell {
+	.speciesSpriteWrapper, .speciesNameWrapper, #speciesTable .speciesTypesWrapper {
 		width: 33%;
 	}
 	
-	td.speciesNameCell {
+	td.speciesNameWrapper {
 		height: 84.8px;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 	}
 	
-	.speciesAbilitiesCell {
+	.speciesAbilitiesWrapper {
 		width: 100%;
 	}
 	
-	.speciesAbilityPrimary, .speciesAbilitySecondary, .speciesAbilityHidden {
+	.speciesAbilitiesPrimary, .speciesAbilitiesSecondary, .speciesAbilitiesHidden {
 		display: inline-block;
 		width: 33%;
 	}
 	
-	.speciesStatCell {
+	.speciesStatWrapper {
 		width: 14%;
 	}
 }

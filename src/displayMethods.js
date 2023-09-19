@@ -8,18 +8,18 @@ function displaySpeciesRow(tracker, key) {
 	tracker.body.appendChild(currentRow);
 	
 	currentRow.append(
-		buildBasicCell("speciesDexIDCell", Math.trunc(mon.dexID)),
-		buildSpriteCell("speciesSprite", mon.ID),
-		buildSpeciesNameCell(mon),
-		buildTypeCell("speciesType", mon.type.primary, mon.type.secondary),
-		buildSpeciesAbilityCell(mon),
-		buildStatCell("HP", mon.stats.HP),
-		buildStatCell("Atk", mon.stats.attack),
-		buildStatCell("Def", mon.stats.defense),
-		buildStatCell("SpA", mon.stats.specialAttack),
-		buildStatCell("SpD", mon.stats.specialDefense),
-		buildStatCell("Spe", mon.stats.speed),
-		buildStatCell("BST", mon.stats.total)
+		buildWrapper("td", "speciesDexIDWrapper", Math.trunc(mon.dexID)),
+		buildWrapperSprite("td", "speciesSprite", sprites[mon.ID]),
+		buildWrapperName("td", "speciesName", mon),
+		buildWrapperTypes("td", "speciesTypes", types[mon.type.primary], types[mon.type.secondary]),
+		buildWrapperAbilities("td", "speciesAbilities", mon.abilities),
+		buildWrapperStat("td", "speciesStat", "HP", mon.stats.HP),
+		buildWrapperStat("td", "speciesStat", "Atk", mon.stats.attack),
+		buildWrapperStat("td", "speciesStat", "Def", mon.stats.defense),
+		buildWrapperStat("td", "speciesStat", "SpA", mon.stats.specialAttack),
+		buildWrapperStat("td", "speciesStat", "SpD", mon.stats.specialDefense),
+		buildWrapperStat("td", "speciesStat", "Spe", mon.stats.speed),
+		buildWrapperStat("td", "speciesStat", "BST", mon.stats.total)
 	);
 }
 
@@ -31,14 +31,13 @@ function displayLevelUpMovesRow(tracker, movePair) {
 	tracker.body.appendChild(currentRow);
 	
 	currentRow.append(
-		buildBasicCell("moveLevel", level),
-		buildBasicCell("moveName", move.name),
-		buildTypeCell("moveType", move.type),
-		buildSplitCell("moveSplit", move.split),
-		buildBasicCell("movePower", move.power),
-		buildBasicCell("moveAccuracy", move.accuracy),
-		buildBasicCell("movePP", move.PP),
-		buildBasicCell("moveDescription", move.description)
+		buildWrapper("td", "moveLevelWrapper", level),
+		buildWrapper("td", "moveNameWrapper", move.name),
+		buildWrapperTypes("td", "moveType", types[move.type]),
+		buildWrapperTypes("td", "moveSplit", splits[move.split]),
+		buildWrapper("td", "movePowerWrapper", move.power),
+		buildWrapper("td", "moveAccuracyWrapper", move.accuracy),
+		buildWrapper("td", "moveDescriptionWrapper", move.description)
 	);
 }
 
@@ -49,232 +48,212 @@ function displayMovesRow(tracker, key) {
 	tracker.body.appendChild(currentRow);
 	
 	currentRow.append(
-		buildBasicCell("moveName", move.name),
-		buildTypeCell("moveType", move.type),
-		buildSplitCell("moveSplit", move.split),
-		buildBasicCell("movePower", move.power),
-		buildBasicCell("moveAccuracy", move.accuracy),
-		buildBasicCell("movePP", move.PP),
-		buildBasicCell("moveDescription", move.description)
+		buildWrapper("td", "moveNameWrapper", move.name),
+		buildWrapperTypes("td", "moveType", types[move.type]),
+		buildWrapperTypes("td", "moveSplit", splits[move.split]),
+		buildWrapper("td", "movePowerWrapper", move.power),
+		buildWrapper("td", "moveAccuracyWrapper", move.accuracy),
+		buildWrapper("td", "moveDescriptionWrapper", move.description)
 	);
 }
 
-function buildBasicCell(className, value="") {
-	let cell = document.createElement("td");
-	cell.scope = "col";
-	cell.className = className;
-	cell.textContent = value;
-	
-	return cell;
-}
-
-function buildSpriteCell(className, spriteKey, alt="") {
-	let cell = buildBasicCell(className + "Cell");
-	let img = document.createElement("img");
-	img.className = className;
-	img.alt = alt;
-	img.src = sprites[spriteKey];
-	
-	cell.append(img);
-	return cell;
-}
-
-function buildSpeciesNameCell(mon) {
-	let cell = buildBasicCell("speciesNameCell");
-	
-	if (mon.family.cousins && species[mon.family.cousins[0]].family.region !== mon.family.region)
-		cell.append(buildBasicWrapper("speciesRegion", regions[mon.family.region].variant));
-	
-	cell.append(buildBasicWrapper("speciesName", mon.name));
-
-	if (mon.family.form)
-		cell.append(buildBasicWrapper("speciesForm", mon.family.form));
-
-	return cell;
-}
-
-function buildBasicWrapper(className, text) {
-	let wrapper = document.createElement("div");
-	wrapper.className = className;
-	wrapper.textContent = text;
-	
-	return wrapper;
-}
-
-function buildTypeCell(className, primary, secondary=null) {
-	let cell = buildBasicCell(className + "Cell");
-	
-	cell.append(buildTypeWrapper(primary));
-	if (secondary)
-		cell.append(buildTypeWrapper(secondary));
-	
-	return cell;
-}
-
-function buildTypeWrapper(type) {
-	let wrapper = document.createElement("div");
-	wrapper.className = "typeWrapper";
-	wrapper.style.backgroundColor = types[type].color;
-	wrapper.textContent = types[type].name;
-	
-	return wrapper;
-}
-
-function buildSplitCell(className, split) {
-	let cell = buildBasicCell(className + "Cell");
-	
-	cell.append(buildSplitWrapper(split));
-	
-	return cell;
-}
-
-function buildSplitWrapper(split) {
-	let splits = {
-		"SPLIT_PHYSICAL": {"name": "Physical", "color": "#f75231"},
-		"SPLIT_SPECIAL": {"name": "Special", "color": "#5273ad"},
-		"SPLIT_STATUS": {"name": "Status", "color": "#ada594"}
-	};
-	let wrapper = document.createElement("div");
-	wrapper.className = "splitWrapper";
-	wrapper.style.backgroundColor = splits[split].color;
-	wrapper.textContent = splits[split].name;
-	
-	return wrapper;
-}
-
-function buildSpeciesAbilityCell(mon) {
-	let cell = buildBasicCell("speciesAbilitiesCell");
-	
-	if (mon.abilities.primary)
-		cell.append(buildBasicWrapper("speciesAbilityPrimary", abilities[mon.abilities.primary].name));
-	
-	if (mon.abilities.secondary)
-		cell.append(buildBasicWrapper("speciesAbilitySecondary", abilities[mon.abilities.secondary].name));
-	
-	if (mon.abilities.hidden)
-		cell.append(buildBasicWrapper("speciesAbilityHidden", abilities[mon.abilities.hidden].name));
-
-	return cell;
-}
-
-function buildStatCell(label, value) {
-	let cell = buildBasicCell("speciesStatCell");
-	
-	cell.append(buildBasicWrapper("speciesStatLabel", label));
-	
-	cell.append(buildBasicWrapper("speciesStatValue", value));
-	
-	return cell;
-}
-
 function displaySpeciesPanel(mon) {
-	let speciesPanel = document.getElementById("speciesPanelPrimaryInfo");
+	let speciesPanel = document.getElementById("speciesPanel");
+	let infoDisplay = document.getElementById("speciesPanelInfoDisplay");
+	let tables = [
+		["speciesLearnsetLevelUpTable", mon.learnset.levelup],
+		["speciesLearnsetTMHMTable", mon.learnset.TMHM],
+		["speciesLearnsetTutorTable", mon.learnset.tutor],
+		["speciesLearnsetEggMovesTable", mon.learnset.eggmoves]
+	]
 	
-	speciesPanel.innerText = "";
+	speciesPanel.className = "";
+	infoDisplay.innerText = "";
 	
-	//sprite
-	//speciesPanel.append(buildSpeciesSprite(mon));
-	//
-	////name
-	//speciesPanel.append(buildSpeciesName(mon));
-	//
-	////dexID
-	//speciesPanel.append(buildSpeciesDexID(mon));
-	//
-	////type
-	//speciesPanel.append(buildSpeciesType(mon));
-	//
-	////abilities
-	//speciesPanel.append(buildSpeciesAbilities(mon));
-	//
-	////stats
-	//speciesPanel.append(buildSpeciesStats(mon));
-	//
-	////changes
-	//speciesPanel.append(buildSpeciesChanges(mon));
-	//
-	////family
-	//speciesPanel.append(buildSpeciesFamily(mon));
-	//
-	////items
-	//speciesPanel.append(buildSpeciesItems(mon));
-	//
-	////egg groups
-	//speciesPanel.append(buildSpeciesEggGroups(mon));
-	//
-	////defensive
-	//speciesPanel.append(buildSpeciesDefensiveCoverage(mon));
-	//
-	////offensive
-	//speciesPanel.append(buildSpeciesOffensiveCoverage(mon));
+	infoDisplay.append(
+		buildWrapperSprite("div", "infoSprite", sprites[mon.ID]),
+		buildWrapperName("div", "infoName", mon),
+		buildWrapper("div", "infoDexIDWrapper",  "#" + Math.trunc(mon.dexID)),
+		buildWrapperTypes("div", "infoTypes", types[mon.type.primary], types[mon.type.secondary]),
+		buildWrapperAbilitiesFull("div", "infoAbilities", mon.abilities)
+	);
 	
-	//level up
-	populateTable("speciesLearnsetLevelUpTable", mon.learnset.levelup);
+	let statWrapper = buildWrapper("div", "infoStats");
+	statWrapper.append(
+		buildWrapperStatFull("div", "infoStat", "HP", mon.stats.HP),
+		buildWrapperStatFull("div", "infoStat", "Atk", mon.stats.attack),
+		buildWrapperStatFull("div", "infoStat", "Def", mon.stats.defense),
+		buildWrapperStatFull("div", "infoStat", "SpA", mon.stats.specialAttack),
+		buildWrapperStatFull("div", "infoStat", "SpD", mon.stats.specialDefense),
+		buildWrapperStatFull("div", "infoStat", "Spe", mon.stats.speed),
+		buildWrapperStat("div", "infoStat", "BST", mon.stats.total)
+	);
 	
-	//tmhm
-	populateTable("speciesLearnsetTMHMTable", mon.learnset.TMHM);
-	
-	//tutor
-	populateTable("speciesLearnsetTutorTable", mon.learnset.tutor);
-	
-	//egg moves
-	populateTable("speciesLearnsetEggMovesTable", mon.learnset.eggmoves);
-	
+	infoDisplay.append(
+		statWrapper,
+		buildWrapperChangelog("div", "infoChangelog", mon),
+		buildWrapperFamilyTree("div", "infoFamilyTree", mon.family.ancestor),
+		buildWrapper("div", "infoItems", mon.items),
+		buildWrapper("div", "infoEggGroups",mon.eggGroups),
+		buildWrapperCoverageDefensive("div", "infoCoverage", types[mon.type.primary], types[mon.type.secondary]),
+		buildWrapperCoverageOffensive("div", "infoCoverage", types[mon.type.primary], types[mon.type.secondary])
+	);
+
+	for (const [ID, data] of tables) {
+		let table = document.getElementById(ID);
+		table.className = "tableWrapper";
+		if (data.length > 0)
+			populateTable(ID, data);
+		else
+			table.classList.toggle("hide");
+	}
+
 	window.scrollTo(0, 0);
 }
 
-function buildSpeciesDexID(mon) {
+function buildWrapper(tag, className, text=null) {
+	let wrapper = document.createElement(tag);
+	wrapper.className = className;
+	if (text)
+		wrapper.textContent = text;
+	if (text === 0)
+		wrapper.textContent = "-";
 	
+	return wrapper;
 }
 
-function buildSpeciesType(mon) {
+function buildWrapperSprite(tag, className, src) {
+	let wrapper = buildWrapper(tag, className + "Wrapper");
 	
+	let img = document.createElement("img");
+	img.className = className;
+	img.src = src;
+	wrapper.append(img);
+	
+	return wrapper;
 }
 
-function buildSpeciesAbilities(mon) {
+function buildWrapperName(tag, className, mon) {
+	let wrapper = buildWrapper(tag, className + "Wrapper");
 	
+	if (mon.family.cousins && species[mon.family.cousins[0]].family.region !== mon.family.region)
+		wrapper.append(buildWrapper("div", className + "Region", regions[mon.family.region].variant));
+	
+	wrapper.append(buildWrapper("div", className + "Name", mon.name));
+
+	if (mon.family.form)
+		wrapper.append(buildWrapper("div", className + "Form", mon.family.form));
+	
+	return wrapper;
 }
 
-function buildSpeciesStats(mon) {
+function buildWrapperTypes(tag, className, primary, secondary=null) {
+	let wrapper = buildWrapper(tag, className + "Wrapper");
 	
+	let typeBlock = buildWrapper("div", "typeWrapper", primary.name);
+	typeBlock.style.backgroundColor = primary.color;
+	wrapper.append(typeBlock);
+	
+	if (secondary) {
+		typeBlock = buildWrapper("div", "typeWrapper", secondary.name);
+		typeBlock.style.backgroundColor = secondary.color;
+		wrapper.append(typeBlock);
+	}
+	
+	return wrapper;
 }
 
-function buildSpeciesChanges(mon) {
+function buildWrapperAbilities(tag, className, a) {
+	let wrapper = buildWrapper(tag, className + "Wrapper");
 	
+	if (a.primary)
+		wrapper.append(buildWrapper("div", className + "Primary", abilities[a.primary].name));
+	
+	if (a.secondary)
+		wrapper.append(buildWrapper("div", className + "Secondary", abilities[a.secondary].name));
+	
+	if (a.hidden)
+		wrapper.append(buildWrapper("div", className + "Hidden", abilities[a.hidden].name));
+	
+	return wrapper;
 }
 
-function buildSpeciesFamily(mon) {
+function buildWrapperAbilitiesFull(tag, className, a) {
+	let wrapper = buildWrapper(tag, className + "Wrapper");
 	
+	if (a.primary)
+		wrapper.append(buildWrapper("div", className + "Primary", abilities[a.primary].name + " - " + abilities[a.primary].description));
+	
+	if (a.secondary)
+		wrapper.append(buildWrapper("div", className + "Secondary", abilities[a.secondary].name + " - " + abilities[a.secondary].description));
+	
+	if (a.hidden)
+		wrapper.append(buildWrapper("div", className + "Hidden", abilities[a.hidden].name + " - " + abilities[a.hidden].description));
+	
+	return wrapper;
 }
 
-function buildSpeciesItems(mon) {
+function buildWrapperStat(tag, className, label, value) {
+	let wrapper = buildWrapper(tag, className + "Wrapper");
 	
+	wrapper.append(buildWrapper("div", className + "Label", label));
+	wrapper.append(buildWrapper("div", className + "Value", value));
+	
+	return wrapper;
 }
 
-function buildSpeciesEggGroups(mon) {
+function buildWrapperStatFull(tag, className, label, value) {
+	let wrapper = buildWrapperStat(tag, className, label, value);
+	let bar = buildWrapper("div", className + "Bar");
+	bar.style.width = `${(value / 255) * 300}px`;
+	bar.style.backgroundColor = colorGradient(value / 255, {red:160, green:10, blue:10}, {red:128, green:183, blue:17}, {red:0, green:155, blue:147});
+	wrapper.append(bar);
 	
+	return wrapper;
 }
 
-function buildSpeciesDefensiveCoverage(mon) {
+function buildWrapperChangelog(tag, className, mon) {
+	let wrapper = buildWrapper(tag, className + "Wrapper");
 	
+	if (!mon.changelog)
+		return wrapper;
+	
+	if (mon.changelog.type) {
+		wrapper.append(buildWrapperTypes("div", className, types[mon.changelog.type.primary], types[mon.changelog.type.secondary]));
+		wrapper.append(buildWrapper("div", className + "ArrowWrapper", "→"));
+		wrapper.append(buildWrapperTypes("div", className, types[mon.type.primary], types[mon.type.secondary]));
+	}
+	
+	if (mon.changelog.abilities) {
+		wrapper.append(buildWrapperAbilities("div", className, mon.changelog.abilities));
+		wrapper.append(buildWrapper("div", className + "ArrowWrapper", "→"));
+		wrapper.append(buildWrapperAbilities("div", className, mon.abilities));
+	}
+	
+	if (mon.changelog.stats) {
+		let statLabels = {HP:HP, attack:Atk, defense:Def, specialAttack:SpA, specialDefense:SpD, speed:Spe};
+		for (const stat in mon.changelog.stats) {
+			wrapper.append(buildWrapper("div", className, statLabels[stat] + " " + mon.changelog.stats[stat] + " → " + mon.stats[stat]));
+		}
+	}
+	
+	return wrapper;
 }
 
-function buildSpeciesOffensiveCoverage(mon) {
+function buildWrapperFamilyTree(tag, className, ancestor) {
+	let wrapper = buildWrapper(tag, className + "Wrapper", "Family Tree.");
 	
+	return wrapper;
 }
 
-function buildSpeciesLearnsetLevelUp(mon) {
+function buildWrapperCoverageDefensive(tag, className, primary, secondary=null) {
+	let wrapper = buildWrapper(tag, className + "Wrapper", "Defensive Coverage.");
 	
+	return wrapper;
 }
 
-function buildSpeciesLearnsetTMHM(mon) {
+function buildWrapperCoverageOffensive(tag, className, primary, secondary=null) {
+	let wrapper = buildWrapper(tag, className + "Wrapper", "Offensive Coverage.");
 	
-}
-
-function buildSpeciesLearnsetTutor(mon) {
-	
-}
-
-function buildSpeciesLearnsetEggMoves(mon) {
-
+	return wrapper;
 }

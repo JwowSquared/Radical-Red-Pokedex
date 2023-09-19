@@ -65,6 +65,10 @@ async function onStartup() {
 	setupTables();
 	
 	setupFilters();
+	
+	document.getElementById("closeSpeciesPanel").onclick = function() {
+		document.getElementById("speciesPanel").className = "hide";
+	}
 }
 
 function loadChunk(tracker, toClear) {
@@ -79,10 +83,8 @@ function loadChunk(tracker, toClear) {
 	let data = tracker.data;
 	let i = tracker.index;
 	for (j = data.length, k = tracker.maxRows; rowsAdded < k && i < j; i++) {
-		if (data[i].filters.length === 0) {
-			tracker.displayMethod(tracker, data[i].value);
-			rowsAdded++;
-		}
+		tracker.displayMethod(tracker, data[i]);
+		rowsAdded++;
 	}
 	tracker.index = i;
 }
