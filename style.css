@@ -54,6 +54,21 @@ body {
 	image-rendering: pixelated;
 }
 
+.infoFormButton {
+	height: 33px;
+    background-color: #e83e3e;
+    border-radius: 7px;
+    border: solid thin black;
+    width: 33px;
+    display: inline-block;
+    margin: 2px;
+    line-height: 29px;
+    cursor: pointer;
+}
+
+.infoFormButton:hover {
+	background-color: #df6666;
+}
 
 .infoStatWrapper {
 	display: flex;
@@ -75,6 +90,30 @@ body {
 	border: solid 1px black;
 	margin-left: 4px;
 	height: 17px;
+}
+
+.infoStatBar.HP {
+	background-color: #CC0000;
+}
+
+.infoStatBar.Atk {
+	background-color: #AC4F0C;
+}
+
+.infoStatBar.Def {
+	background-color: #ae8e09;
+}
+
+.infoStatBar.SpA {
+	background-color: #0f348c;
+}
+
+.infoStatBar.SpD {
+	background-color: #5F902D;
+}
+
+.infoStatBar.Spe {
+	background-color: #980c36;
 }
 
 .infoChangelogTypesWrapper {
@@ -239,7 +278,7 @@ td.speciesSpriteWrapper {
 	font-style: italic;
 }
 
-.speciesNameName, .infoChangelogAbilityhidden {
+.speciesNameName {
 	font-weight: 700;
 }
 
@@ -270,7 +309,9 @@ td.speciesSpriteWrapper {
 }
 
 .speciesAbilitiesHidden, .infoAbilitiesHidden {
-	font-weight: 700;
+	color: rgb(255 107 188);
+    font-weight: 550;
+    text-shadow: 1px 1px black;
 }
 
 .speciesStatWrapper {

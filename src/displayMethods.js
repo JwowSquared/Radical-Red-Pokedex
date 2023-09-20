@@ -72,6 +72,7 @@ function displaySpeciesPanel(mon) {
 	
 	infoDisplay.append(
 		buildWrapperSprite("div", "infoSprite", sprites[mon.ID]),
+		buildWrapperForms("div", "infoForms", mon.family.forms),
 		buildWrapperName("div", "infoName", mon),
 		buildWrapper("div", "infoDexIDWrapper",  "#" + Math.trunc(mon.dexID)),
 		buildWrapperTypes("div", "infoTypes", types[mon.type.primary], types[mon.type.secondary]),
@@ -129,6 +130,24 @@ function buildWrapperSprite(tag, className, src) {
 	img.className = className;
 	img.src = src;
 	wrapper.append(img);
+	
+	return wrapper;
+}
+
+function buildWrapperForms(tag, className, forms) {
+	let wrapper = buildWrapper(tag, className + "Wrapper");
+	
+	if (!forms)
+		return wrapper;
+	
+	let i = 1;
+	for (const form of forms) {
+		let formButton = buildWrapper("div", "infoFormButton", i++);
+		formButton.onclick = function() {
+			displaySpeciesPanel(species[form]);
+		};
+		wrapper.append(formButton);
+	}
 	
 	return wrapper;
 }
@@ -204,9 +223,8 @@ function buildWrapperStat(tag, className, label, value) {
 
 function buildWrapperStatFull(tag, className, label, value) {
 	let wrapper = buildWrapperStat(tag, className, label, value);
-	let bar = buildWrapper("div", className + "Bar");
-	bar.style.width = `${(value / 255) * 300}px`;
-	bar.style.backgroundColor = colorGradient(value / 255, {red:160, green:10, blue:10}, {red:128, green:183, blue:17}, {red:0, green:155, blue:147});
+	let bar = buildWrapper("div", "infoStatBar " + label);
+	bar.style.width = `${(value / 255) * 300}px`;;
 	wrapper.append(bar);
 	
 	return wrapper;
@@ -291,7 +309,23 @@ function buildWrapperEggGroups(tag, className, e) {
 }
 
 function buildWrapperFamilyTree(tag, className, ancestor) {
-	let wrapper = buildWrapper(tag, className + "Wrapper", "Family Tree.");
+	let wrapper = buildWrapper(tag, className + "Wrapper");
+	
+	let output = [];
+	output.push(ancestor);
+	while (output.length > 0) {
+		let mon = species[output.splice(0, 1)];
+		let img = document.createElement("img");
+		img.src = sprites[mon.ID];
+		img.onclick = function () {
+			displaySpeciesPanel(mon);
+		}
+		wrapper.append(img);
+		if (mon.family.evolutions) {
+			for (const [evoCategory, evoCriteria, evoTarget] of mon.family.evolutions)
+				output.push(evoTarget);
+		}
+	}
 	
 	return wrapper;
 }
