@@ -73,16 +73,14 @@ function setupFilters() {
 		speciesInput.value = "";
 	});
 
-	speciesInput.addEventListener("keyup", function(event) {
+	speciesInput.addEventListener("change", function(event) {
 		event.preventDefault();
-		if (event.keyCode === 13) {
-			let input = speciesInput.value.trim();
-			let option = selectedFilter.options.find(x => x[1] === input);
-			if (option) {
-				selectedFilter.filter(option);
-				speciesInput.value = "";
-			}
-		};
+		let input = speciesInput.value.trim();
+		let option = selectedFilter.options.find(x => x[1] === input);
+		if (option) {
+			selectedFilter.filter(option);
+			speciesInput.value = "";
+		}
 	});
 }
 
@@ -185,7 +183,7 @@ function filterEggGroup(option) {
 }
 
 function filterHeldItem(option) {
-	let func = x => species[x].items.common === option[0] || species[x].items.rare === option[0];
+	let func = x => species[x].items != null && (species[x].items.common === option[0] || species[x].items.rare === option[0]);
 	addFilter(filters["Held Item"], option, func);
 }
 
@@ -233,14 +231,14 @@ function filterToggle(option) {
 
 	if (toggles[option[0]] === true) {
 		toggles[option[0]] = false;
-		removeFilter(filter, option);
+		removeFilter(filter, option[0]);
 	}
 	else {
 		toggles[option[0]] = true;
 		addFilter(filter, option, func);
 		filters.active[option[0]].tag.onclick = function() {
 			toggles[option[0]] = false;
-			removeFilter(filter, option);
+			removeFilter(filter, option[0]);
 		};
 	}
 
@@ -259,7 +257,7 @@ function addFilter(filter, option, func) {
 	
 	if (filter.active.length > filter.max) {
 		let key = filter.active.shift();
-		delete filters.active[key];
+		removeFilter(filter, key);
 	}
 
 	let activeFiltersDisplay = document.getElementById("activeFilters");
@@ -267,7 +265,7 @@ function addFilter(filter, option, func) {
 	button.textContent = `${filter.name}: ${option[1]}`;
 	button.className = "activeFilter";
 	button.onclick = function() {
-		removeFilter(filter, option);
+		removeFilter(filter, option[0]);
 	};
 	activeFiltersDisplay.append(button);
 
@@ -278,13 +276,16 @@ function addFilter(filter, option, func) {
 		results = results.filter(pair.func);
 	
 	populateTable("speciesTable", results);
+	
+	if (results.length === 1)
+		displaySpeciesPanel(species[results[0]]);
 }
 
-function removeFilter(selectedFilter, option) {
-	filters.active[option[0]].tag.remove();
-	delete filters.active[option[0]];
+function removeFilter(selectedFilter, key) {
+	filters.active[key].tag.remove();
+	delete filters.active[key];
 	
-	let idx = selectedFilter.active.indexOf(option[0]);
+	let idx = selectedFilter.active.indexOf(key);
 	selectedFilter.active.splice(idx, 1);
 	
 	let results = Object.keys(species);

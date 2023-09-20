@@ -97,11 +97,11 @@ body {
 }
 
 #speciesControl {
-	padding: 30px;
+	padding: 30px 30px 15px 30px;
     display: flex;
     flex-wrap: wrap;
     margin: auto;
-	justify-content: center;
+    justify-content: center;
 }
 
 #speciesFilterInput, #speciesFilterCategory, #speciesFilterSeparator {
@@ -145,15 +145,23 @@ body {
 
 #activeFilters {
 	display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 12px;
 }
 
 .activeFilter {
-	color: white;
-    background-color: black;
+    margin: 3px;
     padding: 0.2rem;
     border-radius: 3px;
-    border: solid;
-    display: inline-block;
+    border: 2px solid gray;
+    background: none;
+    color: white;
+    font-weight: 550;
+    cursor: pointer;
+    user-select: none;
 }
 
 .tableWrapper {
@@ -188,7 +196,7 @@ body {
 	cursor: auto;
 }
 
-.active, .sortOption:hover, #speciesFilterInput:hover, #speciesFilterCategory:hover, #speciesFilterInput:focus {
+.active, .sortOption:hover, #speciesFilterInput:hover, #speciesFilterCategory:hover, #speciesFilterInput:focus, .activeFilter:hover {
 	background: rgba(255, 255, 255, 0.075);
 }
 
@@ -227,11 +235,11 @@ td.speciesSpriteWrapper {
 	min-width: 120.6px;
 }
 
-.speciesNameRegion, .speciesNameForm, .infoNameRegion, .infoNameForm {
+.speciesNameRegion, .speciesNameForm, .infoNameRegion, .infoNameForm, .infoChangelogAbilityWrapper > div {
 	font-style: italic;
 }
 
-.speciesNameName {
+.speciesNameName, .infoChangelogAbilityhidden {
 	font-weight: 700;
 }
 

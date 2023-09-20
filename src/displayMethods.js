@@ -93,8 +93,8 @@ function displaySpeciesPanel(mon) {
 		statWrapper,
 		buildWrapperChangelog("div", "infoChangelog", mon),
 		buildWrapperFamilyTree("div", "infoFamilyTree", mon.family.ancestor),
-		buildWrapper("div", "infoItems", mon.items),
-		buildWrapper("div", "infoEggGroups",mon.eggGroups),
+		//buildWrapperHeldItems("div", "infoItems", mon.items),
+		//buildWrapperEggGroups("div", "infoEggGroups", mon.family.eggGroup),
 		buildWrapperCoverageDefensive("div", "infoCoverage", types[mon.type.primary], types[mon.type.secondary]),
 		buildWrapperCoverageOffensive("div", "infoCoverage", types[mon.type.primary], types[mon.type.secondary])
 	);
@@ -218,9 +218,10 @@ function buildWrapperChangelog(tag, className, mon) {
 	if (!mon.changelog)
 		return wrapper;
 	
-	wrapper.append(buildWrapper("div", className, "Changelog:"));
+	wrapper.append(buildWrapper("div", className));
 	
 	if (mon.changelog.type) {
+		wrapper.append(buildWrapper("div", "infoChangelogTypeLabel", "New Typing:"));
 		let typeWrapper = buildWrapper("div", "infoChangelogTypesWrapper");
 		typeWrapper.append(buildWrapperTypes("div", "infoChangelogOldType", types[mon.changelog.type.primary], types[mon.changelog.type.secondary]));
 		typeWrapper.append(buildWrapper("div", className + "ArrowWrapper", "→"));
@@ -229,29 +230,62 @@ function buildWrapperChangelog(tag, className, mon) {
 	}
 	
 	if (mon.changelog.abilities) {
+		let abilityWrapper = buildWrapper("div", "infoChangelogAbilityWrapper", "Ability Changes:");
 		for (const ability of ["primary", "secondary", "hidden"]) {
 			let oldAbility = abilities[mon.changelog.abilities[ability]];
 			let newAbility = abilities[mon.abilities[ability]];
-			console.log(oldAbility, newAbility);
 			if (oldAbility == newAbility)
 				continue;
 			if (oldAbility && newAbility)
-				wrapper.append(buildWrapper("div", className, oldAbility.name + " → " + newAbility.name));
+				abilityWrapper.append(buildWrapper("div", "infoChangelogAbility" + ability, oldAbility.name + " → " + newAbility.name));
 			else if (newAbility)
-				wrapper.append(buildWrapper("div", "infoChangelogBuff", "+" + newAbility.name));
+				abilityWrapper.append(buildWrapper("div", "infoChangelogAbility" + ability, "None → " + newAbility.name));
 			else if (oldAbility)
-				wrapper.append(buildWrapper("div", "infoChangelogNerf", "-" + oldAbility.name));
+				abilityWrapper.append(buildWrapper("div", "infoChangelogAbility" + ability, oldAbility.name + " → None"));
 			}
+		wrapper.append(abilityWrapper);
 	}
 	
 	if (mon.changelog.stats) {
 		let statLabels = {HP:"HP", attack:"Atk", defense:"Def", specialAttack:"SpA", specialDefense:"SpD", speed:"Spe"};
+		let statsWrapper = buildWrapper("div", className, "Stat Changes:");
 		
 		for (const stat in mon.changelog.stats) {
 			let statClass =  mon.changelog.stats[stat] < mon.stats[stat] ? "infoChangelogBuff" : "infoChangelogNerf";
-			wrapper.append(buildWrapper("div", statClass, statLabels[stat] + " " + mon.changelog.stats[stat] + " → " + mon.stats[stat]));
+			statsWrapper.append(buildWrapper("div", statClass, statLabels[stat] + " " + mon.changelog.stats[stat] + " → " + mon.stats[stat]));
 		}
+		wrapper.append(statsWrapper);
 	}
+	
+	return wrapper;
+}
+
+function buildWrapperHeldItems(tag, className, i) {
+	let wrapper = buildWrapper(tag, className + "Wrapper");
+	
+	if (!i)
+		return wrapper;
+	
+	wrapper.append(buildWrapper("div", className, "Held Items:"));
+	if (i.common)
+		wrapper.append(buildWrapper("div", className, "Common: " + items[i.common].name));
+	if (i.rare)
+		wrapper.append(buildWrapper("div", className, "Rare: " + items[i.rare].name));
+	
+	return wrapper;
+}
+
+function buildWrapperEggGroups(tag, className, e) {
+	let wrapper = buildWrapper(tag, className + "Wrapper");
+	
+	if (!e)
+		return wrapper;
+	
+	wrapper.append(buildWrapper("div", className, "Egg Groups:"));
+	if (e.primary)
+		wrapper.append(buildWrapper("div", className, eggGroups[e.primary].name));
+	if (e.secondary)
+		wrapper.append(buildWrapper("div", className, eggGroups[e.secondary].name));
 	
 	return wrapper;
 }
