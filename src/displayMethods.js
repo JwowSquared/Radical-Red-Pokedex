@@ -291,21 +291,23 @@ function buildWrapperEggGroups(tag, className, e) {
 
 function buildWrapperFamilyTree(tag, className, mon) {
 	let wrapper = buildWrapper(tag, className + "Wrapper");
-	
+	wrapper.append(buildWrapper("div", "infoTreeEvoLabel", "Evolution Line"));
 	wrapper.append(familyTree(mon.family.ancestor));
 	
 	
 	if (mon.family.forms) {
-		let formsWrapper = buildWrapper("div", "infoFormsWrapper", "Alternate Forms:");
-		for (const form of mon.family.forms) {
-			let formToCheck = species[form];
+		wrapper.append(buildWrapper("div", "infoTreeFormsLabel", "Alternate Forms"));
+		let formsWrapper = buildWrapper("div", "infoFormsWrapper");
+		for (const key of mon.family.forms) {
+			let spriteWrapper = buildWrapper("div", "infoTreeSpriteWrapper");
 			let img = document.createElement("img");
-			img.src = sprites[formToCheck.ID];
+			img.src = sprites[key];
 			img.className = "infoTreeSprite";
 			img.onclick = function () {
-				displaySpeciesPanel(formToCheck);
+				displaySpeciesPanel(species[key]);
 			}
-			formsWrapper.append(img);
+			spriteWrapper.append(img);
+			formsWrapper.append(spriteWrapper);
 		}
 		wrapper.append(formsWrapper);
 	}
@@ -333,6 +335,8 @@ function familyTree(key, evo=null) {
 	wrapper.append(spriteWrapper);
 	
 	if (species[key].family.evolutions) {
+		if (species[key].family.evolutions.length === 1)
+			wrapper.className += " single";
 		let branchWrapper = buildWrapper("div", "infoTreeBranchWrapper");
 		for (const evolution of species[key].family.evolutions)
 			branchWrapper.append(familyTree(evolution[2], evolution));

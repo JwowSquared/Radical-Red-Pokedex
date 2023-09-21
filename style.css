@@ -147,10 +147,18 @@ body {
 	align-items: stretch;
 	justify-content: center;
 }
+.infoTreeWrapper.single {
+	align-items: center;
+}
 
 .infoTreeBranchWrapper {
 	display: flex;
 	flex-direction: column;
+}
+
+.infoFormsWrapper {
+	display: flex;
+    justify-content: center;
 }
 
 .infoChangelogTypesWrapper {
