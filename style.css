@@ -116,6 +116,43 @@ body {
 	background-color: #980c36;
 }
 
+.infoTreeSprite {
+	width: 64px;
+	height: 64px;
+	image-rendering: pixelated;
+}
+
+.infoTreeSpriteWrapper {
+	padding: 3px;
+	margin: 5px;
+    cursor: pointer;
+    border: solid thin black;
+    border-radius: 3px;
+    background-color: #333333;
+	display: flex;
+    align-items: center;
+}
+
+.evoMethodWrapper {
+	display: flex;
+	align-items: center;
+}
+
+.infoTreeSpriteWrapper:hover {
+	background-color: #444444;
+}
+
+.infoTreeWrapper {
+	display: flex;
+	align-items: stretch;
+	justify-content: center;
+}
+
+.infoTreeBranchWrapper {
+	display: flex;
+	flex-direction: column;
+}
+
 .infoChangelogTypesWrapper {
     display: flex;
     align-items: center;

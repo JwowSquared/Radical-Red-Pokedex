@@ -72,7 +72,6 @@ function displaySpeciesPanel(mon) {
 	
 	infoDisplay.append(
 		buildWrapperSprite("div", "infoSprite", sprites[mon.ID]),
-		buildWrapperForms("div", "infoForms", mon.family.forms),
 		buildWrapperName("div", "infoName", mon),
 		buildWrapper("div", "infoDexIDWrapper",  "#" + Math.trunc(mon.dexID)),
 		buildWrapperTypes("div", "infoTypes", types[mon.type.primary], types[mon.type.secondary]),
@@ -93,7 +92,7 @@ function displaySpeciesPanel(mon) {
 	infoDisplay.append(
 		statWrapper,
 		buildWrapperChangelog("div", "infoChangelog", mon),
-		buildWrapperFamilyTree("div", "infoFamilyTree", mon.family.ancestor),
+		buildWrapperFamilyTree("div", "infoFamilyTree", mon),
 		//buildWrapperHeldItems("div", "infoItems", mon.items),
 		//buildWrapperEggGroups("div", "infoEggGroups", mon.family.eggGroup),
 		buildWrapperCoverageDefensive("div", "infoCoverage", types[mon.type.primary], types[mon.type.secondary]),
@@ -130,24 +129,6 @@ function buildWrapperSprite(tag, className, src) {
 	img.className = className;
 	img.src = src;
 	wrapper.append(img);
-	
-	return wrapper;
-}
-
-function buildWrapperForms(tag, className, forms) {
-	let wrapper = buildWrapper(tag, className + "Wrapper");
-	
-	if (!forms)
-		return wrapper;
-	
-	let i = 1;
-	for (const form of forms) {
-		let formButton = buildWrapper("div", "infoFormButton", i++);
-		formButton.onclick = function() {
-			displaySpeciesPanel(species[form]);
-		};
-		wrapper.append(formButton);
-	}
 	
 	return wrapper;
 }
@@ -308,23 +289,54 @@ function buildWrapperEggGroups(tag, className, e) {
 	return wrapper;
 }
 
-function buildWrapperFamilyTree(tag, className, ancestor) {
+function buildWrapperFamilyTree(tag, className, mon) {
 	let wrapper = buildWrapper(tag, className + "Wrapper");
 	
-	let output = [];
-	output.push(ancestor);
-	while (output.length > 0) {
-		let mon = species[output.splice(0, 1)];
-		let img = document.createElement("img");
-		img.src = sprites[mon.ID];
-		img.onclick = function () {
-			displaySpeciesPanel(mon);
+	wrapper.append(familyTree(mon.family.ancestor));
+	
+	
+	if (mon.family.forms) {
+		let formsWrapper = buildWrapper("div", "infoFormsWrapper", "Alternate Forms:");
+		for (const form of mon.family.forms) {
+			let formToCheck = species[form];
+			let img = document.createElement("img");
+			img.src = sprites[formToCheck.ID];
+			img.className = "infoTreeSprite";
+			img.onclick = function () {
+				displaySpeciesPanel(formToCheck);
+			}
+			formsWrapper.append(img);
 		}
-		wrapper.append(img);
-		if (mon.family.evolutions) {
-			for (const [evoCategory, evoCriteria, evoTarget] of mon.family.evolutions)
-				output.push(evoTarget);
-		}
+		wrapper.append(formsWrapper);
+	}
+
+	return wrapper;
+}
+
+function familyTree(key, evo=null) {
+	let wrapper = buildWrapper("div", "infoTreeWrapper " + key);
+	
+	if (evo) {
+		let evoWrapper = buildWrapper("div", "evoMethodWrapper");
+		evoWrapper.append(buildWrapper("div", "evoMethod " + evo[0], "→"));
+		wrapper.append(evoWrapper);
+	}
+	
+	let spriteWrapper = buildWrapper("div", "infoTreeSpriteWrapper");
+	let img = document.createElement("img");
+	img.src = sprites[key];
+	img.className = "infoTreeSprite";
+	img.onclick = function () {
+		displaySpeciesPanel(species[key]);
+	}
+	spriteWrapper.append(img);
+	wrapper.append(spriteWrapper);
+	
+	if (species[key].family.evolutions) {
+		let branchWrapper = buildWrapper("div", "infoTreeBranchWrapper");
+		for (const evolution of species[key].family.evolutions)
+			branchWrapper.append(familyTree(evolution[2], evolution));
+		wrapper.append(branchWrapper);
 	}
 	
 	return wrapper;
