@@ -32,10 +32,8 @@ function setupFilters() {
 	filters["Ability"].options.sort(sortByName);
 	filters["Egg Group"].options.sort(sortByName);
 	filters["Held Item"].options.sort(sortByName);
-	//create an array filled with one of each pokemon name
-	filters["Name"].options = Array.from(new Set(filters["Name"].options.map(a => a[1])))
-	//map a new array, finding the first match of each name, once for each name, eliminating duplicates (jesus christ)
-		.map(name => { return filters["Name"].options.find(a => a[1] === name) });
+	for (const option of filters["Name"].options)
+		option[1] = fullSpeciesName(option[0]);
 	filters["Toggle"].toggles = {};
 
 	let listContainer = document.getElementById("speciesLists");
@@ -96,7 +94,7 @@ function buildFilter(name, filter, max, library) {
 }
 
 function filterName(option) {
-	let func = x => Math.trunc(species[x].dexID) === Math.trunc(species[option[0]].dexID);
+	let func = x => x === option[0];
 	addFilter(filters["Name"], option, func);
 }
 
@@ -276,9 +274,12 @@ function addFilter(filter, option, func) {
 		results = results.filter(pair.func);
 	
 	populateTable("speciesTable", results);
-	
-	if (results.length === 1)
-		displaySpeciesPanel(species[results[0]]);
+
+	if (results.length === 1 && filter.name === "Name") {
+		let hit = species[results[0]];
+		removeFilter(filter, option[0]);
+		displaySpeciesPanel(hit);
+	}
 }
 
 function removeFilter(selectedFilter, key) {

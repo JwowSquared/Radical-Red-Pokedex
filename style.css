@@ -92,28 +92,28 @@ body {
 	height: 17px;
 }
 
-.infoStatBar.HP {
+.infoStatBar.rank1 {
 	background-color: #CC0000;
 }
 
-.infoStatBar.Atk {
-	background-color: #AC4F0C;
+.infoStatBar.rank2 {
+	background-color: #ce4d00;
 }
 
-.infoStatBar.Def {
-	background-color: #ae8e09;
+.infoStatBar.rank3 {
+	background-color: #ffe100;
 }
 
-.infoStatBar.SpA {
-	background-color: #0f348c;
+.infoStatBar.rank4 {
+	background-color: #0d8d00;
 }
 
-.infoStatBar.SpD {
-	background-color: #5F902D;
+.infoStatBar.rank5 {
+	background-color: #25d65e;
 }
 
-.infoStatBar.Spe {
-	background-color: #980c36;
+.infoStatBar.rank6 {
+	background-color: #15c9c7;
 }
 
 .infoTreeSprite {
@@ -138,6 +138,14 @@ body {
 	align-items: center;
 }
 
+.evoMethod span {
+	font-weight: 550;
+}
+
+.infoTreeArrow {
+	font-size: 20px;
+}
+
 .infoTreeSpriteWrapper:hover {
 	background-color: #444444;
 }
@@ -145,8 +153,12 @@ body {
 .infoTreeWrapper {
 	display: flex;
 	align-items: stretch;
+}
+
+.infoTreeWrapper.outer {
 	justify-content: center;
 }
+
 .infoTreeWrapper.single {
 	align-items: center;
 }
@@ -172,6 +184,25 @@ body {
 
 .infoChangelogNerf {
 	color: #f83f3f;
+}
+
+.infoTreeEvoLabel, .infoTreeFormsLabel, .coverageLabelWrapper, .infoChangelogLabel, .infoItemsLabel, .infoEggGroupsLabel {
+	font-weight: 550;
+    font-size: 1.2rem;
+}
+
+.coverageMatchupsWrapper {
+	display: flex;
+    width: 534px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.typeMatchupMultiplier {
+	padding: 3px;
+    margin: 3px;
+    border-radius: 3px;
+    background-color: #333333;
 }
 
 .tableName {
@@ -353,7 +384,7 @@ td.speciesSpriteWrapper {
 	min-width: 148.2px;
 }
 
-.speciesAbilitiesHidden, .infoAbilitiesHidden {
+.speciesAbilitiesHidden, .infoAbilitiesHidden, .infoChangelogAbility.hidden {
 	color: rgb(255 107 188);
     font-weight: 550;
     text-shadow: 1px 1px black;

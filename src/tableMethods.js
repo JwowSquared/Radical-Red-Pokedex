@@ -1,4 +1,14 @@
 function setupTables() {
+	setupTable("speciesLearnsetPrevoExclusiveTable", moves, displayLevelUpMovesRow, Object.keys(moves).length, sortLevelUpMovesRow, [
+		["Level", ["level"]],
+		["Name", ["name"]],
+		["Type", ["type"]],
+		["Category", ["split"]],
+		["Power", ["power"]],
+		["Acc", ["accuracy"]],
+		["Description", []],
+	]);
+	
 	setupTable("speciesLearnsetLevelUpTable", moves, displayLevelUpMovesRow, Object.keys(moves).length, sortLevelUpMovesRow, [
 		["Level", ["level"]],
 		["Name", ["name"]],

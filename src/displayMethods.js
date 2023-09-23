@@ -61,6 +61,7 @@ function displaySpeciesPanel(mon) {
 	let speciesPanel = document.getElementById("speciesPanel");
 	let infoDisplay = document.getElementById("speciesPanelInfoDisplay");
 	let tables = [
+		["speciesLearnsetPrevoExclusiveTable", buildPrevoExclusiveMoves(mon.family.ancestor, mon.ID)],
 		["speciesLearnsetLevelUpTable", mon.learnset.levelup],
 		["speciesLearnsetTMHMTable", mon.learnset.TMHM],
 		["speciesLearnsetTutorTable", mon.learnset.tutor],
@@ -93,10 +94,9 @@ function displaySpeciesPanel(mon) {
 		statWrapper,
 		buildWrapperChangelog("div", "infoChangelog", mon),
 		buildWrapperFamilyTree("div", "infoFamilyTree", mon),
-		//buildWrapperHeldItems("div", "infoItems", mon.items),
-		//buildWrapperEggGroups("div", "infoEggGroups", mon.family.eggGroup),
 		buildWrapperCoverageDefensive("div", "infoCoverage", types[mon.type.primary], types[mon.type.secondary]),
-		buildWrapperCoverageOffensive("div", "infoCoverage", types[mon.type.primary], types[mon.type.secondary])
+		buildWrapperHeldItems("div", "infoItems", mon.items),
+		buildWrapperEggGroups("div", "infoEggGroups", mon.family.eggGroup),
 	);
 
 	for (const [ID, data] of tables) {
@@ -204,8 +204,21 @@ function buildWrapperStat(tag, className, label, value) {
 
 function buildWrapperStatFull(tag, className, label, value) {
 	let wrapper = buildWrapperStat(tag, className, label, value);
-	let bar = buildWrapper("div", "infoStatBar " + label);
-	bar.style.width = `${(value / 255) * 300}px`;;
+	
+	let rank = 6;
+	if (value < 150)
+		rank = 5;
+	if (value < 120)
+		rank = 4;
+	if (value < 90)
+		rank = 3;
+	if (value < 60)
+		rank = 2;
+	if (value < 30)
+		rank = 1;
+	
+	let bar = buildWrapper("div", "infoStatBar rank" + rank);
+	bar.style.width = `${(value / 255) * 300}px`;
 	wrapper.append(bar);
 	
 	return wrapper;
@@ -217,10 +230,9 @@ function buildWrapperChangelog(tag, className, mon) {
 	if (!mon.changelog)
 		return wrapper;
 	
-	wrapper.append(buildWrapper("div", className));
+	wrapper.append(buildWrapper("div", "infoChangelogLabel", "RR Changes"));
 	
 	if (mon.changelog.type) {
-		wrapper.append(buildWrapper("div", "infoChangelogTypeLabel", "New Typing:"));
 		let typeWrapper = buildWrapper("div", "infoChangelogTypesWrapper");
 		typeWrapper.append(buildWrapperTypes("div", "infoChangelogOldType", types[mon.changelog.type.primary], types[mon.changelog.type.secondary]));
 		typeWrapper.append(buildWrapper("div", className + "ArrowWrapper", "→"));
@@ -229,25 +241,25 @@ function buildWrapperChangelog(tag, className, mon) {
 	}
 	
 	if (mon.changelog.abilities) {
-		let abilityWrapper = buildWrapper("div", "infoChangelogAbilityWrapper", "Ability Changes:");
+		let abilityWrapper = buildWrapper("div", "infoChangelogAbilityWrapper");
 		for (const ability of ["primary", "secondary", "hidden"]) {
 			let oldAbility = abilities[mon.changelog.abilities[ability]];
 			let newAbility = abilities[mon.abilities[ability]];
 			if (oldAbility == newAbility)
 				continue;
 			if (oldAbility && newAbility)
-				abilityWrapper.append(buildWrapper("div", "infoChangelogAbility" + ability, oldAbility.name + " → " + newAbility.name));
+				abilityWrapper.append(buildWrapper("div", "infoChangelogAbility " + ability, oldAbility.name + " → " + newAbility.name));
 			else if (newAbility)
-				abilityWrapper.append(buildWrapper("div", "infoChangelogAbility" + ability, "None → " + newAbility.name));
+				abilityWrapper.append(buildWrapper("div", "infoChangelogAbility " + ability, "None → " + newAbility.name));
 			else if (oldAbility)
-				abilityWrapper.append(buildWrapper("div", "infoChangelogAbility" + ability, oldAbility.name + " → None"));
+				abilityWrapper.append(buildWrapper("div", "infoChangelogAbility " + ability, oldAbility.name + " → None"));
 			}
 		wrapper.append(abilityWrapper);
 	}
 	
 	if (mon.changelog.stats) {
 		let statLabels = {HP:"HP", attack:"Atk", defense:"Def", specialAttack:"SpA", specialDefense:"SpD", speed:"Spe"};
-		let statsWrapper = buildWrapper("div", className, "Stat Changes:");
+		let statsWrapper = buildWrapper("div", className);
 		
 		for (const stat in mon.changelog.stats) {
 			let statClass =  mon.changelog.stats[stat] < mon.stats[stat] ? "infoChangelogBuff" : "infoChangelogNerf";
@@ -259,40 +271,12 @@ function buildWrapperChangelog(tag, className, mon) {
 	return wrapper;
 }
 
-function buildWrapperHeldItems(tag, className, i) {
-	let wrapper = buildWrapper(tag, className + "Wrapper");
-	
-	if (!i)
-		return wrapper;
-	
-	wrapper.append(buildWrapper("div", className, "Held Items:"));
-	if (i.common)
-		wrapper.append(buildWrapper("div", className, "Common: " + items[i.common].name));
-	if (i.rare)
-		wrapper.append(buildWrapper("div", className, "Rare: " + items[i.rare].name));
-	
-	return wrapper;
-}
-
-function buildWrapperEggGroups(tag, className, e) {
-	let wrapper = buildWrapper(tag, className + "Wrapper");
-	
-	if (!e)
-		return wrapper;
-	
-	wrapper.append(buildWrapper("div", className, "Egg Groups:"));
-	if (e.primary)
-		wrapper.append(buildWrapper("div", className, eggGroups[e.primary].name));
-	if (e.secondary)
-		wrapper.append(buildWrapper("div", className, eggGroups[e.secondary].name));
-	
-	return wrapper;
-}
-
 function buildWrapperFamilyTree(tag, className, mon) {
 	let wrapper = buildWrapper(tag, className + "Wrapper");
 	wrapper.append(buildWrapper("div", "infoTreeEvoLabel", "Evolution Line"));
-	wrapper.append(familyTree(mon.family.ancestor));
+	let display = buildWrapper("div", "infoEvolutionMethods");
+	wrapper.append(familyTree(display, mon.family.ancestor));
+	wrapper.append(display);
 	
 	
 	if (mon.family.forms) {
@@ -315,14 +299,28 @@ function buildWrapperFamilyTree(tag, className, mon) {
 	return wrapper;
 }
 
-function familyTree(key, evo=null) {
+function familyTree(display, key, prevo=null, evo=null) {
 	let wrapper = buildWrapper("div", "infoTreeWrapper " + key);
 	
-	if (evo) {
+	if (prevo) {
+		wrapper.className += " inner";
 		let evoWrapper = buildWrapper("div", "evoMethodWrapper");
-		evoWrapper.append(buildWrapper("div", "evoMethod " + evo[0], "→"));
+		let arrow = buildWrapper("div", "infoTreeArrow", `→`);
+		
+		let leftMon = fullSpeciesName(prevo);
+		let rightMon = fullSpeciesName(key);
+		let description = eval(evolutions[evo[0]]);
+		arrow.title = description;
+		let method = buildWrapper("div", "evoMethod");
+		
+		method.innerHTML = `<span>${leftMon}</span> → <span>${rightMon}</span> ${description}.`;
+		display.append(method);
+		
+		evoWrapper.append(arrow);
 		wrapper.append(evoWrapper);
 	}
+	else
+		wrapper.className += " outer";
 	
 	let spriteWrapper = buildWrapper("div", "infoTreeSpriteWrapper");
 	let img = document.createElement("img");
@@ -332,14 +330,14 @@ function familyTree(key, evo=null) {
 		displaySpeciesPanel(species[key]);
 	}
 	spriteWrapper.append(img);
-	wrapper.append(spriteWrapper);
+	wrapper.append(spriteWrapper);	
 	
 	if (species[key].family.evolutions) {
 		if (species[key].family.evolutions.length === 1)
 			wrapper.className += " single";
 		let branchWrapper = buildWrapper("div", "infoTreeBranchWrapper");
 		for (const evolution of species[key].family.evolutions)
-			branchWrapper.append(familyTree(evolution[2], evolution));
+			branchWrapper.append(familyTree(display, evolution[2], key, evolution));
 		wrapper.append(branchWrapper);
 	}
 	
@@ -347,13 +345,59 @@ function familyTree(key, evo=null) {
 }
 
 function buildWrapperCoverageDefensive(tag, className, primary, secondary=null) {
-	let wrapper = buildWrapper(tag, className + "Wrapper", "Defensive Coverage.");
+	let wrapper = buildWrapper(tag, className + "Wrapper");
+	
+	let label = buildWrapper("div", "coverageLabelWrapper", "Weakness");
+	let matchups = buildWrapper("div", "coverageMatchupsWrapper");
+	
+	let coverage = {};
+	for (const key in primary.defensive) {
+		let matchup = primary.defensive[key];
+		if (secondary)
+			matchup *= secondary.defensive[key];
+		matchups.append(buildWrapperTypeMatchup(key, matchup));
+	}
+	
+	wrapper.append(label, matchups);
 	
 	return wrapper;
 }
 
-function buildWrapperCoverageOffensive(tag, className, primary, secondary=null) {
-	let wrapper = buildWrapper(tag, className + "Wrapper", "Offensive Coverage.");
+function buildWrapperTypeMatchup(key, matchup) {
+	let wrapper = buildWrapper("div", "typeMatchupWrapper");
+	
+	wrapper.append(buildWrapperTypes("div", "typeMatchupLabel", types[key]));
+	wrapper.append(buildWrapper("div", "typeMatchupMultiplier", "*" + matchup));
+	
+	return wrapper;
+}
+
+function buildWrapperHeldItems(tag, className, i) {
+	let wrapper = buildWrapper(tag, className + "Wrapper");
+	
+	if (!i)
+		return wrapper;
+	
+	wrapper.append(buildWrapper("div", "infoItemsLabel", "Held Items"));
+	if (i.common)
+		wrapper.append(buildWrapper("div", className, "Common: " + items[i.common].name));
+	if (i.rare)
+		wrapper.append(buildWrapper("div", className, "Rare: " + items[i.rare].name));
+	
+	return wrapper;
+}
+
+function buildWrapperEggGroups(tag, className, e) {
+	let wrapper = buildWrapper(tag, className + "Wrapper");
+	
+	if (!e)
+		return wrapper;
+	
+	wrapper.append(buildWrapper("div", "infoEggGroupsLabel", "Egg Groups"));
+	if (e.primary)
+		wrapper.append(buildWrapper("div", className, eggGroups[e.primary].name));
+	if (e.secondary)
+		wrapper.append(buildWrapper("div", className, eggGroups[e.secondary].name));
 	
 	return wrapper;
 }
