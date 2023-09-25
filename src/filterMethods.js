@@ -4,6 +4,7 @@ function setupFilters() {
 		"TOGGLE_CHANGED": {name: "Changed"},
 		"TOGGLE_LEVELUP": {name: "Levelup"},
 		"TOGGLE_EVOLVED": {name: "Evolved"},
+		"TOGGLE_EVIOLITE": {name: "Eviolite"},
 		"TOGGLE_HARDCORE": {name: "Hardcore"},
 		"TOGGLE_ONLYNEW": {name: "Only New"},
 		"TOGGLE_REGIONAL": {name: "Regional"},
@@ -74,6 +75,7 @@ function setupFilters() {
 	speciesInput.addEventListener("change", function(event) {
 		event.preventDefault();
 		let input = speciesInput.value.trim();
+		
 		let option = selectedFilter.options.find(x => x[1] === input);
 		if (option) {
 			selectedFilter.filter(option);
@@ -154,9 +156,9 @@ function filterMoveType(option) {
 		let found = false;
 		for (const key in learnset) {
 			if (key === "levelup")
-				found = learnset.levelup.find(y => moves[y[0]].type === option[0]);
+				found = learnset.levelup.find(y => moves[y[0]].type === option[0] && moves[y[0]].power > 0);
 			else
-				found = learnset[key].find(y => moves[y].type === option[0]);
+				found = learnset[key].find(y => moves[y].type === option[0] && moves[y].power > 0);
 			if (found)
 				return true;
 		}
@@ -176,7 +178,7 @@ function filterAbilities(option) {
 }
 
 function filterEggGroup(option) {
-	let func = x => x => species[x].family.eggGroup.primary === option[0] || species[x].family.eggGroup.secondary === option[0];
+	let func = x => species[x].family.eggGroup.primary === option[0] || species[x].family.eggGroup.secondary === option[0];
 	addFilter(filters["Egg Group"], option, func);
 }
 
@@ -223,9 +225,11 @@ function filterToggle(option) {
 	else if (option[0] === "TOGGLE_EVOLVED" && filters["Level Cap"].active.length === 0)
 		func = x => !species[x].family.evolutions;
 	else if (option[0] === "TOGGLE_REGIONAL")
-		func = x => species[x].family.cousins && species[species[x].family.cousins[0]].family.region !== species[x].family.region;
+		func = x => species[x].family.forms && species[species[x].family.forms[0]].family.region !== species[x].family.region;
 	else if (option[0] === "TOGGLE_MEGA")
 		func = x => species[x].family.form && species[x].family.form.includes("Mega");
+	else if (option[0] === "TOGGLE_EVIOLITE")
+		func = x => species[x].family.evolutions;
 
 	if (toggles[option[0]] === true) {
 		toggles[option[0]] = false;
@@ -236,7 +240,13 @@ function filterToggle(option) {
 		addFilter(filter, option, func);
 		filters.active[option[0]].tag.onclick = function() {
 			toggles[option[0]] = false;
-			removeFilter(filter, option[0]);
+			if (option[0] === "TOGGLE_EVOLVED" || option[0] === "TOGGLE_HARDCORE" || option[0] === "TOGGLE_ONLYNEW")
+				filterLevelCap("RECALC");
+			if (option[0] === "TOGGLE_LEVELUP") {
+				filterMove("RECALC");
+				filterMoveType("RECALC");
+			}
+			removeFilter(filter, option);
 		};
 	}
 
@@ -250,12 +260,15 @@ function filterToggle(option) {
 
 function addFilter(filter, option, func) {
 
-	if (filter.active.indexOf(option[0]) === -1)
-		filter.active.push(option[0]);
+	if (filters.active[option[0]] && filters.active[option[0]].func !== func) {
+		removeFilter(filter, option);
+	}
+	
+	filter.active.push(option);
 	
 	if (filter.active.length > filter.max) {
 		let key = filter.active.shift();
-		removeFilter(filter, key);
+		removeFilter(filter, option);
 	}
 
 	let activeFiltersDisplay = document.getElementById("activeFilters");
@@ -263,7 +276,7 @@ function addFilter(filter, option, func) {
 	button.textContent = `${filter.name}: ${option[1]}`;
 	button.className = "activeFilter";
 	button.onclick = function() {
-		removeFilter(filter, option[0]);
+		removeFilter(filter, option);
 	};
 	activeFiltersDisplay.append(button);
 
@@ -277,16 +290,16 @@ function addFilter(filter, option, func) {
 
 	if (results.length === 1 && filter.name === "Name") {
 		let hit = species[results[0]];
-		removeFilter(filter, option[0]);
+		removeFilter(filter, option);
 		displaySpeciesPanel(hit);
 	}
 }
 
-function removeFilter(selectedFilter, key) {
-	filters.active[key].tag.remove();
-	delete filters.active[key];
+function removeFilter(selectedFilter, option) {
+	filters.active[option[0]].tag.remove();
+	delete filters.active[option[0]];
 	
-	let idx = selectedFilter.active.indexOf(key);
+	let idx = selectedFilter.active.indexOf(option);
 	selectedFilter.active.splice(idx, 1);
 	
 	let results = Object.keys(species);

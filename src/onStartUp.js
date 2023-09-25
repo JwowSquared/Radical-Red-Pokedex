@@ -65,10 +65,6 @@ async function onStartup() {
 	setupTables();
 	
 	setupFilters();
-	
-	document.getElementById("closeSpeciesPanel").onclick = function() {
-		document.getElementById("speciesPanel").className = "hide";
-	}
 }
 
 function loadChunk(tracker, toClear) {

@@ -7,6 +7,11 @@ function sortSpeciesRow(tracker, properties) {
 	let compare = basicCompare;
 	function tiebreaker (a, b) {
 		let comp = basicCompare(library[a].dexID, library[b].dexID);
+		if (comp !== 0)
+			return comp;
+		
+		//if two mons have the same dexID, they must be forms of eachother
+		comp = basicCompare(library[a].family.forms.indexOf(a), library[b].family.forms.indexOf(b));
 		return comp;
 	};
 	if (properties.length === 1) {

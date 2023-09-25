@@ -4,9 +4,9 @@
         "name": "Kanto",
         "variant": "Kantonian"
     },
-    "REGION_JHOTO": {
-        "ID": "REGION_JHOTO",
-        "name": "Jhoto",
+    "REGION_JOHTO": {
+        "ID": "REGION_JOHTO",
+        "name": "Johto",
         "variant": "Johtonian"
     },
     "REGION_HOENN": {

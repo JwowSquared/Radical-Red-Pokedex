@@ -8,7 +8,7 @@ function displaySpeciesRow(tracker, key) {
 	tracker.body.appendChild(currentRow);
 	
 	currentRow.append(
-		buildWrapper("td", "speciesDexIDWrapper", Math.trunc(mon.dexID)),
+		buildWrapper("td", "speciesDexIDWrapper", mon.dexID),
 		buildWrapperSprite("td", "speciesSprite", sprites[mon.ID]),
 		buildWrapperName("td", "speciesName", mon),
 		buildWrapperTypes("td", "speciesTypes", types[mon.type.primary], types[mon.type.secondary]),
@@ -36,8 +36,7 @@ function displayLevelUpMovesRow(tracker, movePair) {
 		buildWrapperTypes("td", "moveType", types[move.type]),
 		buildWrapperTypes("td", "moveSplit", splits[move.split]),
 		buildWrapper("td", "movePowerWrapper", move.power),
-		buildWrapper("td", "moveAccuracyWrapper", move.accuracy),
-		buildWrapper("td", "moveDescriptionWrapper", move.description)
+		buildWrapper("td", "moveAccuracyWrapper", move.accuracy)
 	);
 }
 
@@ -52,13 +51,11 @@ function displayMovesRow(tracker, key) {
 		buildWrapperTypes("td", "moveType", types[move.type]),
 		buildWrapperTypes("td", "moveSplit", splits[move.split]),
 		buildWrapper("td", "movePowerWrapper", move.power),
-		buildWrapper("td", "moveAccuracyWrapper", move.accuracy),
-		buildWrapper("td", "moveDescriptionWrapper", move.description)
+		buildWrapper("td", "moveAccuracyWrapper", move.accuracy)
 	);
 }
 
 function displaySpeciesPanel(mon) {
-	let speciesPanel = document.getElementById("speciesPanel");
 	let infoDisplay = document.getElementById("speciesPanelInfoDisplay");
 	let tables = [
 		["speciesLearnsetPrevoExclusiveTable", buildPrevoExclusiveMoves(mon.family.ancestor, mon.ID)],
@@ -68,13 +65,12 @@ function displaySpeciesPanel(mon) {
 		["speciesLearnsetEggMovesTable", mon.learnset.eggmoves]
 	]
 	
-	speciesPanel.className = "";
 	infoDisplay.innerText = "";
 	
 	infoDisplay.append(
 		buildWrapperSprite("div", "infoSprite", sprites[mon.ID]),
 		buildWrapperName("div", "infoName", mon),
-		buildWrapper("div", "infoDexIDWrapper",  "#" + Math.trunc(mon.dexID)),
+		buildWrapper("div", "infoDexIDWrapper",  "#" + mon.dexID),
 		buildWrapperTypes("div", "infoTypes", types[mon.type.primary], types[mon.type.secondary]),
 		buildWrapperAbilitiesFull("div", "infoAbilities", mon.abilities)
 	);
@@ -108,7 +104,8 @@ function displaySpeciesPanel(mon) {
 			table.classList.toggle("hide");
 	}
 
-	window.scrollTo(0, 0);
+	$('#speciesModal').modal('show');
+	window.scrollTo(0, 0); //only needed to offset the scroll from default sorting the move tables. probably change this?
 }
 
 function buildWrapper(tag, className, text=null) {
@@ -136,7 +133,7 @@ function buildWrapperSprite(tag, className, src) {
 function buildWrapperName(tag, className, mon) {
 	let wrapper = buildWrapper(tag, className + "Wrapper");
 	
-	if (mon.family.cousins && species[mon.family.cousins[0]].family.region !== mon.family.region)
+	if (mon.family.forms && species[mon.family.forms[0]].family.region !== mon.family.region)
 		wrapper.append(buildWrapper("div", className + "Region", regions[mon.family.region].variant));
 	
 	wrapper.append(buildWrapper("div", className + "Name", mon.name));

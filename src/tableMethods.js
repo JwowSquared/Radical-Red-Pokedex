@@ -5,8 +5,7 @@ function setupTables() {
 		["Type", ["type"]],
 		["Category", ["split"]],
 		["Power", ["power"]],
-		["Acc", ["accuracy"]],
-		["Description", []],
+		["Acc", ["accuracy"]]
 	]);
 	
 	setupTable("speciesLearnsetLevelUpTable", moves, displayLevelUpMovesRow, Object.keys(moves).length, sortLevelUpMovesRow, [
@@ -15,8 +14,7 @@ function setupTables() {
 		["Type", ["type"]],
 		["Category", ["split"]],
 		["Power", ["power"]],
-		["Acc", ["accuracy"]],
-		["Description", []],
+		["Acc", ["accuracy"]]
 	]);
 	
 	setupTable("speciesLearnsetTMHMTable", moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
@@ -24,8 +22,7 @@ function setupTables() {
 		["Type", ["type"]],
 		["Category", ["split"]],
 		["Power", ["power"]],
-		["Acc", ["accuracy"]],
-		["Description", []],
+		["Acc", ["accuracy"]]
 	]);
 	
 	setupTable("speciesLearnsetTutorTable", moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
@@ -33,8 +30,7 @@ function setupTables() {
 		["Type", ["type"]],
 		["Category", ["split"]],
 		["Power", ["power"]],
-		["Acc", ["accuracy"]],
-		["Description", []],
+		["Acc", ["accuracy"]]
 	]);
 	
 	setupTable("speciesLearnsetEggMovesTable", moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
@@ -42,8 +38,7 @@ function setupTables() {
 		["Type", ["type"]],
 		["Category", ["split"]],
 		["Power", ["power"]],
-		["Acc", ["accuracy"]],
-		["Description", []],
+		["Acc", ["accuracy"]]
 	]);
 	
 	setupTable("speciesTable", species, displaySpeciesRow, 50, sortSpeciesRow, [

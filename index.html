@@ -17,28 +17,35 @@
 	  <p>Loading Radical Red Pokedex...</p>
 	</div>
     <main class="hide">
-	  <div id="speciesPanel" class="hide">
-	    <div id="closeSpeciesPanel">X</div>
-		<div id="speciesPanelInfoDisplay">
-		</div>
-		<div id="speciesPanelLearnsets">
-		  <div id="speciesLearnsetPrevoExclusiveTable" class="tableWrapper">
-			<div class="tableName">Moves Exclusive to Pre-Evolution</div>
-		  </div>
-		  <div id="speciesLearnsetLevelUpTable" class="tableWrapper">
-			<div class="tableName">Moves Learned By Level Up</div>
-		  </div>
-		  <div id="speciesLearnsetTMHMTable" class="tableWrapper">
-		    <div class="tableName">Moves Learned By TM/HM</div>
-		  </div>
-		  <div id="speciesLearnsetTutorTable" class="tableWrapper">
-		    <div class="tableName">Moves Learned By Tutor</div>
-		  </div>
-		  <div id="speciesLearnsetEggMovesTable" class="tableWrapper">
-		    <div class="tableName">Moves Learned By Breeding</div>
-		  </div>
-		</div>
-	  </div>
+	  <div class="modal fade" id="speciesModal" tabindex="-1" role="dialog" aria-labelledby="Full Pokemon Info" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+              </button>
+              <div id="speciesPanelInfoDisplay"></div>
+	  	      <div id="speciesPanelLearnsets">
+	  	        <div id="speciesLearnsetPrevoExclusiveTable" class="tableWrapper">
+	  	    	  <div class="tableName">Moves Exclusive to Pre-Evolution</div>
+	  	        </div>
+	  	        <div id="speciesLearnsetLevelUpTable" class="tableWrapper">
+	  	    	  <div class="tableName">Moves Learned By Level Up</div>
+	  	        </div>
+	  	        <div id="speciesLearnsetTMHMTable" class="tableWrapper">
+	  	          <div class="tableName">Moves Learned By TM/HM</div>
+	  	        </div>
+	  	        <div id="speciesLearnsetTutorTable" class="tableWrapper">
+	  	          <div class="tableName">Moves Learned By Tutor</div>
+	  	        </div>
+	  	        <div id="speciesLearnsetEggMovesTable" class="tableWrapper">
+	  	          <div class="tableName">Moves Learned By Breeding</div>
+	  	        </div>
+	  	      </div>
+            </div>
+          </div>
+        </div>
+      </div>
 	  <div id="speciesControl">
 	    <select id="speciesFilterCategory"></select>
 		<label id="speciesFilterSeparator">:</label>

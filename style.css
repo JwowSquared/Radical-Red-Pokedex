@@ -16,23 +16,19 @@ body {
 	margin-top: 20px;
 }
 
-#speciesPanel {
-	user-select: none;
+#speciesModal .modal-content {
+	background-color: #222222;
+    user-select: none;
+    border-radius: 5px;
+    border: solid thin white;
+    max-width: 541px;
 }
 
-#closeSpeciesPanel {
-	width: 21px;
-    height: 23px;
-    color: white;
-    text-align: center;
-    font-weight: 700;
-    border-radius: 6px;
-    position: sticky;
-    float: right;
-    right: 4px;
-    top: 5px;
-    z-index: 3;
-    cursor: pointer;
+#speciesModal .close {
+	color: white;
+    text-shadow: none;
+	position: sticky;
+    top: 7px;
 }
 
 #speciesPanelInfoDisplay {
@@ -42,10 +38,6 @@ body {
 	flex-direction: column;
 	align-items: center;
 	clear: right;
-}
-
-.moveTypeWrapper, .moveSplitWrapper {
-	min-width: 89px;
 }
 
 .infoSprite {
@@ -193,7 +185,7 @@ body {
 
 .coverageMatchupsWrapper {
 	display: flex;
-    width: 534px;
+    max-width: 534px;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -214,7 +206,6 @@ body {
 #speciesControl {
 	padding: 30px 30px 15px 30px;
     display: flex;
-    flex-wrap: wrap;
     margin: auto;
     justify-content: center;
 }
@@ -286,7 +277,7 @@ body {
 }
 
 .table {
-	width: 90%;
+	max-width: 90%;
 	margin-inline: auto;
 	user-select: none;
 	cursor: pointer;
@@ -337,17 +328,9 @@ body {
 	font-weight: 700;
 }
 
-td.speciesSpriteWrapper {
-	padding: 0px;
-}
-
 .speciesSprite {
 	height: 64px;
 	width: 64px;
-}
-
-.speciesNameWrapper {
-	min-width: 120.6px;
 }
 
 .speciesNameRegion, .speciesNameForm, .infoNameRegion, .infoNameForm, .infoChangelogAbilityWrapper > div {
@@ -360,10 +343,6 @@ td.speciesSpriteWrapper {
 
 .infoNameName {
 	font-size: 1.2rem;
-}
-
-.speciesTypesWrapper {
-	min-width: 165.4px;
 }
 
 .typeWrapper {
@@ -380,18 +359,10 @@ td.speciesSpriteWrapper {
 	font-style: italic;
 }
 
-.speciesAbilitiesWrapper {
-	min-width: 148.2px;
-}
-
 .speciesAbilitiesHidden, .infoAbilitiesHidden, .infoChangelogAbility.hidden {
 	color: rgb(255 107 188);
     font-weight: 550;
     text-shadow: 1px 1px black;
-}
-
-.speciesStatWrapper {
-	min-width: 51.1px;
 }
 
 .speciesStatLabel {
@@ -400,11 +371,38 @@ td.speciesSpriteWrapper {
 
 @media (max-width: 991.98px) {
 	
-	.table {
-		min-width: 487px;
+	#speciesModal .sortOption {
+		width: 33.33%;
 	}
 	
-	.sortLocked, .moveDescriptionWrapper {
+	#speciesLearnsetTMHMTable th:nth-of-type(1), #speciesLearnsetTMHMTable th:nth-of-type(2), #speciesLearnsetTutorTable th:nth-of-type(1), #speciesLearnsetTutorTable th:nth-of-type(2), #speciesLearnsetEggMovesTable th:nth-of-type(1), #speciesLearnsetEggMovesTable th:nth-of-type(2) {
+		width: 50%;
+	}
+	
+	.movesRow {
+		display: flex;
+		height: fit-content;
+		position: relative;
+		align-items: center;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	
+	.moveLevelWrapper {
+		position: absolute;
+		left: -4%;
+		top: 5%;
+	}
+	
+	.movesRow td {
+		width: 25%;
+	}
+	
+	td.moveNameWrapper, td.moveTypeWrapper {
+		width: 40%;
+	}
+	
+	.sortLocked {
 		display: none;
 	}
 	
@@ -412,28 +410,32 @@ td.speciesSpriteWrapper {
 		border: none;
 	}
 	
+	.sortControls {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
 	#speciesTable .sortOption {
-		display: inline-block;
-		width: 20%;
+		width: 14.28%;
 		border: none;
+	}
+	
+	#speciesTable th:nth-of-type(1), #speciesTable th:nth-of-type(3), #speciesTable th:nth-of-type(5) {
+		width: 33.33%;
 	}
 	
 	.speciesRow {
 		position: relative;
-		height: 180px;
+		height: fit-content;
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
 	}
 	
-	.speciesRow td {
-		display: inline-block;
-	}
-	
 	.speciesDexIDWrapper {
 		position: absolute;
 		left: 21%;
-		top: 24px;
+		top: 12%;
 	}
 	
 	.speciesSpriteWrapper, .speciesNameWrapper, #speciesTable .speciesTypesWrapper {
@@ -441,7 +443,6 @@ td.speciesSpriteWrapper {
 	}
 	
 	td.speciesNameWrapper {
-		height: 84.8px;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -449,11 +450,8 @@ td.speciesSpriteWrapper {
 	
 	.speciesAbilitiesWrapper {
 		width: 100%;
-	}
-	
-	.speciesAbilitiesPrimary, .speciesAbilitiesSecondary, .speciesAbilitiesHidden {
-		display: inline-block;
-		width: 33%;
+		display: flex;
+		justify-content: space-evenly;
 	}
 	
 	.speciesStatWrapper {
