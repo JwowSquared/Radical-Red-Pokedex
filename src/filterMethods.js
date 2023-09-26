@@ -233,7 +233,7 @@ function filterToggle(option) {
 
 	if (toggles[option[0]] === true) {
 		toggles[option[0]] = false;
-		removeFilter(filter, option[0]);
+		removeFilter(filter, option);
 	}
 	else {
 		toggles[option[0]] = true;
@@ -263,12 +263,11 @@ function addFilter(filter, option, func) {
 	if (filters.active[option[0]] && filters.active[option[0]].func !== func) {
 		removeFilter(filter, option);
 	}
-	
+
 	filter.active.push(option);
 	
 	if (filter.active.length > filter.max) {
-		let key = filter.active.shift();
-		removeFilter(filter, option);
+		removeFilter(filter, filter.active[0]);
 	}
 
 	let activeFiltersDisplay = document.getElementById("activeFilters");

@@ -163,6 +163,7 @@ body {
 .infoFormsWrapper {
 	display: flex;
     justify-content: center;
+	flex-wrap: wrap;
 }
 
 .infoChangelogTypesWrapper {
