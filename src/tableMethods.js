@@ -41,6 +41,14 @@ function setupTables() {
 		["Acc", ["accuracy"]]
 	]);
 	
+	setupTable("speciesLearnsetEventTable", moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
+		["Name", ["name"]],
+		["Type", ["type"]],
+		["Category", ["split"]],
+		["Power", ["power"]],
+		["Acc", ["accuracy"]]
+	]);
+	
 	setupTable("speciesTable", species, displaySpeciesRow, 50, sortSpeciesRow, [
 		["#", ["dexID"]],
 		["Sprite", []],
