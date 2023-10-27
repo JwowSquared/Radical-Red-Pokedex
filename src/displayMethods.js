@@ -9,18 +9,13 @@ function displaySpeciesRow(tracker, key) {
 	
 	currentRow.append(
 		buildWrapper("td", "speciesDexIDWrapper", mon.dexID),
-		buildWrapperSprite("td", "speciesSprite", sprites[mon.ID]),
+		buildWrapperSprite("td", "speciesSprite", sprites[mon.key]),
 		buildWrapperName("td", "speciesName", mon),
 		buildWrapperTypes("td", "speciesTypes", types[mon.type.primary], types[mon.type.secondary]),
 		buildWrapperAbilities("td", "speciesAbilities", mon.abilities),
-		buildWrapperStat("td", "speciesStat", "HP", mon.stats.HP),
-		buildWrapperStat("td", "speciesStat", "Atk", mon.stats.attack),
-		buildWrapperStat("td", "speciesStat", "Def", mon.stats.defense),
-		buildWrapperStat("td", "speciesStat", "SpA", mon.stats.specialAttack),
-		buildWrapperStat("td", "speciesStat", "SpD", mon.stats.specialDefense),
-		buildWrapperStat("td", "speciesStat", "Spe", mon.stats.speed),
-		buildWrapperStat("td", "speciesStat", "BST", mon.stats.total)
 	);
+	for (const key in stats)
+		currentRow.append(buildWrapperStat("td", "speciesStat", stats[key], mon.stats[key]));
 }
 
 function displayLevelUpMovesRow(tracker, movePair) {
@@ -58,17 +53,18 @@ function displayMovesRow(tracker, key) {
 function displaySpeciesPanel(mon) {
 	let infoDisplay = document.getElementById("speciesPanelInfoDisplay");
 	let tables = [
-		["speciesLearnsetPrevoExclusiveTable", buildPrevoExclusiveMoves(mon.family.ancestor, mon.ID)],
+		["speciesLearnsetPrevoExclusiveTable", mon.learnset.prevo],
 		["speciesLearnsetLevelUpTable", mon.learnset.levelup],
-		["speciesLearnsetTMHMTable", mon.learnset.TMHM],
+		["speciesLearnsetTMHMTable", mon.learnset.TM],
 		["speciesLearnsetTutorTable", mon.learnset.tutor],
-		["speciesLearnsetEggMovesTable", mon.learnset.eggmoves]
+		["speciesLearnsetEggMovesTable", mon.learnset.egg],
+		["speciesLearnsetEventTable", mon.learnset.event],
 	]
 	
 	infoDisplay.innerText = "";
 	
 	infoDisplay.append(
-		buildWrapperSprite("div", "infoSprite", sprites[mon.ID]),
+		buildWrapperSprite("div", "infoSprite", sprites[mon.key]),
 		buildWrapperName("div", "infoName", mon),
 		buildWrapper("div", "infoDexIDWrapper",  "#" + mon.dexID),
 		buildWrapperTypes("div", "infoTypes", types[mon.type.primary], types[mon.type.secondary]),
@@ -80,8 +76,8 @@ function displaySpeciesPanel(mon) {
 		buildWrapperStatFull("div", "infoStat", "HP", mon.stats.HP),
 		buildWrapperStatFull("div", "infoStat", "Atk", mon.stats.attack),
 		buildWrapperStatFull("div", "infoStat", "Def", mon.stats.defense),
-		buildWrapperStatFull("div", "infoStat", "SpA", mon.stats.specialAttack),
-		buildWrapperStatFull("div", "infoStat", "SpD", mon.stats.specialDefense),
+		buildWrapperStatFull("div", "infoStat", "SpA", mon.stats.spAttack),
+		buildWrapperStatFull("div", "infoStat", "SpD", mon.stats.spDefense),
 		buildWrapperStatFull("div", "infoStat", "Spe", mon.stats.speed),
 		buildWrapperStat("div", "infoStat", "BST", mon.stats.total)
 	);
@@ -328,7 +324,7 @@ function familyTree(display, key, prevo=null, evo=null) {
 	}
 	spriteWrapper.append(img);
 	wrapper.append(spriteWrapper);	
-	
+	console.log(key);
 	if (species[key].family.evolutions) {
 		if (species[key].family.evolutions.length === 1)
 			wrapper.className += " single";

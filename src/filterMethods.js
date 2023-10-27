@@ -90,7 +90,6 @@ function buildFilter(name, filter, max, library) {
 	basic.name = name;
 	basic.filter = filter;
 	basic.max = max;
-	console.log(name, filter, max, library);
 	basic.options = Object.keys(library).map(x => [x, library[x].name]);
 	basic.active = [];
 	return basic;
