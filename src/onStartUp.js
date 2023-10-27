@@ -48,7 +48,8 @@ function loadChunk(tracker, toClear) {
 	let rowsAdded = 0;
 	
 	if (toClear) {
-		tracker.sortControls[0].parentNode.parentNode.scrollIntoView({behavior: "smooth", block: "nearest"});
+		if (scrollIntoView)
+			tracker.sortControls[0].parentNode.parentNode.scrollIntoView({behavior: "smooth", block: "nearest"});
 		tracker.body.innerText = "";
 		tracker.index = 0;
 	}

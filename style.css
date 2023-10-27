@@ -27,8 +27,7 @@ body {
 #speciesModal .close {
 	color: white;
     text-shadow: none;
-	position: sticky;
-    top: 7px;
+	float: right;
 }
 
 #speciesPanelInfoDisplay {

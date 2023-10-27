@@ -101,7 +101,7 @@ function displaySpeciesPanel(mon) {
 	}
 
 	$('#speciesModal').modal('show');
-	window.scrollTo(0, 0); //only needed to offset the scroll from default sorting the move tables. probably change this?
+	//window.scrollTo(0, 0); //only needed to offset the scroll from default sorting the move tables. probably change this?
 }
 
 function buildWrapper(tag, className, text=null) {
@@ -371,9 +371,9 @@ function buildWrapperHeldItems(tag, className, i) {
 	
 	wrapper.append(buildWrapper("div", "infoItemsLabel", "Held Items"));
 	if (i.common)
-		wrapper.append(buildWrapper("div", className, "Common: " + items[i.common].name));
+		wrapper.append(buildWrapper("div", className, "Common: " + heldItems[i.common].name));
 	if (i.rare)
-		wrapper.append(buildWrapper("div", className, "Rare: " + items[i.rare].name));
+		wrapper.append(buildWrapper("div", className, "Rare: " + heldItems[i.rare].name));
 	
 	return wrapper;
 }

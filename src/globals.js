@@ -1,5 +1,5 @@
 let repo = "JwowSquared/Radical-Red-Pokedex";
-let version = "rrdex release 1.1.0.9";
+let version = "rrdex release 1.1.1.0";
 
 let species = null;
 let sprites = null;
@@ -18,6 +18,8 @@ let stats = null;
 
 let trackers = {};
 let filters = {};
+
+let scrollIntoView = true;
 
 function fullSpeciesName(key) {
 	let mon = species[key];

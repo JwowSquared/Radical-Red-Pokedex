@@ -68,7 +68,7 @@ function setupTables() {
 	
 	window.onscroll = function(ev) {
 		if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
-		loadChunk(trackers["speciesTable"], false);
+			loadChunk(trackers["speciesTable"], false);
 		}
 	};
 }
@@ -123,7 +123,9 @@ function populateTable(name, data) {
 	tracker.data = data;
 	for (const control of tracker.sortControls)
 		control.className = "sortOption";
+	scrollIntoView = false;
 	tracker.sortControls[0].click();
+	scrollIntoView = true;
 }
 
 function sortTracker(selectedOption, tracker, sortMethod, sortProperties) {
