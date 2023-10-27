@@ -72,21 +72,18 @@ function displaySpeciesPanel(mon) {
 	);
 	
 	let statWrapper = buildWrapper("div", "infoStats");
-	statWrapper.append(
-		buildWrapperStatFull("div", "infoStat", "HP", mon.stats.HP),
-		buildWrapperStatFull("div", "infoStat", "Atk", mon.stats.attack),
-		buildWrapperStatFull("div", "infoStat", "Def", mon.stats.defense),
-		buildWrapperStatFull("div", "infoStat", "SpA", mon.stats.spAttack),
-		buildWrapperStatFull("div", "infoStat", "SpD", mon.stats.spDefense),
-		buildWrapperStatFull("div", "infoStat", "Spe", mon.stats.speed),
-		buildWrapperStat("div", "infoStat", "BST", mon.stats.total)
-	);
+	for (let i = 0; i < Object.keys(stats).length - 1; i++) {
+		let stat = Object.keys(stats)[i];
+		statWrapper.append(buildWrapperStatFull("div", "infoStat", stats[stat], mon.stats[stat]));
+	}
+	statWrapper.append(buildWrapperStat("div", "infoStat", "BST", mon.stats.total));
 	
 	infoDisplay.append(
 		statWrapper,
 		buildWrapperChangelog("div", "infoChangelog", mon),
 		buildWrapperFamilyTree("div", "infoFamilyTree", mon),
 		buildWrapperCoverageDefensive("div", "infoCoverage", types[mon.type.primary], types[mon.type.secondary]),
+		buildWrapperCap("div", "infoCap", mon.cap),
 		buildWrapperHeldItems("div", "infoItems", mon.items),
 		buildWrapperEggGroups("div", "infoEggGroups", mon.family.eggGroup),
 	);
@@ -101,7 +98,6 @@ function displaySpeciesPanel(mon) {
 	}
 
 	$('#speciesModal').modal('show');
-	//window.scrollTo(0, 0); //only needed to offset the scroll from default sorting the move tables. probably change this?
 }
 
 function buildWrapper(tag, className, text=null) {
@@ -225,6 +221,9 @@ function buildWrapperChangelog(tag, className, mon) {
 	
 	wrapper.append(buildWrapper("div", "infoChangelogLabel", "RR Changes"));
 	
+	if (mon.changelog.unique)
+		wrapper.append(buildWrapper("div", "infoChangelogUnique", "All New Pokemon!"));
+	
 	if (mon.changelog.type) {
 		let typeWrapper = buildWrapper("div", "infoChangelogTypesWrapper");
 		typeWrapper.append(buildWrapperTypes("div", "infoChangelogOldType", types[mon.changelog.type.primary], types[mon.changelog.type.secondary]));
@@ -236,16 +235,16 @@ function buildWrapperChangelog(tag, className, mon) {
 	if (mon.changelog.abilities) {
 		let abilityWrapper = buildWrapper("div", "infoChangelogAbilityWrapper");
 		for (const ability of ["primary", "secondary", "hidden"]) {
-			let oldAbility = abilities[mon.changelog.abilities[ability]];
+			let oldAbility = mon.changelog.abilities[ability];
 			let newAbility = abilities[mon.abilities[ability]];
-			if (oldAbility == newAbility)
+			if (!oldAbility)
 				continue;
 			if (oldAbility && newAbility)
-				abilityWrapper.append(buildWrapper("div", "infoChangelogAbility " + ability, oldAbility.name + " → " + newAbility.name));
+				abilityWrapper.append(buildWrapper("div", "infoChangelogAbility " + ability, oldAbility + " → " + newAbility.name));
 			else if (newAbility)
 				abilityWrapper.append(buildWrapper("div", "infoChangelogAbility " + ability, "None → " + newAbility.name));
-			else if (oldAbility)
-				abilityWrapper.append(buildWrapper("div", "infoChangelogAbility " + ability, oldAbility.name + " → None"));
+			else
+				abilityWrapper.append(buildWrapper("div", "infoChangelogAbility " + ability, oldAbility + " → None"));
 			}
 		wrapper.append(abilityWrapper);
 	}
@@ -253,7 +252,7 @@ function buildWrapperChangelog(tag, className, mon) {
 	if (mon.changelog.stats) {
 		let statsWrapper = buildWrapper("div", className);
 		
-		for (const stat in stats) {
+		for (const stat in mon.changelog.stats) {
 			let statClass =  mon.changelog.stats[stat] < mon.stats[stat] ? "infoChangelogBuff" : "infoChangelogNerf";
 			statsWrapper.append(buildWrapper("div", statClass, stats[stat] + " " + mon.changelog.stats[stat] + " → " + mon.stats[stat]));
 		}
@@ -358,7 +357,39 @@ function buildWrapperTypeMatchup(key, matchup) {
 	let wrapper = buildWrapper("div", "typeMatchupWrapper");
 	
 	wrapper.append(buildWrapperTypes("div", "typeMatchupLabel", types[key]));
-	wrapper.append(buildWrapper("div", "typeMatchupMultiplier", "*" + matchup));
+	wrapper.append(buildWrapper("div", "typeMatchupMultiplier x" + (matchup * 100), "*" + matchup));
+	
+	return wrapper;
+}
+
+function buildWrapperCap(tag, className, cap) {
+	let wrapper = buildWrapper(tag, className + "Wrapper");
+	
+	wrapper.append(buildWrapper("div", "infoCapLabel", "Availability"));
+	if (cap.locations) {
+		for (const [key, method] of cap.locations) {
+			wrapper.append(buildWrapper("div", className, locations[key].name + " " + locations[key][method].name));
+		}
+	}
+	else {
+		wrapper.append(buildWrapper("div", className, "Unobtainable in the wild."));
+	}
+	
+	wrapper.append(buildWrapper("div", "infoCapLabel", "Level Cap"));
+	
+	if ("normal" in cap) {
+		wrapper.append(buildWrapper("div", className, "Available on Normal " + caps[cap.normal].name + "."));
+	}
+	else {
+		wrapper.append(buildWrapper("div", className, "Unobtainable on Normal Difficulty."));
+	}
+	
+	if ("hardcore" in cap) {
+		wrapper.append(buildWrapper("div", className, "Available on Hardcore " + caps[cap.hardcore].name + "."));
+	}
+	else {
+		wrapper.append(buildWrapper("div", className, "Unobtainable on Hardcore Difficulty."));
+	}
 	
 	return wrapper;
 }
