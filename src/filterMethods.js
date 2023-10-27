@@ -19,7 +19,7 @@ function setupFilters() {
 		["Move Type", filterMoveType, 1, types],
 		["Ability", filterAbilities, 1, abilities],
 		["Egg Group", filterEggGroup, 1, eggGroups],
-		["Held Item", filterHeldItem, 1, items],
+		["Held Item", filterHeldItem, 1, heldItems],
 		["Level Cap", filterLevelCap, 1, caps],
 		["Toggle", filterToggle, 7, toggles]
 	];
@@ -90,6 +90,7 @@ function buildFilter(name, filter, max, library) {
 	basic.name = name;
 	basic.filter = filter;
 	basic.max = max;
+	console.log(name, filter, max, library);
 	basic.options = Object.keys(library).map(x => [x, library[x].name]);
 	basic.active = [];
 	return basic;

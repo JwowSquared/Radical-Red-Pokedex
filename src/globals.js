@@ -1,4 +1,4 @@
-let repo = "JwowSquared/JwowSquared.github.io";
+let repo = "JwowSquared/Radical-Red-Pokedex";
 let version = "rrdex release 1.1.0.3";
 
 let species = null;
@@ -9,7 +9,8 @@ let locations = null;
 let types = null;
 let caps = null;
 let eggGroups = null;
-let items = null;
+let evolutionItems = null;
+let heldItems = null;
 let regions = null;
 let splits = null;
 let evolutions = null;

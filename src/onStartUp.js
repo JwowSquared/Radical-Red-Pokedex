@@ -4,12 +4,12 @@ async function fetchData() {
 		
 		const cache = await caches.open(version);
 		
-		let response = await cache.match(requests[i]);
+		let response = await cache.match(request);
 		if (!response) {
-			response = await fetch(requests[i]);
-			await cache.put(requests[i], response);
+			response = await fetch(request);
+			await cache.put(request, response);
 		}
-			response = await cache.match(requests[i]);
+			response = await cache.match(request);
 		
 		let data = await response.json();
 		species = data.species;
@@ -21,14 +21,13 @@ async function fetchData() {
 		splits = data.splits;
 		evolutionItems = data.evolutionItems;
 		heldItems = data.heldItems;
+		caps = data.caps;
 		sprites = data.sprites;
 		evolutions = data.evolutions;
 		regions = data.regions;
 		stats = data.stats;
 	}
 	catch (e) {
-		showMessage(loadingScreen, "Error encountered. Please wait a few minutes and refresh the page.");
-		showMessage(loadingScreen, "If that doesn't work, ping @JwowSquared in the Radical Red discord.");
 		console.log(e);
 		return;
 	}
