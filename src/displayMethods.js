@@ -94,7 +94,7 @@ function displaySpeciesPanel(mon) {
 	for (const [ID, data] of tables) {
 		let table = document.getElementById(ID);
 		table.className = "tableWrapper";
-		if (data.length > 0)
+		if (data && data.length > 0)
 			populateTable(ID, data);
 		else
 			table.classList.toggle("hide");
@@ -251,12 +251,11 @@ function buildWrapperChangelog(tag, className, mon) {
 	}
 	
 	if (mon.changelog.stats) {
-		let statLabels = {HP:"HP", attack:"Atk", defense:"Def", specialAttack:"SpA", specialDefense:"SpD", speed:"Spe"};
 		let statsWrapper = buildWrapper("div", className);
 		
-		for (const stat in mon.changelog.stats) {
+		for (const stat in stats) {
 			let statClass =  mon.changelog.stats[stat] < mon.stats[stat] ? "infoChangelogBuff" : "infoChangelogNerf";
-			statsWrapper.append(buildWrapper("div", statClass, statLabels[stat] + " " + mon.changelog.stats[stat] + " → " + mon.stats[stat]));
+			statsWrapper.append(buildWrapper("div", statClass, stats[stat] + " " + mon.changelog.stats[stat] + " → " + mon.stats[stat]));
 		}
 		wrapper.append(statsWrapper);
 	}
