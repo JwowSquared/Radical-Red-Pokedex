@@ -1,5 +1,5 @@
 let repo = "JwowSquared/Radical-Red-Pokedex";
-let version = "rrdex release 1.1.0.5";
+let version = "rrdex release 1.1.0.6";
 
 let species = null;
 let sprites = null;

@@ -324,7 +324,6 @@ function familyTree(display, key, prevo=null, evo=null) {
 	}
 	spriteWrapper.append(img);
 	wrapper.append(spriteWrapper);	
-	console.log(key);
 	if (species[key].family.evolutions) {
 		if (species[key].family.evolutions.length === 1)
 			wrapper.className += " single";
