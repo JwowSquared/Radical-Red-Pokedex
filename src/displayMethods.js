@@ -7,6 +7,8 @@ function displaySpeciesRow(tracker, key) {
 	};
 	tracker.body.appendChild(currentRow);
 	
+	buildBackgroundColor(currentRow, mon);
+	
 	currentRow.append(
 		buildWrapper("td", "speciesDexIDWrapper", mon.dexID),
 		buildWrapperSprite("td", "speciesSprite", sprites[mon.key]),
@@ -422,4 +424,21 @@ function buildWrapperEggGroups(tag, className, e) {
 		wrapper.append(buildWrapper("div", className, eggGroups[e.secondary].name));
 	
 	return wrapper;
+}
+
+function buildBackgroundColor(currentRow, mon) {
+	if (mon.type.secondary) {
+		let gradient = [];
+		currentRow.style.backgroundColor = types[mon.type.primary].color;
+		gradient.push(currentRow.style.backgroundColor.substr(3).replace(")", ", 0.4)"));
+		currentRow.style.backgroundColor = types[mon.type.secondary].color;
+		gradient.push(currentRow.style.backgroundColor.substr(3).replace(")", ", 0.4)"));
+		currentRow.style.backgroundColor = "";
+		currentRow.style.backgroundImage = "linear-gradient(to right, rgba" + gradient[0] + ", rgba" + gradient[1] + ")";
+	}
+	else {
+		currentRow.style.backgroundColor = types[mon.type.primary].color;
+		currentRow.style.backgroundImage = "linear-gradient(to right, rgba" + currentRow.style.backgroundColor.substr(3).replace(")", ", 0.4)") + ", rgb(63, 40, 40, 0.4))";
+		currentRow.style.backgroundColor = "";
+	}
 }
