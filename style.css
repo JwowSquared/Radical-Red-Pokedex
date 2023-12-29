@@ -442,19 +442,36 @@ tbody {
 	font-style: italic;
 }
 
+	height: 28px;
+}
+
 @media (max-width: 991.98px) {
 	
 	#speciesModal .sortOption {
-		width: 33.33%;
+		width: 25%;
 	}
+
 	
-	#speciesLearnsetTMHMTable th:nth-of-type(1), #speciesLearnsetTMHMTable th:nth-of-type(2), #speciesLearnsetTutorTable th:nth-of-type(1), #speciesLearnsetTutorTable th:nth-of-type(2), #speciesLearnsetEggMovesTable th:nth-of-type(1), #speciesLearnsetEggMovesTable th:nth-of-type(2) {
-		width: 50%;
+	
+	#speciesLearnsetPrevoExclusiveTable th:nth-of-type(2),
+	#speciesLearnsetLevelUpTable th:nth-of-type(2)
+	{
+		width: 75%;
+		text-indent: 25%;
+		text-align: left;
+	}
+
+	#speciesLearnsetTMHMTable th:nth-of-type(1), 
+	#speciesLearnsetTutorTable th:nth-of-type(1), 
+	#speciesLearnsetEggMovesTable th:nth-of-type(1)
+	{
+		width: 100%;
 	}
 	
 	.movesRow {
 		display: flex;
 		height: fit-content;
+		height: -moz-max-content;
 		position: relative;
 		align-items: center;
 		flex-wrap: wrap;
@@ -463,17 +480,31 @@ tbody {
 	
 	.moveLevelWrapper {
 		position: absolute;
-		left: -4%;
-		top: 5%;
+		left: 0;
+		top: 0;
 	}
 	
 	.movesRow td {
 		width: 25%;
 	}
 	
-	td.moveNameWrapper, td.moveTypeWrapper {
-		width: 40%;
+	td.moveNameWrapper {
+		text-align: center;
+		width: 100%;
 	}
+
+	td.moveTypeWrapper {
+		width: 25%;
+	}
+
+	.moveSplit{
+		height: 28px;
+	}
+
+	td.moveDescriptionWrapper{
+		width: 100%;
+	}
+
 	
 	tbody {
 		scroll-margin-top: 67px;
@@ -504,6 +535,7 @@ tbody {
 	.speciesRow {
 		position: relative;
 		height: fit-content;
+		height: -moz-max-content;
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
