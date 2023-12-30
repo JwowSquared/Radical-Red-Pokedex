@@ -65,10 +65,11 @@ function setupFilters() {
 		selectFilterCategory.className = "highlight";
 		categoryDropdown.className = "";
 	});
-	categoryWrapper.addEventListener("mouseleave", function(event) {
-		event.preventDefault();
-		selectFilterCategory.className = "";
-		categoryDropdown.className = "hide";
+	document.addEventListener("mousedown", function(event) {
+		if (!selectFilterCategory.contains(event.target)) {
+			selectFilterCategory.className = "";
+			categoryDropdown.className = "hide";
+		}
 	});
 	
 	filters.active = {};
@@ -87,9 +88,8 @@ function setupFilters() {
 	});
 	speciesInput.addEventListener("keyup", buildDropdown);
 	speciesInput.addEventListener("mousedown", buildDropdown);
-	inputWrapper.addEventListener("mouseleave", function(event) {
+	speciesInput.addEventListener("blur", function(event) {
 		event.preventDefault();
-		speciesInput.blur();
 		inputDropdown.innerHTML = "";
 	});
 }
