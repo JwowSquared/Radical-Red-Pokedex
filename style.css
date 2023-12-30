@@ -517,6 +517,18 @@ td.moveDescriptionWrapper {
 
 @media (max-width: 991.98px) {
 	
+	#speciesTable tbody {
+		scroll-margin-top: 67px;
+	}
+	
+	#speciesTable .sortLocked {
+		display: none;
+	}
+	
+	#speciesTable .table td {
+		border: none;
+	}
+	
 	#speciesTable .sortControls {
 		display: flex;
 		flex-wrap: wrap;
