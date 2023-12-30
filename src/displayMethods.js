@@ -2,6 +2,21 @@ function displayHelp() {
 	$('#helpModal').modal('show');
 }
 
+function getSplitSrc(split)
+{
+
+	switch(split)
+	{
+		case "STATUS":
+			return "move-status.png"
+		case "PHYSICAL":
+			return "move-physical.png"
+		case "SPECIAL":
+			return "move-Special.png"
+	}
+	return ""
+}
+
 function displaySpeciesRow(tracker, key) {
 	let mon = tracker.library[key];
 	let currentRow = document.createElement("tr");
@@ -35,9 +50,10 @@ function displayLevelUpMovesRow(tracker, movePair) {
 		buildWrapper("td", "moveLevelWrapper", level),
 		buildWrapper("td", "moveNameWrapper", move.name),
 		buildWrapperTypes("td", "moveType", types[move.type]),
-		buildWrapperTypes("td", "moveSplit", splits[move.split]),
+		buildWrapperSprite("td", "moveSplit", getSplitSrc(move.split)),
 		buildWrapper("td", "movePowerWrapper", move.power),
-		buildWrapper("td", "moveAccuracyWrapper", move.accuracy)
+		buildWrapper("td", "moveAccuracyWrapper", move.accuracy),
+		buildWrapper("td", "moveDescriptionWrapper", move.description)
 	);
 }
 
@@ -50,9 +66,10 @@ function displayMovesRow(tracker, key) {
 	currentRow.append(
 		buildWrapper("td", "moveNameWrapper", move.name),
 		buildWrapperTypes("td", "moveType", types[move.type]),
-		buildWrapperTypes("td", "moveSplit", splits[move.split]),
+		buildWrapperSprite("td", "moveSplit", getSplitSrc(move.split)),
 		buildWrapper("td", "movePowerWrapper", move.power),
-		buildWrapper("td", "moveAccuracyWrapper", move.accuracy)
+		buildWrapper("td", "moveAccuracyWrapper", move.accuracy),
+		buildWrapper("td", "moveDescriptionWrapper", move.description)
 	);
 }
 
