@@ -380,7 +380,7 @@ function buildWrapperTypeMatchup(key, matchup) {
 	let wrapper = buildWrapper("div", "typeMatchupWrapper");
 	
 	wrapper.append(buildWrapperTypes("div", "typeMatchupLabel", types[key]));
-	wrapper.append(buildWrapper("div", "typeMatchupMultiplier x" + (matchup * 100), "*" + matchup));
+	wrapper.append(buildWrapper("div", "typeMatchupMultiplier x" + (matchup * 100), matchup + "x"));
 	
 	return wrapper;
 }

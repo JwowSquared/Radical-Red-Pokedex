@@ -1,60 +1,35 @@
 function setupTables() {
-	setupTable("speciesLearnsetPrevoExclusiveTable", moves, displayLevelUpMovesRow, Object.keys(moves).length, sortLevelUpMovesRow, [
-		["Lvl", ["level"]],
-		["Name", ["name"]],
-		["Type", ["type"]],
-		["Category", ["split"]],
-		["Power", ["power"]],
-		["Acc", ["accuracy"]],
-		["Description",[]]
-	]);
+	for (const name of [
+		"speciesLearnsetPrevoExclusiveTable",
+		"speciesLearnsetLevelUpTable"
+	]) {
+		setupTable(name, moves, displayLevelUpMovesRow, Object.keys(moves).length, sortLevelUpMovesRow, [
+			["Lvl", ["level"]],
+			["Name", ["name"]],
+			["Type", ["type"]],
+			["Category", ["split"]],
+			["Power", ["power"]],
+			["Acc", ["accuracy"]],
+			["Description",[]]
+		]);
+	}
 	
-	setupTable("speciesLearnsetLevelUpTable", moves, displayLevelUpMovesRow, Object.keys(moves).length, sortLevelUpMovesRow, [
-		["Lvl", ["level"]],
-		["Name", ["name"]],
-		["Type", ["type"]],
-		["Category", ["split"]],
-		["Power", ["power"]],
-		["Acc", ["accuracy"]],
-		["Description",[]]
-	]);
-	
-	setupTable("speciesLearnsetTMHMTable", moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
-		["Name", ["name"]],
-		["Type", ["type"]],
-		["Category", ["split"]],
-		["Power", ["power"]],
-		["Acc", ["accuracy"]],
-		["Description",[]]
-	]);
-	
-	setupTable("speciesLearnsetTutorTable", moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
-		["Name", ["name"]],
-		["Type", ["type"]],
-		["Category", ["split"]],
-		["Power", ["power"]],
-		["Acc", ["accuracy"]],
-		["Description",[]]
-	]);
-	
-	setupTable("speciesLearnsetEggMovesTable", moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
-		["Name", ["name"]],
-		["Type", ["type"]],
-		["Category", ["split"]],
-		["Power", ["power"]],
-		["Acc", ["accuracy"]],
-		["Description",[]]
-	]);
-	
-	setupTable("speciesLearnsetEventTable", moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
-		["Name", ["name"]],
-		["Type", ["type"]],
-		["Category", ["split"]],
-		["Power", ["power"]],
-		["Acc", ["accuracy"]],
-		["Description",[]]
-	]);
-	
+	for (const name of [
+		"speciesLearnsetTMHMTable",
+		"speciesLearnsetTutorTable",
+		"speciesLearnsetEggMovesTable",
+		"speciesLearnsetEventTable"
+	]) {
+		setupTable(name, moves, displayMovesRow, Object.keys(moves).length, sortMovesRow, [
+			["Name", ["name"]],
+			["Type", ["type"]],
+			["Category", ["split"]],
+			["Power", ["power"]],
+			["Acc", ["accuracy"]],
+			["Description",[]]
+		]);
+	}
+
 	setupTable("speciesTable", species, displaySpeciesRow, 50, sortSpeciesRow, [
 		["#", ["dexID"]],
 		["Sprite", []],

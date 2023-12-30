@@ -442,84 +442,82 @@ tbody {
 	font-style: italic;
 }
 
-img.moveSplit{
+.moveSplit {
 	height: 28px;
+}
+
+#speciesModal .sortOption {
+	width: 25%;
+}
+
+#speciesLearnsetPrevoExclusiveTable th:nth-of-type(2),
+#speciesLearnsetLevelUpTable th:nth-of-type(2)
+{
+	width: 75%;
+	text-indent: 25%;
+	text-align: left;
+}
+
+#speciesLearnsetTMHMTable th:nth-of-type(1), 
+#speciesLearnsetTutorTable th:nth-of-type(1), 
+#speciesLearnsetEggMovesTable th:nth-of-type(1)
+{
+	width: 100%;
+}
+
+.movesRow {
+	display: flex;
+	height: fit-content;
+	height: -moz-max-content;
+	position: relative;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.moveLevelWrapper {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.movesRow td {
+	width: 25%;
+}
+
+td.moveNameWrapper {
+	text-align: center;
+	width: 100%;
+}
+
+td.moveTypeWrapper {
+	width: 25%;
+}
+
+td.moveDescriptionWrapper {
+	width: 100%;
+}
+
+.modal tbody {
+	scroll-margin-top: 67px;
+}
+
+.modal .sortLocked {
+	display: none;
+}
+
+.modal .table td {
+	border: none;
+}
+
+.modal .sortControls {
+	display: flex;
+	flex-wrap: wrap;
 }
 
 @media (max-width: 991.98px) {
 	
-	#speciesModal .sortOption {
-		width: 25%;
-	}
-
-	
-	
-	#speciesLearnsetPrevoExclusiveTable th:nth-of-type(2),
-	#speciesLearnsetLevelUpTable th:nth-of-type(2)
-	{
-		width: 75%;
-		text-indent: 25%;
-		text-align: left;
-	}
-
-	#speciesLearnsetTMHMTable th:nth-of-type(1), 
-	#speciesLearnsetTutorTable th:nth-of-type(1), 
-	#speciesLearnsetEggMovesTable th:nth-of-type(1)
-	{
-		width: 100%;
-	}
-	
-	.movesRow {
-		display: flex;
-		height: fit-content;
-		height: -moz-max-content;
-		position: relative;
-		align-items: center;
-		flex-wrap: wrap;
-		justify-content: center;
-	}
-	
-	.moveLevelWrapper {
-		position: absolute;
-		left: 0;
-		top: 0;
-	}
-	
-	.movesRow td {
-		width: 25%;
-	}
-	
-	td.moveNameWrapper {
-		text-align: center;
-		width: 100%;
-	}
-
-	td.moveTypeWrapper {
-		width: 25%;
-	}
-
-	.moveSplit{
-		height: 28px;
-	}
-
-	td.moveDescriptionWrapper{
-		width: 100%;
-	}
-
-	
-	tbody {
-		scroll-margin-top: 67px;
-	}
-	
-	.sortLocked {
-		display: none;
-	}
-	
-	.table td {
-		border: none;
-	}
-	
-	.sortControls {
+	#speciesTable .sortControls {
 		display: flex;
 		flex-wrap: wrap;
 	}
