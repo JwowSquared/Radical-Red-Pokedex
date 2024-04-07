@@ -72,7 +72,7 @@ let evolutions = {
 	//evo_hold_item_day
 	26: "`on Level Up with the move ${moves[evo[1]].name}`",
 	27: "`on Level Up with ${species[evo[1]].name} in Party`",
-	28: "`at Level ${evo[1]} ${evo[3] === 1041 ? (Day) : evo[3] === 5144 ? '(Night)' : '(Dusk)'}`",
+	28: "`at Level ${evo[1]} ${evo[3] === 1041 ? '(Day)' : evo[3] === 5144 ? '(Night)' : '(Dusk)'}`",
 	
 	//UNKNOWN
     30: "`at Level ${evo[1]} with Adamant, Brave, Docile, Hardy, Hasty, Impish, Jolly, Lax, Naive, Naughty, Rash, Quirky, or Sassy Nature`",
