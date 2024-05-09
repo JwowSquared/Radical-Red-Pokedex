@@ -21,12 +21,15 @@ function setupFilters() {
 	
 	buildFilter('Move', 4, Object.values(moves),
 		o => o.name,
-		(x,o) => getFullLearnset(x).find(y => y == o.ID)
+		(x,o) => getFullLearnset(x)
+			.find(m => m.ID == o.ID)
 	);
 	
 	buildFilter('Ability', 3, Object.values(abilities),
 		o => o.names[0], //make alternate names filterable eventually
-		(x,o) => x.abilities.find(y => y[0] == o.ID)
+		(x,o) => x.abilities
+			.map(y => getMappedAbility(y, x.ID))	
+			.find(y => y[0] == o.ID)
 	);
 	
 	//default filter category
@@ -166,9 +169,9 @@ function buildFilter(label, max, options, display, filter) {
 //		let found = false;
 //		for (const key in learnset) {
 //			if (key === 'levelup' || key === 'prevo')
-//				found = learnset.levelup.find(y => moves[y[0]].type === option[0] && moves[y[0]].power > 0);
+//				found = learnset.levelup.find(y => getMove(y[0)].type === option[0] && getMove(y[0)].power > 0);
 //			else
-//				found = learnset[key].find(y => moves[y].type === option[0] && moves[y].power > 0);
+//				found = learnset[key].find(y => getMove(y).type === option[0] && getMove(y).power > 0);
 //			if (found)
 //				return true;
 //		}
@@ -177,7 +180,7 @@ function buildFilter(label, max, options, display, filter) {
 //	
 //	let toggles = filters['Toggle'].toggles;
 //	if (toggles.LEVELUP)
-//		func = x => species[x].learnset.levelup.find(y => moves[y[0]].type === option[0]) || species[x].learnset.prevo.find(y => moves[y[0]].type === option[0]);
+//		func = x => species[x].learnset.levelup.find(y => getMove(y[0)].type === option[0]) || species[x].learnset.prevo.find(y => getMove(y[0)].type === option[0]);
 //	
 //	addFilter(filter, option, func);
 //}
@@ -326,4 +329,11 @@ function removeFilter(filter, active) {
 	}
 	
 	populateTable('speciesTable', results);
+}
+
+function removeFilters() {
+	Object.values(filters).forEach(filter => {
+		filter.active.forEach(active => active.button.remove());
+		filter.active = [];
+	});
 }

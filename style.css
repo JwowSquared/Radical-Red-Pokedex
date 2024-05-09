@@ -268,14 +268,18 @@ li:hover {
 	font-size: 1.2rem;
 }
 
+#headingWrapper {
+	padding-top: 30px;
+}
+
 #speciesControl {
-	padding: 30px 30px 15px 30px;
+	padding: 0px 30px 15px 30px;
     display: flex;
     margin: auto;
     justify-content: center;
 }
 
-#speciesFilterInput, #speciesFilterCategory, #speciesFilterSeparator, #showHelpButton {
+#speciesFilterInput, #speciesFilterCategory, #speciesFilterSeparator, #showHelpButton, #saveFileInputButton, #clearCurrentSave {
 	display: block;
     padding: 0.2rem;
     border-radius: 3px;
@@ -316,12 +320,19 @@ li:hover {
     margin-right: 2px;
 }
 
-#activeFilters {
+#saveFileInput {
+	display: none;
+}
+
+#activeFilters, #currentSave {
 	display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+#activeFilters {
     padding-bottom: 12px;
 }
 
@@ -335,6 +346,38 @@ li:hover {
     font-weight: 550;
     cursor: pointer;
     user-select: none;
+}
+
+#saveWrapper {
+	margin: 0 auto;
+	padding-bottom: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#currentSave {
+	color: white;
+	color: rgba(255, 255, 255, 0.5);
+	gap: 0px 0.4rem;
+}
+
+#currentSave.hide, #saveFileInputButton.hide {
+	display: none;
+}
+
+#currentSaveName {
+	color: white;
+	font-weight: 500;
+}
+
+#saveFileInputButton, #clearCurrentSave {
+	padding: 0.2rem 0.6rem;
+	flex-grow: 0;
+}
+
+#saveFileInputButton {
+	margin-left: 16px;
 }
 
 .tableWrapper {
@@ -377,7 +420,7 @@ tbody {
 	cursor: auto;
 }
 
-.active, .sortOption:hover, #speciesFilterInput:hover, #speciesFilterCategory:hover, #speciesFilterInput:focus, #showHelpButton:hover, .activeFilter:hover {
+.active, .sortOption:hover, #speciesFilterInput:hover, #speciesFilterCategory:hover, #speciesFilterInput:focus, #showHelpButton:hover, #saveFileInputButton:hover, #clearCurrentSave:hover, .activeFilter:hover {
 	background: rgba(255, 255, 255, 0.075);
 }
 
@@ -586,5 +629,20 @@ td.moveDescriptionWrapper {
 	}
 	.infoTreeArrow {
 		font-size: 10px;
+	}
+}
+
+@media (max-width: 768px) {
+	#saveWrapper {
+		max-width: 399px;
+	}
+
+	#currentSaveDash {
+		display: none;
+	}
+
+	#clearCurrentSave {
+		margin-top: 8px;
+		padding: 0.2rem 4rem;
 	}
 }
