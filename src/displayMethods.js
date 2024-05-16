@@ -3,30 +3,33 @@ function displayHelp() {
 }
 
 function displaySpeciesRow(tracker, mon) {
-	let currentRow = document.createElement('tr');
-	currentRow.className = 'speciesRow';
-	currentRow.onclick = function() {
-		displaySpeciesPanel(mon);
-	};
-	tracker.body.appendChild(currentRow);
-	
-	buildBackgroundColor(currentRow, mon);
-	
-	currentRow.append(
-		buildWrapper('td', 'speciesDexIDWrapper', mon.dexID),
-		buildWrapperSprite('td', 'speciesSprite', getSprite(mon.ID)),
-		buildWrapper('td', 'speciesNameWrapper', mon.key),
-		buildWrapperTypes('td', 'speciesTypes', types[mon.type[0]], types[mon.type[1]]),
-		buildWrapperAbilities('td', 'speciesAbilities', mon.abilities),
-		buildWrapperStat('td', 'speciesStat', 'HP', mon.stats[0]),
-		buildWrapperStat('td', 'speciesStat', 'Atk', mon.stats[1]),
-		buildWrapperStat('td', 'speciesStat', 'Def', mon.stats[2]),
-		buildWrapperStat('td', 'speciesStat', 'SpA', mon.stats[4]),
-		buildWrapperStat('td', 'speciesStat', 'SpD', mon.stats[5]),
-		buildWrapperStat('td', 'speciesStat', 'Spe', mon.stats[3]),
-		buildWrapperStat('td', 'speciesStat', 'BST', mon.stats.reduce((total, y) => total += y, 0))
-	);
+    let currentRow = document.createElement('tr');
+    currentRow.className = 'speciesRow';
+    currentRow.onclick = function() {
+        displaySpeciesPanel(mon);
+    };
+    tracker.body.appendChild(currentRow);
+    
+    buildBackgroundColor(currentRow, mon);
+    
+    // Appending each data cell to the row
+    currentRow.append(
+        buildWrapper('td', 'speciesDexIDWrapper', mon.dexID),
+        buildWrapperSprite('td', 'speciesSprite', getSprite(mon.ID)),
+        buildWrapper('td', 'speciesNameWrapper', mon.key),
+        buildWrapperTypes('td', 'speciesTypes', types[mon.type[0]], types[mon.type[1]]),
+        buildWrapperAbilities('td', 'speciesAbilities', mon.abilities),
+        buildWrapperStat('td', 'speciesStat', 'HP', mon.stats[0]),
+        buildWrapperStat('td', 'speciesStat', 'Atk', mon.stats[1]),
+        buildWrapperStat('td', 'speciesStat', 'Def', mon.stats[2]),
+        buildWrapperStat('td', 'speciesStat', 'SpA', mon.stats[4]),
+        buildWrapperStat('td', 'speciesStat', 'SpD', mon.stats[5]),
+        buildWrapperStat('td', 'speciesStat', 'Spe', mon.stats[3]),
+        buildWrapperStat('td', 'speciesStat', 'BST', mon.stats.reduce((total, y) => total += y, 0)),
+        buildWrapper('td', 'speciesAreaWrapper', getAreaName(mon.ID))  // Displaying the area data
+    );
 }
+
 
 function displayLevelUpMovesRow(tracker, movePair) {
 	let [move, level] = movePair;
@@ -62,14 +65,14 @@ function displayMovesRow(tracker, move) {
 
 function displaySpeciesPanel(mon) {
 	let infoDisplay = document.getElementById('speciesPanelInfoDisplay');
-	let tables = [
-		['speciesLearnsetPrevoExclusiveTable', mon.prevoMoves?.map(x => moves[x])],
-		['speciesLearnsetLevelUpTable', mon.levelupMoves?.map(x => [moves[x[0]], x[1]])],
-		['speciesLearnsetTMHMTable', mon.tmMoves?.map(x => moves[tmMoves[x]]).filter(x => x !== undefined)],
-		['speciesLearnsetTutorTable', mon.tutorMoves?.map(x => moves[tutorMoves[x]]).filter(x => x !== undefined)],
-		['speciesLearnsetEggMovesTable', mon.eggMoves?.map(x => moves[x])],
-		['speciesLearnsetEventTable', mon.eventMoves?.map(x => moves[x])],
-	]
+    let tables = [
+        ['speciesLearnsetPrevoExclusiveTable', mon.prevoMoves?.map(x => moves[x])],
+        ['speciesLearnsetLevelUpTable', mon.levelupMoves?.map(x => [moves[x[0]], x[1]])],
+        ['speciesLearnsetTMHMTable', mon.tmMoves?.map(x => moves[tmMoves[x]]).filter(x => x !== undefined)],
+        ['speciesLearnsetTutorTable', mon.tutorMoves?.map(x => moves[tutorMoves[x]]).filter(x => x !== undefined)],
+        ['speciesLearnsetEggMovesTable', mon.eggMoves?.map(x => moves[x])],
+        ['speciesLearnsetEventTable', mon.eventMoves?.map(x => moves[x])]
+    ];
 	
 	infoDisplay.innerText = '';
 	
