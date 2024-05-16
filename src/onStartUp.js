@@ -39,13 +39,13 @@ async function fetchData() {
 }
 
 async function onStartup() {
-	
-	await fetchData();
-	
-	setupTables();
-	
-	setupFilters();
-	
+    await fetchData();  // Ensure data is fetched
+    buildSpeciesToAreasMap();  // Build the species to areas map
+    setupTables();      // Set up all tables
+    setupFilters();     // Set up filtering mechanisms
+
+    // Populate the species table with all species data after everything is set up
+    populateTable('speciesTable', Object.values(species));
 	if(Array.prototype.equals)
 			console.warn("Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code.");
 	// attach the .equals method to Array's prototype to call it on any array

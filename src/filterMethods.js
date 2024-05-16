@@ -7,77 +7,106 @@ let categoryWrapper = document.getElementById('speciesFilterCategoryWrapper');
 let selectedFilter = null;
 
 function setupFilters() {
+    buildFilter('ID', 0,
+        Object.values(species),
+        o => o.dexID.toString(), // Ensure it returns a string representation of the ID
+        (x, o) => x.dexID == o.dexID
+    );
 
-	buildFilter('Name', 1,
-		Object.values(species),
-		o => o.key,
-		(x,o) => x.key == o.key
-	);
-	
-	buildFilter('Type', 2, Object.values(types),
-		o => o.name,
-		(x,o) => x.type.find(y => y == o.ID) !== undefined
-	);
-	
-	buildFilter('Move', 4, Object.values(moves),
-		o => o.name,
-		(x,o) => getFullLearnset(x).find(y => y == o.ID)
-	);
-	
-	buildFilter('Ability', 3, Object.values(abilities),
-		o => o.names[0], //make alternate names filterable eventually
-		(x,o) => x.abilities.find(y => y[0] == o.ID)
-	);
-	
-	//default filter category
-	selectFilterCategory.value = 'Name';
-	categoryDropdown.className = 'hide';
-	
-	for (const filter of Object.values(filters)) {
-		let option = document.createElement('li');
-		option.innerText = filter.label;
-		option.addEventListener('mousedown', function() {
-			selectFilterCategory.value = filter.label;
-			selectedFilter = filter;
-			speciesInput.value = '';
-			selectFilterCategory.className = '';
-			categoryDropdown.className = 'hide';
-		});
-		categoryDropdown.append(option);
-	}
-	selectFilterCategory.addEventListener('mousedown', function(event) {
-		event.preventDefault();
-		selectFilterCategory.className = 'highlight';
-		categoryDropdown.className = '';
-	});
-	document.addEventListener('mousedown', function(event) {
-		if (!selectFilterCategory.contains(event.target)) {
-			selectFilterCategory.className = '';
-			categoryDropdown.className = 'hide';
-		}
-	});
-	
-	//also default here for some reason?
-	selectedFilter = filters['Name'];
+    buildFilter('Name', 1,
+        Object.values(species),
+        o => o.key,
+        (x, o) => x.key == o.key
+    );
+    
+    buildFilter('Type', 2, Object.values(types),
+        o => o.name,
+        (x, o) => x.type.find(y => y == o.ID) !== undefined
+    );
+    
+    buildFilter('Move', 4, Object.values(moves),
+        o => o.name,
+        (x, o) => getFullLearnset(x).find(y => y == o.ID)
+    );
+    
+    buildFilter('Ability', 3, Object.values(abilities),
+        o => o.names[0], //make alternate names filterable eventually
+        (x, o) => x.abilities.find(y => y[0] == o.ID)
+    );
 
-	speciesInput.addEventListener('keyup', function(event) {
-		event.preventDefault();
-		if (event.key !== 'Enter')
-			return;
-		let input = speciesInput.value.trim().toLowerCase();
-		let option = selectedFilter.options.find(x => selectedFilter.display(x).toLowerCase() === input);
-		if (option) {
-			addFilter(selectedFilter, option);
-			speciesInput.value = '';
-		}
-	});
-	speciesInput.addEventListener('keyup', buildDropdown);
-	speciesInput.addEventListener('mousedown', buildDropdown);
-	speciesInput.addEventListener('blur', function(event) {
-		event.preventDefault();
-		inputDropdown.innerHTML = '';
-	});
+    buildFilter('Area', 5, getAllAreas(),
+        o => o,
+        (x, o) => getAreaName(x.ID).includes(o)
+    );
+    
+    selectFilterCategory.value = 'ID';
+    categoryDropdown.className = 'hide';
+    
+    for (const filter of Object.values(filters)) {
+        let option = document.createElement('li');
+        option.innerText = filter.label;
+        option.addEventListener('mousedown', function() {
+            selectFilterCategory.value = filter.label;
+            selectedFilter = filter;
+            speciesInput.value = '';
+            selectFilterCategory.className = '';
+            categoryDropdown.className = 'hide';
+        });
+        categoryDropdown.append(option);
+    }
+    selectFilterCategory.addEventListener('mousedown', function(event) {
+        event.preventDefault();
+        selectFilterCategory.className = 'highlight';
+        categoryDropdown.className = '';
+    });
+    document.addEventListener('mousedown', function(event) {
+        if (!selectFilterCategory.contains(event.target)) {
+            selectFilterCategory.className = '';
+            categoryDropdown.className = 'hide';
+        }
+    });
+
+    selectedFilter = filters['ID'];
+
+    speciesInput.addEventListener('keyup', function(event) {
+        event.preventDefault();
+        if (event.key !== 'Enter')
+            return;
+        let input = speciesInput.value.trim().toLowerCase();
+        let option = selectedFilter.options.find(x => selectedFilter.display(x).toLowerCase() === input);
+        if (option) {
+            addFilter(selectedFilter, option);
+            speciesInput.value = '';
+        }
+    });
+    speciesInput.addEventListener('keyup', buildDropdown);
+    speciesInput.addEventListener('mousedown', buildDropdown);
+    speciesInput.addEventListener('blur', function(event) {
+        event.preventDefault();
+        inputDropdown.innerHTML = '';
+    });
 }
+
+
+
+
+function getAllAreas() {
+    let areaSet = new Set();
+
+    Object.values(areas).forEach(area => {
+        Object.keys(area).forEach(key => {
+            if (key.startsWith('wild-') || key.startsWith('raid') || key === 'fixed-gift' || key === 'fixed-roaming') {
+                let method = key.startsWith('raid') ? key : key.split('-')[1] || key.split('-')[0];
+                method = formatMethod(method);
+                areaSet.add(`${area.name} (${method})`);
+            }
+        });
+    });
+
+    return Array.from(areaSet);
+}
+
+
 
 function buildDropdown(event) {
 	let input = speciesInput.value.trim().toLowerCase();
@@ -94,16 +123,17 @@ function buildDropdown(event) {
 	}
 }
 
-function buildFilter(label, max, options, display, filter) {
-	filters[label] = {
-		label: label,
-		max: max,
-		options: options,
-		display: display,
-		filter: filter,
-		active: []
-	};
+function buildFilter(label, order, options, display, match) {
+    filters[label] = {
+        label: label,
+        order: order,
+        options: options,
+        display: display,
+        match: match
+    };
+    filtersArray = Object.values(filters).sort((a, b) => a.order - b.order);
 }
+
 
 //function filterName(option) {
 //	let func = x => x === option[0];
@@ -197,38 +227,38 @@ function buildFilter(label, max, options, display, filter) {
 //	addFilter(filters['Held Item'], option, func);
 //}
 //
-//function filterLevelCap(option) {
-//	let filter = filters['Level Cap'];
-//
-//	if (option === 'RECALC') {
-//		let activeFilters = [...filter.active];
-//		for (const activeFilter of activeFilters)
-//			filterLevelCap(activeFilter);
-//		return;
-//	}
-//
-//	let toggles = filters['Toggle'].toggles;
-//	
-//	let difficulty = 'normal';
-//	if (toggles.HARDCORE)
-//		difficulty = 'hardcore';
-//
-//	if (toggles.ONLYNEW)
-//		func = x => species[x].cap[difficulty] == option[0];
-//	else
-//		func = x => species[x].cap[difficulty] <= option[0];
-//
-//	if (toggles.EVOLVED)
-//		filters.active.EVOLVED.func = x => !('evolutions' in species[x].family) || !(species[x].family.evolutions.find(y => species[y[2]].cap[difficulty] <= option[0]));
-//
-//	addFilter(filter, option, func);
-//	filters.active[option[0]].tag.onclick = function() {
-//		if (toggles.EVOLVED)
-//			filters.active.EVOLVED.func = x => !species[x].family.evolutions;
-//		removeFilter(filter, option);
-//	};
-//}
-//
+function filterLevelCap(option) {
+	let filter = filters['Level Cap'];
+
+	if (option === 'RECALC') {
+		let activeFilters = [...filter.active];
+		for (const activeFilter of activeFilters)
+			filterLevelCap(activeFilter);
+		return;
+	}
+
+	let toggles = filters['Toggle'].toggles;
+	
+	let difficulty = 'normal';
+	if (toggles.HARDCORE)
+		difficulty = 'hardcore';
+
+	if (toggles.ONLYNEW)
+		func = x => species[x].cap[difficulty] == option[0];
+	else
+		func = x => species[x].cap[difficulty] <= option[0];
+
+	if (toggles.EVOLVED)
+		filters.active.EVOLVED.func = x => !('evolutions' in species[x].family) || !(species[x].family.evolutions.find(y => species[y[2]].cap[difficulty] <= option[0]));
+
+	addFilter(filter, option, func);
+	filters.active[option[0]].tag.onclick = function() {
+		if (toggles.EVOLVED)
+			filters.active.EVOLVED.func = x => !species[x].family.evolutions;
+		removeFilter(filter, option);
+	};
+}
+
 //function filterToggle(option) {
 //	let filter = filters['Toggle'];
 //	let toggles = filter.toggles;
@@ -273,57 +303,53 @@ function buildFilter(label, max, options, display, filter) {
 //}
 
 function addFilter(filter, option) {
-
-	let active = {
-		option: filter.display(option),
-		func: x => filter.filter(x,option)
-	}
-
-	if ((found = filter.active.find(x => x.option == active.option))) {
-		if (found.func == active.func) {
-			console.log(found, 'active filter already active (how did you manage this?)\n');
-			return;
-		}
-		removeFilter(filter, found);
-	}
-
-	filter.active.push(active);
-	
-	if (filter.active.length > filter.max) {
-		removeFilter(filter, filter.active[0]);
-	}
-
-	let activeFiltersDisplay = document.getElementById('activeFilters');
-	active.button = document.createElement('div');
-	active.button.textContent = `${filter.label}: ${active.option}`;
-	active.button.className = 'activeFilter';
-	active.button.onclick = function() {
-		removeFilter(filter, active);
-	};
-	activeFiltersDisplay.append(active.button);
-
-	let results = Object.values(species);
-	for (const a of Object.values(filters).reduce((list, x) => list.concat(x.active), [])) {
-		results = results.filter(a.func);
-	}
-	
-	populateTable('speciesTable', results);
-
-	if (results.length === 1) {//&& filter.name === 'Name') {
-		removeFilter(filter, active);
-		displaySpeciesPanel(results[0]);
-	}
+    if (!activeFilters[filter.label]) {
+        activeFilters[filter.label] = [];
+    }
+    if (!activeFilters[filter.label].includes(option)) {
+        activeFilters[filter.label].push(option);
+        displayActiveFilters();
+        applyFilters();
+    }
 }
 
-function removeFilter(filter, active) {
-	active.button.remove();
+function displayActiveFilters() {
+    let activeFilterContainer = document.getElementById('activeFilters');
+    activeFilterContainer.innerHTML = '';
 
-	filter.active.splice(filter.active.findIndex(x => x.option == active.option), 1);
+    for (const [filterLabel, options] of Object.entries(activeFilters)) {
+        options.forEach(option => {
+            let filterElement = document.createElement('div');
+            filterElement.className = 'activeFilter';
+            filterElement.innerText = `${filterLabel}: ${filters[filterLabel].display(option)}`;
+            filterElement.onclick = () => {
+                removeFilter(filterLabel, option);
+                applyFilters();
+            };
+            activeFilterContainer.append(filterElement);
+        });
+    }
+}
 
-	let results = Object.values(species);
-	for (const a of Object.values(filters).reduce((list, x) => list.concat(x.active), [])) {
-		results = results.filter(a.func);
-	}
-	
-	populateTable('speciesTable', results);
+function removeFilter(filterLabel, option) {
+    if (activeFilters[filterLabel]) {
+        activeFilters[filterLabel] = activeFilters[filterLabel].filter(item => item !== option);
+        if (activeFilters[filterLabel].length === 0) {
+            delete activeFilters[filterLabel];
+        }
+        displayActiveFilters(); // Update the display of active filters
+        applyFilters(); // Apply the filters again
+    }
+}
+
+
+function applyFilters() {
+    let filteredData = Object.values(species);
+
+    for (const [filterLabel, options] of Object.entries(activeFilters)) {
+        const filter = filters[filterLabel];
+        filteredData = filteredData.filter(item => options.some(option => filter.match(item, option)));
+    }
+
+    populateTable('speciesTable', filteredData);
 }
