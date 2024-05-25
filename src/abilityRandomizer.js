@@ -280,6 +280,9 @@ const CHARACTER_ENCODINGS = [
 ]
 
 function tryRandomizeAbility(trainedId, restricted, ability, species) {
+    if (ability === 0) {
+        return 0;
+    }
     trainedId = Math.max(1, trainedId);
     const abilitiesTable = restricted ? ABILITIES_RESTRICTED : ABILITIES_NORMAL;
     const abilitiesCount = abilitiesTable.length;
@@ -353,6 +356,15 @@ function findSector(file, id) {
 }
 
 function readDataFromSaveFile(file) {
+    for (let sectorId = 0; sectorId < 14; sectorId++) {
+        if (findSector(file, sectorId) == -1) {
+            return {
+                valid: false,
+                data: null,
+            }
+        }
+    }
+
     const trainerInfo = findSector(file, 0x0);
     const trainedId = file.getUint32(trainerInfo + TRAINED_ID_OFFSET, true);
     let name = "";
@@ -378,15 +390,18 @@ function readDataFromSaveFile(file) {
     const restricted = (restrictedBitFlag & 0x40) > 0;
 
     return {
-        name,
-        trainedId,
-        restricted,
-        hardmode,
-        random: {
-            abilities,
-            learnset,
-            normalSpecies,
-            scaledSpecies,
+        valid: true,
+        data: {
+            name,
+            trainedId,
+            restricted,
+            hardmode,
+            random: {
+                abilities,
+                learnset,
+                normalSpecies,
+                scaledSpecies,
+            }
         }
     }
 }
@@ -445,7 +460,12 @@ document.getElementById("saveFileInput").addEventListener("change", function() {
         saveFileInput.value = null;
         file.arrayBuffer().then(buffer => {
             const view = new DataView(buffer);
-            processSaveData(readDataFromSaveFile(view));
+            const {valid, data} = readDataFromSaveFile(view);
+            if(!valid) {
+                alert("Unable to read save data. Please ensure you've selected a save and not a save state (Most likely a .sav file)");
+                return;
+            }
+            processSaveData(data);
         })
     }
 });

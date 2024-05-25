@@ -22,7 +22,7 @@ function setupFilters() {
 	buildFilter('Move', 4, Object.values(moves),
 		o => o.name,
 		(x,o) => getFullLearnset(x)
-			.find(m => m.ID == o.ID)
+			.find(m => m == o.ID)
 	);
 	
 	buildFilter('Ability', 3, Object.values(abilities),
