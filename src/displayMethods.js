@@ -17,7 +17,7 @@ function displaySpeciesRow(tracker, mon) {
 		buildWrapperSprite('td', 'speciesSprite', getSprite(mon.ID)),
 		buildWrapper('td', 'speciesNameWrapper', mon.key),
 		buildWrapperTypes('td', 'speciesTypes', types[mon.type[0]], types[mon.type[1]]),
-		buildWrapperAbilities('td', 'speciesAbilities', mon.abilities),
+		buildWrapperAbilities('td', 'speciesAbilities', mon.abilities, mon.ID),
 		buildWrapperStat('td', 'speciesStat', 'HP', mon.stats[0]),
 		buildWrapperStat('td', 'speciesStat', 'Atk', mon.stats[1]),
 		buildWrapperStat('td', 'speciesStat', 'Def', mon.stats[2]),
@@ -63,12 +63,12 @@ function displayMovesRow(tracker, move) {
 function displaySpeciesPanel(mon) {
 	let infoDisplay = document.getElementById('speciesPanelInfoDisplay');
 	let tables = [
-		['speciesLearnsetPrevoExclusiveTable', mon.prevoMoves?.map(x => moves[x])],
-		['speciesLearnsetLevelUpTable', mon.levelupMoves?.map(x => [moves[x[0]], x[1]])],
-		['speciesLearnsetTMHMTable', mon.tmMoves?.map(x => moves[tmMoves[x]]).filter(x => x !== undefined)],
-		['speciesLearnsetTutorTable', mon.tutorMoves?.map(x => moves[tutorMoves[x]]).filter(x => x !== undefined)],
-		['speciesLearnsetEggMovesTable', mon.eggMoves?.map(x => moves[x])],
-		['speciesLearnsetEventTable', mon.eventMoves?.map(x => moves[x])],
+		['speciesLearnsetPrevoExclusiveTable', mon.prevoMoves?.map(x => getMove(x, mon.ID))],
+		['speciesLearnsetLevelUpTable', mon.levelupMoves?.map(x => [getMove(x[0], mon.ID), x[1]])],
+		['speciesLearnsetTMHMTable', mon.tmMoves?.map(x => getMove(tmMoves[x], mon.ID, true)).filter(x => x !== undefined)],
+		['speciesLearnsetTutorTable', mon.tutorMoves?.map(x => getMove(tutorMoves[x], mon.ID, true)).filter(x => x !== undefined)],
+		['speciesLearnsetEggMovesTable', mon.eggMoves?.map(x => getMove(x, mon.ID, true))],
+		['speciesLearnsetEventTable', mon.eventMoves?.map(x => getMove(x, mon.ID, true))],
 	]
 	
 	infoDisplay.innerText = '';
@@ -78,7 +78,7 @@ function displaySpeciesPanel(mon) {
 		buildWrapper('div', 'infoNameName', mon.key),
 		buildWrapper('div', 'infoDexIDWrapper',  '#' + mon.dexID),
 		buildWrapperTypes('div', 'infoTypes', types[mon.type[0]], types[mon.type[1]]),
-		buildWrapperAbilitiesFull('div', 'infoAbilities', mon.abilities)
+		buildWrapperAbilitiesFull('div', 'infoAbilities', mon.abilities, mon.ID)
 	);
 	
 	let statWrapper = buildWrapper('div', 'infoStats');
@@ -166,33 +166,40 @@ function buildWrapperTypes(tag, className, primary, secondary=null) {
 	return wrapper;
 }
 
-function buildWrapperAbilities(tag, className, a) {
+function buildWrapperAbilities(tag, className, a, species) {
 	let wrapper = buildWrapper(tag, className + 'Wrapper');
 	
-	if ((name = getAbilityName(a[1])))
+	if ((name = getAbilityName(a[1], species)))
 		wrapper.append(buildWrapper('div', className + 'Primary', name));
 	
-	if ((name = getAbilityName(a[2])))
+	if ((name = getAbilityName(a[2], species)))
 		wrapper.append(buildWrapper('div', className + 'Secondary', name));
 	
-	if ((name = getAbilityName(a[0])))
+	if ((name = getAbilityName(a[0], species)))
 		wrapper.append(buildWrapper('div', className + 'Hidden', name));
 	
 	return wrapper;
 }
 
-function buildWrapperAbilitiesFull(tag, className, a) {
+function buildWrapperAbilitiesFull(tag, className, a, species) {
 	let wrapper = buildWrapper(tag, className + 'Wrapper');
 	
-	if ((name = getAbilityName(a[1])))
-		wrapper.append(buildWrapper('div', className + 'Primary', name + ' - ' + abilities[a[1][0]].description));
-	
-	if ((name = getAbilityName(a[2])))
-		wrapper.append(buildWrapper('div', className + 'Secondary', name + ' - ' + abilities[a[2][0]].description));
-	
-	if ((name = getAbilityName(a[0])))
-		wrapper.append(buildWrapper('div', className + 'Hidden', name + ' - ' + abilities[a[0][0]].description));
-	
+	let ability;
+	if ((name = getAbilityName(a[1], species))) {
+		ability = getMappedAbility(a[1], species);
+		wrapper.append(buildWrapper('div', className + 'Primary', name + ' - ' + abilities[ability[0]].description));
+	}
+
+	if ((name = getAbilityName(a[2], species))) {
+		ability = getMappedAbility(a[2], species);
+		wrapper.append(buildWrapper('div', className + 'Secondary', name + ' - ' + abilities[ability[0]].description));
+	}
+
+	if ((name = getAbilityName(a[0], species))) {
+		ability = getMappedAbility(a[0], species);
+		wrapper.append(buildWrapper('div', className + 'Hidden', name + ' - ' + abilities[ability[0]].description));
+	}
+
 	return wrapper;
 }
 
@@ -257,8 +264,8 @@ function buildWrapperChangelog(tag, className, mon) {
 			if (newAbility.equals(oldAbility))
 				continue;
 			if (typeof oldAbility !== 'string')
-				oldAbility = getAbilityName(oldAbility);
-			newAbility = getAbilityName(newAbility);
+				oldAbility = getAbilityName(oldAbility, mon.ID, true);
+			newAbility = getAbilityName(newAbility, mon.ID, true);
 		
 			if (oldAbility && newAbility)
 				abilityWrapper.append(buildWrapper('div', 'infoChangelogAbility' + ability, oldAbility + ' → ' + newAbility));

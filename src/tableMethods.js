@@ -11,6 +11,7 @@ function cmpAll(cmps) {
 		return 0;
 	}
 }
+
 function setupTables() {
 	for (const name of [
 		//'speciesLearnsetPrevoExclusiveTable',
@@ -55,7 +56,7 @@ function setupTables() {
 			'Sprite': null,
 			'Name': cmp(x => x.name),
 			'Type': null,
-			'Abilities': cmp(x => getAbilityName(x.abilities[1])),
+			'Abilities': cmp(x => getAbilityName(x.abilities[1], x.ID)),
 			'HP': cmp(x => x.stats[0], -1),
 			'Atk': cmp(x => x.stats[1], -1),
 			'Def': cmp(x => x.stats[2], -1),

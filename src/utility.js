@@ -1,14 +1,19 @@
-function getAbilityName(ability) {
+function getAbilityName(ability, species, raw = false) {
 	if (ability[0] === 0)
 		return undefined;
 
-	return (abilities[ability[0]].names[ability[1]]);
+	const mappedAbility = raw ? ability : getMappedAbility(ability, species);
+	return (abilities[mappedAbility[0]].names[mappedAbility[1]]);
+}
+
+function getMove(moveIdx, species, raw = false) {
+	return moves[raw ? moveIdx : getMappedMove(moveIdx, species)];
 }
 
 function getFullLearnset(mon) {
 	let learnset = [];
 	if (mon.levelupMoves)
-		learnset.push(...mon.levelupMoves.map(x => x[0]));
+		learnset.push(...mon.levelupMoves.map(x => getMove(x[0]).ID));
 	if (mon.tmMoves)
 		learnset.push(...mon.tmMoves.map(x => tmMoves[x]));
 	if (mon.tutorMoves)

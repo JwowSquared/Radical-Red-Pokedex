@@ -1,118 +1,135 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="style.css">
 	<link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/JwowSquared/Radical-Red-Pokedex/master/favicon.ico">
-    <title>RR Dex</title>
-  </head>
-  <body>
+	<title>RR Dex</title>
+</head>
+<body>
 	<div id="loadingScreen">
-	  <p>Loading Radical Red Pokedex...</p>
+		<p>Loading Radical Red Pokedex...</p>
 	</div>
-    <main class="hide">
-	  <div class="modal fade" id="speciesModal" tabindex="-1" role="dialog" aria-labelledby="Full Pokemon Info" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-body">
-			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			    <span aria-hidden="true">&times;</span>
-              </button>
-              <div id="speciesPanelInfoDisplay"></div>
-	  	      <div id="speciesPanelLearnsets">
-	  	        <div id="speciesLearnsetPrevoExclusiveTable" class="tableWrapper">
-	  	    	  <div class="tableName">Moves Exclusive to Pre-Evolution</div>
-	  	        </div>
-	  	        <div id="speciesLearnsetLevelUpTable" class="tableWrapper">
-	  	    	  <div class="tableName">Moves Learned By Level Up</div>
-	  	        </div>
-	  	        <div id="speciesLearnsetTMHMTable" class="tableWrapper">
-	  	          <div class="tableName">Moves Learned By TM/HM</div>
-	  	        </div>
-	  	        <div id="speciesLearnsetTutorTable" class="tableWrapper">
-	  	          <div class="tableName">Moves Learned By Tutor</div>
-	  	        </div>
-	  	        <div id="speciesLearnsetEggMovesTable" class="tableWrapper">
-	  	          <div class="tableName">Moves Learned By Breeding</div>
-	  	        </div>
-				<div id="speciesLearnsetEventTable" class="tableWrapper">
-	  	          <div class="tableName">Moves Exclusive To Events</div>
-	  	        </div>
-	  	      </div>
-            </div>
-          </div>
-        </div>
-      </div>
-	  <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="Full Pokemon Info" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-body">
-			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			    <span aria-hidden="true">&times;</span>
-              </button>
-			  <div id="helpContent">
-			    <h1>Filters</h1>
-                <p><b>Name</b>: search for a species by name.</p>
-                <!--<p><b>Region</b>: Show all species from a certain region.</p>-->
-                <p><b>Type</b>: Show all species with a certain type.</p>
-                <p><b>Move</b>: Show all species who can learn a certain move.</p>
-                <!--<p><b>Move Type</b>: Show all species who can learn a move of a certain type.</p>-->
-                <p><b>Ability</b>: Show all species who can have a certain ability.</p>
-                <!--<p><b>Egg Group</b>: Show all species from a certain egg group.</p>
-                <p><b>Held Item</b>: Show all species who can be found in the wild holding a certain item.</p>
-                <p><b>Level Cap</b>: Show all species who are available before a certain major boss fight.</p>
-				<h1>Toggles</h1>
-				<p><b>Changed</b>: Show all species who have their type, ability, or stats changed in Radical Red.</p>
-				<p><b>Levelup</b>: Changes <b>Move</b> and <b>Move Type</b> filters to only look for Moves learned by level up.</p>
-				<p><b>Evolved</b>: Changes <b>Level Cap</b> filter to only show species who are at the maximum evolution possible before a certain level cap. If no <b>Level Cap</b> filter is selected, <b>Evolved</b> still works, showing all fully evolved species.</p>
-				<p><b>Hardcore</b>: Changes <b>Level Cap</b> filter to use the <b>Hardcore</b> level caps and item locations.</p>
-				<p><b>Only New</b>: Changes <b>Level Cap</b> filter to only show species who are newly available as of a certain level cap.</p>
-				<p><b>Regional</b>: Show all species that are regional variants.</p>
-				<p><b>Mega</b>: Show all species that are Mega evolutions.</p>-->
-				<p><i>more filters will be re-introduced with time</i></p>
-			  </div>
-            </div>
-          </div>
-        </div>
-      </div>
-	  <h1 style="color: white; margin: auto;text-align: center;width: 80%;">
-	      Data updated to v4.1, some features temporarily disabled
-	    </h1>
-	  <div id="speciesControl">
-	    <button id="showHelpButton" onclick="displayHelp()">?</button>
-	    <div id="speciesFilterCategoryWrapper">
-	      <input type="button" id="speciesFilterCategory"></input>
-		  <ul id="speciesFilterCategoryDropdown">
+	<main class="hide">
+		<div class="modal fade" id="speciesModal" tabindex="-1" role="dialog" aria-labelledby="Full Pokemon Info" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<div id="speciesPanelInfoDisplay"></div>
+						<div id="speciesPanelLearnsets">
+							<div id="speciesLearnsetPrevoExclusiveTable" class="tableWrapper">
+								<div class="tableName">Moves Exclusive to Pre-Evolution</div>
+							</div>
+							<div id="speciesLearnsetLevelUpTable" class="tableWrapper">
+								<div class="tableName">Moves Learned By Level Up</div>
+							</div>
+							<div id="speciesLearnsetTMHMTable" class="tableWrapper">
+								<div class="tableName">Moves Learned By TM/HM</div>
+							</div>
+							<div id="speciesLearnsetTutorTable" class="tableWrapper">
+								<div class="tableName">Moves Learned By Tutor</div>
+							</div>
+							<div id="speciesLearnsetEggMovesTable" class="tableWrapper">
+								<div class="tableName">Moves Learned By Breeding</div>
+							</div>
+							<div id="speciesLearnsetEventTable" class="tableWrapper">
+								<div class="tableName">Moves Exclusive To Events</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<label id="speciesFilterSeparator">:</label>
-		<div id="speciesFilterInputWrapper">
-		  <input type="text" autocomplete="off" id="speciesFilterInput">
-		  <ul id="speciesFilterInputDropdown">
-		  </ul>
+		<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="Full Pokemon Info" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<div id="helpContent">
+							<h1>Filters</h1>
+							<p><b>Name</b>: search for a species by name.</p>
+							<!--<p><b>Region</b>: Show all species from a certain region.</p>-->
+							<p><b>Type</b>: Show all species with a certain type.</p>
+							<p><b>Move</b>: Show all species who can learn a certain move.</p>
+							<!--<p><b>Move Type</b>: Show all species who can learn a move of a certain type.</p>-->
+							<p><b>Ability</b>: Show all species who can have a certain ability.</p>
+							<!--<p><b>Egg Group</b>: Show all species from a certain egg group.</p>
+							<p><b>Held Item</b>: Show all species who can be found in the wild holding a certain item.</p>
+							<p><b>Level Cap</b>: Show all species who are available before a certain major boss fight.</p>
+							<h1>Toggles</h1>
+							<p><b>Changed</b>: Show all species who have their type, ability, or stats changed in Radical Red.</p>
+							<p><b>Levelup</b>: Changes <b>Move</b> and <b>Move Type</b> filters to only look for Moves learned by level up.</p>
+							<p><b>Evolved</b>: Changes <b>Level Cap</b> filter to only show species who are at the maximum evolution possible before a certain level cap. If no <b>Level Cap</b> filter is selected, <b>Evolved</b> still works, showing all fully evolved species.</p>
+							<p><b>Hardcore</b>: Changes <b>Level Cap</b> filter to use the <b>Hardcore</b> level caps and item locations.</p>
+							<p><b>Only New</b>: Changes <b>Level Cap</b> filter to only show species who are newly available as of a certain level cap.</p>
+							<p><b>Regional</b>: Show all species that are regional variants.</p>
+							<p><b>Mega</b>: Show all species that are Mega evolutions.</p>-->
+							<p><i>more filters will be re-introduced with time</i></p>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-	  </div>
-	  <div id="activeFilters">
-	  </div>
-      <div id="speciesTable" class="tableWrapper">
-      </div>
+		<h1 style="color: white; margin: auto;text-align: center;width: 80%;">
+			Data updated to v4.1, some features temporarily disabled
+		</h1>
+
+		<div id="headingWrapper">
+			<div id="saveWrapper">
+				<div id="currentSave" class="hide">
+					<span>Current Save:</span>
+					<span id="currentSaveName"></span>
+					<span id="currentSaveDash">-</span>
+					<i id="currentSaveFlags"></i>
+					<button id="clearCurrentSave" onclick="clearCurrentSave()">
+						Clear
+					</button>
+				</div>
+				<button id="saveFileInputButton" onclick="openSaveFileDialog()">
+					Upload save file (v4.1)
+				</button>
+				<input id="saveFileInput" type="file" />
+			</div>
+			<div id="speciesControl">
+				<button id="showHelpButton" onclick="displayHelp()">?</button>
+				<div id="speciesFilterCategoryWrapper">
+					<input type="button" id="speciesFilterCategory"></input>
+					<ul id="speciesFilterCategoryDropdown">
+				</div>
+				<label id="speciesFilterSeparator">:</label>
+				<div id="speciesFilterInputWrapper">
+					<input type="text" autocomplete="off" id="speciesFilterInput">
+					<ul id="speciesFilterInputDropdown">
+					</ul>
+				</div>
+			</div>
+			<div id="activeFilters">
+			</div>
+		</div>
+		<div id="speciesTable" class="tableWrapper">
+		</div>
 	</main>
-    <!-- Optional JavaScript -->
+	<!-- Optional JavaScript -->
 	<script src="src/globals.js"></script>
 	<script src="src/tableMethods.js"></script>
 	<script src="src/sortMethods.js"></script>
 	<script src="src/displayMethods.js"></script>
 	<script src="src/filterMethods.js"></script>
 	<script src="src/utility.js"></script>
+	<script src="src/abilityRandomizer.js"></script>
 	<script src="src/onStartUp.js"></script>
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
 </html>

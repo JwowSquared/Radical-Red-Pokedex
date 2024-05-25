@@ -17,6 +17,7 @@ evolutions = null;
 scaledLevels = null;
 capIDs = null;
 sprites = null;
+saveData = null;
 
 let trackers = {};
 let filters = {};
