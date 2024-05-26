@@ -75,7 +75,11 @@ li:hover {
 #speciesPanelInfoDisplay {
 	color: white;
 	text-align: center;
-	display: flex;
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 	flex-direction: column;
 	align-items: center;
 	clear: right;
@@ -104,7 +108,11 @@ li:hover {
 }
 
 .infoStatWrapper {
-	display: flex;
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 	align-items: center;
 }
 
@@ -162,12 +170,20 @@ li:hover {
     border: solid thin black;
     border-radius: 3px;
     background-color: #333333;
-	display: flex;
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
     align-items: center;
 }
 
 .evoMethodWrapper {
-	display: flex;
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 	align-items: center;
 }
 
@@ -184,7 +200,11 @@ li:hover {
 }
 
 .infoTreeWrapper {
-	display: flex;
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 	align-items: stretch;
 }
 
@@ -197,18 +217,30 @@ li:hover {
 }
 
 .infoTreeBranchWrapper {
-	display: flex;
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 	flex-direction: column;
 }
 
 .infoFormsWrapper {
-	display: flex;
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
     justify-content: center;
 	flex-wrap: wrap;
 }
 
 .infoChangelogTypesWrapper {
-    display: flex;
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
     align-items: center;
 }
 
@@ -226,7 +258,11 @@ li:hover {
 }
 
 .coverageMatchupsWrapper {
-	display: flex;
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
     max-width: 534px;
     flex-wrap: wrap;
     justify-content: center;
@@ -269,14 +305,12 @@ li:hover {
 }
 
 #headingWrapper {
-	-webkit-padding-top: 30px;
-	-webkit-display: flex;
-	-webkit-flex-direction: column;
-	-webkit-align-items: center;
-	-webkit-gap: 15px;
-	
 	padding-top: 30px;
-	display: flex;
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 	flex-direction: column;
 	align-items: center;
 	gap: 15px;
@@ -284,7 +318,11 @@ li:hover {
 
 #speciesControl {
 	padding: 0px 30px 15px 30px;
-    display: flex;
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
     margin: auto;
     justify-content: center;
 }
@@ -330,7 +368,11 @@ li:hover {
 }
 
 #activeFilters, #currentSave {
-	display: flex;
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
@@ -355,7 +397,11 @@ li:hover {
 
 #saveWrapper {
 	margin: 0 auto;
-	display: flex;
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 	flex-direction: column;
 	align-items: center;
 	gap: 10px;
@@ -378,23 +424,14 @@ li:hover {
 
 #saveFileInputButton, #clearCurrentSave {
 	padding: 0.2rem 0.6rem;
-	flex-grow: 0;
+	-webkit-flex: 0;
+	flex: 0;
 }
 
 #showHelpButton {
-	-webkit-padding: 0.2rem 0.6rem;
-	-webkit-flex-grow: 0;
-	-webkit-display: block;
-	-webkit-border-radius: 3px;
-	-webkit-border: 2px solid gray;
-	-webkit-background: none;
-	-webkit-color: white;
-	-webkit-font-weight: 550;
-	-webkit-appearance: none;
-	-webkit-margin: 0;
-	
 	padding: 0.2rem 0.6rem;
-	flex-grow: 0;
+	-webkit-flex: 0;
+	flex: 0;
 	display: block;
 	border-radius: 3px;
 	border: 2px solid gray;
@@ -534,7 +571,11 @@ td.speciesNameWrapper {
 }
 
 .movesRow {
-	display: flex;
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 	height: fit-content;
 	height: -moz-max-content;
 	position: relative;
@@ -579,7 +620,11 @@ td.moveDescriptionWrapper {
 }
 
 .modal .sortControls {
-	display: flex;
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 	flex-wrap: wrap;
 }
 
@@ -598,7 +643,11 @@ td.moveDescriptionWrapper {
 	}
 	
 	#speciesTable .sortControls {
-		display: flex;
+		display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+		display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+		display: -ms-flexbox;      /* TWEENER - IE 10 */
+		display: -webkit-flex;     /* NEW - Chrome */
+		display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 		flex-wrap: wrap;
 	}
 
@@ -615,7 +664,11 @@ td.moveDescriptionWrapper {
 		position: relative;
 		height: fit-content;
 		height: -moz-max-content;
-		display: flex;
+		display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+		display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+		display: -ms-flexbox;      /* TWEENER - IE 10 */
+		display: -webkit-flex;     /* NEW - Chrome */
+		display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 		flex-wrap: wrap;
 		align-items: center;
 		border-top: solid thin #757575;
@@ -632,14 +685,22 @@ td.moveDescriptionWrapper {
 	}
 	
 	td.speciesNameWrapper {
-		display: flex;
+		display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+		display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+		display: -ms-flexbox;      /* TWEENER - IE 10 */
+		display: -webkit-flex;     /* NEW - Chrome */
+		display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 		flex-direction: column;
 		justify-content: center;
 	}
 	
 	.speciesAbilitiesWrapper {
 		width: 100%;
-		display: flex;
+		display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+		display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+		display: -ms-flexbox;      /* TWEENER - IE 10 */
+		display: -webkit-flex;     /* NEW - Chrome */
+		display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 		justify-content: space-evenly;
 	}
 	
