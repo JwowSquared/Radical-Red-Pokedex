@@ -273,6 +273,7 @@ li:hover {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	gap: 15px;
 }
 
 #speciesControl {
@@ -282,7 +283,7 @@ li:hover {
     justify-content: center;
 }
 
-#speciesFilterInput, #speciesFilterCategory, #speciesFilterSeparator, #showHelpButton, #saveFileInputButton, #clearCurrentSave, #showSaveHelpButton {
+#speciesFilterInput, #speciesFilterCategory, #speciesFilterSeparator, #saveFileInputButton, #clearCurrentSave {
 	display: block;
     padding: 0.2rem;
     border-radius: 3px;
@@ -318,10 +319,6 @@ li:hover {
     left: -1px;
 }
 
-#showHelpButton {
-    margin-bottom: 15px;
-}
-
 #saveFileInput {
 	display: none;
 }
@@ -352,10 +349,10 @@ li:hover {
 
 #saveWrapper {
 	margin: 0 auto;
-	padding-bottom: 15px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	gap: 10px;
 }
 
 #currentSave {
@@ -378,8 +375,17 @@ li:hover {
 	flex-grow: 0;
 }
 
-#saveFileInputButton {
-	margin-left: 16px;
+#showHelpButton {
+	padding: 0.2rem 0.6rem;
+	flex-grow: 0;
+	display: block;
+    border-radius: 3px;
+    border: 2px solid gray;
+	background: none;
+    color: white;
+    font-weight: 550;
+	appearance: none;
+	margin: 0;
 }
 
 .tableWrapper {
@@ -422,7 +428,7 @@ tbody {
 	cursor: auto;
 }
 
-.active, .sortOption:hover, #speciesFilterInput:hover, #speciesFilterCategory:hover, #speciesFilterInput:focus, #showHelpButton:hover, #saveFileInputButton:hover, #clearCurrentSave:hover, .activeFilter:hover, #showSaveHelpButton:hover {
+.active, .sortOption:hover, #speciesFilterInput:hover, #speciesFilterCategory:hover, #speciesFilterInput:focus, #showHelpButton:hover, #saveFileInputButton:hover, #clearCurrentSave:hover, .activeFilter:hover {
 	background: rgba(255, 255, 255, 0.075);
 }
 
