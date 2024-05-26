@@ -270,6 +270,9 @@ li:hover {
 
 #headingWrapper {
 	padding-top: 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 #speciesControl {
@@ -279,7 +282,7 @@ li:hover {
     justify-content: center;
 }
 
-#speciesFilterInput, #speciesFilterCategory, #speciesFilterSeparator, #showHelpButton, #saveFileInputButton, #clearCurrentSave {
+#speciesFilterInput, #speciesFilterCategory, #speciesFilterSeparator, #showHelpButton, #saveFileInputButton, #clearCurrentSave, #showSaveHelpButton {
 	display: block;
     padding: 0.2rem;
     border-radius: 3px;
@@ -316,8 +319,7 @@ li:hover {
 }
 
 #showHelpButton {
-	width: 29px;
-    margin-right: 2px;
+    margin-bottom: 15px;
 }
 
 #saveFileInput {
@@ -420,7 +422,7 @@ tbody {
 	cursor: auto;
 }
 
-.active, .sortOption:hover, #speciesFilterInput:hover, #speciesFilterCategory:hover, #speciesFilterInput:focus, #showHelpButton:hover, #saveFileInputButton:hover, #clearCurrentSave:hover, .activeFilter:hover {
+.active, .sortOption:hover, #speciesFilterInput:hover, #speciesFilterCategory:hover, #speciesFilterInput:focus, #showHelpButton:hover, #saveFileInputButton:hover, #clearCurrentSave:hover, .activeFilter:hover, #showSaveHelpButton:hover {
 	background: rgba(255, 255, 255, 0.075);
 }
 

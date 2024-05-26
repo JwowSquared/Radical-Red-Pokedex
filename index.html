@@ -55,6 +55,9 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 						<div id="helpContent">
+							<h1>What does uploading your save do?</h1>
+							<p>Uploading your save is used with <b>Ability Randomizer</b> and <b>Learnset Randomizer</b>. The general pokemon info will change to match your specific randomizer seed.</p>
+						
 							<h1>Filters</h1>
 							<p><b>Name</b>: search for a species by name.</p>
 							<!--<p><b>Region</b>: Show all species from a certain region.</p>-->
@@ -73,17 +76,30 @@
 							<p><b>Only New</b>: Changes <b>Level Cap</b> filter to only show species who are newly available as of a certain level cap.</p>
 							<p><b>Regional</b>: Show all species that are regional variants.</p>
 							<p><b>Mega</b>: Show all species that are Mega evolutions.</p>-->
-							<p><i>more filters will be re-introduced with time</i></p>
+							<h1>What happened to the features I know and love from 4.0?</h1>
+							<p>I am in the process of <b>remaking this website entirely.</b> Time I have to work on this project is going towards the new website, and not this one. The old features had to be disabled because I severely changed the structure of my database, so all of the old features that relied on the old database broke completely. The missing features will return in the next episode of Dragon Ball Z. (The new website)</p>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<h1 style="color: white; margin: auto;text-align: center;width: 80%;">
-			Data updated to v4.1, some features temporarily disabled
-		</h1>
+		<div class="modal fade" id="saveHelpModal" tabindex="-1" role="dialog" aria-labelledby="Full Pokemon Info" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<div id="helpContent">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<div id="headingWrapper">
+			<button id="showHelpButton" onclick="displayHelp()">Help</button>
 			<div id="saveWrapper">
 				<div id="currentSave" class="hide">
 					<span>Current Save:</span>
@@ -100,7 +116,6 @@
 				<input id="saveFileInput" type="file" />
 			</div>
 			<div id="speciesControl">
-				<button id="showHelpButton" onclick="displayHelp()">?</button>
 				<div id="speciesFilterCategoryWrapper">
 					<input type="button" id="speciesFilterCategory"></input>
 					<ul id="speciesFilterCategoryDropdown">
