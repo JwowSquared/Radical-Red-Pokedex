@@ -269,6 +269,12 @@ li:hover {
 }
 
 #headingWrapper {
+	-webkit-padding-top: 30px;
+	-webkit-display: flex;
+	-webkit-flex-direction: column;
+	-webkit-align-items: center;
+	-webkit-gap: 15px;
+	
 	padding-top: 30px;
 	display: flex;
 	flex-direction: column;
@@ -376,14 +382,25 @@ li:hover {
 }
 
 #showHelpButton {
+	-webkit-padding: 0.2rem 0.6rem;
+	-webkit-flex-grow: 0;
+	-webkit-display: block;
+	-webkit-border-radius: 3px;
+	-webkit-border: 2px solid gray;
+	-webkit-background: none;
+	-webkit-color: white;
+	-webkit-font-weight: 550;
+	-webkit-appearance: none;
+	-webkit-margin: 0;
+	
 	padding: 0.2rem 0.6rem;
 	flex-grow: 0;
 	display: block;
-    border-radius: 3px;
-    border: 2px solid gray;
+	border-radius: 3px;
+	border: 2px solid gray;
 	background: none;
-    color: white;
-    font-weight: 550;
+	color: white;
+	font-weight: 550;
 	appearance: none;
 	margin: 0;
 }
