@@ -799,9 +799,31 @@ td.moveDescriptionWrapper {
     color: #EF5350;
 }
 
-/* Separator between different encounter types */
+.speciesAreasWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 4px;
+}
+
+[class^="encounter-"] {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
 [class^="encounter-"]:not(:last-child)::after {
-    content: "•";
-    margin: 0 5px;
-    color: #666;
+    content: none;
+}
+
+.encounter-group {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 4px;
+}
+
+.encounter-group:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
 }

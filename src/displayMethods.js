@@ -25,7 +25,7 @@ function displaySpeciesRow(tracker, mon) {
         buildWrapperStat('td', 'speciesStat', 'SpD', mon.stats[5]),
         buildWrapperStat('td', 'speciesStat', 'Spe', mon.stats[3]),
         buildWrapperStat('td', 'speciesStat', 'BST', mon.stats.reduce((total, y) => total += y, 0)),
-        buildWrapper('td', 'speciesAreasWrapper', getAreasList(mon).join(', '))
+        buildWrapper('td', 'speciesAreasWrapper', getAreasList(mon))
     );
 }
 
