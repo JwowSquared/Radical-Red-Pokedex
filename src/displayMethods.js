@@ -16,6 +16,7 @@ function displaySpeciesRow(tracker, mon) {
         buildWrapper('td', 'speciesDexIDWrapper', mon.dexID),
         buildWrapperSprite('td', 'speciesSprite', getSprite(mon.ID)),
         buildWrapper('td', 'speciesNameWrapper', mon.key),
+        buildWrapper('td', 'speciesHeldItemsWrapper', getItemNames(mon.items)),
         buildWrapperTypes('td', 'speciesTypes', types[mon.type[0]], types[mon.type[1]]),
         buildWrapperAbilities('td', 'speciesAbilities', mon.abilities, mon.ID),
         buildWrapperStat('td', 'speciesStat', 'HP', mon.stats[0]),

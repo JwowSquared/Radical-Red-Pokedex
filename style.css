@@ -733,7 +733,6 @@ td.moveDescriptionWrapper {
 	}
 }
 
-/* Encounter type styles */
 .encounter-day {
     color: #FFB74D;
 }
@@ -804,7 +803,7 @@ td.moveDescriptionWrapper {
     flex-direction: column;
     gap: 4px;
     padding: 4px;
-    width: 300px; /* Fixed width */
+    width: 300px;
     word-wrap: break-word;
     white-space: normal;
 }
@@ -845,4 +844,50 @@ td.moveDescriptionWrapper {
 .encounter-group:last-child {
     border-bottom: none;
     padding-bottom: 0;
+}
+
+.held-item {
+    display: flex;
+    flex-direction: row; 
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+    gap: 0;
+    align-items: center;
+}
+
+.held-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.held-item.common {
+    color: #ffffff;
+}
+
+.held-item.rare {
+    color: #fdd835;
+}
+
+.item-label {
+    font-weight: bold;
+}
+
+.item-name {
+    padding-left: 4px;
+}
+
+.speciesHeldItemsWrapper {
+    display: flex;
+    flex-direction: column;
+    min-width: 180px;
+    height: 85.8px;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 4px;
+}
+
+td.speciesHeldItemsWrapper {
+    padding: 0 !important;
+    vertical-align: middle !important;
 }

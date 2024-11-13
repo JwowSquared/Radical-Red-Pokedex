@@ -55,6 +55,7 @@ function setupTables() {
 			'#': cmp(x => x.dexID),
 			'Sprite': null,
 			'Name': cmp(x => x.name),
+			'Held Items': cmp(x => getItemNames(x.items)),
 			'Type': null,
 			'Abilities': cmp(x => getAbilityName(x.abilities[1], x.ID)),
 			'HP': cmp(x => x.stats[0], -1),
@@ -64,7 +65,7 @@ function setupTables() {
 			'SpD': cmp(x => x.stats[5], -1),
 			'Spe': cmp(x => x.stats[3], -1),
 			'BST': cmp(x => x.stats.reduce((total, y) => total += y, 0), -1),
-			'Area(s)': cmp(x => getAreasList(x).join('')), 
+			'Area(s)': cmp(x => getAreasList(x).join(''))
 		},
 		[cmp(x => x.dexID), cmp(x => x.order)]
 	);

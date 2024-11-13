@@ -1,5 +1,6 @@
 async function fetchData() {
-    let request = new Request(`https://raw.githubusercontent.com/JwowSquared/Radical-Red-Pokedex/master/data.js`);
+	
+	let request = new Request(`https://raw.githubusercontent.com/JwowSquared/Radical-Red-Pokedex/master/data.js`);
     let response = null;
     if (typeof caches !== "undefined") {
         const cache = await caches.open(version);
@@ -76,6 +77,10 @@ async function onStartup() {
 	}
 	// Hide method from for-in loops
 	Object.defineProperty(Array.prototype, "equals", {enumerable: false});
+
+	/* console.log("First species:", Object.values(species)[0]); Debug data structure for species
+	console.log("First item:", Object.values(items)[0]); Debug data structure for items */
+
 }
 
 onStartup();

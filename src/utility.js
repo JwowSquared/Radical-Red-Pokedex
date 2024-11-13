@@ -217,6 +217,21 @@ function getAreasList(mon) {
         }).join('');
 }
 
+function getItemNames(itemArray) {
+    if (!itemArray || (itemArray[0] === 0 && itemArray[1] === 0)) return '';
+    
+    const items = [];
+    if (itemArray[0] !== 0) {
+        items.push(`<span class="held-item common"><span class="item-label">Common:</span>
+<span class="item-name">${window.items[itemArray[0]].name.trim()}</span></span>`);
+    }
+    if (itemArray[1] !== 0) {
+        items.push(`<span class="held-item rare"><span class="item-label">Rare:</span>
+<span class="item-name">${window.items[itemArray[1]].name.trim()}</span></span>`);
+    }
+    return items.join('');
+}
+
 function loadChunk(tracker, toClear) {
 	let rowsAdded = 0;
 	
