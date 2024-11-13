@@ -12,11 +12,38 @@ function displaySpeciesRow(tracker, mon) {
     
     buildBackgroundColor(currentRow, mon);
     
+    // Create a container for name and held items
+    const nameContainer = document.createElement('div');
+    nameContainer.className = 'nameContainer';
+    
+    // Create name element
+    const nameElement = document.createElement('div');
+    nameElement.className = 'speciesName';
+    nameElement.textContent = mon.key;
+    
+    // Create held items element if items exist
+    const itemsHTML = getItemNames(mon.items);
+    const itemsElement = document.createElement('div');
+    itemsElement.className = 'speciesHeldItems';
+    if (itemsHTML) {
+        itemsElement.innerHTML = itemsHTML;
+    }
+    
+    // Combine name and items in container
+    nameContainer.appendChild(nameElement);
+    if (itemsHTML) {
+        nameContainer.appendChild(itemsElement);
+    }
+    
+    // Create the name cell with the container
+    const nameCell = document.createElement('td');
+    nameCell.className = 'speciesNameWrapper';
+    nameCell.appendChild(nameContainer);
+    
     currentRow.append(
         buildWrapper('td', 'speciesDexIDWrapper', mon.dexID),
         buildWrapperSprite('td', 'speciesSprite', getSprite(mon.ID)),
-        buildWrapper('td', 'speciesNameWrapper', mon.key),
-        buildWrapper('td', 'speciesHeldItemsWrapper', getItemNames(mon.items)),
+        nameCell,
         buildWrapperTypes('td', 'speciesTypes', types[mon.type[0]], types[mon.type[1]]),
         buildWrapperAbilities('td', 'speciesAbilities', mon.abilities, mon.ID),
         buildWrapperStat('td', 'speciesStat', 'HP', mon.stats[0]),
@@ -29,6 +56,7 @@ function displaySpeciesRow(tracker, mon) {
         buildWrapper('td', 'speciesAreasWrapper', getAreasList(mon))
     );
 }
+
 
 function displayLevelUpMovesRow(tracker, movePair) {
 	let [move, level] = movePair;

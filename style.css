@@ -762,7 +762,7 @@ td.moveDescriptionWrapper {
 }
 
 .encounter-gift {
-    color: #F06292;
+    color: #ff9cbd;
 }
 
 .encounter-roaming {
@@ -779,42 +779,49 @@ td.moveDescriptionWrapper {
 }
 
 .encounter-raid1 {
-    color: #EF5350;
+    color: #ea1915;
 }
 
 .encounter-raid3 {
-    color: #EF5350;
+    color: #ea1915;
 }
 
 .encounter-raid4 {
-    color: #EF5350;
+    color: #ea1915;
 }
 
 .encounter-raid5 {
-    color: #EF5350;
+    color: #ea1915;
 }
 
 .encounter-raid6 {
-    color: #EF5350;
+    color: #ea1915;
 }
 
 .speciesAreasWrapper {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: left;     
     gap: 4px;
     padding: 4px;
     width: 300px;
     word-wrap: break-word;
     white-space: normal;
+    margin: auto 0; 
 }
 
+/* Keep inner backgrounds intact */
 [class^="encounter-"] {
+    background: rgba(255, 255, 255, 0.1); /* Inner background for each encounter */
+    border-radius: 4px;
     font-size: 0.9rem;
     white-space: normal;
     overflow: visible;
     display: block;
-    padding-bottom: 4px;
+    padding: 4px 8px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 4px;
 }
 
 [class^="encounter-"]:last-child {
@@ -823,18 +830,18 @@ td.moveDescriptionWrapper {
 }
 
 .speciesRow {
-    height: auto !important;
-    min-height: 85.8px;
-}
-
-[class^="encounter-"]:not(:last-child)::after {
-    content: none;
+    height: auto !important; 
 }
 
 .encounter-group {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent; /* Remove the outer light background */
+    box-shadow: none; /* Remove any shadow if it's adding an extra outline */
+    border: none; /* Remove any border if it's creating the outer rectangle */
     padding-bottom: 4px;
-	text-align: left;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* Keep gap between encounters */
 }
 
 .encounter-type {
@@ -846,48 +853,48 @@ td.moveDescriptionWrapper {
     padding-bottom: 0;
 }
 
-.held-item {
-    display: flex;
-    flex-direction: row; 
-    padding-bottom: 4px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: left;
-    gap: 0;
-    align-items: center;
-}
 
-.held-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-.held-item.common {
-    color: #ffffff;
-}
-
-.held-item.rare {
-    color: #fdd835;
-}
-
-.item-label {
-    font-weight: bold;
-}
-
-.item-name {
-    padding-left: 4px;
-}
-
-.speciesHeldItemsWrapper {
+.nameContainer {
     display: flex;
     flex-direction: column;
-    min-width: 180px;
-    height: 85.8px;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 4px;
+    gap: 4px;
 }
 
-td.speciesHeldItemsWrapper {
-    padding: 0 !important;
-    vertical-align: middle !important;
+.speciesName {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.speciesHeldItems {
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 8px; /* Add space between name and held items */
+    text-align: center; /* Center the text */
+}
+
+.held-item {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the flex items */
+    gap: 4px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+td.speciesNameWrapper {
+    min-width: 220px;
+    padding: 8px !important;
+}
+
+@media (max-width: 991.98px) {
+    .nameContainer {
+        text-align: center;
+    }
+    
+    .speciesHeldItems {
+        align-items: center;
+    }
 }
