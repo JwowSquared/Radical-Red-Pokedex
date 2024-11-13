@@ -811,8 +811,8 @@ td.moveDescriptionWrapper {
 
 [class^="encounter-"] {
     font-size: 0.9rem;
-    white-space: normal; /* Changed from nowrap to normal */
-    overflow: visible;   /* Changed from hidden to visible */
+    white-space: normal;
+    overflow: visible;
     display: block;
     padding-bottom: 4px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -824,8 +824,8 @@ td.moveDescriptionWrapper {
 }
 
 .speciesRow {
-    height: auto !important; /* Override fixed height */
-    min-height: 85.8px; /* Keep minimum height */
+    height: auto !important;
+    min-height: 85.8px;
 }
 
 [class^="encounter-"]:not(:last-child)::after {

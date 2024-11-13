@@ -34,7 +34,6 @@ function getSprite(ID) {
 function getAreasList(mon) {
     if (!mon || !areas) return [];
     
-    // Object to store locations by encounter type
     const locationsByType = {
         'Day': new Set(),
         'Night': new Set(),
@@ -54,11 +53,9 @@ function getAreasList(mon) {
         'Raid-6': new Set()
     };
 
-    // Process each area and its encounters
     Object.entries(areas).forEach(([_, areaData]) => {
         if (!areaData.name) return;
 
-        // Check each encounter type
         const encounterTypes = {
             'wild-day': ['Day', '☀️'],
             'wild-night': ['Night', '🌙'],
@@ -93,7 +90,6 @@ function getAreasList(mon) {
         });
     });
 
-    // Format encounters into groups
     const encounterGroups = {
         'Wild': [],
         'Water': [],
@@ -101,7 +97,6 @@ function getAreasList(mon) {
         'Raids': []
     };
 
-    // Map encounter types to their groups and format with emoji
     const typeToGroup = {
         'Day': ['Wild', '☀️'],
         'Night': ['Wild', '🌙'],
