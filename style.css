@@ -747,11 +747,11 @@ td.moveDescriptionWrapper {
 }
 
 .encounter-oldrod {
-    color: #81C784;
+    color: #ffffff;
 }
 
 .encounter-goodrod {
-    color: #66BB6A;
+    color: #edf725;
 }
 
 .encounter-superrod {
@@ -804,14 +804,28 @@ td.moveDescriptionWrapper {
     flex-direction: column;
     gap: 4px;
     padding: 4px;
+    width: 300px; /* Fixed width */
+    word-wrap: break-word;
+    white-space: normal;
 }
 
 [class^="encounter-"] {
     font-size: 0.9rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal; /* Changed from nowrap to normal */
+    overflow: visible;   /* Changed from hidden to visible */
     display: block;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[class^="encounter-"]:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.speciesRow {
+    height: auto !important; /* Override fixed height */
+    min-height: 85.8px; /* Keep minimum height */
 }
 
 [class^="encounter-"]:not(:last-child)::after {
@@ -821,6 +835,11 @@ td.moveDescriptionWrapper {
 .encounter-group {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: 4px;
+	text-align: left;
+}
+
+.encounter-type {
+    font-weight: bold;
 }
 
 .encounter-group:last-child {

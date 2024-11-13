@@ -54,155 +54,46 @@ function getAreasList(mon) {
         'Raid-6': new Set()
     };
 
+    // Process each area and its encounters
     Object.entries(areas).forEach(([_, areaData]) => {
         if (!areaData.name) return;
 
-        // Check wild-day encounters
-        if (areaData['wild-day']) {
-            Object.values(areaData['wild-day']).forEach(encounters => {
-                if (encounters.some(encounter => encounter[0] === mon.ID)) {
-                    locationsByType['Day'].add(areaData.name);
-                }
-            });
-        }
+        // Check each encounter type
+        const encounterTypes = {
+            'wild-day': ['Day', '☀️'],
+            'wild-night': ['Night', '🌙'],
+            'wild-surf': ['Surf', '🏄'],
+            'wild-oldRod': ['Old Rod', '🎣'],
+            'wild-goodRod': ['Good Rod', '🎣'],
+            'wild-superRod': ['Super Rod', '🎣'],
+            'wild-smash': ['Smash', '🗺️'],
+            'fixed-gift': ['Gift', '🎁'],
+            'fixed-roaming': ['Roaming', '🏃'],
+            'fixed-overworld': ['Overworld', '🗺️'],
+            'fixed-trade': ['Trade', '🤝'],
+            'raid1': ['Raid-1', '⭐'],
+            'raid3': ['Raid-3', '⭐⭐⭐'],
+            'raid4': ['Raid-4', '⭐⭐⭐⭐'],
+            'raid5': ['Raid-5', '⭐⭐⭐⭐⭐'],
+            'raid6': ['Raid-6', '⭐⭐⭐⭐⭐⭐']
+        };
 
-        // Check wild-night encounters
-        if (areaData['wild-night']) {
-            Object.values(areaData['wild-night']).forEach(encounters => {
-                if (encounters.some(encounter => encounter[0] === mon.ID)) {
-                    locationsByType['Night'].add(areaData.name);
-                }
-            });
-        }
-
-        // Check surf encounters
-        if (areaData['wild-surf']) {
-            Object.values(areaData['wild-surf']).forEach(encounters => {
-                if (encounters.some(encounter => encounter[0] === mon.ID)) {
-                    locationsByType['Surf'].add(areaData.name);
-                }
-            });
-        }
-
-        // Check old rod encounters
-        if (areaData['wild-oldRod']) {
-            Object.values(areaData['wild-oldRod']).forEach(encounters => {
-                if (encounters.some(encounter => encounter[0] === mon.ID)) {
-                    locationsByType['Old Rod'].add(areaData.name);
-                }
-            });
-        }
-
-        // Check good rod encounters
-        if (areaData['wild-goodRod']) {
-            Object.values(areaData['wild-goodRod']).forEach(encounters => {
-                if (encounters.some(encounter => encounter[0] === mon.ID)) {
-                    locationsByType['Good Rod'].add(areaData.name);
-                }
-            });
-        }
-
-        // Check super rod encounters
-        if (areaData['wild-superRod']) {
-            Object.values(areaData['wild-superRod']).forEach(encounters => {
-                if (encounters.some(encounter => encounter[0] === mon.ID)) {
-                    locationsByType['Super Rod'].add(areaData.name);
-                }
-            });
-        }
-
-        // Check smash encounters
-        if (areaData['wild-smash']) {
-            Object.values(areaData['wild-smash']).forEach(encounters => {
-                if (encounters.some(encounter => encounter[0] === mon.ID)) {
-                    locationsByType['Smash'].add(areaData.name);
-                }
-            });
-        }
-
-        // Check gift encounters
-        if (areaData['fixed-gift']) {
-            Object.values(areaData['fixed-gift']).forEach(encounters => {
-                if (encounters.includes(mon.ID)) {
-                    locationsByType['Gift'].add(areaData.name);
-                }
-            });
-        }
-
-        // Check roaming encounters
-        if (areaData['fixed-roaming']) {
-            Object.values(areaData['fixed-roaming']).forEach(encounters => {
-                if (encounters.includes(mon.ID)) {
-                    locationsByType['Roaming'].add(areaData.name);
-                }
-            });
-        }
-
-        // Check overworld encounters
-        if (areaData['fixed-overworld']) {
-            Object.values(areaData['fixed-overworld']).forEach(encounters => {
-                if (encounters.includes(mon.ID)) {
-                    locationsByType['Overworld'].add(areaData.name);
-                }
-            });
-        }
-
-        // Check trade encounters
-        if (areaData['fixed-trade']) {
-            Object.values(areaData['fixed-trade']).forEach(encounters => {
-                if (encounters.includes(mon.ID)) {
-                    locationsByType['Trade'].add(areaData.name);
-                }
-            });
-        }
-
-        // Check raid1 encounters
-        if (areaData['raid1']) {
-            Object.values(areaData['raid1']).forEach(encounters => {
-                if (encounters.some(encounter => encounter[0] === mon.ID)) {
-                    locationsByType['Raid-1'].add(areaData.name);
-                }
-            });
-        }
-
-        // Check raid3 encounters
-        if (areaData['raid3']) {
-            Object.values(areaData['raid3']).forEach(encounters => {
-                if (encounters.some(encounter => encounter[0] === mon.ID)) {
-                    locationsByType['Raid-3'].add(areaData.name);
-                }
-            });
-        }
-
-        // Check raid4 encounters
-        if (areaData['raid4']) {
-            Object.values(areaData['raid4']).forEach(encounters => {
-                if (encounters.some(encounter => encounter[0] === mon.ID)) {
-                    locationsByType['Raid-4'].add(areaData.name);
-                }
-            });
-        }
-
-        // Check raid5 encounters
-        if (areaData['raid5']) {
-            Object.values(areaData['raid5']).forEach(encounters => {
-                if (encounters.some(encounter => encounter[0] === mon.ID)) {
-                    locationsByType['Raid-5'].add(areaData.name);
-                }
-            });
-        }
-
-        // Check raid6 encounters
-        if (areaData['raid6']) {
-            Object.values(areaData['raid6']).forEach(encounters => {
-                if (encounters.some(encounter => encounter[0] === mon.ID)) {
-                    locationsByType['Raid-6'].add(areaData.name);
-                }
-            });
-        }
+        Object.entries(encounterTypes).forEach(([dataKey, [typeKey, emoji]]) => {
+            if (areaData[dataKey]) {
+                Object.values(areaData[dataKey]).forEach(encounters => {
+                    const hasEncounter = Array.isArray(encounters[0]) 
+                        ? encounters.some(encounter => encounter[0] === mon.ID)
+                        : encounters.includes(mon.ID);
+                    
+                    if (hasEncounter) {
+                        locationsByType[typeKey].add(areaData.name);
+                    }
+                });
+            }
+        });
     });
 
-    // Format and group the encounters
+    // Format encounters into groups
     const encounterGroups = {
         'Wild': [],
         'Water': [],
@@ -210,84 +101,120 @@ function getAreasList(mon) {
         'Raids': []
     };
 
+    // Map encounter types to their groups and format with emoji
+    const typeToGroup = {
+        'Day': ['Wild', '☀️'],
+        'Night': ['Wild', '🌙'],
+        'Surf': ['Water', '🏄'],
+        'Old Rod': ['Water', '🎣'],
+        'Good Rod': ['Water', '🎣'],
+        'Super Rod': ['Water', '🎣'],
+        'Smash': ['Special', '🗺️'],
+        'Gift': ['Special', '🎁'],
+        'Roaming': ['Special', '🏃'],
+        'Overworld': ['Special', '🗺️'],
+        'Trade': ['Special', '🤝'],
+        'Raid-1': ['Raids', '⭐'],
+        'Raid-3': ['Raids', '⭐⭐⭐'],
+        'Raid-4': ['Raids', '⭐⭐⭐⭐'],
+        'Raid-5': ['Raids', '⭐⭐⭐⭐⭐'],
+        'Raid-6': ['Raids', '⭐⭐⭐⭐⭐⭐']
+    };
+
     Object.entries(locationsByType).forEach(([type, locations]) => {
         if (locations.size > 0) {
             const locationList = Array.from(locations);
             let formattedLocation;
 
-            switch(type) {
-                case 'Day':
-                case 'Night':
-                    formattedLocation = `<span class="encounter-${type.toLowerCase()}">${locationList.join(', ')} ${type === 'Day' ? '☀️' : '🌙'}</span>`;
-                    encounterGroups['Wild'].push(formattedLocation);
-                    break;
+			switch(type) {
+				case 'Day':
+					formattedLocation = `<span class="encounter-day"><span class="encounter-type">Day (☀️):</span> ${locationList.join(', ')}</span>`;
+					encounterGroups['Wild'].push(formattedLocation);
+					break;
+			
+				case 'Night':
+					formattedLocation = `<span class="encounter-night"><span class="encounter-type">Night (🌙):</span> ${locationList.join(', ')}</span>`;
+					encounterGroups['Wild'].push(formattedLocation);
+					break;
+			
+				case 'Surf':
+					formattedLocation = `<span class="encounter-surf"><span class="encounter-type">Surf (🌊):</span> ${locationList.join(', ')}</span>`;
+					encounterGroups['Water'].push(formattedLocation);
+					break;
+			
+				case 'Old Rod':
+					formattedLocation = `<span class="encounter-oldrod"><span class="encounter-type">Old Rod (🎣):</span> ${locationList.join(', ')}</span>`;
+					encounterGroups['Water'].push(formattedLocation);
+					break;
+			
+				case 'Good Rod':
+					formattedLocation = `<span class="encounter-goodrod"><span class="encounter-type">Good Rod (🎣):</span> ${locationList.join(', ')}</span>`;
+					encounterGroups['Water'].push(formattedLocation);
+					break;
+			
+				case 'Super Rod':
+					formattedLocation = `<span class="encounter-superrod"><span class="encounter-type">Super Rod (🎣):</span> ${locationList.join(', ')}</span>`;
+					encounterGroups['Water'].push(formattedLocation);
+					break;
+			
+				case 'Smash':
+					formattedLocation = `<span class="encounter-smash"><span class="encounter-type">Smash (🗺️):</span> ${locationList.join(', ')}</span>`;
+					encounterGroups['Special'].push(formattedLocation);
+					break;
+			
+				case 'Gift':
+					formattedLocation = `<span class="encounter-gift"><span class="encounter-type">Gift (🎁):</span> ${locationList.join(', ')}</span>`;
+					encounterGroups['Special'].push(formattedLocation);
+					break;
+			
+				case 'Roaming':
+					formattedLocation = `<span class="encounter-roaming"><span class="encounter-type">Roaming (🏃):</span> ${locationList.join(', ')}</span>`;
+					encounterGroups['Special'].push(formattedLocation);
+					break;
+			
+				case 'Overworld':
+					formattedLocation = `<span class="encounter-overworld"><span class="encounter-type">Overworld (🗺️):</span> ${locationList.join(', ')}</span>`;
+					encounterGroups['Special'].push(formattedLocation);
+					break;
+			
+				case 'Trade':
+					formattedLocation = `<span class="encounter-trade"><span class="encounter-type">Trade (🤝):</span> ${locationList.join(', ')}</span>`;
+					encounterGroups['Special'].push(formattedLocation);
+					break;
+			
+				case 'Raid-1':
+					formattedLocation = `<span class="encounter-raid1"><span class="encounter-type">Raid (⭐):</span> ${locationList.join(', ')}</span>`;
+					encounterGroups['Raids'].push(formattedLocation);
+					break;
 
-                case 'Surf':
-                    formattedLocation = `<span class="encounter-surf">${locationList.join(', ')} 🏄</span>`;
-                    encounterGroups['Water'].push(formattedLocation);
-                    break;
-
-                case 'Old Rod':
-                case 'Good Rod':
-                case 'Super Rod':
-                    formattedLocation = `<span class="encounter-${type.toLowerCase().replace(' ', '')}">${locationList.join(', ')} 🎣</span>`;
-                    encounterGroups['Water'].push(formattedLocation);
-                    break;
-
-                case 'Smash':
-                    formattedLocation = `<span class="encounter-smash">${locationList.join(', ')} 🗺️</span>`;
-                    encounterGroups['Special'].push(formattedLocation);
-                    break;
-
-                case 'Gift':
-                    formattedLocation = `<span class="encounter-gift">${locationList.join(', ')} 🎁</span>`;
-                    encounterGroups['Special'].push(formattedLocation);
-                    break;
-
-                case 'Roaming':
-                    formattedLocation = `<span class="encounter-roaming">${locationList.join(', ')} 🌎</span>`;
-                    encounterGroups['Special'].push(formattedLocation);
-                    break;
-
-                case 'Overworld':
-                    formattedLocation = `<span class="encounter-overworld">${locationList.join(', ')} 🗺️</span>`;
-                    encounterGroups['Special'].push(formattedLocation);
-                    break;
-
-                case 'Trade':
-                    formattedLocation = `<span class="encounter-trade">${locationList.join(', ')} 🤝</span>`;
-                    encounterGroups['Special'].push(formattedLocation);
-                    break;
-
-                case 'Raid-1':
-                    formattedLocation = `<span class="encounter-raid1">${locationList.join(', ')} ⭐</span>`;
-                    encounterGroups['Raids'].push(formattedLocation);
-                    break;
-
-                case 'Raid-3':
-                    formattedLocation = `<span class="encounter-raid3">${locationList.join(', ')} ⭐⭐⭐</span>`;
-                    encounterGroups['Raids'].push(formattedLocation);
-                    break;
-
-                case 'Raid-4':
-                    formattedLocation = `<span class="encounter-raid4">${locationList.join(', ')} ⭐⭐⭐⭐</span>`;
-                    encounterGroups['Raids'].push(formattedLocation);
-                    break;
-
-                case 'Raid-5':
-                    formattedLocation = `<span class="encounter-raid5">${locationList.join(', ')} ⭐⭐⭐⭐⭐</span>`;
-                    encounterGroups['Raids'].push(formattedLocation);
-                    break;
-
-                case 'Raid-6':
-                    formattedLocation = `<span class="encounter-raid6">${locationList.join(', ')} ⭐⭐⭐⭐⭐⭐</span>`;
-                    encounterGroups['Raids'].push(formattedLocation);
-                    break;
-            }
+				case 'Raid-2':
+					formattedLocation = `<span class="encounter-raid2"><span class="encounter-type">Raid (⭐⭐):</span> ${locationList.join(', ')}</span>`;
+					encounterGroups['Raids'].push(formattedLocation);
+					break;
+			
+				case 'Raid-3':
+					formattedLocation = `<span class="encounter-raid3"><span class="encounter-type">Raid (⭐⭐⭐):</span> ${locationList.join(', ')}</span>`;
+					encounterGroups['Raids'].push(formattedLocation);
+					break;
+			
+				case 'Raid-4':
+					formattedLocation = `<span class="encounter-raid4"><span class="encounter-type">Raid (⭐⭐⭐⭐):</span> ${locationList.join(', ')}</span>`;
+					encounterGroups['Raids'].push(formattedLocation);
+					break;
+			
+				case 'Raid-5':
+					formattedLocation = `<span class="encounter-raid5"><span class="encounter-type">Raid (⭐⭐⭐⭐⭐):</span> ${locationList.join(', ')}</span>`;
+					encounterGroups['Raids'].push(formattedLocation);
+					break;
+			
+				case 'Raid-6':
+					formattedLocation = `<span class="encounter-raid6"><span class="encounter-type">Raid (⭐⭐⭐⭐⭐⭐):</span> ${locationList.join(', ')}</span>`;
+					encounterGroups['Raids'].push(formattedLocation);
+					break;
+			}
         }
     });
 
-    // Only include groups that have encounters and wrap them in divs
     return Object.entries(encounterGroups)
         .filter(([_, encounters]) => encounters.length > 0)
         .map(([groupName, encounters]) => {
