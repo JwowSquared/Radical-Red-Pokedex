@@ -1,5 +1,5 @@
 async function fetchData() {
-	let request = new Request(`https://raw.githubusercontent.com/${repo}/master/data.js`);
+	let request = new Request(`https://raw.githubusercontent.com/JwowSquared/Radical-Red-Pokedex/master/data.js`);
 	let response = null;
 	if (typeof caches !== "undefined") {
 		const cache = await caches.open(version);

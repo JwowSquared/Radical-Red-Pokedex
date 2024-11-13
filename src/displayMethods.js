@@ -3,29 +3,30 @@ function displayHelp() {
 }
 
 function displaySpeciesRow(tracker, mon) {
-	let currentRow = document.createElement('tr');
-	currentRow.className = 'speciesRow';
-	currentRow.onclick = function() {
-		displaySpeciesPanel(mon);
-	};
-	tracker.body.appendChild(currentRow);
-	
-	buildBackgroundColor(currentRow, mon);
-	
-	currentRow.append(
-		buildWrapper('td', 'speciesDexIDWrapper', mon.dexID),
-		buildWrapperSprite('td', 'speciesSprite', getSprite(mon.ID)),
-		buildWrapper('td', 'speciesNameWrapper', mon.key),
-		buildWrapperTypes('td', 'speciesTypes', types[mon.type[0]], types[mon.type[1]]),
-		buildWrapperAbilities('td', 'speciesAbilities', mon.abilities, mon.ID),
-		buildWrapperStat('td', 'speciesStat', 'HP', mon.stats[0]),
-		buildWrapperStat('td', 'speciesStat', 'Atk', mon.stats[1]),
-		buildWrapperStat('td', 'speciesStat', 'Def', mon.stats[2]),
-		buildWrapperStat('td', 'speciesStat', 'SpA', mon.stats[4]),
-		buildWrapperStat('td', 'speciesStat', 'SpD', mon.stats[5]),
-		buildWrapperStat('td', 'speciesStat', 'Spe', mon.stats[3]),
-		buildWrapperStat('td', 'speciesStat', 'BST', mon.stats.reduce((total, y) => total += y, 0))
-	);
+    let currentRow = document.createElement('tr');
+    currentRow.className = 'speciesRow';
+    currentRow.onclick = function() {
+        displaySpeciesPanel(mon);
+    };
+    tracker.body.appendChild(currentRow);
+    
+    buildBackgroundColor(currentRow, mon);
+    
+    currentRow.append(
+        buildWrapper('td', 'speciesDexIDWrapper', mon.dexID),
+        buildWrapperSprite('td', 'speciesSprite', getSprite(mon.ID)),
+        buildWrapper('td', 'speciesNameWrapper', mon.key),
+        buildWrapperTypes('td', 'speciesTypes', types[mon.type[0]], types[mon.type[1]]),
+        buildWrapperAbilities('td', 'speciesAbilities', mon.abilities, mon.ID),
+        buildWrapperStat('td', 'speciesStat', 'HP', mon.stats[0]),
+        buildWrapperStat('td', 'speciesStat', 'Atk', mon.stats[1]),
+        buildWrapperStat('td', 'speciesStat', 'Def', mon.stats[2]),
+        buildWrapperStat('td', 'speciesStat', 'SpA', mon.stats[4]),
+        buildWrapperStat('td', 'speciesStat', 'SpD', mon.stats[5]),
+        buildWrapperStat('td', 'speciesStat', 'Spe', mon.stats[3]),
+        buildWrapperStat('td', 'speciesStat', 'BST', mon.stats.reduce((total, y) => total += y, 0)),
+        buildWrapper('td', 'speciesAreasWrapper', getAreasList(mon).join(', '))
+    );
 }
 
 function displayLevelUpMovesRow(tracker, movePair) {

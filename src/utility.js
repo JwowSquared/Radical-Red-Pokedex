@@ -30,6 +30,27 @@ function getSprite(ID) {
 	return sprite;
 }
 
+// Add this to utility.js
+function getAreasList(mon) {
+    if (!mon || !areas) return [];
+    
+    const monAreas = [];
+    Object.values(areas).forEach(areaGroup => {
+        if (areaGroup.areas) {
+            areaGroup.areas.forEach(area => {
+                if (area.wild && area.wild.includes(mon.ID)) {
+                    monAreas.push(area.name);
+                }
+                if (area.fixed && area.fixed.includes(mon.ID)) {
+                    monAreas.push(area.name);
+                }
+            });
+        }
+    });
+    
+    return [...new Set(monAreas)]; // Remove duplicates
+}
+
 function loadChunk(tracker, toClear) {
 	let rowsAdded = 0;
 	
