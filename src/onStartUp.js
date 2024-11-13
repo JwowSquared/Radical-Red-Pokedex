@@ -1,41 +1,41 @@
 async function fetchData() {
-	let request = new Request(`https://raw.githubusercontent.com/JwowSquared/Radical-Red-Pokedex/master/data.js`);
-	let response = null;
-	if (typeof caches !== "undefined") {
-		const cache = await caches.open(version);
-		
-		response = await cache.match(request);
-		if (!response) {
-			response = await fetch(request);
-			await cache.put(request, response);
-		}
-			response = await cache.match(request);
-	}
-	else
-		response = await fetch(request);
-	
-	let data = await response.text();
-	data = new Function("return " + data + ";")();
-	
-	species = data.species;
-	moves = data.moves;
-	abilities = data.abilities;
-	items = data.items;
-	areas = data.areas;
-	tmMoves = data.tmMoves;
-	tutorMoves = data.tutorMoves;
-	trainers = data.trainers;
-	natures = data.natures;
-	eggGroups = data.eggGroups;
-	types = data.types;
-	splits = data.splits;
-	evolutions = data.evolutions;
-	scaledLevels = data.scaledLevels;
-	capIDs = data.capIDs;
-	sprites = data.sprites;
-	
-	loadingScreen.className = "hide";
-	document.querySelector("main").className = "";
+    let request = new Request(`https://raw.githubusercontent.com/JwowSquared/Radical-Red-Pokedex/master/data.js`);
+    let response = null;
+    if (typeof caches !== "undefined") {
+        const cache = await caches.open(version);
+        
+        response = await cache.match(request);
+        if (!response) {
+            response = await fetch(request);
+            await cache.put(request, response);
+        }
+        response = await cache.match(request);
+    }
+    else
+        response = await fetch(request);
+    
+    let data = await response.text();
+    data = new Function("return " + data + ";")();
+    
+    species = data.species;
+    moves = data.moves;
+    abilities = data.abilities;
+    items = data.items;
+    areas = data.areas;
+    tmMoves = data.tmMoves;
+    tutorMoves = data.tutorMoves;
+    trainers = data.trainers;
+    natures = data.natures;
+    eggGroups = data.eggGroups;
+    types = data.types;
+    splits = data.splits;
+    evolutions = data.evolutions;
+    scaledLevels = data.scaledLevels;
+    capIDs = data.capIDs;
+    sprites = data.sprites;
+    
+    loadingScreen.className = "hide";
+    document.querySelector("main").className = "";
 }
 
 async function onStartup() {

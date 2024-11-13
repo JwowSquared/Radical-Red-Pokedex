@@ -732,3 +732,76 @@ td.moveDescriptionWrapper {
 		padding: 0.2rem 4rem;
 	}
 }
+
+/* Encounter type styles */
+.encounter-day {
+    color: #FFB74D;
+}
+
+.encounter-night {
+    color: #9575CD;
+}
+
+.encounter-surf {
+    color: #4FC3F7;
+}
+
+.encounter-oldrod {
+    color: #81C784;
+}
+
+.encounter-goodrod {
+    color: #66BB6A;
+}
+
+.encounter-superrod {
+    color: #43A047;
+}
+
+.encounter-smash {
+    color: #8D6E63;
+}
+
+.encounter-gift {
+    color: #F06292;
+}
+
+.encounter-roaming {
+    color: #FFD740;
+    font-style: italic;
+}
+
+.encounter-overworld {
+    color: #26A69A;
+}
+
+.encounter-trade {
+    color: #7E57C2;
+}
+
+.encounter-raid1 {
+    color: #EF5350;
+}
+
+.encounter-raid3 {
+    color: #EF5350;
+}
+
+.encounter-raid4 {
+    color: #EF5350;
+}
+
+.encounter-raid5 {
+    color: #EF5350;
+}
+
+.encounter-raid6 {
+    color: #EF5350;
+}
+
+/* Separator between different encounter types */
+[class^="encounter-"]:not(:last-child)::after {
+    content: "•";
+    margin: 0 5px;
+    color: #666;
+}

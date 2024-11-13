@@ -126,6 +126,19 @@ function buildWrapper(tag, className, text=null) {
 	return wrapper;
 }
 
+function buildWrapper(tag, className, content) {
+    let wrapper = document.createElement(tag);
+    wrapper.className = className;
+    if (content) {
+        if (Array.isArray(content)) {
+            wrapper.innerHTML = content.join('<br>');
+        } else {
+            wrapper.innerHTML = content;
+        }
+    }
+    return wrapper;
+}
+
 function buildWrapperSprite(tag, className, src) {
 	let wrapper = buildWrapper(tag, className + 'Wrapper');
 	
