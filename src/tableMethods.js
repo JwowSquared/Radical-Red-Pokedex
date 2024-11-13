@@ -63,7 +63,7 @@ function setupTables() {
 			'SpA': cmp(x => x.stats[4], -1),
 			'SpD': cmp(x => x.stats[5], -1),
 			'Spe': cmp(x => x.stats[3], -1),
-			'BST': cmp(x => x.stats.reduce((total, y) => total += y, 0), -1),  // Added comma here
+			'BST': cmp(x => x.stats.reduce((total, y) => total += y, 0), -1),
 			'Areas': cmp(x => getAreasList(x).join(', '))
 		},
 		[cmp(x => x.dexID), cmp(x => x.order)]

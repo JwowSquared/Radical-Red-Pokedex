@@ -30,7 +30,7 @@ function getSprite(ID) {
 	return sprite;
 }
 
-// Add this to utility.js
+
 function getAreasList(mon) {
     if (!mon || !areas) return [];
     
@@ -48,7 +48,7 @@ function getAreasList(mon) {
         }
     });
     
-    return [...new Set(monAreas)]; // Remove duplicates
+    return [...new Set(monAreas)]; 
 }
 
 function loadChunk(tracker, toClear) {
