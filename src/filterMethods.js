@@ -31,7 +31,60 @@ function setupFilters() {
 			.map(y => getMappedAbility(y, x.ID))	
 			.find(y => y[0] == o.ID)
 	);
-	
+
+
+	buildFilter('Area', 2, 
+		Array.from(new Set(Object.values(areas).map(area => area.name))).sort(),
+		o => o,
+		
+		(x,o) => {
+			
+			const pokemonAreas = new Set();
+			
+			Object.values(areas).forEach(areaData => {
+				if (!areaData.name) return;
+				
+				
+				['wild-day', 'wild-night', 'wild-surf', 'wild-oldRod', 'wild-goodRod', 'wild-superRod', 'wild-smash'].forEach(wildType => {
+					if (areaData[wildType]) {
+						Object.values(areaData[wildType]).forEach(encounters => {
+							if (encounters.some(encounter => encounter[0] === x.ID)) {
+								pokemonAreas.add(areaData.name);
+							}
+						});
+					}
+				});
+
+				
+				['fixed-gift', 'fixed-roaming', 'fixed-overworld', 'fixed-trade'].forEach(fixedType => {
+					if (areaData[fixedType]) {
+						Object.values(areaData[fixedType]).forEach(encounters => {
+							if (encounters.includes(x.ID)) {
+								pokemonAreas.add(areaData.name);
+							}
+						});
+					}
+				});
+
+				
+				['raid1', 'raid3', 'raid4', 'raid5', 'raid6'].forEach(raidType => {
+					if (areaData[raidType]) {
+						Object.values(areaData[raidType]).forEach(encounters => {
+							if (encounters.some(encounter => encounter[0] === x.ID)) {
+								pokemonAreas.add(areaData.name);
+							}
+						});
+					}
+				});
+			});
+
+			// Check if the area we're filtering for is in the set of areas where this Pokémon appears
+			return Array.from(pokemonAreas).some(area => 
+				area.toLowerCase() === o.toLowerCase()
+			);
+		}
+	);
+
 	//default filter category
 	selectFilterCategory.value = 'Name';
 	categoryDropdown.className = 'hide';

@@ -153,7 +153,7 @@ function getAreasList(mon) {
 					break;
 			
 				case 'Smash':
-					formattedLocation = `<span class="encounter-smash"><span class="encounter-type">Smash (🗺️):</span> ${locationList.join(', ')}</span>`;
+					formattedLocation = `<span class="encounter-smash"><span class="encounter-type">Smash (🪨):</span> ${locationList.join(', ')}</span>`;
 					encounterGroups['Special'].push(formattedLocation);
 					break;
 			
