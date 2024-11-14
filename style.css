@@ -865,36 +865,57 @@ td.moveDescriptionWrapper {
     font-size: 1rem;
 }
 
-.speciesHeldItems {
-    font-size: 0.9rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    margin-top: 8px; 
-    text-align: center; 
-}
-
 .held-item {
     display: flex;
     align-items: center;
     justify-content: center; 
     gap: 4px;
-    padding: 2px 4px;
+    padding: 4px 8px;
     border-radius: 4px;
     background: rgba(255, 255, 255, 0.1);
+    min-width: 180px; 
+}
+
+.held-item.common {
+    color: #ffffff; 
+}
+
+.held-item.rare {
+    color: #ffd700;
+}
+
+.speciesHeldItems {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px; 
+    text-align: center; 
 }
 
 td.speciesNameWrapper {
-    min-width: 220px;
-    padding: 8px !important;
+    min-width: 250px; 
+    padding: 12px !important; 
+}
+
+.nameContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; 
+    min-width: 200px; 
 }
 
 @media (max-width: 991.98px) {
-    .nameContainer {
-        text-align: center;
-    }
-    
     .speciesHeldItems {
         align-items: center;
+    }
+    
+    td.speciesNameWrapper {
+        width: 100%; 
+        min-width: unset;
+    }
+    
+    .held-item {
+        width: 100%; 
+        max-width: 250px; 
     }
 }
