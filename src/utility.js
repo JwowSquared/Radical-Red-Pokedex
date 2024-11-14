@@ -47,6 +47,7 @@ function getAreasList(mon) {
         'Overworld': new Set(),
         'Trade': new Set(),
         'Raid-1': new Set(),
+								'Raid-2': new Set(),
         'Raid-3': new Set(), 
         'Raid-4': new Set(),
         'Raid-5': new Set(),
