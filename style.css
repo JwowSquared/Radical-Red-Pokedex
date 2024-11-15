@@ -972,3 +972,11 @@ td.speciesNameWrapper {
     padding-bottom: 10px;
     margin-bottom: 10px;
 }
+
+.sprite {
+    width: 64px;
+    height: 64px;
+    background-image: url('images/spritesheet.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+}

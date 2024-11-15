@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Sprite Sheet Generator with Downloads</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        #debug {
+            white-space: pre-wrap;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .canvas-container {
+            margin-top: 20px;
+            overflow: auto;
+            max-height: 800px;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+        .stats {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+        .download-buttons {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+        }
+        .download-btn {
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .download-btn:hover {
+            background: #45a049;
+        }
+        .download-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Pokemon Sprite Sheet Generator</h2>
+        <div id="status">Loading Pokemon data...</div>
+        <div class="stats" id="stats"></div>
+
+        <div class="download-buttons">
+            <button id="downloadSprites" class="download-btn" disabled>Download Sprite Sheet (PNG)</button>
+            <button id="downloadDebug" class="download-btn" disabled>Download Debug List (TXT)</button>
+        </div>
+
+        <div class="canvas-container">
+            <h3>Generated Sprite Sheet</h3>
+            <canvas id="spriteSheet"></canvas>
+        </div>
+    </div>
+
+    <div class="container">
+        <h3>Debug Information</h3>
+        <div id="debug"></div>
+    </div>
+
+    <script>
+        let debugOutput = [];
+
+        async function fetchData() {
+            let request = new Request(`https://raw.githubusercontent.com/JwowSquared/Radical-Red-Pokedex/master/data.js`);
+            let response = await fetch(request);
+            let data = await response.text();
+            data = new Function("return " + data + ";")();
+            return data;
+        }
+
+        function findMegaEvolution(pokemon, allPokemon) {
+            const baseKey = pokemon.key;
+            const mega = Object.values(allPokemon).find(p => 
+                p.dexID === pokemon.dexID && 
+                p.key === `${baseKey}-Mega`
+            );
+            return mega;
+        }
+
+        async function createSpriteImage(base64Data) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.onerror = reject;
+                img.src = base64Data;
+            });
+        }
+
+        function setupDownloadButtons() {
+            document.getElementById('downloadSprites').addEventListener('click', () => {
+                const canvas = document.getElementById('spriteSheet');
+                const link = document.createElement('a');
+                link.download = 'pokemon-sprite-sheet.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+
+            document.getElementById('downloadDebug').addEventListener('click', () => {
+                const blob = new Blob([debugOutput.join('\n')], { type: 'text/plain' });
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.download = 'pokemon-debug-list.txt';
+                link.href = url;
+                link.click();
+                window.URL.revokeObjectURL(url);
+            });
+        }
+
+        async function generateFullSpriteSheet(data) {
+            const speciesData = data.species;
+            const spritesData = data.sprites;
+            const pokemonArray = Object.values(speciesData);
+            const sortedPokemon = [];
+            debugOutput = [];
+            
+            debugOutput.push(`Pokemon Sprite Sheet Mapping List`);
+            debugOutput.push(`Generated: ${new Date().toISOString()}\n`);
+            debugOutput.push(`Total Pokemon in data: ${pokemonArray.length}`);
+            const megaCount = pokemonArray.filter(p => p.key.endsWith('-Mega')).length;
+            debugOutput.push(`Total Mega Evolutions: ${megaCount}\n`);
+
+            const baseFormPokemon = pokemonArray
+                .filter(p => !p.key.endsWith('-Mega'))
+                .sort((a, b) => a.dexID - b.dexID);
+
+            debugOutput.push(`Processing all Pokemon and their Mega forms:`);
+            
+            const SPRITE_SIZE = 64;
+            const SPRITES_PER_ROW = 10;
+
+            let totalSprites = 0;
+            baseFormPokemon.forEach(pokemon => {
+                totalSprites++;
+                const mega = findMegaEvolution(pokemon, speciesData);
+                if (mega) totalSprites++;
+            });
+
+            const canvas = document.getElementById('spriteSheet');
+            const ctx = canvas.getContext('2d');
+            const rows = Math.ceil(totalSprites / SPRITES_PER_ROW);
+            canvas.width = SPRITES_PER_ROW * SPRITE_SIZE;
+            canvas.height = rows * SPRITE_SIZE;
+
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            let spriteIndex = 0;
+            for(let i = 0; i < baseFormPokemon.length; i++) {
+                const pokemon = baseFormPokemon[i];
+                sortedPokemon.push(pokemon);
+                debugOutput.push(`\n${i + 1}. ${pokemon.name} (ID: ${pokemon.ID}, dexID: ${pokemon.dexID}, key: ${pokemon.key})`);
+                
+                if (spritesData[pokemon.ID]) {
+                    const img = await createSpriteImage(spritesData[pokemon.ID]);
+                    const row = Math.floor(spriteIndex / SPRITES_PER_ROW);
+                    const col = spriteIndex % SPRITES_PER_ROW;
+                    ctx.drawImage(img, col * SPRITE_SIZE, row * SPRITE_SIZE);
+                    spriteIndex++;
+                }
+                
+                const mega = findMegaEvolution(pokemon, speciesData);
+                if (mega) {
+                    sortedPokemon.push(mega);
+                    debugOutput.push(`   → ${mega.name} (ID: ${mega.ID}, dexID: ${mega.dexID}, key: ${mega.key})`);
+                    
+                    if (spritesData[mega.ID]) {
+                        const megaImg = await createSpriteImage(spritesData[mega.ID]);
+                        const row = Math.floor(spriteIndex / SPRITES_PER_ROW);
+                        const col = spriteIndex % SPRITES_PER_ROW;
+                        ctx.drawImage(megaImg, col * SPRITE_SIZE, row * SPRITE_SIZE);
+                        spriteIndex++;
+                    }
+                }
+
+                if (i % 10 === 0) {
+                    document.getElementById('status').textContent = 
+                        `Processing Pokemon... ${Math.round((i / baseFormPokemon.length) * 100)}%`;
+                }
+            }
+
+            const stats = document.getElementById('stats');
+            stats.innerHTML = `
+                <strong>Final Statistics:</strong><br>
+                Total Sprites Generated: ${spriteIndex}<br>
+                Sheet Dimensions: ${canvas.width}x${canvas.height}<br>
+                Rows: ${rows}, Columns: ${SPRITES_PER_ROW}
+            `;
+
+            document.getElementById('debug').textContent = debugOutput.join('\n');
+            document.getElementById('status').textContent = 'Sprite sheet generation complete!';
+            
+            document.getElementById('downloadSprites').disabled = false;
+            document.getElementById('downloadDebug').disabled = false;
+
+            return sortedPokemon;
+        }
+
+        async function init() {
+            try {
+                setupDownloadButtons();
+                const data = await fetchData();
+                await generateFullSpriteSheet(data);
+            } catch (error) {
+                document.getElementById('status').textContent = 'Error: ' + error.message;
+                console.error(error);
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
