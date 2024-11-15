@@ -980,3 +980,26 @@ td.speciesNameWrapper {
     background-repeat: no-repeat;
     display: inline-block;
 }
+
+.sprite-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.pokemon-info-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.infoTreeSpriteWrapper .sprite {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.infoTreeSpriteWrapper .sprite:hover {
+    transform: scale(1.1);
+}

@@ -91,58 +91,62 @@ function displayMovesRow(tracker, move) {
 }
 
 function displaySpeciesPanel(mon) {
-	let infoDisplay = document.getElementById('speciesPanelInfoDisplay');
-	let tables = [
-		['speciesLearnsetPrevoExclusiveTable', mon.prevoMoves?.map(x => getMove(x, mon.ID))],
-		['speciesLearnsetLevelUpTable', mon.levelupMoves?.map(x => [getMove(x[0], mon.ID), x[1]])],
-		['speciesLearnsetTMHMTable', mon.tmMoves?.map(x => getMove(tmMoves[x], mon.ID, true)).filter(x => x !== undefined)],
-		['speciesLearnsetTutorTable', mon.tutorMoves?.map(x => getMove(tutorMoves[x], mon.ID, true)).filter(x => x !== undefined)],
-		['speciesLearnsetEggMovesTable', mon.eggMoves?.map(x => getMove(x, mon.ID, true))],
-		['speciesLearnsetEventTable', mon.eventMoves?.map(x => getMove(x, mon.ID, true))],
-	]
-	
-	infoDisplay.innerText = '';
-	
-	infoDisplay.append(
-		buildWrapperSprite('div', 'infoSprite', getSprite(mon.ID)),
-		buildWrapper('div', 'infoNameName', mon.key),
-		buildWrapper('div', 'infoDexIDWrapper',  '#' + mon.dexID),
-		buildWrapperTypes('div', 'infoTypes', types[mon.type[0]], types[mon.type[1]]),
-		buildWrapperHeldItems('div', 'infoItems', mon.items),
-		buildWrapperAbilitiesFull('div', 'infoAbilities', mon.abilities, mon.ID)
-	);
-	
-	let statWrapper = buildWrapper('div', 'infoStats');
-	statWrapper.append(
-		buildWrapperStatFull('div', 'infoStat', 'HP', mon.stats[0]),
-		buildWrapperStatFull('div', 'infoStat', 'Atk', mon.stats[1]),
-		buildWrapperStatFull('div', 'infoStat', 'Def', mon.stats[2]),
-		buildWrapperStatFull('div', 'infoStat', 'SpA', mon.stats[4]),
-		buildWrapperStatFull('div', 'infoStat', 'SpD', mon.stats[5]),
-		buildWrapperStatFull('div', 'infoStat', 'Spe', mon.stats[3]),
-		buildWrapperStat('div', 'infoStat', 'BST', mon.stats.reduce((total, y) => total += y, 0))
-	);
-	
-	infoDisplay.append(
-		statWrapper,
-		buildWrapperChangelog('div', 'infoChangelog', mon),
-		buildWrapperFamilyTree('div', 'infoFamilyTree', mon),
-		buildWrapperAreas('div', 'infoAreas', mon),
-		buildWrapperCoverageDefensive('div', 'infoCoverage', mon.type[0], mon.type[1]),
-		//buildWrapperCap('div', 'infoCap', mon.ID),
-		//buildWrapperEggGroups('div', 'infoEggGroups', mon.eggGroup),
-	);
+    let infoDisplay = document.getElementById('speciesPanelInfoDisplay');
+    let tables = [
+        ['speciesLearnsetPrevoExclusiveTable', mon.prevoMoves?.map(x => getMove(x, mon.ID))],
+        ['speciesLearnsetLevelUpTable', mon.levelupMoves?.map(x => [getMove(x[0], mon.ID), x[1]])],
+        ['speciesLearnsetTMHMTable', mon.tmMoves?.map(x => getMove(tmMoves[x], mon.ID, true)).filter(x => x !== undefined)],
+        ['speciesLearnsetTutorTable', mon.tutorMoves?.map(x => getMove(tutorMoves[x], mon.ID, true)).filter(x => x !== undefined)],
+        ['speciesLearnsetEggMovesTable', mon.eggMoves?.map(x => getMove(x, mon.ID, true))],
+        ['speciesLearnsetEventTable', mon.eventMoves?.map(x => getMove(x, mon.ID, true))]
+    ];
 
-	for (const [ID, data] of tables) {
-		let table = document.getElementById(ID);
-		table.className = 'tableWrapper';
-		if (data && data.length > 0)
-			populateTable(ID, data);
-		else
-			table.classList.toggle('hide');
-	}
+    infoDisplay.innerText = '';
 
-	$('#speciesModal').modal('show');
+    
+    const spriteWrapper = buildWrapperSprite('div', 'infoSprite', getSprite(mon.ID));
+    
+    infoDisplay.append(
+        spriteWrapper,
+        buildWrapper('div', 'infoNameName', mon.key),
+        buildWrapper('div', 'infoDexIDWrapper', '#' + mon.dexID),
+        buildWrapperTypes('div', 'infoTypes', types[mon.type[0]], types[mon.type[1]]),
+        buildWrapperHeldItems('div', 'infoItems', mon.items),
+        buildWrapperAbilitiesFull('div', 'infoAbilities', mon.abilities, mon.ID)
+    );
+
+    
+    let statWrapper = buildWrapper('div', 'infoStats');
+    statWrapper.append(
+        buildWrapperStatFull('div', 'infoStat', 'HP', mon.stats[0]),
+        buildWrapperStatFull('div', 'infoStat', 'Atk', mon.stats[1]),
+        buildWrapperStatFull('div', 'infoStat', 'Def', mon.stats[2]),
+        buildWrapperStatFull('div', 'infoStat', 'SpA', mon.stats[4]),
+        buildWrapperStatFull('div', 'infoStat', 'SpD', mon.stats[5]),
+        buildWrapperStatFull('div', 'infoStat', 'Spe', mon.stats[3]),
+        buildWrapperStat('div', 'infoStat', 'BST', mon.stats.reduce((total, y) => total += y, 0))
+    );
+
+    infoDisplay.append(
+        statWrapper,
+        buildWrapperChangelog('div', 'infoChangelog', mon),
+        buildWrapperFamilyTree('div', 'infoFamilyTree', mon),
+        buildWrapperAreas('div', 'infoAreas', mon),
+        buildWrapperCoverageDefensive('div', 'infoCoverage', mon.type[0], mon.type[1])
+    );
+
+    
+    for (const [ID, data] of tables) {
+        let table = document.getElementById(ID);
+        table.className = 'tableWrapper';
+        if (data && data.length > 0) {
+            populateTable(ID, data);
+        } else {
+            table.classList.toggle('hide');
+        }
+    }
+
+    $('#speciesModal').modal('show');
 }
 
 function buildWrapper(tag, className, text=null) {
@@ -354,76 +358,84 @@ function buildWrapperChangelog(tag, className, mon) {
 }
 
 function buildWrapperFamilyTree(tag, className, mon) {
-	let wrapper = buildWrapper(tag, className + 'Wrapper');
-	wrapper.append(buildWrapper('div', 'infoTreeEvoLabel', 'Evolution Line'));
-	let display = buildWrapper('div', 'infoEvolutionMethods');
-	wrapper.append(familyTree(display, species[mon.ancestor]));
-	wrapper.append(display);
-	
-	
-	if (mon.order !== undefined) {
-		let forms = Object.values(species).filter(x => x.dexID == mon.dexID).sort(cmp(x => x.order));
-		wrapper.append(buildWrapper('div', 'infoTreeFormsLabel', 'Alternate Forms'));
-		let formsWrapper = buildWrapper('div', 'infoFormsWrapper');
-		for (const form of forms) {
-			let spriteWrapper = buildWrapper('div', 'infoTreeSpriteWrapper');
-			let img = document.createElement('img');
-			img.src = getSprite(form.ID);
-			img.className = 'infoTreeSprite';
-			img.onclick = function () {
-				displaySpeciesPanel(form);
-			}
-			spriteWrapper.append(img);
-			formsWrapper.append(spriteWrapper);
-		}
-		wrapper.append(formsWrapper);
-	}
+    let wrapper = buildWrapper(tag, className + 'Wrapper');
+    wrapper.append(buildWrapper('div', 'infoTreeEvoLabel', 'Evolution Line'));
+    let display = buildWrapper('div', 'infoEvolutionMethods');
+    wrapper.append(familyTree(display, species[mon.ancestor]));
+    wrapper.append(display);
 
-	return wrapper;
+    if (mon.order !== undefined) {
+        let forms = Object.values(species)
+            .filter(x => x.dexID == mon.dexID)
+            .sort(cmp(x => x.order));
+        
+        wrapper.append(buildWrapper('div', 'infoTreeFormsLabel', 'Alternate Forms'));
+        let formsWrapper = buildWrapper('div', 'infoFormsWrapper');
+        
+        for (const form of forms) {
+            let spriteWrapper = buildWrapper('div', 'infoTreeSpriteWrapper');
+            const spriteDiv = document.createElement('div');
+            spriteDiv.className = 'sprite';
+            spriteDiv.style.cssText = getSprite(form.ID);
+            spriteDiv.onclick = function() {
+                displaySpeciesPanel(form);
+            };
+            spriteWrapper.appendChild(spriteDiv);
+            formsWrapper.appendChild(spriteWrapper);
+        }
+        wrapper.append(formsWrapper);
+    }
+
+    return wrapper;
 }
 
 function familyTree(display, mon, prevo=null, evo=null) {
-	let wrapper = buildWrapper('div', 'infoTreeWrapper ' + mon.key);
-	
-	if (prevo) {
-		wrapper.className += ' inner';
-		let evoWrapper = buildWrapper('div', 'evoMethodWrapper');
-		let arrow = buildWrapper('div', 'infoTreeArrow', `→`);
-		
-		let leftMon = prevo.key;
-		let rightMon = mon.key;
-		let description = eval(evolutions[evo[0]]);
-		arrow.title = description;
-		let method = buildWrapper('div', 'evoMethod');
-		
-		method.innerHTML = `<span>${leftMon}</span> → <span>${rightMon}</span> ${description}.`;
-		display.append(method);
-		
-		evoWrapper.append(arrow);
-		wrapper.append(evoWrapper);
-	}
-	else
-		wrapper.className += ' outer';
-	
-	let spriteWrapper = buildWrapper('div', 'infoTreeSpriteWrapper');
-	let img = document.createElement('img');
-	img.src = getSprite(mon.ID);
-	img.className = 'infoTreeSprite';
-	img.onclick = function () {
-		displaySpeciesPanel(mon);
-	}
-	spriteWrapper.append(img);
-	wrapper.append(spriteWrapper);	
-	if (mon.evolutions) {
-		if (mon.evolutions.length === 1)
-			wrapper.className += ' single';
-		let branchWrapper = buildWrapper('div', 'infoTreeBranchWrapper');
-		for (const evolution of mon.evolutions)
-			branchWrapper.append(familyTree(display, species[evolution[2]], mon, evolution));
-		wrapper.append(branchWrapper);
-	}
-	
-	return wrapper;
+    let wrapper = buildWrapper('div', 'infoTreeWrapper ' + mon.key);
+    
+    if (prevo) {
+        wrapper.className += ' inner';
+        let evoWrapper = buildWrapper('div', 'evoMethodWrapper');
+        let arrow = buildWrapper('div', 'infoTreeArrow', `→`);
+        
+        let leftMon = prevo.key;
+        let rightMon = mon.key;
+        let description = eval(evolutions[evo[0]]);
+        arrow.title = description;
+        let method = buildWrapper('div', 'evoMethod');
+        
+        method.innerHTML = `<span>${leftMon}</span> → <span>${rightMon}</span> ${description}.`;
+        display.append(method);
+        
+        evoWrapper.append(arrow);
+        wrapper.append(evoWrapper);
+    }
+    else {
+        wrapper.className += ' outer';
+    }
+
+    
+    let spriteWrapper = buildWrapper('div', 'infoTreeSpriteWrapper');
+    const spriteDiv = document.createElement('div');
+    spriteDiv.className = 'sprite';
+    spriteDiv.style.cssText = getSprite(mon.ID);
+    spriteDiv.onclick = function() {
+        displaySpeciesPanel(mon);
+    };
+    spriteWrapper.appendChild(spriteDiv);
+    wrapper.appendChild(spriteWrapper);
+
+    if (mon.evolutions) {
+        if (mon.evolutions.length === 1) {
+            wrapper.className += ' single';
+        }
+        let branchWrapper = buildWrapper('div', 'infoTreeBranchWrapper');
+        for (const evolution of mon.evolutions) {
+            branchWrapper.append(familyTree(display, species[evolution[2]], mon, evolution));
+        }
+        wrapper.append(branchWrapper);
+    }
+    
+    return wrapper;
 }
 
 function buildWrapperCoverageDefensive(tag, className, primary, secondary=undefined) {
