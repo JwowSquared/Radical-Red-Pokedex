@@ -25,18 +25,15 @@ function getFullLearnset(mon) {
 
 
 function getSprite(ID) {
-    
-    if (typeof window.spriteIndexMap === 'undefined') {
-        window.spriteIndexMap = new Map();
-        window.currentSpriteIndex = 0;
+    if (!spriteIndexMap) {
+        console.error('Sprite mapping not initialized');
+        return '';
     }
 
-    let spriteIndex;
-    if (window.spriteIndexMap.has(ID)) {
-        spriteIndex = window.spriteIndexMap.get(ID);
-    } else {
-        spriteIndex = window.currentSpriteIndex++;
-        window.spriteIndexMap.set(ID, spriteIndex);
+    const spriteIndex = spriteIndexMap.get(ID);
+    if (spriteIndex === undefined) {
+        console.warn(`No sprite mapping found for ID: ${ID}`);
+        return '';
     }
 
     const SPRITE_SIZE = 64;

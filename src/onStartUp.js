@@ -39,9 +39,26 @@ async function fetchData() {
     document.querySelector("main").className = "";
 }
 
+function initializeSpriteMapping(speciesData) {
+    spriteIndexMap = new Map();
+    let currentIndex = 0;
+    
+    Object.values(speciesData)
+        .sort((a, b) => a.dexID - b.dexID || a.order - b.order)
+        .forEach(pokemon => {
+            if (!spriteIndexMap.has(pokemon.ID)) {
+                spriteIndexMap.set(pokemon.ID, currentIndex++);
+            }
+        });
+
+    console.log("Sprite mapping initialized with", spriteIndexMap.size, "entries");
+}
+
 async function onStartup() {
 	
 	await fetchData();
+
+	initializeSpriteMapping(species);
 	
 	setupTables();
 	
