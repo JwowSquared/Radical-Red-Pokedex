@@ -1,4 +1,4 @@
-Data Structures
+Data Structures for Three Samples
 
 data.species
 {
