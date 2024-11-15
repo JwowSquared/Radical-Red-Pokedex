@@ -23,13 +23,27 @@ function getFullLearnset(mon) {
 	return learnset;
 }
 
-function getSprite(ID) {
-	let sprite = sprites[ID];
-	if (sprite === undefined)
-		sprite = sprites[0];
-	return sprite;
-}
 
+function getSprite(ID) {
+
+    const SPRITE_SIZE = 64;
+    const SPRITES_PER_ROW = 10;
+    
+    const spriteIndex = currentSpriteIndex++;
+    const row = Math.floor(spriteIndex / SPRITES_PER_ROW);
+    const col = spriteIndex % SPRITES_PER_ROW;
+    
+    const xPos = col * SPRITE_SIZE;
+    const yPos = row * SPRITE_SIZE;
+    
+    console.log(`Sprite Debug for ID ${ID}:
+    spriteIndex: ${spriteIndex}
+    row: ${row}
+    col: ${col}
+    position: x=${xPos}px, y=${yPos}px`);
+    
+    return `background: url('images/spritesheet.png'); background-position: -${xPos}px -${yPos}px;`;
+}
 
 function getAreasList(mon) {
     if (!mon || !areas) return [];

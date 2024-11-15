@@ -117,7 +117,8 @@
                 const canvas = document.getElementById('spriteSheet');
                 const link = document.createElement('a');
                 link.download = 'pokemon-sprite-sheet.png';
-                link.href = canvas.toDataURL('image/png');
+                
+                link.href = canvas.toDataURL('image/png', 1.0);
                 link.click();
             });
 
@@ -162,13 +163,13 @@
             });
 
             const canvas = document.getElementById('spriteSheet');
-            const ctx = canvas.getContext('2d');
+            const ctx = canvas.getContext('2d', { alpha: true }); 
             const rows = Math.ceil(totalSprites / SPRITES_PER_ROW);
             canvas.width = SPRITES_PER_ROW * SPRITE_SIZE;
             canvas.height = rows * SPRITE_SIZE;
 
-            ctx.fillStyle = 'white';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             let spriteIndex = 0;
             for(let i = 0; i < baseFormPokemon.length; i++) {
@@ -220,6 +221,7 @@
 
             return sortedPokemon;
         }
+
 
         async function init() {
             try {

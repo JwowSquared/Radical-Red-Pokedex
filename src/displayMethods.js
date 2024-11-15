@@ -169,15 +169,13 @@ function buildWrapper(tag, className, content) {
     return wrapper;
 }
 
-function buildWrapperSprite(tag, className, src) {
-	let wrapper = buildWrapper(tag, className + 'Wrapper');
-	
-	let img = document.createElement('img');
-	img.className = className;
-	img.src = src;
-	wrapper.append(img);
-	
-	return wrapper;
+function buildWrapperSprite(tag, className, spriteStyle) {
+    let wrapper = buildWrapper(tag, className + 'Wrapper');
+    let spriteDiv = document.createElement('div');
+    spriteDiv.className = className + ' sprite';
+    spriteDiv.style.cssText = spriteStyle;
+    wrapper.append(spriteDiv);
+    return wrapper;
 }
 
 //function buildWrapperName(tag, className, mon) {

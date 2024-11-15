@@ -22,4 +22,6 @@ saveData = null;
 let trackers = {};
 let filters = {};
 
+let currentSpriteIndex = 0;
+
 let scrollIntoView = true;
