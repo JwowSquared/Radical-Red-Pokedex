@@ -22,18 +22,18 @@ function displaySpeciesRow(tracker, mon) {
     nameElement.textContent = mon.key;
     
     
-    const itemsHTML = getItemNames(mon.items);
+/*    const itemsHTML = getItemNames(mon.items);
     const itemsElement = document.createElement('div');
     itemsElement.className = 'speciesHeldItems';
     if (itemsHTML) {
         itemsElement.innerHTML = itemsHTML;
-    }
+    } */
     
     
     nameContainer.appendChild(nameElement);
-    if (itemsHTML) {
+/*    if (itemsHTML) {
         nameContainer.appendChild(itemsElement);
-    }
+    } */
     
     
     const nameCell = document.createElement('td');
@@ -53,7 +53,7 @@ function displaySpeciesRow(tracker, mon) {
         buildWrapperStat('td', 'speciesStat', 'SpD', mon.stats[5]),
         buildWrapperStat('td', 'speciesStat', 'Spe', mon.stats[3]),
         buildWrapperStat('td', 'speciesStat', 'BST', mon.stats.reduce((total, y) => total += y, 0)),
-        buildWrapper('td', 'speciesAreasWrapper', getAreasList(mon))
+    //    buildWrapper('td', 'speciesAreasWrapper', getAreasList(mon))
     );
 }
 
@@ -108,6 +108,7 @@ function displaySpeciesPanel(mon) {
 		buildWrapper('div', 'infoNameName', mon.key),
 		buildWrapper('div', 'infoDexIDWrapper',  '#' + mon.dexID),
 		buildWrapperTypes('div', 'infoTypes', types[mon.type[0]], types[mon.type[1]]),
+		buildWrapperHeldItems('div', 'infoItems', mon.items),
 		buildWrapperAbilitiesFull('div', 'infoAbilities', mon.abilities, mon.ID)
 	);
 	
@@ -126,9 +127,9 @@ function displaySpeciesPanel(mon) {
 		statWrapper,
 		buildWrapperChangelog('div', 'infoChangelog', mon),
 		buildWrapperFamilyTree('div', 'infoFamilyTree', mon),
+		buildWrapperAreas('div', 'infoAreas', mon),
 		buildWrapperCoverageDefensive('div', 'infoCoverage', mon.type[0], mon.type[1]),
 		//buildWrapperCap('div', 'infoCap', mon.ID),
-		buildWrapperHeldItems('div', 'infoItems', mon.items),
 		//buildWrapperEggGroups('div', 'infoEggGroups', mon.eggGroup),
 	);
 
@@ -277,6 +278,25 @@ function buildWrapperStatFull(tag, className, label, value) {
 	return wrapper;
 }
 
+function buildWrapperAreas(tag, className, mon) {
+    let wrapper = buildWrapper(tag, className + 'Wrapper');
+    
+    // Use the same label class
+    wrapper.append(buildWrapper('div', 'infoTreeEvoLabel', 'Area(s)'));
+    
+    const areasHTML = getAreasList(mon);
+    if (areasHTML) {
+        let areasContainer = document.createElement('div');
+        areasContainer.className = className;
+        areasContainer.innerHTML = areasHTML;
+        wrapper.append(areasContainer);
+    } else {
+        wrapper.append(buildWrapper('div', className, 'No areas available.'));
+    }
+    
+    return wrapper;
+}
+
 function buildWrapperChangelog(tag, className, mon) {
 	let wrapper = buildWrapper(tag, className + 'Wrapper');
 	
@@ -411,7 +431,7 @@ function familyTree(display, mon, prevo=null, evo=null) {
 function buildWrapperCoverageDefensive(tag, className, primary, secondary=undefined) {
 	let wrapper = buildWrapper(tag, className + 'Wrapper');
 	
-	let label = buildWrapper('div', 'coverageLabelWrapper', 'Weakness');
+	let label = buildWrapper('div', 'coverageLabelWrapper', 'Weaknesses');
 	let matchups = buildWrapper('div', 'coverageMatchupsWrapper');
 	
 	let coverage = {};
@@ -481,19 +501,26 @@ function buildWrapperCap(tag, className, ID) {
 	return wrapper;
 }
 
-function buildWrapperHeldItems(tag, className, i) {
-	let wrapper = buildWrapper(tag, className + 'Wrapper');
-	
-	if (i.equals([0, 0])) //why must it be this way?
-		return wrapper;
-	wrapper.append(buildWrapper('div', 'infoItemsLabel', 'Held Items'));
-	if (i[0])
-		wrapper.append(buildWrapper('div', className, 'Common: ' + items[i[0]].name));
-	if (i[1])
-		wrapper.append(buildWrapper('div', className, 'Rare: ' + items[i[1]].name));
-	
-	return wrapper;
+function buildWrapperHeldItems(tag, className, itemsArray) {
+    let wrapper = buildWrapper(tag, className + 'Wrapper');
+    
+    if (!itemsArray || (itemsArray[0] === 0 && itemsArray[1] === 0)) {
+        return wrapper;
+    }
+    
+    wrapper.append(buildWrapper('div', className + 'Label', 'Held Items'));
+    
+    const itemsHTML = getItemNames(itemsArray);
+    if (itemsHTML) {
+        let itemsContainer = document.createElement('div');
+        itemsContainer.className = className;
+        itemsContainer.innerHTML = itemsHTML;
+        wrapper.append(itemsContainer);
+    }
+    
+    return wrapper;
 }
+
 
 function buildWrapperEggGroups(tag, className, e) {
 	let wrapper = buildWrapper(tag, className + 'Wrapper');
@@ -531,3 +558,4 @@ function buildBackgroundColor(currentRow, mon) {
 	//	currentRow.style.backgroundColor = '';
 	//}
 }
+

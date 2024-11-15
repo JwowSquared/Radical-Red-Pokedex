@@ -64,7 +64,7 @@ function setupTables() {
             'SpD': cmp(x => x.stats[5], -1),
             'Spe': cmp(x => x.stats[3], -1),
             'BST': cmp(x => x.stats.reduce((total, y) => total += y, 0), -1),
-            'Area(s)': cmp(x => getAreasList(x).join(''))
+        //    'Area(s)': cmp(x => getAreasList(x).join(''))
         },
         [cmp(x => x.dexID), cmp(x => x.order)]
     );

@@ -798,6 +798,34 @@ td.moveDescriptionWrapper {
     color: #ea1915;
 }
 
+.infoAreas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 10px;
+}
+
+.infoAreas .encounter-group {
+    background: none;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.infoAreas [class^="encounter-"] {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    font-size: 1.0rem;
+    padding: 4px 8px;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
 .speciesAreasWrapper {
     display: flex;
     flex-direction: column;
@@ -865,6 +893,20 @@ td.moveDescriptionWrapper {
     font-size: 1rem;
 }
 
+.infoItemsLabel {
+    font-weight: 550;
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.infoItems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 10px;
+}
+
 .held-item {
     display: flex;
     align-items: center;
@@ -874,6 +916,11 @@ td.moveDescriptionWrapper {
     border-radius: 4px;
     background: rgba(255, 255, 255, 0.1);
     min-width: 180px; 
+}
+
+.held-item .item-label,
+.held-item .item-name {
+    font-weight: bold;
 }
 
 .held-item.common {
