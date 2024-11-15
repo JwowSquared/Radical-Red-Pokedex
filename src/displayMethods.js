@@ -59,35 +59,35 @@ function displaySpeciesRow(tracker, mon) {
 
 
 function displayLevelUpMovesRow(tracker, movePair) {
-	let [move, level] = movePair;
-	let currentRow = document.createElement('tr');
-	currentRow.className = 'movesRow';
-	tracker.body.appendChild(currentRow);
-	
-	currentRow.append(
-		buildWrapper('td', 'moveLevelWrapper', level),
-		buildWrapper('td', 'moveNameWrapper', move.name),
-		buildWrapperTypes('td', 'moveType', types[move.type]),
-		buildWrapperSprite('td', 'moveSplit', getSprite(splits[move.split])),
-		buildWrapper('td', 'movePowerWrapper', move.power),
-		buildWrapper('td', 'moveAccuracyWrapper', move.accuracy),
-		buildWrapper('td', 'moveDescriptionWrapper', move.description)
-	);
+    let [move, level] = movePair;
+    let currentRow = document.createElement('tr');
+    currentRow.className = 'movesRow';
+    tracker.body.appendChild(currentRow);
+    
+    currentRow.append(
+        buildWrapper('td', 'moveLevelWrapper', level),
+        buildWrapper('td', 'moveNameWrapper', move.name),
+        buildWrapperTypes('td', 'moveType', types[move.type]),
+        buildWrapperMoveSplit('td', 'moveSplit', move.split),
+        buildWrapper('td', 'movePowerWrapper', move.power),
+        buildWrapper('td', 'moveAccuracyWrapper', move.accuracy),
+        buildWrapper('td', 'moveDescriptionWrapper', move.description)
+    );
 }
 
 function displayMovesRow(tracker, move) {
-	let currentRow = document.createElement('tr');
-	currentRow.className = 'movesRow';
-	tracker.body.appendChild(currentRow);
-	
-	currentRow.append(
-		buildWrapper('td', 'moveNameWrapper', move.name),
-		buildWrapperTypes('td', 'moveType', types[move.type]),
-		buildWrapperSprite('td', 'moveSplit', getSprite(splits[move.split])),
-		buildWrapper('td', 'movePowerWrapper', move.power),
-		buildWrapper('td', 'moveAccuracyWrapper', move.accuracy),
-		buildWrapper('td', 'moveDescriptionWrapper', move.description)
-	);
+    let currentRow = document.createElement('tr');
+    currentRow.className = 'movesRow';
+    tracker.body.appendChild(currentRow);
+    
+    currentRow.append(
+        buildWrapper('td', 'moveNameWrapper', move.name),
+        buildWrapperTypes('td', 'moveType', types[move.type]),
+        buildWrapperMoveSplit('td', 'moveSplit', move.split),
+        buildWrapper('td', 'movePowerWrapper', move.power),
+        buildWrapper('td', 'moveAccuracyWrapper', move.accuracy),
+        buildWrapper('td', 'moveDescriptionWrapper', move.description)
+    );
 }
 
 function displaySpeciesPanel(mon) {
@@ -475,6 +475,25 @@ function buildWrapperTypeMatchup(type, matchup) {
 	wrapper.append(buildWrapper('div', 'typeMatchupMultiplier x' + (matchup * 100), matchup + 'x'));
 	
 	return wrapper;
+}
+
+function buildWrapperMoveSplit(tag, className, split) {
+    let wrapper = buildWrapper(tag, className + 'Wrapper');
+    let moveDiv = document.createElement('div');
+    moveDiv.className = className;
+    
+    
+    const splitImageMap = {
+        0: "graphics/physical.png",
+        1: "graphics/special.png",
+        2: "graphics/status.png"
+    };
+    
+    const imageUrl = splitImageMap[split] || splitImageMap[2];
+    moveDiv.style.cssText = `background: url('${imageUrl}') no-repeat center; background-size: contain;`;
+    
+    wrapper.append(moveDiv);
+    return wrapper;
 }
 
 function buildWrapperCap(tag, className, ID) {

@@ -1003,3 +1003,16 @@ td.speciesNameWrapper {
 .infoTreeSpriteWrapper .sprite:hover {
     transform: scale(1.1);
 }
+
+.moveSplit {
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.moveSplitWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
