@@ -1,0 +1,2632 @@
+Pokemon Sprite Sheet Mapping List
+Generated: 2024-11-15T14:50:41.760Z
+
+Total Pokemon in data: 1343
+Total Mega Evolutions: 61
+
+Processing all Pokemon and their Mega forms:
+
+1. Bulbasaur (ID: 1, dexID: 1, key: Bulbasaur)
+
+2. Ivysaur (ID: 2, dexID: 2, key: Ivysaur)
+
+3. Venusaur (ID: 3, dexID: 3, key: Venusaur)
+   → Venusaur (ID: 869, dexID: 3, key: Venusaur-Mega)
+
+4. Charmander (ID: 4, dexID: 4, key: Charmander)
+
+5. Charmeleon (ID: 5, dexID: 5, key: Charmeleon)
+
+6. Charizard (ID: 6, dexID: 6, key: Charizard)
+
+7. Charizard (ID: 870, dexID: 6, key: Charizard-Mega-X)
+
+8. Charizard (ID: 871, dexID: 6, key: Charizard-Mega-Y)
+
+9. Squirtle (ID: 7, dexID: 7, key: Squirtle)
+
+10. Wartortle (ID: 8, dexID: 8, key: Wartortle)
+
+11. Blastoise (ID: 9, dexID: 9, key: Blastoise)
+   → Blastoise (ID: 872, dexID: 9, key: Blastoise-Mega)
+
+12. Caterpie (ID: 10, dexID: 10, key: Caterpie)
+
+13. Metapod (ID: 11, dexID: 11, key: Metapod)
+
+14. Butterfree (ID: 12, dexID: 12, key: Butterfree)
+   → Butterfree (ID: 1233, dexID: 12, key: Butterfree-Mega)
+
+15. Weedle (ID: 13, dexID: 13, key: Weedle)
+
+16. Kakuna (ID: 14, dexID: 14, key: Kakuna)
+
+17. Beedrill (ID: 15, dexID: 15, key: Beedrill)
+   → Beedrill (ID: 873, dexID: 15, key: Beedrill-Mega)
+
+18. Pidgey (ID: 16, dexID: 16, key: Pidgey)
+
+19. Pidgeotto (ID: 17, dexID: 17, key: Pidgeotto)
+
+20. Pidgeot (ID: 18, dexID: 18, key: Pidgeot)
+   → Pidgeot (ID: 874, dexID: 18, key: Pidgeot-Mega)
+
+21. Rattata (ID: 19, dexID: 19, key: Rattata)
+
+22. Rattata (ID: 1020, dexID: 19, key: Rattata-Alola)
+
+23. Raticate (ID: 20, dexID: 20, key: Raticate)
+
+24. Raticate (ID: 1021, dexID: 20, key: Raticate-Alola)
+
+25. Spearow (ID: 21, dexID: 21, key: Spearow)
+
+26. Fearow (ID: 22, dexID: 22, key: Fearow)
+
+27. Ekans (ID: 23, dexID: 23, key: Ekans)
+
+28. Arbok (ID: 24, dexID: 24, key: Arbok)
+
+29. Pikachu (ID: 25, dexID: 25, key: Pikachu)
+
+30. Pikachu (ID: 1085, dexID: 25, key: Pikachu-Surfing)
+
+31. Pikachu (ID: 1086, dexID: 25, key: Pikachu-Flying)
+
+32. Pikachu (ID: 1087, dexID: 25, key: Pikachu-Cosplay)
+
+33. Pikachu (ID: 1088, dexID: 25, key: Pikachu-Libre)
+
+34. Pikachu (ID: 1089, dexID: 25, key: Pikachu-Pop-Star)
+
+35. Pikachu (ID: 1090, dexID: 25, key: Pikachu-Rock-Star)
+
+36. Pikachu (ID: 1091, dexID: 25, key: Pikachu-Belle)
+
+37. Pikachu (ID: 1092, dexID: 25, key: Pikachu-PhD)
+
+38. Pikachu (ID: 1093, dexID: 25, key: Pikachu-Original)
+
+39. Pikachu (ID: 1094, dexID: 25, key: Pikachu-Hoenn)
+
+40. Pikachu (ID: 1095, dexID: 25, key: Pikachu-Sinnoh)
+
+41. Pikachu (ID: 1096, dexID: 25, key: Pikachu-Unova)
+
+42. Pikachu (ID: 1097, dexID: 25, key: Pikachu-Kalos)
+
+43. Pikachu (ID: 1098, dexID: 25, key: Pikachu-Alola)
+
+44. Pikachu (ID: 1099, dexID: 25, key: Pikachu-Partner)
+
+45. Raichu (ID: 26, dexID: 26, key: Raichu)
+
+46. Raichu (ID: 1022, dexID: 26, key: Raichu-Alola)
+
+47. Sandshrew (ID: 27, dexID: 27, key: Sandshrew)
+
+48. Sandshrew (ID: 1023, dexID: 27, key: Sandshrew-Alola)
+
+49. Sandslash (ID: 28, dexID: 28, key: Sandslash)
+
+50. Sandslash (ID: 1024, dexID: 28, key: Sandslash-Alola)
+
+51. Nidoran♀ (ID: 29, dexID: 29, key: Nidoran-F)
+
+52. Nidorina (ID: 30, dexID: 30, key: Nidorina)
+
+53. Nidoqueen (ID: 31, dexID: 31, key: Nidoqueen)
+
+54. Nidoran♂ (ID: 32, dexID: 32, key: Nidoran-M)
+
+55. Nidorino (ID: 33, dexID: 33, key: Nidorino)
+
+56. Nidoking (ID: 34, dexID: 34, key: Nidoking)
+
+57. Clefairy (ID: 35, dexID: 35, key: Clefairy)
+
+58. Clefable (ID: 36, dexID: 36, key: Clefable)
+
+59. Vulpix (ID: 37, dexID: 37, key: Vulpix)
+
+60. Vulpix (ID: 1025, dexID: 37, key: Vulpix-Alola)
+
+61. Ninetales (ID: 38, dexID: 38, key: Ninetales)
+
+62. Ninetales (ID: 1026, dexID: 38, key: Ninetales-Alola)
+
+63. Jigglypuff (ID: 39, dexID: 39, key: Jigglypuff)
+
+64. Wigglytuff (ID: 40, dexID: 40, key: Wigglytuff)
+
+65. Zubat (ID: 41, dexID: 41, key: Zubat)
+
+66. Golbat (ID: 42, dexID: 42, key: Golbat)
+
+67. Oddish (ID: 43, dexID: 43, key: Oddish)
+
+68. Gloom (ID: 44, dexID: 44, key: Gloom)
+
+69. Vileplume (ID: 45, dexID: 45, key: Vileplume)
+
+70. Paras (ID: 46, dexID: 46, key: Paras)
+
+71. Parasect (ID: 47, dexID: 47, key: Parasect)
+
+72. Venonat (ID: 48, dexID: 48, key: Venonat)
+
+73. Venomoth (ID: 49, dexID: 49, key: Venomoth)
+
+74. Diglett (ID: 50, dexID: 50, key: Diglett)
+
+75. Diglett (ID: 1027, dexID: 50, key: Diglett-Alola)
+
+76. Dugtrio (ID: 51, dexID: 51, key: Dugtrio)
+
+77. Dugtrio (ID: 1028, dexID: 51, key: Dugtrio-Alola)
+
+78. Meowth (ID: 52, dexID: 52, key: Meowth)
+
+79. Meowth (ID: 1029, dexID: 52, key: Meowth-Alola)
+
+80. Meowth (ID: 1208, dexID: 52, key: Meowth-Galar)
+
+81. Persian (ID: 53, dexID: 53, key: Persian)
+
+82. Persian (ID: 1030, dexID: 53, key: Persian-Alola)
+
+83. Psyduck (ID: 54, dexID: 54, key: Psyduck)
+
+84. Golduck (ID: 55, dexID: 55, key: Golduck)
+
+85. Mankey (ID: 56, dexID: 56, key: Mankey)
+
+86. Primeape (ID: 57, dexID: 57, key: Primeape)
+
+87. Growlithe (ID: 58, dexID: 58, key: Growlithe)
+
+88. Growlithe (ID: 1271, dexID: 58, key: Growlithe-Hisui)
+
+89. Arcanine (ID: 59, dexID: 59, key: Arcanine)
+
+90. Arcanine (ID: 1272, dexID: 59, key: Arcanine-Hisui)
+
+91. Poliwag (ID: 60, dexID: 60, key: Poliwag)
+
+92. Poliwhirl (ID: 61, dexID: 61, key: Poliwhirl)
+
+93. Poliwrath (ID: 62, dexID: 62, key: Poliwrath)
+
+94. Abra (ID: 63, dexID: 63, key: Abra)
+
+95. Kadabra (ID: 64, dexID: 64, key: Kadabra)
+
+96. Alakazam (ID: 65, dexID: 65, key: Alakazam)
+   → Alakazam (ID: 875, dexID: 65, key: Alakazam-Mega)
+
+97. Machop (ID: 66, dexID: 66, key: Machop)
+
+98. Machoke (ID: 67, dexID: 67, key: Machoke)
+
+99. Machamp (ID: 68, dexID: 68, key: Machamp)
+   → Machamp (ID: 1236, dexID: 68, key: Machamp-Mega)
+
+100. Bellsprout (ID: 69, dexID: 69, key: Bellsprout)
+
+101. Weepinbell (ID: 70, dexID: 70, key: Weepinbell)
+
+102. Victreebel (ID: 71, dexID: 71, key: Victreebel)
+
+103. Tentacool (ID: 72, dexID: 72, key: Tentacool)
+
+104. Tentacruel (ID: 73, dexID: 73, key: Tentacruel)
+
+105. Geodude (ID: 74, dexID: 74, key: Geodude)
+
+106. Geodude (ID: 1031, dexID: 74, key: Geodude-Alola)
+
+107. Graveler (ID: 75, dexID: 75, key: Graveler)
+
+108. Graveler (ID: 1032, dexID: 75, key: Graveler-Alola)
+
+109. Golem (ID: 76, dexID: 76, key: Golem)
+
+110. Golem (ID: 1033, dexID: 76, key: Golem-Alola)
+
+111. Ponyta (ID: 77, dexID: 77, key: Ponyta)
+
+112. Ponyta (ID: 1209, dexID: 77, key: Ponyta-Galar)
+
+113. Rapidash (ID: 78, dexID: 78, key: Rapidash)
+
+114. Rapidash (ID: 1210, dexID: 78, key: Rapidash-Galar)
+
+115. Slowpoke (ID: 79, dexID: 79, key: Slowpoke)
+
+116. Slowpoke (ID: 1211, dexID: 79, key: Slowpoke-Galar)
+
+117. Slowbro (ID: 80, dexID: 80, key: Slowbro)
+   → Slowbro (ID: 876, dexID: 80, key: Slowbro-Mega)
+
+118. Slowbro (ID: 1212, dexID: 80, key: Slowbro-Galar)
+
+119. Magnemite (ID: 81, dexID: 81, key: Magnemite)
+
+120. Magneton (ID: 82, dexID: 82, key: Magneton)
+
+121. Farfetch’d (ID: 83, dexID: 83, key: Farfetch’d)
+
+122. Farfetch’d (ID: 1213, dexID: 83, key: Farfetch’d-Galar)
+
+123. Doduo (ID: 84, dexID: 84, key: Doduo)
+
+124. Doduo (ID: 1276, dexID: 84, key: Doduo-Sevii)
+
+125. Dodrio (ID: 85, dexID: 85, key: Dodrio)
+
+126. Dodrio (ID: 1277, dexID: 85, key: Dodrio-Sevii)
+
+127. Seel (ID: 86, dexID: 86, key: Seel)
+
+128. Dewgong (ID: 87, dexID: 87, key: Dewgong)
+
+129. Grimer (ID: 88, dexID: 88, key: Grimer)
+
+130. Grimer (ID: 1034, dexID: 88, key: Grimer-Alola)
+
+131. Muk (ID: 89, dexID: 89, key: Muk)
+
+132. Muk (ID: 1035, dexID: 89, key: Muk-Alola)
+
+133. Shellder (ID: 90, dexID: 90, key: Shellder)
+
+134. Cloyster (ID: 91, dexID: 91, key: Cloyster)
+
+135. Gastly (ID: 92, dexID: 92, key: Gastly)
+
+136. Haunter (ID: 93, dexID: 93, key: Haunter)
+
+137. Gengar (ID: 94, dexID: 94, key: Gengar)
+   → Gengar (ID: 877, dexID: 94, key: Gengar-Mega)
+
+138. Onix (ID: 95, dexID: 95, key: Onix)
+
+139. Drowzee (ID: 96, dexID: 96, key: Drowzee)
+
+140. Hypno (ID: 97, dexID: 97, key: Hypno)
+
+141. Krabby (ID: 98, dexID: 98, key: Krabby)
+
+142. Kingler (ID: 99, dexID: 99, key: Kingler)
+   → Kingler (ID: 1238, dexID: 99, key: Kingler-Mega)
+
+143. Voltorb (ID: 100, dexID: 100, key: Voltorb)
+
+144. Voltorb (ID: 1295, dexID: 100, key: Voltorb-Hisui)
+
+145. Electrode (ID: 101, dexID: 101, key: Electrode)
+
+146. Electrode (ID: 1296, dexID: 101, key: Electrode-Hisui)
+
+147. Exeggcute (ID: 102, dexID: 102, key: Exeggcute)
+
+148. Exeggutor (ID: 103, dexID: 103, key: Exeggutor)
+
+149. Exeggutor (ID: 1037, dexID: 103, key: Exeggutor-Alola)
+
+150. Cubone (ID: 104, dexID: 104, key: Cubone)
+
+151. Marowak (ID: 105, dexID: 105, key: Marowak)
+
+152. Marowak (ID: 1039, dexID: 105, key: Marowak-Alola)
+
+153. Hitmonlee (ID: 106, dexID: 106, key: Hitmonlee)
+
+154. Hitmonchan (ID: 107, dexID: 107, key: Hitmonchan)
+
+155. Lickitung (ID: 108, dexID: 108, key: Lickitung)
+
+156. Koffing (ID: 109, dexID: 109, key: Koffing)
+
+157. Weezing (ID: 110, dexID: 110, key: Weezing)
+
+158. Weezing (ID: 1215, dexID: 110, key: Weezing-Galar)
+
+159. Rhyhorn (ID: 111, dexID: 111, key: Rhyhorn)
+
+160. Rhydon (ID: 112, dexID: 112, key: Rhydon)
+
+161. Chansey (ID: 113, dexID: 113, key: Chansey)
+
+162. Tangela (ID: 114, dexID: 114, key: Tangela)
+
+163. Kangaskhan (ID: 115, dexID: 115, key: Kangaskhan)
+   → Kangaskhan (ID: 878, dexID: 115, key: Kangaskhan-Mega)
+
+164. Horsea (ID: 116, dexID: 116, key: Horsea)
+
+165. Seadra (ID: 117, dexID: 117, key: Seadra)
+
+166. Goldeen (ID: 118, dexID: 118, key: Goldeen)
+
+167. Seaking (ID: 119, dexID: 119, key: Seaking)
+
+168. Staryu (ID: 120, dexID: 120, key: Staryu)
+
+169. Starmie (ID: 121, dexID: 121, key: Starmie)
+
+170. Mr. Mime (ID: 122, dexID: 122, key: Mr. Mime)
+
+171. Mr. Mime (ID: 1216, dexID: 122, key: Mr. Mime-Galar)
+
+172. Scyther (ID: 123, dexID: 123, key: Scyther)
+
+173. Jynx (ID: 124, dexID: 124, key: Jynx)
+
+174. Electabuzz (ID: 125, dexID: 125, key: Electabuzz)
+
+175. Magmar (ID: 126, dexID: 126, key: Magmar)
+
+176. Pinsir (ID: 127, dexID: 127, key: Pinsir)
+   → Pinsir (ID: 879, dexID: 127, key: Pinsir-Mega)
+
+177. Tauros (ID: 128, dexID: 128, key: Tauros)
+
+178. Tauros (ID: 1234, dexID: 128, key: Tauros-Paldea-Combat)
+
+179. Tauros (ID: 1235, dexID: 128, key: Tauros-Paldea-Aqua)
+
+180. Tauros (ID: 1240, dexID: 128, key: Tauros-Paldea-Blaze)
+
+181. Magikarp (ID: 129, dexID: 129, key: Magikarp)
+
+182. Gyarados (ID: 130, dexID: 130, key: Gyarados)
+   → Gyarados (ID: 880, dexID: 130, key: Gyarados-Mega)
+
+183. Lapras (ID: 131, dexID: 131, key: Lapras)
+   → Lapras (ID: 1239, dexID: 131, key: Lapras-Mega)
+
+184. Ditto (ID: 132, dexID: 132, key: Ditto)
+
+185. Eevee (ID: 133, dexID: 133, key: Eevee)
+
+186. Vaporeon (ID: 134, dexID: 134, key: Vaporeon)
+
+187. Jolteon (ID: 135, dexID: 135, key: Jolteon)
+
+188. Flareon (ID: 136, dexID: 136, key: Flareon)
+
+189. Porygon (ID: 137, dexID: 137, key: Porygon)
+
+190. Omanyte (ID: 138, dexID: 138, key: Omanyte)
+
+191. Omastar (ID: 139, dexID: 139, key: Omastar)
+
+192. Kabuto (ID: 140, dexID: 140, key: Kabuto)
+
+193. Kabutops (ID: 141, dexID: 141, key: Kabutops)
+
+194. Aerodactyl (ID: 142, dexID: 142, key: Aerodactyl)
+   → Aerodactyl (ID: 881, dexID: 142, key: Aerodactyl-Mega)
+
+195. Snorlax (ID: 143, dexID: 143, key: Snorlax)
+   → Snorlax (ID: 1241, dexID: 143, key: Snorlax-Mega)
+
+196. Articuno (ID: 144, dexID: 144, key: Articuno)
+
+197. Articuno (ID: 1217, dexID: 144, key: Articuno-Galar)
+
+198. Zapdos (ID: 145, dexID: 145, key: Zapdos)
+
+199. Zapdos (ID: 1218, dexID: 145, key: Zapdos-Galar)
+
+200. Moltres (ID: 146, dexID: 146, key: Moltres)
+
+201. Moltres (ID: 1219, dexID: 146, key: Moltres-Galar)
+
+202. Dratini (ID: 147, dexID: 147, key: Dratini)
+
+203. Dragonair (ID: 148, dexID: 148, key: Dragonair)
+
+204. Dragonite (ID: 149, dexID: 149, key: Dragonite)
+
+205. Mewtwo (ID: 150, dexID: 150, key: Mewtwo)
+
+206. Mewtwo (ID: 882, dexID: 150, key: Mewtwo-Mega-X)
+
+207. Mewtwo (ID: 883, dexID: 150, key: Mewtwo-Mega-Y)
+
+208. Mew (ID: 151, dexID: 151, key: Mew)
+
+209. Chikorita (ID: 152, dexID: 152, key: Chikorita)
+
+210. Bayleef (ID: 153, dexID: 153, key: Bayleef)
+
+211. Meganium (ID: 154, dexID: 154, key: Meganium)
+
+212. Cyndaquil (ID: 155, dexID: 155, key: Cyndaquil)
+
+213. Quilava (ID: 156, dexID: 156, key: Quilava)
+
+214. Typhlosion (ID: 157, dexID: 157, key: Typhlosion)
+
+215. Typhlosion (ID: 1299, dexID: 157, key: Typhlosion-Hisui)
+
+216. Totodile (ID: 158, dexID: 158, key: Totodile)
+
+217. Croconaw (ID: 159, dexID: 159, key: Croconaw)
+
+218. Feraligatr (ID: 160, dexID: 160, key: Feraligatr)
+
+219. Sentret (ID: 161, dexID: 161, key: Sentret)
+
+220. Furret (ID: 162, dexID: 162, key: Furret)
+
+221. Hoothoot (ID: 163, dexID: 163, key: Hoothoot)
+
+222. Noctowl (ID: 164, dexID: 164, key: Noctowl)
+
+223. Ledyba (ID: 165, dexID: 165, key: Ledyba)
+
+224. Ledian (ID: 166, dexID: 166, key: Ledian)
+
+225. Spinarak (ID: 167, dexID: 167, key: Spinarak)
+
+226. Ariados (ID: 168, dexID: 168, key: Ariados)
+
+227. Crobat (ID: 169, dexID: 169, key: Crobat)
+
+228. Chinchou (ID: 170, dexID: 170, key: Chinchou)
+
+229. Lanturn (ID: 171, dexID: 171, key: Lanturn)
+
+230. Pichu (ID: 172, dexID: 172, key: Pichu)
+
+231. Cleffa (ID: 173, dexID: 173, key: Cleffa)
+
+232. Igglybuff (ID: 174, dexID: 174, key: Igglybuff)
+
+233. Togepi (ID: 175, dexID: 175, key: Togepi)
+
+234. Togetic (ID: 176, dexID: 176, key: Togetic)
+
+235. Natu (ID: 177, dexID: 177, key: Natu)
+
+236. Xatu (ID: 178, dexID: 178, key: Xatu)
+
+237. Mareep (ID: 179, dexID: 179, key: Mareep)
+
+238. Flaaffy (ID: 180, dexID: 180, key: Flaaffy)
+
+239. Ampharos (ID: 181, dexID: 181, key: Ampharos)
+   → Ampharos (ID: 884, dexID: 181, key: Ampharos-Mega)
+
+240. Bellossom (ID: 182, dexID: 182, key: Bellossom)
+
+241. Marill (ID: 183, dexID: 183, key: Marill)
+
+242. Azumarill (ID: 184, dexID: 184, key: Azumarill)
+
+243. Sudowoodo (ID: 185, dexID: 185, key: Sudowoodo)
+
+244. Politoed (ID: 186, dexID: 186, key: Politoed)
+
+245. Hoppip (ID: 187, dexID: 187, key: Hoppip)
+
+246. Skiploom (ID: 188, dexID: 188, key: Skiploom)
+
+247. Jumpluff (ID: 189, dexID: 189, key: Jumpluff)
+
+248. Aipom (ID: 190, dexID: 190, key: Aipom)
+
+249. Sunkern (ID: 191, dexID: 191, key: Sunkern)
+
+250. Sunflora (ID: 192, dexID: 192, key: Sunflora)
+
+251. Yanma (ID: 193, dexID: 193, key: Yanma)
+
+252. Wooper (ID: 194, dexID: 194, key: Wooper)
+
+253. Wooper (ID: 930, dexID: 194, key: Wooper-Paldea)
+
+254. Quagsire (ID: 195, dexID: 195, key: Quagsire)
+
+255. Espeon (ID: 196, dexID: 196, key: Espeon)
+
+256. Umbreon (ID: 197, dexID: 197, key: Umbreon)
+
+257. Murkrow (ID: 198, dexID: 198, key: Murkrow)
+
+258. Slowking (ID: 199, dexID: 199, key: Slowking)
+
+259. Slowking (ID: 1220, dexID: 199, key: Slowking-Galar)
+
+260. Misdreavus (ID: 200, dexID: 200, key: Misdreavus)
+
+261. Unown (ID: 201, dexID: 201, key: Unown)
+
+262. Unown (ID: 413, dexID: 201, key: Unown)
+
+263. Unown (ID: 414, dexID: 201, key: Unown)
+
+264. Unown (ID: 415, dexID: 201, key: Unown)
+
+265. Unown (ID: 416, dexID: 201, key: Unown)
+
+266. Unown (ID: 417, dexID: 201, key: Unown)
+
+267. Unown (ID: 418, dexID: 201, key: Unown)
+
+268. Unown (ID: 419, dexID: 201, key: Unown)
+
+269. Unown (ID: 420, dexID: 201, key: Unown)
+
+270. Unown (ID: 421, dexID: 201, key: Unown)
+
+271. Unown (ID: 422, dexID: 201, key: Unown)
+
+272. Unown (ID: 423, dexID: 201, key: Unown)
+
+273. Unown (ID: 424, dexID: 201, key: Unown)
+
+274. Unown (ID: 425, dexID: 201, key: Unown)
+
+275. Unown (ID: 426, dexID: 201, key: Unown)
+
+276. Unown (ID: 427, dexID: 201, key: Unown)
+
+277. Unown (ID: 428, dexID: 201, key: Unown)
+
+278. Unown (ID: 429, dexID: 201, key: Unown)
+
+279. Unown (ID: 430, dexID: 201, key: Unown)
+
+280. Unown (ID: 431, dexID: 201, key: Unown)
+
+281. Unown (ID: 432, dexID: 201, key: Unown)
+
+282. Unown (ID: 433, dexID: 201, key: Unown)
+
+283. Unown (ID: 434, dexID: 201, key: Unown)
+
+284. Unown (ID: 435, dexID: 201, key: Unown)
+
+285. Unown (ID: 436, dexID: 201, key: Unown)
+
+286. Unown (ID: 437, dexID: 201, key: Unown)
+
+287. Unown (ID: 438, dexID: 201, key: Unown)
+
+288. Unown (ID: 439, dexID: 201, key: Unown)
+
+289. Wobbuffet (ID: 202, dexID: 202, key: Wobbuffet)
+
+290. Girafarig (ID: 203, dexID: 203, key: Girafarig)
+
+291. Pineco (ID: 204, dexID: 204, key: Pineco)
+
+292. Forretress (ID: 205, dexID: 205, key: Forretress)
+
+293. Dunsparce (ID: 206, dexID: 206, key: Dunsparce)
+
+294. Gligar (ID: 207, dexID: 207, key: Gligar)
+
+295. Steelix (ID: 208, dexID: 208, key: Steelix)
+   → Steelix (ID: 885, dexID: 208, key: Steelix-Mega)
+
+296. Snubbull (ID: 209, dexID: 209, key: Snubbull)
+
+297. Granbull (ID: 210, dexID: 210, key: Granbull)
+
+298. Qwilfish (ID: 211, dexID: 211, key: Qwilfish)
+
+299. Qwilfish (ID: 1307, dexID: 211, key: Qwilfish-Hisui)
+
+300. Scizor (ID: 212, dexID: 212, key: Scizor)
+   → Scizor (ID: 886, dexID: 212, key: Scizor-Mega)
+
+301. Shuckle (ID: 213, dexID: 213, key: Shuckle)
+
+302. Heracross (ID: 214, dexID: 214, key: Heracross)
+   → Heracross (ID: 887, dexID: 214, key: Heracross-Mega)
+
+303. Sneasel (ID: 215, dexID: 215, key: Sneasel)
+
+304. Sneasel (ID: 1304, dexID: 215, key: Sneasel-Hisui)
+
+305. Teddiursa (ID: 216, dexID: 216, key: Teddiursa)
+
+306. Teddiursa (ID: 1278, dexID: 216, key: Teddiursa-Sevii)
+
+307. Ursaring (ID: 217, dexID: 217, key: Ursaring)
+
+308. Ursaring (ID: 1279, dexID: 217, key: Ursaring-Sevii)
+
+309. Slugma (ID: 218, dexID: 218, key: Slugma)
+
+310. Magcargo (ID: 219, dexID: 219, key: Magcargo)
+
+311. Swinub (ID: 220, dexID: 220, key: Swinub)
+
+312. Piloswine (ID: 221, dexID: 221, key: Piloswine)
+
+313. Corsola (ID: 222, dexID: 222, key: Corsola)
+
+314. Corsola (ID: 1221, dexID: 222, key: Corsola-Galar)
+
+315. Remoraid (ID: 223, dexID: 223, key: Remoraid)
+
+316. Octillery (ID: 224, dexID: 224, key: Octillery)
+
+317. Delibird (ID: 225, dexID: 225, key: Delibird)
+
+318. Mantine (ID: 226, dexID: 226, key: Mantine)
+
+319. Mantine (ID: 1284, dexID: 226, key: Mantine-Sevii)
+
+320. Skarmory (ID: 227, dexID: 227, key: Skarmory)
+
+321. Houndour (ID: 228, dexID: 228, key: Houndour)
+
+322. Houndoom (ID: 229, dexID: 229, key: Houndoom)
+   → Houndoom (ID: 888, dexID: 229, key: Houndoom-Mega)
+
+323. Kingdra (ID: 230, dexID: 230, key: Kingdra)
+
+324. Phanpy (ID: 231, dexID: 231, key: Phanpy)
+
+325. Donphan (ID: 232, dexID: 232, key: Donphan)
+
+326. Porygon2 (ID: 233, dexID: 233, key: Porygon2)
+
+327. Stantler (ID: 234, dexID: 234, key: Stantler)
+
+328. Smeargle (ID: 235, dexID: 235, key: Smeargle)
+
+329. Tyrogue (ID: 236, dexID: 236, key: Tyrogue)
+
+330. Hitmontop (ID: 237, dexID: 237, key: Hitmontop)
+
+331. Smoochum (ID: 238, dexID: 238, key: Smoochum)
+
+332. Elekid (ID: 239, dexID: 239, key: Elekid)
+
+333. Magby (ID: 240, dexID: 240, key: Magby)
+
+334. Miltank (ID: 241, dexID: 241, key: Miltank)
+
+335. Blissey (ID: 242, dexID: 242, key: Blissey)
+
+336. Raikou (ID: 243, dexID: 243, key: Raikou)
+
+337. Entei (ID: 244, dexID: 244, key: Entei)
+
+338. Suicune (ID: 245, dexID: 245, key: Suicune)
+
+339. Larvitar (ID: 246, dexID: 246, key: Larvitar)
+
+340. Pupitar (ID: 247, dexID: 247, key: Pupitar)
+
+341. Tyranitar (ID: 248, dexID: 248, key: Tyranitar)
+   → Tyranitar (ID: 889, dexID: 248, key: Tyranitar-Mega)
+
+342. Lugia (ID: 249, dexID: 249, key: Lugia)
+
+343. Ho-Oh (ID: 250, dexID: 250, key: Ho-Oh)
+
+344. Celebi (ID: 251, dexID: 251, key: Celebi)
+
+345. Treecko (ID: 277, dexID: 252, key: Treecko)
+
+346. Grovyle (ID: 278, dexID: 253, key: Grovyle)
+
+347. Sceptile (ID: 279, dexID: 254, key: Sceptile)
+   → Sceptile (ID: 890, dexID: 254, key: Sceptile-Mega)
+
+348. Torchic (ID: 280, dexID: 255, key: Torchic)
+
+349. Combusken (ID: 281, dexID: 256, key: Combusken)
+
+350. Blaziken (ID: 282, dexID: 257, key: Blaziken)
+   → Blaziken (ID: 891, dexID: 257, key: Blaziken-Mega)
+
+351. Mudkip (ID: 283, dexID: 258, key: Mudkip)
+
+352. Marshtomp (ID: 284, dexID: 259, key: Marshtomp)
+
+353. Swampert (ID: 285, dexID: 260, key: Swampert)
+   → Swampert (ID: 892, dexID: 260, key: Swampert-Mega)
+
+354. Poochyena (ID: 286, dexID: 261, key: Poochyena)
+
+355. Mightyena (ID: 287, dexID: 262, key: Mightyena)
+
+356. Zigzagoon (ID: 288, dexID: 263, key: Zigzagoon)
+
+357. Zigzagoon (ID: 1222, dexID: 263, key: Zigzagoon-Galar)
+
+358. Linoone (ID: 289, dexID: 264, key: Linoone)
+
+359. Linoone (ID: 1223, dexID: 264, key: Linoone-Galar)
+
+360. Wurmple (ID: 290, dexID: 265, key: Wurmple)
+
+361. Silcoon (ID: 291, dexID: 266, key: Silcoon)
+
+362. Beautifly (ID: 292, dexID: 267, key: Beautifly)
+
+363. Cascoon (ID: 293, dexID: 268, key: Cascoon)
+
+364. Dustox (ID: 294, dexID: 269, key: Dustox)
+
+365. Lotad (ID: 295, dexID: 270, key: Lotad)
+
+366. Lombre (ID: 296, dexID: 271, key: Lombre)
+
+367. Ludicolo (ID: 297, dexID: 272, key: Ludicolo)
+
+368. Seedot (ID: 298, dexID: 273, key: Seedot)
+
+369. Nuzleaf (ID: 299, dexID: 274, key: Nuzleaf)
+
+370. Shiftry (ID: 300, dexID: 275, key: Shiftry)
+
+371. Taillow (ID: 304, dexID: 276, key: Taillow)
+
+372. Swellow (ID: 305, dexID: 277, key: Swellow)
+
+373. Wingull (ID: 309, dexID: 278, key: Wingull)
+
+374. Pelipper (ID: 310, dexID: 279, key: Pelipper)
+
+375. Ralts (ID: 392, dexID: 280, key: Ralts)
+
+376. Kirlia (ID: 393, dexID: 281, key: Kirlia)
+
+377. Gardevoir (ID: 394, dexID: 282, key: Gardevoir)
+   → Gardevoir (ID: 893, dexID: 282, key: Gardevoir-Mega)
+
+378. Surskit (ID: 311, dexID: 283, key: Surskit)
+
+379. Masquerain (ID: 312, dexID: 284, key: Masquerain)
+
+380. Shroomish (ID: 306, dexID: 285, key: Shroomish)
+
+381. Breloom (ID: 307, dexID: 286, key: Breloom)
+
+382. Slakoth (ID: 364, dexID: 287, key: Slakoth)
+
+383. Vigoroth (ID: 365, dexID: 288, key: Vigoroth)
+
+384. Slaking (ID: 366, dexID: 289, key: Slaking)
+
+385. Nincada (ID: 301, dexID: 290, key: Nincada)
+
+386. Ninjask (ID: 302, dexID: 291, key: Ninjask)
+
+387. Shedinja (ID: 303, dexID: 292, key: Shedinja)
+
+388. Whismur (ID: 370, dexID: 293, key: Whismur)
+
+389. Loudred (ID: 371, dexID: 294, key: Loudred)
+
+390. Exploud (ID: 372, dexID: 295, key: Exploud)
+
+391. Makuhita (ID: 335, dexID: 296, key: Makuhita)
+
+392. Hariyama (ID: 336, dexID: 297, key: Hariyama)
+
+393. Azurill (ID: 350, dexID: 298, key: Azurill)
+
+394. Nosepass (ID: 320, dexID: 299, key: Nosepass)
+
+395. Skitty (ID: 315, dexID: 300, key: Skitty)
+
+396. Delcatty (ID: 316, dexID: 301, key: Delcatty)
+
+397. Sableye (ID: 322, dexID: 302, key: Sableye)
+   → Sableye (ID: 894, dexID: 302, key: Sableye-Mega)
+
+398. Mawile (ID: 355, dexID: 303, key: Mawile)
+   → Mawile (ID: 895, dexID: 303, key: Mawile-Mega)
+
+399. Aron (ID: 382, dexID: 304, key: Aron)
+
+400. Lairon (ID: 383, dexID: 305, key: Lairon)
+
+401. Aggron (ID: 384, dexID: 306, key: Aggron)
+   → Aggron (ID: 896, dexID: 306, key: Aggron-Mega)
+
+402. Meditite (ID: 356, dexID: 307, key: Meditite)
+
+403. Medicham (ID: 357, dexID: 308, key: Medicham)
+   → Medicham (ID: 897, dexID: 308, key: Medicham-Mega)
+
+404. Electrike (ID: 337, dexID: 309, key: Electrike)
+
+405. Manectric (ID: 338, dexID: 310, key: Manectric)
+   → Manectric (ID: 898, dexID: 310, key: Manectric-Mega)
+
+406. Plusle (ID: 353, dexID: 311, key: Plusle)
+
+407. Minun (ID: 354, dexID: 312, key: Minun)
+
+408. Volbeat (ID: 386, dexID: 313, key: Volbeat)
+
+409. Illumise (ID: 387, dexID: 314, key: Illumise)
+
+410. Roselia (ID: 363, dexID: 315, key: Roselia)
+
+411. Gulpin (ID: 367, dexID: 316, key: Gulpin)
+
+412. Swalot (ID: 368, dexID: 317, key: Swalot)
+
+413. Carvanha (ID: 330, dexID: 318, key: Carvanha)
+
+414. Sharpedo (ID: 331, dexID: 319, key: Sharpedo)
+   → Sharpedo (ID: 899, dexID: 319, key: Sharpedo-Mega)
+
+415. Wailmer (ID: 313, dexID: 320, key: Wailmer)
+
+416. Wailord (ID: 314, dexID: 321, key: Wailord)
+
+417. Numel (ID: 339, dexID: 322, key: Numel)
+
+418. Camerupt (ID: 340, dexID: 323, key: Camerupt)
+   → Camerupt (ID: 900, dexID: 323, key: Camerupt-Mega)
+
+419. Torkoal (ID: 321, dexID: 324, key: Torkoal)
+
+420. Spoink (ID: 351, dexID: 325, key: Spoink)
+
+421. Grumpig (ID: 352, dexID: 326, key: Grumpig)
+
+422. Spinda (ID: 308, dexID: 327, key: Spinda)
+
+423. Trapinch (ID: 332, dexID: 328, key: Trapinch)
+
+424. Vibrava (ID: 333, dexID: 329, key: Vibrava)
+
+425. Flygon (ID: 334, dexID: 330, key: Flygon)
+
+426. Cacnea (ID: 344, dexID: 331, key: Cacnea)
+
+427. Cacturne (ID: 345, dexID: 332, key: Cacturne)
+
+428. Swablu (ID: 358, dexID: 333, key: Swablu)
+
+429. Altaria (ID: 359, dexID: 334, key: Altaria)
+   → Altaria (ID: 901, dexID: 334, key: Altaria-Mega)
+
+430. Zangoose (ID: 380, dexID: 335, key: Zangoose)
+
+431. Seviper (ID: 379, dexID: 336, key: Seviper)
+
+432. Lunatone (ID: 348, dexID: 337, key: Lunatone)
+
+433. Solrock (ID: 349, dexID: 338, key: Solrock)
+
+434. Barboach (ID: 323, dexID: 339, key: Barboach)
+
+435. Whiscash (ID: 324, dexID: 340, key: Whiscash)
+
+436. Corphish (ID: 326, dexID: 341, key: Corphish)
+
+437. Crawdaunt (ID: 327, dexID: 342, key: Crawdaunt)
+
+438. Baltoy (ID: 318, dexID: 343, key: Baltoy)
+
+439. Claydol (ID: 319, dexID: 344, key: Claydol)
+
+440. Lileep (ID: 388, dexID: 345, key: Lileep)
+
+441. Cradily (ID: 389, dexID: 346, key: Cradily)
+
+442. Anorith (ID: 390, dexID: 347, key: Anorith)
+
+443. Armaldo (ID: 391, dexID: 348, key: Armaldo)
+
+444. Feebas (ID: 328, dexID: 349, key: Feebas)
+
+445. Feebas (ID: 1285, dexID: 349, key: Feebas-Sevii)
+
+446. Milotic (ID: 329, dexID: 350, key: Milotic)
+
+447. Milotic (ID: 1286, dexID: 350, key: Milotic-Sevii)
+
+448. Castform (ID: 385, dexID: 351, key: Castform)
+
+449. Kecleon (ID: 317, dexID: 352, key: Kecleon)
+
+450. Shuppet (ID: 377, dexID: 353, key: Shuppet)
+
+451. Banette (ID: 378, dexID: 354, key: Banette)
+   → Banette (ID: 902, dexID: 354, key: Banette-Mega)
+
+452. Duskull (ID: 361, dexID: 355, key: Duskull)
+
+453. Dusclops (ID: 362, dexID: 356, key: Dusclops)
+
+454. Tropius (ID: 369, dexID: 357, key: Tropius)
+
+455. Chimecho (ID: 411, dexID: 358, key: Chimecho)
+
+456. Absol (ID: 376, dexID: 359, key: Absol)
+   → Absol (ID: 903, dexID: 359, key: Absol-Mega)
+
+457. Wynaut (ID: 360, dexID: 360, key: Wynaut)
+
+458. Snorunt (ID: 346, dexID: 361, key: Snorunt)
+
+459. Glalie (ID: 347, dexID: 362, key: Glalie)
+   → Glalie (ID: 904, dexID: 362, key: Glalie-Mega)
+
+460. Spheal (ID: 341, dexID: 363, key: Spheal)
+
+461. Sealeo (ID: 342, dexID: 364, key: Sealeo)
+
+462. Walrein (ID: 343, dexID: 365, key: Walrein)
+
+463. Clamperl (ID: 373, dexID: 366, key: Clamperl)
+
+464. Huntail (ID: 374, dexID: 367, key: Huntail)
+
+465. Gorebyss (ID: 375, dexID: 368, key: Gorebyss)
+
+466. Relicanth (ID: 381, dexID: 369, key: Relicanth)
+
+467. Luvdisc (ID: 325, dexID: 370, key: Luvdisc)
+
+468. Bagon (ID: 395, dexID: 371, key: Bagon)
+
+469. Shelgon (ID: 396, dexID: 372, key: Shelgon)
+
+470. Salamence (ID: 397, dexID: 373, key: Salamence)
+   → Salamence (ID: 905, dexID: 373, key: Salamence-Mega)
+
+471. Beldum (ID: 398, dexID: 374, key: Beldum)
+
+472. Metang (ID: 399, dexID: 375, key: Metang)
+
+473. Metagross (ID: 400, dexID: 376, key: Metagross)
+   → Metagross (ID: 906, dexID: 376, key: Metagross-Mega)
+
+474. Regirock (ID: 401, dexID: 377, key: Regirock)
+
+475. Regice (ID: 402, dexID: 378, key: Regice)
+
+476. Registeel (ID: 403, dexID: 379, key: Registeel)
+
+477. Latias (ID: 407, dexID: 380, key: Latias)
+   → Latias (ID: 907, dexID: 380, key: Latias-Mega)
+
+478. Latios (ID: 408, dexID: 381, key: Latios)
+   → Latios (ID: 908, dexID: 381, key: Latios-Mega)
+
+479. Kyogre (ID: 404, dexID: 382, key: Kyogre)
+
+480. Kyogre (ID: 910, dexID: 382, key: Kyogre-Primal)
+
+481. Groudon (ID: 405, dexID: 383, key: Groudon)
+
+482. Groudon (ID: 909, dexID: 383, key: Groudon-Primal)
+
+483. Rayquaza (ID: 406, dexID: 384, key: Rayquaza)
+   → Rayquaza (ID: 911, dexID: 384, key: Rayquaza-Mega)
+
+484. Jirachi (ID: 409, dexID: 385, key: Jirachi)
+
+485. Deoxys (ID: 410, dexID: 386, key: Deoxys)
+
+486. Deoxys (ID: 1040, dexID: 386, key: Deoxys-Attack)
+
+487. Deoxys (ID: 1041, dexID: 386, key: Deoxys-Defense)
+
+488. Deoxys (ID: 1042, dexID: 386, key: Deoxys-Speed)
+
+489. Turtwig (ID: 440, dexID: 387, key: Turtwig)
+
+490. Grotle (ID: 441, dexID: 388, key: Grotle)
+
+491. Torterra (ID: 442, dexID: 389, key: Torterra)
+
+492. Chimchar (ID: 443, dexID: 390, key: Chimchar)
+
+493. Monferno (ID: 444, dexID: 391, key: Monferno)
+
+494. Infernape (ID: 445, dexID: 392, key: Infernape)
+
+495. Piplup (ID: 446, dexID: 393, key: Piplup)
+
+496. Prinplup (ID: 447, dexID: 394, key: Prinplup)
+
+497. Empoleon (ID: 448, dexID: 395, key: Empoleon)
+
+498. Starly (ID: 449, dexID: 396, key: Starly)
+
+499. Staravia (ID: 450, dexID: 397, key: Staravia)
+
+500. Staraptor (ID: 451, dexID: 398, key: Staraptor)
+
+501. Bidoof (ID: 452, dexID: 399, key: Bidoof)
+
+502. Bibarel (ID: 453, dexID: 400, key: Bibarel)
+
+503. Kricketot (ID: 454, dexID: 401, key: Kricketot)
+
+504. Kricketune (ID: 455, dexID: 402, key: Kricketune)
+
+505. Shinx (ID: 456, dexID: 403, key: Shinx)
+
+506. Luxio (ID: 457, dexID: 404, key: Luxio)
+
+507. Luxray (ID: 458, dexID: 405, key: Luxray)
+
+508. Budew (ID: 459, dexID: 406, key: Budew)
+
+509. Roserade (ID: 460, dexID: 407, key: Roserade)
+
+510. Cranidos (ID: 461, dexID: 408, key: Cranidos)
+
+511. Rampardos (ID: 462, dexID: 409, key: Rampardos)
+
+512. Shieldon (ID: 463, dexID: 410, key: Shieldon)
+
+513. Bastiodon (ID: 464, dexID: 411, key: Bastiodon)
+
+514. Burmy (ID: 465, dexID: 412, key: Burmy)
+
+515. Burmy (ID: 707, dexID: 412, key: Burmy)
+
+516. Burmy (ID: 708, dexID: 412, key: Burmy)
+
+517. Wormadam (ID: 466, dexID: 413, key: Wormadam)
+
+518. Wormadam (ID: 709, dexID: 413, key: Wormadam-Sandy)
+
+519. Wormadam (ID: 710, dexID: 413, key: Wormadam-Trash)
+
+520. Mothim (ID: 467, dexID: 414, key: Mothim)
+
+521. Combee (ID: 468, dexID: 415, key: Combee)
+
+522. Vespiquen (ID: 469, dexID: 416, key: Vespiquen)
+
+523. Pachirisu (ID: 470, dexID: 417, key: Pachirisu)
+
+524. Buizel (ID: 471, dexID: 418, key: Buizel)
+
+525. Floatzel (ID: 472, dexID: 419, key: Floatzel)
+
+526. Cherubi (ID: 473, dexID: 420, key: Cherubi)
+
+527. Cherrim (ID: 474, dexID: 421, key: Cherrim)
+
+528. Cherrim (ID: 751, dexID: 421, key: Cherrim-Sunshine)
+
+529. Shellos (ID: 475, dexID: 422, key: Shellos)
+
+530. Shellos (ID: 711, dexID: 422, key: Shellos)
+
+531. Gastrodon (ID: 476, dexID: 423, key: Gastrodon)
+
+532. Gastrodon (ID: 712, dexID: 423, key: Gastrodon)
+
+533. Ambipom (ID: 477, dexID: 424, key: Ambipom)
+
+534. Drifloon (ID: 478, dexID: 425, key: Drifloon)
+
+535. Drifblim (ID: 479, dexID: 426, key: Drifblim)
+
+536. Buneary (ID: 480, dexID: 427, key: Buneary)
+
+537. Lopunny (ID: 481, dexID: 428, key: Lopunny)
+   → Lopunny (ID: 912, dexID: 428, key: Lopunny-Mega)
+
+538. Mismagius (ID: 482, dexID: 429, key: Mismagius)
+
+539. Honchkrow (ID: 483, dexID: 430, key: Honchkrow)
+
+540. Glameow (ID: 484, dexID: 431, key: Glameow)
+
+541. Purugly (ID: 485, dexID: 432, key: Purugly)
+
+542. Chingling (ID: 486, dexID: 433, key: Chingling)
+
+543. Stunky (ID: 487, dexID: 434, key: Stunky)
+
+544. Skuntank (ID: 488, dexID: 435, key: Skuntank)
+
+545. Bronzor (ID: 489, dexID: 436, key: Bronzor)
+
+546. Bronzong (ID: 490, dexID: 437, key: Bronzong)
+
+547. Bonsly (ID: 491, dexID: 438, key: Bonsly)
+
+548. Mime Jr. (ID: 492, dexID: 439, key: Mime Jr.)
+
+549. Happiny (ID: 493, dexID: 440, key: Happiny)
+
+550. Chatot (ID: 494, dexID: 441, key: Chatot)
+
+551. Spiritomb (ID: 495, dexID: 442, key: Spiritomb)
+
+552. Gible (ID: 496, dexID: 443, key: Gible)
+
+553. Gabite (ID: 497, dexID: 444, key: Gabite)
+
+554. Garchomp (ID: 498, dexID: 445, key: Garchomp)
+   → Garchomp (ID: 913, dexID: 445, key: Garchomp-Mega)
+
+555. Munchlax (ID: 499, dexID: 446, key: Munchlax)
+
+556. Riolu (ID: 500, dexID: 447, key: Riolu)
+
+557. Lucario (ID: 501, dexID: 448, key: Lucario)
+   → Lucario (ID: 914, dexID: 448, key: Lucario-Mega)
+
+558. Hippopotas (ID: 502, dexID: 449, key: Hippopotas)
+
+559. Hippopotas (ID: 744, dexID: 449, key: Hippopotas)
+
+560. Hippowdon (ID: 503, dexID: 450, key: Hippowdon)
+
+561. Hippowdon (ID: 745, dexID: 450, key: Hippowdon)
+
+562. Skorupi (ID: 504, dexID: 451, key: Skorupi)
+
+563. Drapion (ID: 505, dexID: 452, key: Drapion)
+
+564. Croagunk (ID: 506, dexID: 453, key: Croagunk)
+
+565. Toxicroak (ID: 507, dexID: 454, key: Toxicroak)
+
+566. Carnivine (ID: 508, dexID: 455, key: Carnivine)
+
+567. Carnivine (ID: 1282, dexID: 455, key: Carnivine-Sevii)
+
+568. Finneon (ID: 509, dexID: 456, key: Finneon)
+
+569. Lumineon (ID: 510, dexID: 457, key: Lumineon)
+
+570. Mantyke (ID: 511, dexID: 458, key: Mantyke)
+
+571. Mantyke (ID: 1283, dexID: 458, key: Mantyke-Sevii)
+
+572. Snover (ID: 512, dexID: 459, key: Snover)
+
+573. Abomasnow (ID: 513, dexID: 460, key: Abomasnow)
+   → Abomasnow (ID: 915, dexID: 460, key: Abomasnow-Mega)
+
+574. Weavile (ID: 514, dexID: 461, key: Weavile)
+
+575. Magnezone (ID: 515, dexID: 462, key: Magnezone)
+
+576. Lickilicky (ID: 516, dexID: 463, key: Lickilicky)
+
+577. Rhyperior (ID: 517, dexID: 464, key: Rhyperior)
+
+578. Tangrowth (ID: 518, dexID: 465, key: Tangrowth)
+
+579. Electivire (ID: 519, dexID: 466, key: Electivire)
+
+580. Magmortar (ID: 520, dexID: 467, key: Magmortar)
+
+581. Togekiss (ID: 521, dexID: 468, key: Togekiss)
+
+582. Yanmega (ID: 522, dexID: 469, key: Yanmega)
+
+583. Leafeon (ID: 523, dexID: 470, key: Leafeon)
+
+584. Glaceon (ID: 524, dexID: 471, key: Glaceon)
+
+585. Gliscor (ID: 525, dexID: 472, key: Gliscor)
+
+586. Mamoswine (ID: 526, dexID: 473, key: Mamoswine)
+
+587. Porygon-Z (ID: 527, dexID: 474, key: Porygon-Z)
+
+588. Gallade (ID: 528, dexID: 475, key: Gallade)
+   → Gallade (ID: 916, dexID: 475, key: Gallade-Mega)
+
+589. Probopass (ID: 529, dexID: 476, key: Probopass)
+
+590. Dusknoir (ID: 530, dexID: 477, key: Dusknoir)
+
+591. Froslass (ID: 531, dexID: 478, key: Froslass)
+
+592. Rotom (ID: 532, dexID: 479, key: Rotom)
+
+593. Rotom (ID: 713, dexID: 479, key: Rotom-Heat)
+
+594. Rotom (ID: 714, dexID: 479, key: Rotom-Wash)
+
+595. Rotom (ID: 715, dexID: 479, key: Rotom-Frost)
+
+596. Rotom (ID: 716, dexID: 479, key: Rotom-Fan)
+
+597. Rotom (ID: 717, dexID: 479, key: Rotom-Mow)
+
+598. Uxie (ID: 533, dexID: 480, key: Uxie)
+
+599. Mesprit (ID: 534, dexID: 481, key: Mesprit)
+
+600. Azelf (ID: 535, dexID: 482, key: Azelf)
+
+601. Dialga (ID: 536, dexID: 483, key: Dialga)
+
+602. Dialga (ID: 919, dexID: 483, key: Dialga-Primal)
+
+603. Dialga (ID: 1310, dexID: 483, key: Dialga-Origin)
+
+604. Palkia (ID: 537, dexID: 484, key: Palkia)
+
+605. Palkia (ID: 1311, dexID: 484, key: Palkia-Origin)
+
+606. Heatran (ID: 538, dexID: 485, key: Heatran)
+
+607. Regigigas (ID: 539, dexID: 486, key: Regigigas)
+
+608. Giratina (ID: 540, dexID: 487, key: Giratina)
+
+609. Giratina (ID: 718, dexID: 487, key: Giratina-Origin)
+
+610. Cresselia (ID: 541, dexID: 488, key: Cresselia)
+
+611. Phione (ID: 542, dexID: 489, key: Phione)
+
+612. Manaphy (ID: 543, dexID: 490, key: Manaphy)
+
+613. Darkrai (ID: 544, dexID: 491, key: Darkrai)
+
+614. Shaymin (ID: 545, dexID: 492, key: Shaymin)
+
+615. Shaymin (ID: 719, dexID: 492, key: Shaymin-Sky)
+
+616. Arceus (ID: 546, dexID: 493, key: Arceus)
+
+617. Arceus (ID: 720, dexID: 493, key: Arceus-Fighting)
+
+618. Arceus (ID: 721, dexID: 493, key: Arceus-Flying)
+
+619. Arceus (ID: 722, dexID: 493, key: Arceus-Poison)
+
+620. Arceus (ID: 723, dexID: 493, key: Arceus-Ground)
+
+621. Arceus (ID: 724, dexID: 493, key: Arceus-Rock)
+
+622. Arceus (ID: 725, dexID: 493, key: Arceus-Bug)
+
+623. Arceus (ID: 726, dexID: 493, key: Arceus-Ghost)
+
+624. Arceus (ID: 727, dexID: 493, key: Arceus-Steel)
+
+625. Arceus (ID: 728, dexID: 493, key: Arceus-Fire)
+
+626. Arceus (ID: 729, dexID: 493, key: Arceus-Water)
+
+627. Arceus (ID: 730, dexID: 493, key: Arceus-Grass)
+
+628. Arceus (ID: 731, dexID: 493, key: Arceus-Electric)
+
+629. Arceus (ID: 732, dexID: 493, key: Arceus-Psychic)
+
+630. Arceus (ID: 733, dexID: 493, key: Arceus-Ice)
+
+631. Arceus (ID: 734, dexID: 493, key: Arceus-Dragon)
+
+632. Arceus (ID: 735, dexID: 493, key: Arceus-Dark)
+
+633. Arceus (ID: 834, dexID: 493, key: Arceus-Fairy)
+
+634. Victini (ID: 547, dexID: 494, key: Victini)
+
+635. Snivy (ID: 548, dexID: 495, key: Snivy)
+
+636. Servine (ID: 549, dexID: 496, key: Servine)
+
+637. Serperior (ID: 550, dexID: 497, key: Serperior)
+
+638. Tepig (ID: 551, dexID: 498, key: Tepig)
+
+639. Pignite (ID: 552, dexID: 499, key: Pignite)
+
+640. Emboar (ID: 553, dexID: 500, key: Emboar)
+
+641. Oshawott (ID: 554, dexID: 501, key: Oshawott)
+
+642. Dewott (ID: 555, dexID: 502, key: Dewott)
+
+643. Samurott (ID: 556, dexID: 503, key: Samurott)
+
+644. Samurott (ID: 1300, dexID: 503, key: Samurott-Hisui)
+
+645. Patrat (ID: 557, dexID: 504, key: Patrat)
+
+646. Watchog (ID: 558, dexID: 505, key: Watchog)
+
+647. Lillipup (ID: 559, dexID: 506, key: Lillipup)
+
+648. Herdier (ID: 560, dexID: 507, key: Herdier)
+
+649. Stoutland (ID: 561, dexID: 508, key: Stoutland)
+
+650. Purrloin (ID: 562, dexID: 509, key: Purrloin)
+
+651. Liepard (ID: 563, dexID: 510, key: Liepard)
+
+652. Pansage (ID: 564, dexID: 511, key: Pansage)
+
+653. Simisage (ID: 565, dexID: 512, key: Simisage)
+
+654. Pansear (ID: 566, dexID: 513, key: Pansear)
+
+655. Simisear (ID: 567, dexID: 514, key: Simisear)
+
+656. Panpour (ID: 568, dexID: 515, key: Panpour)
+
+657. Simipour (ID: 569, dexID: 516, key: Simipour)
+
+658. Munna (ID: 570, dexID: 517, key: Munna)
+
+659. Musharna (ID: 571, dexID: 518, key: Musharna)
+
+660. Pidove (ID: 572, dexID: 519, key: Pidove)
+
+661. Tranquill (ID: 573, dexID: 520, key: Tranquill)
+
+662. Unfezant (ID: 574, dexID: 521, key: Unfezant)
+
+663. Unfezant (ID: 703, dexID: 521, key: Unfezant)
+
+664. Blitzle (ID: 575, dexID: 522, key: Blitzle)
+
+665. Blitzle (ID: 1274, dexID: 522, key: Blitzle-Sevii)
+
+666. Zebstrika (ID: 576, dexID: 523, key: Zebstrika)
+
+667. Zebstrika (ID: 1275, dexID: 523, key: Zebstrika-Sevii)
+
+668. Roggenrola (ID: 577, dexID: 524, key: Roggenrola)
+
+669. Boldore (ID: 578, dexID: 525, key: Boldore)
+
+670. Gigalith (ID: 579, dexID: 526, key: Gigalith)
+
+671. Woobat (ID: 580, dexID: 527, key: Woobat)
+
+672. Swoobat (ID: 581, dexID: 528, key: Swoobat)
+
+673. Drilbur (ID: 582, dexID: 529, key: Drilbur)
+
+674. Excadrill (ID: 583, dexID: 530, key: Excadrill)
+
+675. Audino (ID: 584, dexID: 531, key: Audino)
+   → Audino (ID: 917, dexID: 531, key: Audino-Mega)
+
+676. Timburr (ID: 585, dexID: 532, key: Timburr)
+
+677. Gurdurr (ID: 586, dexID: 533, key: Gurdurr)
+
+678. Conkeldurr (ID: 587, dexID: 534, key: Conkeldurr)
+
+679. Tympole (ID: 588, dexID: 535, key: Tympole)
+
+680. Palpitoad (ID: 589, dexID: 536, key: Palpitoad)
+
+681. Seismitoad (ID: 590, dexID: 537, key: Seismitoad)
+
+682. Throh (ID: 591, dexID: 538, key: Throh)
+
+683. Sawk (ID: 592, dexID: 539, key: Sawk)
+
+684. Sewaddle (ID: 593, dexID: 540, key: Sewaddle)
+
+685. Swadloon (ID: 594, dexID: 541, key: Swadloon)
+
+686. Leavanny (ID: 595, dexID: 542, key: Leavanny)
+
+687. Venipede (ID: 596, dexID: 543, key: Venipede)
+
+688. Whirlipede (ID: 597, dexID: 544, key: Whirlipede)
+
+689. Scolipede (ID: 598, dexID: 545, key: Scolipede)
+
+690. Cottonee (ID: 599, dexID: 546, key: Cottonee)
+
+691. Whimsicott (ID: 600, dexID: 547, key: Whimsicott)
+
+692. Petilil (ID: 601, dexID: 548, key: Petilil)
+
+693. Lilligant (ID: 602, dexID: 549, key: Lilligant)
+
+694. Lilligant (ID: 1303, dexID: 549, key: Lilligant-Hisui)
+
+695. Basculin (ID: 603, dexID: 550, key: Basculin)
+
+696. Basculin (ID: 736, dexID: 550, key: Basculin-Blue-Striped)
+
+697. Sandile (ID: 604, dexID: 551, key: Sandile)
+
+698. Krokorok (ID: 605, dexID: 552, key: Krokorok)
+
+699. Krookodile (ID: 606, dexID: 553, key: Krookodile)
+
+700. Darumaka (ID: 607, dexID: 554, key: Darumaka)
+
+701. Darumaka (ID: 1225, dexID: 554, key: Darumaka-Galar)
+
+702. Darmanitan (ID: 608, dexID: 555, key: Darmanitan)
+
+703. Darmanitan (ID: 737, dexID: 555, key: Darmanitan-Zen)
+
+704. Darmanitan (ID: 1226, dexID: 555, key: Darmanitan-Galar)
+
+705. Darmanitan (ID: 1227, dexID: 555, key: Darmanitan-Galar-Zen)
+
+706. Maractus (ID: 609, dexID: 556, key: Maractus)
+
+707. Dwebble (ID: 610, dexID: 557, key: Dwebble)
+
+708. Crustle (ID: 611, dexID: 558, key: Crustle)
+
+709. Scraggy (ID: 612, dexID: 559, key: Scraggy)
+
+710. Scrafty (ID: 613, dexID: 560, key: Scrafty)
+
+711. Sigilyph (ID: 614, dexID: 561, key: Sigilyph)
+
+712. Yamask (ID: 615, dexID: 562, key: Yamask)
+
+713. Yamask (ID: 1228, dexID: 562, key: Yamask-Galar)
+
+714. Cofagrigus (ID: 616, dexID: 563, key: Cofagrigus)
+
+715. Tirtouga (ID: 617, dexID: 564, key: Tirtouga)
+
+716. Carracosta (ID: 618, dexID: 565, key: Carracosta)
+
+717. Archen (ID: 619, dexID: 566, key: Archen)
+
+718. Archeops (ID: 620, dexID: 567, key: Archeops)
+
+719. Trubbish (ID: 621, dexID: 568, key: Trubbish)
+
+720. Garbodor (ID: 622, dexID: 569, key: Garbodor)
+   → Garbodor (ID: 1242, dexID: 569, key: Garbodor-Mega)
+
+721. Zorua (ID: 623, dexID: 570, key: Zorua)
+
+722. Zorua (ID: 1280, dexID: 570, key: Zorua-Hisui)
+
+723. Zoroark (ID: 624, dexID: 571, key: Zoroark)
+
+724. Zoroark (ID: 1281, dexID: 571, key: Zoroark-Hisui)
+
+725. Minccino (ID: 625, dexID: 572, key: Minccino)
+
+726. Cinccino (ID: 626, dexID: 573, key: Cinccino)
+
+727. Gothita (ID: 627, dexID: 574, key: Gothita)
+
+728. Gothorita (ID: 628, dexID: 575, key: Gothorita)
+
+729. Gothitelle (ID: 629, dexID: 576, key: Gothitelle)
+
+730. Solosis (ID: 630, dexID: 577, key: Solosis)
+
+731. Duosion (ID: 631, dexID: 578, key: Duosion)
+
+732. Reuniclus (ID: 632, dexID: 579, key: Reuniclus)
+
+733. Ducklett (ID: 633, dexID: 580, key: Ducklett)
+
+734. Swanna (ID: 634, dexID: 581, key: Swanna)
+
+735. Vanillite (ID: 635, dexID: 582, key: Vanillite)
+
+736. Vanillish (ID: 636, dexID: 583, key: Vanillish)
+
+737. Vanilluxe (ID: 637, dexID: 584, key: Vanilluxe)
+
+738. Deerling (ID: 638, dexID: 585, key: Deerling)
+
+739. Deerling (ID: 738, dexID: 585, key: Deerling)
+
+740. Deerling (ID: 739, dexID: 585, key: Deerling)
+
+741. Deerling (ID: 740, dexID: 585, key: Deerling)
+
+742. Sawsbuck (ID: 639, dexID: 586, key: Sawsbuck)
+
+743. Sawsbuck (ID: 741, dexID: 586, key: Sawsbuck)
+
+744. Sawsbuck (ID: 742, dexID: 586, key: Sawsbuck)
+
+745. Sawsbuck (ID: 743, dexID: 586, key: Sawsbuck)
+
+746. Emolga (ID: 640, dexID: 587, key: Emolga)
+
+747. Karrablast (ID: 641, dexID: 588, key: Karrablast)
+
+748. Escavalier (ID: 642, dexID: 589, key: Escavalier)
+
+749. Foongus (ID: 643, dexID: 590, key: Foongus)
+
+750. Amoonguss (ID: 644, dexID: 591, key: Amoonguss)
+
+751. Frillish (ID: 645, dexID: 592, key: Frillish)
+
+752. Frillish (ID: 704, dexID: 592, key: Frillish)
+
+753. Jellicent (ID: 646, dexID: 593, key: Jellicent)
+
+754. Jellicent (ID: 705, dexID: 593, key: Jellicent)
+
+755. Alomomola (ID: 647, dexID: 594, key: Alomomola)
+
+756. Joltik (ID: 648, dexID: 595, key: Joltik)
+
+757. Galvantula (ID: 649, dexID: 596, key: Galvantula)
+
+758. Ferroseed (ID: 650, dexID: 597, key: Ferroseed)
+
+759. Ferrothorn (ID: 651, dexID: 598, key: Ferrothorn)
+
+760. Klink (ID: 652, dexID: 599, key: Klink)
+
+761. Klang (ID: 653, dexID: 600, key: Klang)
+
+762. Klinklang (ID: 654, dexID: 601, key: Klinklang)
+
+763. Tynamo (ID: 655, dexID: 602, key: Tynamo)
+
+764. Eelektrik (ID: 656, dexID: 603, key: Eelektrik)
+
+765. Eelektross (ID: 657, dexID: 604, key: Eelektross)
+
+766. Elgyem (ID: 658, dexID: 605, key: Elgyem)
+
+767. Beheeyem (ID: 659, dexID: 606, key: Beheeyem)
+
+768. Litwick (ID: 660, dexID: 607, key: Litwick)
+
+769. Lampent (ID: 661, dexID: 608, key: Lampent)
+
+770. Chandelure (ID: 662, dexID: 609, key: Chandelure)
+
+771. Axew (ID: 663, dexID: 610, key: Axew)
+
+772. Fraxure (ID: 664, dexID: 611, key: Fraxure)
+
+773. Haxorus (ID: 665, dexID: 612, key: Haxorus)
+
+774. Cubchoo (ID: 666, dexID: 613, key: Cubchoo)
+
+775. Beartic (ID: 667, dexID: 614, key: Beartic)
+
+776. Cryogonal (ID: 668, dexID: 615, key: Cryogonal)
+
+777. Shelmet (ID: 669, dexID: 616, key: Shelmet)
+
+778. Accelgor (ID: 670, dexID: 617, key: Accelgor)
+
+779. Stunfisk (ID: 671, dexID: 618, key: Stunfisk)
+
+780. Stunfisk (ID: 1229, dexID: 618, key: Stunfisk-Galar)
+
+781. Mienfoo (ID: 672, dexID: 619, key: Mienfoo)
+
+782. Mienshao (ID: 673, dexID: 620, key: Mienshao)
+
+783. Druddigon (ID: 674, dexID: 621, key: Druddigon)
+
+784. Golett (ID: 675, dexID: 622, key: Golett)
+
+785. Golurk (ID: 676, dexID: 623, key: Golurk)
+
+786. Pawniard (ID: 677, dexID: 624, key: Pawniard)
+
+787. Bisharp (ID: 678, dexID: 625, key: Bisharp)
+
+788. Bouffalant (ID: 679, dexID: 626, key: Bouffalant)
+
+789. Rufflet (ID: 680, dexID: 627, key: Rufflet)
+
+790. Braviary (ID: 681, dexID: 628, key: Braviary)
+
+791. Braviary (ID: 1269, dexID: 628, key: Braviary-Hisui)
+
+792. Vullaby (ID: 682, dexID: 629, key: Vullaby)
+
+793. Mandibuzz (ID: 683, dexID: 630, key: Mandibuzz)
+
+794. Heatmor (ID: 684, dexID: 631, key: Heatmor)
+
+795. Durant (ID: 685, dexID: 632, key: Durant)
+
+796. Deino (ID: 686, dexID: 633, key: Deino)
+
+797. Zweilous (ID: 687, dexID: 634, key: Zweilous)
+
+798. Hydreigon (ID: 688, dexID: 635, key: Hydreigon)
+
+799. Larvesta (ID: 689, dexID: 636, key: Larvesta)
+
+800. Volcarona (ID: 690, dexID: 637, key: Volcarona)
+
+801. Cobalion (ID: 691, dexID: 638, key: Cobalion)
+
+802. Terrakion (ID: 692, dexID: 639, key: Terrakion)
+
+803. Virizion (ID: 693, dexID: 640, key: Virizion)
+
+804. Tornadus (ID: 694, dexID: 641, key: Tornadus)
+
+805. Tornadus (ID: 754, dexID: 641, key: Tornadus-Therian)
+
+806. Thundurus (ID: 695, dexID: 642, key: Thundurus)
+
+807. Thundurus (ID: 755, dexID: 642, key: Thundurus-Therian)
+
+808. Reshiram (ID: 696, dexID: 643, key: Reshiram)
+
+809. Zekrom (ID: 697, dexID: 644, key: Zekrom)
+
+810. Landorus (ID: 698, dexID: 645, key: Landorus)
+
+811. Landorus (ID: 756, dexID: 645, key: Landorus-Therian)
+
+812. Kyurem (ID: 699, dexID: 646, key: Kyurem)
+
+813. Kyurem (ID: 752, dexID: 646, key: Kyurem-Black)
+
+814. Kyurem (ID: 753, dexID: 646, key: Kyurem-White)
+
+815. Keldeo (ID: 700, dexID: 647, key: Keldeo)
+
+816. Keldeo (ID: 757, dexID: 647, key: Keldeo-Resolute)
+
+817. Meloetta (ID: 701, dexID: 648, key: Meloetta)
+
+818. Meloetta (ID: 746, dexID: 648, key: Meloetta-Pirouette)
+
+819. Genesect (ID: 702, dexID: 649, key: Genesect)
+
+820. Chespin (ID: 758, dexID: 650, key: Chespin)
+
+821. Quilladin (ID: 759, dexID: 651, key: Quilladin)
+
+822. Chesnaught (ID: 760, dexID: 652, key: Chesnaught)
+
+823. Fennekin (ID: 761, dexID: 653, key: Fennekin)
+
+824. Braixen (ID: 762, dexID: 654, key: Braixen)
+
+825. Delphox (ID: 763, dexID: 655, key: Delphox)
+
+826. Froakie (ID: 764, dexID: 656, key: Froakie)
+
+827. Frogadier (ID: 765, dexID: 657, key: Frogadier)
+
+828. Greninja (ID: 766, dexID: 658, key: Greninja)
+
+829. Greninja (ID: 839, dexID: 658, key: Greninja-Ash)
+
+830. Bunnelby (ID: 767, dexID: 659, key: Bunnelby)
+
+831. Diggersby (ID: 768, dexID: 660, key: Diggersby)
+
+832. Fletchling (ID: 769, dexID: 661, key: Fletchling)
+
+833. Fletchinder (ID: 770, dexID: 662, key: Fletchinder)
+
+834. Talonflame (ID: 771, dexID: 663, key: Talonflame)
+
+835. Scatterbug (ID: 772, dexID: 664, key: Scatterbug)
+
+836. Spewpa (ID: 773, dexID: 665, key: Spewpa)
+
+837. Vivillon (ID: 774, dexID: 666, key: Vivillon)
+
+838. Litleo (ID: 775, dexID: 667, key: Litleo)
+
+839. Pyroar (ID: 776, dexID: 668, key: Pyroar)
+
+840. Pyroar (ID: 831, dexID: 668, key: Pyroar)
+
+841. Flabébé (ID: 777, dexID: 669, key: Flabébé)
+
+842. Floette (ID: 778, dexID: 670, key: Floette)
+
+843. Floette (ID: 848, dexID: 670, key: Floette-Eternal)
+
+844. Florges (ID: 779, dexID: 671, key: Florges)
+
+845. Skiddo (ID: 780, dexID: 672, key: Skiddo)
+
+846. Gogoat (ID: 781, dexID: 673, key: Gogoat)
+
+847. Pancham (ID: 782, dexID: 674, key: Pancham)
+
+848. Pangoro (ID: 783, dexID: 675, key: Pangoro)
+
+849. Furfrou (ID: 784, dexID: 676, key: Furfrou)
+
+850. Espurr (ID: 785, dexID: 677, key: Espurr)
+
+851. Meowstic (ID: 786, dexID: 678, key: Meowstic)
+
+852. Meowstic (ID: 832, dexID: 678, key: Meowstic-F)
+
+853. Honedge (ID: 787, dexID: 679, key: Honedge)
+
+854. Doublade (ID: 788, dexID: 680, key: Doublade)
+
+855. Aegislash (ID: 789, dexID: 681, key: Aegislash-Shield)
+
+856. Aegislash (ID: 833, dexID: 681, key: Aegislash-Blade)
+
+857. Spritzee (ID: 790, dexID: 682, key: Spritzee)
+
+858. Aromatisse (ID: 791, dexID: 683, key: Aromatisse)
+
+859. Swirlix (ID: 792, dexID: 684, key: Swirlix)
+
+860. Slurpuff (ID: 793, dexID: 685, key: Slurpuff)
+
+861. Inkay (ID: 794, dexID: 686, key: Inkay)
+
+862. Malamar (ID: 795, dexID: 687, key: Malamar)
+
+863. Binacle (ID: 796, dexID: 688, key: Binacle)
+
+864. Barbaracle (ID: 797, dexID: 689, key: Barbaracle)
+
+865. Skrelp (ID: 798, dexID: 690, key: Skrelp)
+
+866. Dragalge (ID: 799, dexID: 691, key: Dragalge)
+
+867. Clauncher (ID: 800, dexID: 692, key: Clauncher)
+
+868. Clauncher (ID: 1287, dexID: 692, key: Clauncher-Sevii)
+
+869. Clawitzer (ID: 801, dexID: 693, key: Clawitzer)
+
+870. Clawitzer (ID: 1288, dexID: 693, key: Clawitzer-Sevii)
+
+871. Helioptile (ID: 802, dexID: 694, key: Helioptile)
+
+872. Heliolisk (ID: 803, dexID: 695, key: Heliolisk)
+
+873. Tyrunt (ID: 804, dexID: 696, key: Tyrunt)
+
+874. Tyrantrum (ID: 805, dexID: 697, key: Tyrantrum)
+
+875. Amaura (ID: 806, dexID: 698, key: Amaura)
+
+876. Aurorus (ID: 807, dexID: 699, key: Aurorus)
+
+877. Sylveon (ID: 808, dexID: 700, key: Sylveon)
+
+878. Hawlucha (ID: 809, dexID: 701, key: Hawlucha)
+
+879. Dedenne (ID: 810, dexID: 702, key: Dedenne)
+
+880. Carbink (ID: 811, dexID: 703, key: Carbink)
+
+881. Goomy (ID: 812, dexID: 704, key: Goomy)
+
+882. Sliggoo (ID: 813, dexID: 705, key: Sliggoo)
+
+883. Sliggoo (ID: 1297, dexID: 705, key: Sliggoo-Hisui)
+
+884. Goodra (ID: 814, dexID: 706, key: Goodra)
+
+885. Goodra (ID: 1298, dexID: 706, key: Goodra-Hisui)
+
+886. Klefki (ID: 815, dexID: 707, key: Klefki)
+
+887. Phantump (ID: 816, dexID: 708, key: Phantump)
+
+888. Trevenant (ID: 817, dexID: 709, key: Trevenant)
+
+889. Pumpkaboo (ID: 818, dexID: 710, key: Pumpkaboo)
+
+890. Pumpkaboo (ID: 853, dexID: 710, key: Pumpkaboo)
+
+891. Pumpkaboo (ID: 854, dexID: 710, key: Pumpkaboo)
+
+892. Pumpkaboo (ID: 855, dexID: 710, key: Pumpkaboo)
+
+893. Gourgeist (ID: 819, dexID: 711, key: Gourgeist)
+
+894. Gourgeist (ID: 856, dexID: 711, key: Gourgeist)
+
+895. Gourgeist (ID: 857, dexID: 711, key: Gourgeist)
+
+896. Gourgeist (ID: 858, dexID: 711, key: Gourgeist)
+
+897. Bergmite (ID: 820, dexID: 712, key: Bergmite)
+
+898. Avalugg (ID: 821, dexID: 713, key: Avalugg)
+
+899. Avalugg (ID: 1309, dexID: 713, key: Avalugg-Hisui)
+
+900. Noibat (ID: 822, dexID: 714, key: Noibat)
+
+901. Noibat (ID: 866, dexID: 714, key: Noibat-Sevii)
+
+902. Noivern (ID: 823, dexID: 715, key: Noivern)
+
+903. Noivern (ID: 867, dexID: 715, key: Noivern-Sevii)
+
+904. Xerneas (ID: 824, dexID: 716, key: Xerneas)
+
+905. Yveltal (ID: 825, dexID: 717, key: Yveltal)
+
+906. Zygarde (ID: 826, dexID: 718, key: Zygarde)
+
+907. Zygarde (ID: 837, dexID: 718, key: Zygarde-10%)
+
+908. Zygarde (ID: 838, dexID: 718, key: Zygarde-Complete)
+
+909. Diancie (ID: 827, dexID: 719, key: Diancie)
+   → Diancie (ID: 918, dexID: 719, key: Diancie-Mega)
+
+910. Hoopa (ID: 828, dexID: 720, key: Hoopa)
+
+911. Hoopa (ID: 829, dexID: 720, key: Hoopa-Unbound)
+
+912. Volcanion (ID: 830, dexID: 721, key: Volcanion)
+
+913. Rowlet (ID: 939, dexID: 722, key: Rowlet)
+
+914. Dartrix (ID: 940, dexID: 723, key: Dartrix)
+
+915. Decidueye (ID: 941, dexID: 724, key: Decidueye)
+
+916. Decidueye (ID: 1301, dexID: 724, key: Decidueye-Hisui)
+
+917. Litten (ID: 942, dexID: 725, key: Litten)
+
+918. Torracat (ID: 943, dexID: 726, key: Torracat)
+
+919. Incineroar (ID: 944, dexID: 727, key: Incineroar)
+
+920. Popplio (ID: 945, dexID: 728, key: Popplio)
+
+921. Brionne (ID: 946, dexID: 729, key: Brionne)
+
+922. Primarina (ID: 947, dexID: 730, key: Primarina)
+
+923. Pikipek (ID: 948, dexID: 731, key: Pikipek)
+
+924. Trumbeak (ID: 949, dexID: 732, key: Trumbeak)
+
+925. Toucannon (ID: 950, dexID: 733, key: Toucannon)
+
+926. Yungoos (ID: 951, dexID: 734, key: Yungoos)
+
+927. Gumshoos (ID: 952, dexID: 735, key: Gumshoos)
+
+928. Grubbin (ID: 953, dexID: 736, key: Grubbin)
+
+929. Charjabug (ID: 954, dexID: 737, key: Charjabug)
+
+930. Vikavolt (ID: 955, dexID: 738, key: Vikavolt)
+
+931. Crabrawler (ID: 956, dexID: 739, key: Crabrawler)
+
+932. Crabominable (ID: 957, dexID: 740, key: Crabominable)
+
+933. Oricorio (ID: 958, dexID: 741, key: Oricorio)
+
+934. Oricorio (ID: 1043, dexID: 741, key: Oricorio-Pom-Pom)
+
+935. Oricorio (ID: 1044, dexID: 741, key: Oricorio-Pa'u)
+
+936. Oricorio (ID: 1045, dexID: 741, key: Oricorio-Sensu)
+
+937. Cutiefly (ID: 959, dexID: 742, key: Cutiefly)
+
+938. Ribombee (ID: 960, dexID: 743, key: Ribombee)
+
+939. Rockruff (ID: 961, dexID: 744, key: Rockruff)
+
+940. Lycanroc (ID: 962, dexID: 745, key: Lycanroc)
+
+941. Lycanroc (ID: 1046, dexID: 745, key: Lycanroc-Midnight)
+
+942. Lycanroc (ID: 1082, dexID: 745, key: Lycanroc-Dusk)
+
+943. Wishiwashi (ID: 963, dexID: 746, key: Wishiwashi)
+
+944. Wishiwashi (ID: 1047, dexID: 746, key: Wishiwashi-School)
+
+945. Wishiwashi (ID: 1292, dexID: 746, key: Wishiwashi-Sevii)
+
+946. Wishiwashi (ID: 1293, dexID: 746, key: Wishiwashi-Sevii-School)
+
+947. Mareanie (ID: 964, dexID: 747, key: Mareanie)
+
+948. Toxapex (ID: 965, dexID: 748, key: Toxapex)
+
+949. Mudbray (ID: 966, dexID: 749, key: Mudbray)
+
+950. Mudsdale (ID: 967, dexID: 750, key: Mudsdale)
+
+951. Dewpider (ID: 968, dexID: 751, key: Dewpider)
+
+952. Araquanid (ID: 969, dexID: 752, key: Araquanid)
+
+953. Fomantis (ID: 970, dexID: 753, key: Fomantis)
+
+954. Lurantis (ID: 971, dexID: 754, key: Lurantis)
+
+955. Morelull (ID: 972, dexID: 755, key: Morelull)
+
+956. Shiinotic (ID: 973, dexID: 756, key: Shiinotic)
+
+957. Salandit (ID: 974, dexID: 757, key: Salandit)
+
+958. Salazzle (ID: 975, dexID: 758, key: Salazzle)
+
+959. Stufful (ID: 976, dexID: 759, key: Stufful)
+
+960. Bewear (ID: 977, dexID: 760, key: Bewear)
+
+961. Bounsweet (ID: 978, dexID: 761, key: Bounsweet)
+
+962. Steenee (ID: 979, dexID: 762, key: Steenee)
+
+963. Tsareena (ID: 980, dexID: 763, key: Tsareena)
+
+964. Comfey (ID: 981, dexID: 764, key: Comfey)
+
+965. Oranguru (ID: 982, dexID: 765, key: Oranguru)
+
+966. Passimian (ID: 983, dexID: 766, key: Passimian)
+
+967. Wimpod (ID: 984, dexID: 767, key: Wimpod)
+
+968. Golisopod (ID: 985, dexID: 768, key: Golisopod)
+
+969. Sandygast (ID: 986, dexID: 769, key: Sandygast)
+
+970. Palossand (ID: 987, dexID: 770, key: Palossand)
+
+971. Pyukumuku (ID: 988, dexID: 771, key: Pyukumuku)
+
+972. Type: Null (ID: 989, dexID: 772, key: Type: Null)
+
+973. Silvally (ID: 990, dexID: 773, key: Silvally)
+
+974. Silvally (ID: 1048, dexID: 773, key: Silvally-Fighting)
+
+975. Silvally (ID: 1049, dexID: 773, key: Silvally-Flying)
+
+976. Silvally (ID: 1050, dexID: 773, key: Silvally-Poison)
+
+977. Silvally (ID: 1051, dexID: 773, key: Silvally-Ground)
+
+978. Silvally (ID: 1052, dexID: 773, key: Silvally-Rock)
+
+979. Silvally (ID: 1053, dexID: 773, key: Silvally-Bug)
+
+980. Silvally (ID: 1054, dexID: 773, key: Silvally-Ghost)
+
+981. Silvally (ID: 1055, dexID: 773, key: Silvally-Steel)
+
+982. Silvally (ID: 1056, dexID: 773, key: Silvally-Fire)
+
+983. Silvally (ID: 1057, dexID: 773, key: Silvally-Water)
+
+984. Silvally (ID: 1058, dexID: 773, key: Silvally-Grass)
+
+985. Silvally (ID: 1059, dexID: 773, key: Silvally-Electric)
+
+986. Silvally (ID: 1060, dexID: 773, key: Silvally-Psychic)
+
+987. Silvally (ID: 1061, dexID: 773, key: Silvally-Ice)
+
+988. Silvally (ID: 1062, dexID: 773, key: Silvally-Dragon)
+
+989. Silvally (ID: 1063, dexID: 773, key: Silvally-Dark)
+
+990. Silvally (ID: 1064, dexID: 773, key: Silvally-Fairy)
+
+991. Minior (ID: 991, dexID: 774, key: Minior-Meteor)
+
+992. Minior (ID: 1065, dexID: 774, key: Minior)
+
+993. Minior (ID: 1066, dexID: 774, key: Minior)
+
+994. Minior (ID: 1067, dexID: 774, key: Minior)
+
+995. Minior (ID: 1068, dexID: 774, key: Minior)
+
+996. Minior (ID: 1069, dexID: 774, key: Minior)
+
+997. Minior (ID: 1070, dexID: 774, key: Minior)
+
+998. Minior (ID: 1071, dexID: 774, key: Minior)
+
+999. Komala (ID: 992, dexID: 775, key: Komala)
+
+1000. Turtonator (ID: 993, dexID: 776, key: Turtonator)
+
+1001. Togedemaru (ID: 994, dexID: 777, key: Togedemaru)
+
+1002. Mimikyu (ID: 995, dexID: 778, key: Mimikyu)
+
+1003. Mimikyu (ID: 1072, dexID: 778, key: Mimikyu-Busted)
+
+1004. Bruxish (ID: 996, dexID: 779, key: Bruxish)
+
+1005. Drampa (ID: 997, dexID: 780, key: Drampa)
+
+1006. Dhelmise (ID: 998, dexID: 781, key: Dhelmise)
+
+1007. Dhelmise (ID: 1294, dexID: 781, key: Dhelmise-Sevii)
+
+1008. Jangmo-o (ID: 999, dexID: 782, key: Jangmo-o)
+
+1009. Hakamo-o (ID: 1000, dexID: 783, key: Hakamo-o)
+
+1010. Kommo-o (ID: 1001, dexID: 784, key: Kommo-o)
+
+1011. Tapu Koko (ID: 1002, dexID: 785, key: Tapu Koko)
+
+1012. Tapu Lele (ID: 1003, dexID: 786, key: Tapu Lele)
+
+1013. Tapu Bulu (ID: 1004, dexID: 787, key: Tapu Bulu)
+
+1014. Tapu Fini (ID: 1005, dexID: 788, key: Tapu Fini)
+
+1015. Cosmog (ID: 1006, dexID: 789, key: Cosmog)
+
+1016. Cosmoem (ID: 1007, dexID: 790, key: Cosmoem)
+
+1017. Solgaleo (ID: 1008, dexID: 791, key: Solgaleo)
+
+1018. Lunala (ID: 1009, dexID: 792, key: Lunala)
+
+1019. Nihilego (ID: 1010, dexID: 793, key: Nihilego)
+
+1020. Buzzwole (ID: 1011, dexID: 794, key: Buzzwole)
+
+1021. Pheromosa (ID: 1012, dexID: 795, key: Pheromosa)
+
+1022. Xurkitree (ID: 1013, dexID: 796, key: Xurkitree)
+
+1023. Celesteela (ID: 1014, dexID: 797, key: Celesteela)
+
+1024. Kartana (ID: 1015, dexID: 798, key: Kartana)
+
+1025. Guzzlord (ID: 1016, dexID: 799, key: Guzzlord)
+
+1026. Necrozma (ID: 1017, dexID: 800, key: Necrozma)
+
+1027. Necrozma (ID: 1079, dexID: 800, key: Necrozma-Dusk-Mane)
+
+1028. Necrozma (ID: 1080, dexID: 800, key: Necrozma-Dawn-Wings)
+
+1029. Necrozma (ID: 1081, dexID: 800, key: Necrozma-Ultra)
+
+1030. Magearna (ID: 1018, dexID: 801, key: Magearna)
+
+1031. Magearna (ID: 1073, dexID: 801, key: Magearna)
+
+1032. Marshadow (ID: 1019, dexID: 802, key: Marshadow)
+
+1033. Poipole (ID: 1074, dexID: 803, key: Poipole)
+
+1034. Naganadel (ID: 1075, dexID: 804, key: Naganadel)
+
+1035. Stakataka (ID: 1076, dexID: 805, key: Stakataka)
+
+1036. Blacephalon (ID: 1077, dexID: 806, key: Blacephalon)
+
+1037. Zeraora (ID: 1078, dexID: 807, key: Zeraora)
+
+1038. Meltan (ID: 1083, dexID: 808, key: Meltan)
+
+1039. Melmetal (ID: 1084, dexID: 809, key: Melmetal)
+
+1040. Grookey (ID: 1102, dexID: 810, key: Grookey)
+
+1041. Thwackey (ID: 1103, dexID: 811, key: Thwackey)
+
+1042. Rillaboom (ID: 1104, dexID: 812, key: Rillaboom)
+
+1043. Scorbunny (ID: 1105, dexID: 813, key: Scorbunny)
+
+1044. Raboot (ID: 1106, dexID: 814, key: Raboot)
+
+1045. Cinderace (ID: 1107, dexID: 815, key: Cinderace)
+
+1046. Sobble (ID: 1108, dexID: 816, key: Sobble)
+
+1047. Drizzile (ID: 1109, dexID: 817, key: Drizzile)
+
+1048. Inteleon (ID: 1110, dexID: 818, key: Inteleon)
+
+1049. Skwovet (ID: 1111, dexID: 819, key: Skwovet)
+
+1050. Greedent (ID: 1112, dexID: 820, key: Greedent)
+
+1051. Rookidee (ID: 1113, dexID: 821, key: Rookidee)
+
+1052. Corvisquire (ID: 1114, dexID: 822, key: Corvisquire)
+
+1053. Corviknight (ID: 1115, dexID: 823, key: Corviknight)
+
+1054. Blipbug (ID: 1116, dexID: 824, key: Blipbug)
+
+1055. Dottler (ID: 1117, dexID: 825, key: Dottler)
+
+1056. Orbeetle (ID: 1118, dexID: 826, key: Orbeetle)
+   → Orbeetle (ID: 1248, dexID: 826, key: Orbeetle-Mega)
+
+1057. Nickit (ID: 1119, dexID: 827, key: Nickit)
+
+1058. Thievul (ID: 1120, dexID: 828, key: Thievul)
+
+1059. Gossifleur (ID: 1121, dexID: 829, key: Gossifleur)
+
+1060. Eldegoss (ID: 1122, dexID: 830, key: Eldegoss)
+
+1061. Wooloo (ID: 1123, dexID: 831, key: Wooloo)
+
+1062. Dubwool (ID: 1124, dexID: 832, key: Dubwool)
+
+1063. Chewtle (ID: 1125, dexID: 833, key: Chewtle)
+
+1064. Drednaw (ID: 1126, dexID: 834, key: Drednaw)
+   → Drednaw (ID: 1249, dexID: 834, key: Drednaw-Mega)
+
+1065. Yamper (ID: 1127, dexID: 835, key: Yamper)
+
+1066. Boltund (ID: 1128, dexID: 836, key: Boltund)
+
+1067. Rolycoly (ID: 1129, dexID: 837, key: Rolycoly)
+
+1068. Carkol (ID: 1130, dexID: 838, key: Carkol)
+
+1069. Coalossal (ID: 1131, dexID: 839, key: Coalossal)
+   → Coalossal (ID: 1250, dexID: 839, key: Coalossal-Mega)
+
+1070. Applin (ID: 1132, dexID: 840, key: Applin)
+
+1071. Flapple (ID: 1133, dexID: 841, key: Flapple)
+   → Flapple (ID: 1251, dexID: 841, key: Flapple-Mega)
+
+1072. Appletun (ID: 1134, dexID: 842, key: Appletun)
+   → Appletun (ID: 1252, dexID: 842, key: Appletun-Mega)
+
+1073. Silicobra (ID: 1135, dexID: 843, key: Silicobra)
+
+1074. Sandaconda (ID: 1136, dexID: 844, key: Sandaconda)
+   → Sandaconda (ID: 1253, dexID: 844, key: Sandaconda-Mega)
+
+1075. Cramorant (ID: 1137, dexID: 845, key: Cramorant)
+
+1076. Cramorant (ID: 1190, dexID: 845, key: Cramorant-Gulping)
+
+1077. Cramorant (ID: 1191, dexID: 845, key: Cramorant-Gorging)
+
+1078. Arrokuda (ID: 1138, dexID: 846, key: Arrokuda)
+
+1079. Barraskewda (ID: 1139, dexID: 847, key: Barraskewda)
+
+1080. Toxel (ID: 1140, dexID: 848, key: Toxel)
+
+1081. Toxtricity (ID: 1141, dexID: 849, key: Toxtricity)
+   → Toxtricity (ID: 1254, dexID: 849, key: Toxtricity-Mega)
+
+1082. Toxtricity (ID: 1192, dexID: 849, key: Toxtricity-Low-Key)
+
+1083. Sizzlipede (ID: 1142, dexID: 850, key: Sizzlipede)
+
+1084. Sizzlipede (ID: 1289, dexID: 850, key: Sizzlipede-Sevii)
+
+1085. Centiskorch (ID: 1143, dexID: 851, key: Centiskorch)
+   → Centiskorch (ID: 1256, dexID: 851, key: Centiskorch-Mega)
+
+1086. Centiskorch (ID: 1290, dexID: 851, key: Centiskorch-Sevii)
+   → Centiskorch (ID: 1291, dexID: 851, key: Centiskorch-Sevii-Mega)
+
+1087. Clobbopus (ID: 1144, dexID: 852, key: Clobbopus)
+
+1088. Grapploct (ID: 1145, dexID: 853, key: Grapploct)
+
+1089. Sinistea (ID: 1146, dexID: 854, key: Sinistea)
+
+1090. Polteageist (ID: 1147, dexID: 855, key: Polteageist)
+
+1091. Hatenna (ID: 1148, dexID: 856, key: Hatenna)
+
+1092. Hattrem (ID: 1149, dexID: 857, key: Hattrem)
+
+1093. Hatterene (ID: 1150, dexID: 858, key: Hatterene)
+
+1094. Impidimp (ID: 1151, dexID: 859, key: Impidimp)
+
+1095. Morgrem (ID: 1152, dexID: 860, key: Morgrem)
+
+1096. Grimmsnarl (ID: 1153, dexID: 861, key: Grimmsnarl)
+
+1097. Obstagoon (ID: 1154, dexID: 862, key: Obstagoon)
+
+1098. Perrserker (ID: 1155, dexID: 863, key: Perrserker)
+
+1099. Cursola (ID: 1156, dexID: 864, key: Cursola)
+
+1100. Sirfetch’d (ID: 1157, dexID: 865, key: Sirfetch’d)
+
+1101. Mr. Rime (ID: 1158, dexID: 866, key: Mr. Rime)
+
+1102. Runerigus (ID: 1159, dexID: 867, key: Runerigus)
+
+1103. Milcery (ID: 1160, dexID: 868, key: Milcery)
+
+1104. Alcremie (ID: 1161, dexID: 869, key: Alcremie)
+   → Alcremie (ID: 1259, dexID: 869, key: Alcremie-Mega)
+
+1105. Falinks (ID: 1162, dexID: 870, key: Falinks)
+
+1106. Pincurchin (ID: 1163, dexID: 871, key: Pincurchin)
+
+1107. Snom (ID: 1164, dexID: 872, key: Snom)
+
+1108. Frosmoth (ID: 1165, dexID: 873, key: Frosmoth)
+
+1109. Stonjourner (ID: 1166, dexID: 874, key: Stonjourner)
+
+1110. Eiscue (ID: 1167, dexID: 875, key: Eiscue)
+
+1111. Eiscue (ID: 1201, dexID: 875, key: Eiscue-Noice)
+
+1112. Indeedee (ID: 1168, dexID: 876, key: Indeedee)
+
+1113. Indeedee (ID: 1202, dexID: 876, key: Indeedee-F)
+
+1114. Morpeko (ID: 1169, dexID: 877, key: Morpeko)
+
+1115. Morpeko (ID: 1203, dexID: 877, key: Morpeko-Hangry)
+
+1116. Cufant (ID: 1170, dexID: 878, key: Cufant)
+
+1117. Copperajah (ID: 1171, dexID: 879, key: Copperajah)
+   → Copperajah (ID: 1260, dexID: 879, key: Copperajah-Mega)
+
+1118. Dracozolt (ID: 1172, dexID: 880, key: Dracozolt)
+
+1119. Arctozolt (ID: 1173, dexID: 881, key: Arctozolt)
+
+1120. Dracovish (ID: 1174, dexID: 882, key: Dracovish)
+
+1121. Arctovish (ID: 1175, dexID: 883, key: Arctovish)
+
+1122. Duraludon (ID: 1176, dexID: 884, key: Duraludon)
+
+1123. Dreepy (ID: 1177, dexID: 885, key: Dreepy)
+
+1124. Drakloak (ID: 1178, dexID: 886, key: Drakloak)
+
+1125. Dragapult (ID: 1179, dexID: 887, key: Dragapult)
+
+1126. Zacian (ID: 1180, dexID: 888, key: Zacian)
+
+1127. Zacian (ID: 1204, dexID: 888, key: Zacian-Crowned)
+
+1128. Zamazenta (ID: 1181, dexID: 889, key: Zamazenta)
+
+1129. Zamazenta (ID: 1205, dexID: 889, key: Zamazenta-Crowned)
+
+1130. Eternatus (ID: 1182, dexID: 890, key: Eternatus)
+
+1131. Eternatus (ID: 1206, dexID: 890, key: Eternatus-Eternamax)
+
+1132. Kubfu (ID: 1183, dexID: 891, key: Kubfu)
+
+1133. Urshifu (ID: 1184, dexID: 892, key: Urshifu)
+
+1134. Urshifu (ID: 1207, dexID: 892, key: Urshifu-Rapid-Strike)
+
+1135. Zarude (ID: 1185, dexID: 893, key: Zarude)
+
+1136. Regieleki (ID: 1188, dexID: 894, key: Regieleki)
+
+1137. Regidrago (ID: 1189, dexID: 895, key: Regidrago)
+
+1138. Glastrier (ID: 1267, dexID: 896, key: Glastrier)
+
+1139. Spectrier (ID: 1266, dexID: 897, key: Spectrier)
+
+1140. Calyrex (ID: 1187, dexID: 898, key: Calyrex)
+
+1141. Calyrex (ID: 1264, dexID: 898, key: Calyrex-Ice)
+
+1142. Calyrex (ID: 1265, dexID: 898, key: Calyrex-Shadow)
+
+1143. Wyrdeer (ID: 1270, dexID: 899, key: Wyrdeer)
+
+1144. Kleavor (ID: 1273, dexID: 900, key: Kleavor)
+
+1145. Ursaluna (ID: 1302, dexID: 901, key: Ursaluna)
+
+1146. Ursaluna (ID: 1356, dexID: 901, key: Ursaluna-Bloodmoon)
+
+1147. Basculegion (ID: 1268, dexID: 902, key: Basculegion)
+
+1148. Basculegion (ID: 1306, dexID: 902, key: Basculegion-F)
+
+1149. Sneasler (ID: 1305, dexID: 903, key: Sneasler)
+
+1150. Overqwil (ID: 1308, dexID: 904, key: Overqwil)
+
+1151. Enamorus (ID: 1312, dexID: 905, key: Enamorus)
+
+1152. Enamorus (ID: 1313, dexID: 905, key: Enamorus-Therian)
+
+1153. Sprigatito (ID: 921, dexID: 906, key: Sprigatito)
+
+1154. Floragato (ID: 922, dexID: 907, key: Floragato)
+
+1155. Meowscarada (ID: 923, dexID: 908, key: Meowscarada)
+
+1156. Fuecoco (ID: 924, dexID: 909, key: Fuecoco)
+
+1157. Crocalor (ID: 925, dexID: 910, key: Crocalor)
+
+1158. Skeledirge (ID: 926, dexID: 911, key: Skeledirge)
+
+1159. Quaxly (ID: 927, dexID: 912, key: Quaxly)
+
+1160. Quaxwell (ID: 928, dexID: 913, key: Quaxwell)
+
+1161. Quaquaval (ID: 929, dexID: 914, key: Quaquaval)
+
+1162. Lechonk (ID: 846, dexID: 915, key: Lechonk)
+
+1163. Oinkologne (ID: 847, dexID: 916, key: Oinkologne)
+
+1164. Oinkologne (ID: 849, dexID: 916, key: Oinkologne-F)
+
+1165. Tarountula (ID: 1314, dexID: 917, key: Tarountula)
+
+1166. Spidops (ID: 1315, dexID: 918, key: Spidops)
+
+1167. Nymble (ID: 1200, dexID: 919, key: Nymble-Sevii)
+
+1168. Nymble (ID: 1316, dexID: 919, key: Nymble)
+
+1169. Lokix (ID: 1186, dexID: 920, key: Lokix-Sevii)
+
+1170. Lokix (ID: 1317, dexID: 920, key: Lokix)
+
+1171. Pawmi (ID: 843, dexID: 921, key: Pawmi)
+
+1172. Pawmo (ID: 844, dexID: 922, key: Pawmo)
+
+1173. Pawmot (ID: 845, dexID: 923, key: Pawmot)
+
+1174. Tandemaus (ID: 1330, dexID: 924, key: Tandemaus)
+
+1175. Maushold (ID: 1331, dexID: 925, key: Maushold)
+
+1176. Fidough (ID: 1347, dexID: 926, key: Fidough)
+
+1177. Dachsbun (ID: 1348, dexID: 927, key: Dachsbun)
+
+1178. Smoliv (ID: 1324, dexID: 928, key: Smoliv)
+
+1179. Dolliv (ID: 1325, dexID: 929, key: Dolliv)
+
+1180. Arboliva (ID: 1326, dexID: 930, key: Arboliva)
+
+1181. Squawkabilly (ID: 1338, dexID: 931, key: Squawkabilly)
+
+1182. Squawkabilly (ID: 1355, dexID: 931, key: Squawkabilly-White)
+
+1183. Nacli (ID: 1340, dexID: 932, key: Nacli)
+
+1184. Naclstack (ID: 1341, dexID: 933, key: Naclstack)
+
+1185. Garganacl (ID: 1342, dexID: 934, key: Garganacl)
+
+1186. Charcadet (ID: 938, dexID: 935, key: Charcadet)
+
+1187. Armarouge (ID: 935, dexID: 936, key: Armarouge)
+
+1188. Ceruledge (ID: 934, dexID: 937, key: Ceruledge)
+
+1189. Tadbulb (ID: 861, dexID: 938, key: Tadbulb)
+
+1190. Bellibolt (ID: 862, dexID: 939, key: Bellibolt)
+
+1191. Wattrel (ID: 1335, dexID: 940, key: Wattrel)
+
+1192. Kilowattrel (ID: 1336, dexID: 941, key: Kilowattrel)
+
+1193. Maschiff (ID: 1349, dexID: 942, key: Maschiff)
+
+1194. Mabosstiff (ID: 1350, dexID: 943, key: Mabosstiff)
+
+1195. Shroodle (ID: 1345, dexID: 944, key: Shroodle)
+
+1196. Grafaiai (ID: 1346, dexID: 945, key: Grafaiai)
+
+1197. Bramblin (ID: 1351, dexID: 946, key: Bramblin)
+
+1198. Brambleghast (ID: 1352, dexID: 947, key: Brambleghast)
+
+1199. Toedscool (ID: 1198, dexID: 948, key: Toedscool)
+
+1200. Toedscruel (ID: 1199, dexID: 949, key: Toedscruel)
+
+1201. Klawf (ID: 706, dexID: 950, key: Klawf)
+
+1202. Capsakid (ID: 1327, dexID: 951, key: Capsakid)
+
+1203. Scovillain (ID: 1328, dexID: 952, key: Scovillain)
+
+1204. Rellor (ID: 1318, dexID: 953, key: Rellor)
+
+1205. Rabsca (ID: 1319, dexID: 954, key: Rabsca)
+
+1206. Flittle (ID: 1320, dexID: 955, key: Flittle)
+
+1207. Espathra (ID: 1321, dexID: 956, key: Espathra)
+
+1208. Tinkatink (ID: 840, dexID: 957, key: Tinkatink)
+
+1209. Tinkatuff (ID: 841, dexID: 958, key: Tinkatuff)
+
+1210. Tinkaton (ID: 842, dexID: 959, key: Tinkaton)
+
+1211. Wiglett (ID: 932, dexID: 960, key: Wiglett)
+
+1212. Wugtrio (ID: 933, dexID: 961, key: Wugtrio)
+
+1213. Bombirdier (ID: 1337, dexID: 962, key: Bombirdier)
+
+1214. Finizen (ID: 863, dexID: 963, key: Finizen)
+
+1215. Palafin (ID: 864, dexID: 964, key: Palafin)
+
+1216. Palafin (ID: 865, dexID: 964, key: Palafin-Hero)
+
+1217. Varoom (ID: 835, dexID: 965, key: Varoom)
+
+1218. Revavroom (ID: 836, dexID: 966, key: Revavroom)
+
+1219. Cyclizar (ID: 1101, dexID: 967, key: Cyclizar)
+
+1220. Orthworm (ID: 1329, dexID: 968, key: Orthworm)
+
+1221. Glimmet (ID: 1343, dexID: 969, key: Glimmet)
+
+1222. Glimmora (ID: 1344, dexID: 970, key: Glimmora)
+
+1223. Greavard (ID: 859, dexID: 971, key: Greavard)
+
+1224. Houndstone (ID: 860, dexID: 972, key: Houndstone)
+
+1225. Flamigo (ID: 1339, dexID: 973, key: Flamigo)
+
+1226. Cetoddle (ID: 1332, dexID: 974, key: Cetoddle)
+
+1227. Cetitan (ID: 1333, dexID: 975, key: Cetitan)
+
+1228. Veluza (ID: 1323, dexID: 976, key: Veluza)
+
+1229. Dondozo (ID: 1322, dexID: 977, key: Dondozo)
+
+1230. Tatsugiri (ID: 1334, dexID: 978, key: Tatsugiri)
+
+1231. Annihilape (ID: 937, dexID: 979, key: Annihilape)
+
+1232. Clodsire (ID: 931, dexID: 980, key: Clodsire)
+
+1233. Farigiraf (ID: 868, dexID: 981, key: Farigiraf)
+
+1234. Dudunsparce (ID: 1100, dexID: 982, key: Dudunsparce)
+
+1235. Kingambit (ID: 936, dexID: 983, key: Kingambit)
+
+1236. Great Tusk (ID: 1237, dexID: 984, key: Great Tusk)
+
+1237. Scream Tail (ID: 1245, dexID: 985, key: Screamtail)
+
+1238. Brute Bonnet (ID: 1243, dexID: 986, key: Brute Bonnet)
+
+1239. Flutter Mane (ID: 1246, dexID: 987, key: Flutter Mane)
+
+1240. Slither Wing (ID: 1255, dexID: 988, key: Slither Wing)
+
+1241. Sandy Shocks (ID: 1244, dexID: 989, key: Sandy Shocks)
+
+1242. Iron Treads (ID: 1258, dexID: 990, key: Iron Treads)
+
+1243. Iron Bundle (ID: 1231, dexID: 991, key: Iron Bundle)
+
+1244. Iron Hands (ID: 1262, dexID: 992, key: Iron Hands)
+
+1245. Iron Jugulis (ID: 1263, dexID: 993, key: Iron Jugulis)
+
+1246. Iron Moth (ID: 1247, dexID: 994, key: Iron Moth)
+
+1247. Iron Thorns (ID: 1230, dexID: 995, key: Iron Thorns)
+
+1248. Frigibax (ID: 1195, dexID: 996, key: Frigibax)
+
+1249. Arctibax (ID: 1196, dexID: 997, key: Arctibax)
+
+1250. Baxcalibur (ID: 1197, dexID: 998, key: Baxcalibur)
+
+1251. Gimmighoul (ID: 850, dexID: 999, key: Gimmighoul)
+
+1252. Gimmighoul (ID: 851, dexID: 999, key: Gimmighoul-Roaming)
+
+1253. Gholdengo (ID: 852, dexID: 1000, key: Gholdengo)
+
+1254. Wo-Chien (ID: 749, dexID: 1001, key: Wo-Chien)
+
+1255. Chien-Pao (ID: 748, dexID: 1002, key: Chien-Pao)
+
+1256. Ting-Lu (ID: 747, dexID: 1003, key: Ting-Lu)
+
+1257. Chi-Yu (ID: 750, dexID: 1004, key: Chi-Yu)
+
+1258. Roaring Moon (ID: 1257, dexID: 1005, key: Roaring Moon)
+
+1259. Iron Valiant (ID: 1232, dexID: 1006, key: Iron Valiant)
+
+1260. Koraidon (ID: 1193, dexID: 1007, key: Koraidon)
+
+1261. Miraidon (ID: 1194, dexID: 1008, key: Miraidon)
+
+1262. Walking Wake (ID: 1354, dexID: 1009, key: Walking Wake)
+
+1263. Iron Leaves (ID: 1353, dexID: 1010, key: Iron Leaves)
+
+1264. Dipplin (ID: 1363, dexID: 1011, key: Dipplin)
+
+1265. Poltchageist (ID: 1361, dexID: 1012, key: Poltchageist)
+
+1266. Sinistcha (ID: 1362, dexID: 1013, key: Sinistcha)
+
+1267. Okidogi (ID: 1366, dexID: 1014, key: Okidogi)
+
+1268. Munkidori (ID: 1365, dexID: 1015, key: Munkidori)
+
+1269. Fezandipiti (ID: 1364, dexID: 1016, key: Fezandipiti)
+
+1270. Ogerpon (ID: 1357, dexID: 1017, key: Ogerpon)
+
+1271. Ogerpon (ID: 1358, dexID: 1017, key: Ogerpon-Wellspring)
+
+1272. Ogerpon (ID: 1359, dexID: 1017, key: Ogerpon-Hearthflame)
+
+1273. Ogerpon (ID: 1360, dexID: 1017, key: Ogerpon-Cornerstone)
+
+1274. Archaludon (ID: 1369, dexID: 1018, key: Archaludon)
+
+1275. Hydrapple (ID: 1371, dexID: 1019, key: Hydrapple)
+
+1276. Gouging Fire (ID: 1374, dexID: 1020, key: Gouging Fire)
+
+1277. Raging Bolt (ID: 1367, dexID: 1021, key: Raging Bolt)
+
+1278. Iron Boulder (ID: 1373, dexID: 1022, key: Iron Boulder)
+
+1279. Iron Crown (ID: 1368, dexID: 1023, key: Iron Crown)
+
+1280. Terapagos (ID: 1370, dexID: 1024, key: Terapagos-Terastal)
+
+1281. Pecharunt (ID: 1372, dexID: 1025, key: Pecharunt)
+
+1282. Chillet (ID: 1375, dexID: 2001, key: Chillet)
