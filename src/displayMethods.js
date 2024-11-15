@@ -229,6 +229,9 @@ function buildWrapperAbilities(tag, className, a, species) {
 
 function buildWrapperAbilitiesFull(tag, className, a, species) {
 	let wrapper = buildWrapper(tag, className + 'Wrapper');
+
+	const abilitiesLabel = buildWrapper('div', 'infoTreeEvoLabel', 'Abilities');
+    wrapper.append(abilitiesLabel);
 	
 	let ability;
 	if ((name = getAbilityName(a[1], species))) {
