@@ -1,5 +1,5 @@
 async function fetchData() {
-	let request = new Request(`https://raw.githubusercontent.com/${repo}/master/data.js`);
+	let request = new Request(`data.js`);
 	let response = null;
 	if (typeof caches !== "undefined") {
 		const cache = await caches.open(version);
@@ -31,8 +31,13 @@ async function fetchData() {
 	splits = data.splits;
 	evolutions = data.evolutions;
 	scaledLevels = data.scaledLevels;
-	capIDs = data.capIDs;
+	caps = data.caps;
 	sprites = data.sprites;
+	await inlineMissingSpeciesSprites();
+
+	if (typeof renderCurrentSavePokemon === "function") {
+		renderCurrentSavePokemon();
+	}
 	
 	loadingScreen.className = "hide";
 	document.querySelector("main").className = "";
@@ -45,6 +50,8 @@ async function onStartup() {
 	setupTables();
 	
 	setupFilters();
+
+	setupAdvancedFeatures();
 	
 	if(Array.prototype.equals)
 			console.warn("Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code.");

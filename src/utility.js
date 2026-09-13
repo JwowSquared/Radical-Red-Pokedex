@@ -1,8 +1,43 @@
+const APPEARANCE_SETTINGS_STORAGE_KEY = 'appearanceSettings';
+
+function readAppearanceSettingsFromStorage() {
+  try {
+    const raw = localStorage.getItem(APPEARANCE_SETTINGS_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : {};
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function writeAppearanceSettingsToStorage(settings) {
+  try {
+    localStorage.setItem(APPEARANCE_SETTINGS_STORAGE_KEY, JSON.stringify(settings));
+  } catch {}
+}
+
+function getAppearanceSetting(key, fallback) {
+  const storedSettings = readAppearanceSettingsFromStorage();
+  if (!appearanceSettingsLoaded && Object.prototype.hasOwnProperty.call(storedSettings, key)) {
+    return storedSettings[key];
+  }
+
+  if (appearanceSettings && Object.prototype.hasOwnProperty.call(appearanceSettings, key)) {
+    return appearanceSettings[key];
+  }
+
+  if (Object.prototype.hasOwnProperty.call(storedSettings, key)) {
+    return storedSettings[key];
+  }
+
+  return fallback;
+}
+
 function getAbilityName(ability, species, raw = false) {
   if (ability[0] === 0) return undefined;
 
   const mappedAbility = raw ? ability : getMappedAbility(ability, species);
-  return abilities[mappedAbility[0]].names[mappedAbility[1]];
+  return getAbilityDisplayNameById(mappedAbility[0], mappedAbility[1]);
 }
 
 function getMove(moveIdx, species, raw = false) {
@@ -28,10 +63,57 @@ function getFullLearnset(mon) {
   return learnset;
 }
 
+// Returns the legacy on-disk sprite path for species that are not embedded in data.js yet.
+// This is only used during startup to hydrate missing inline sprite entries.
+function getFallbackSpeciesSpritePath(ID) {
+  if (species?.[ID] && sprites?.[ID] === undefined) {
+    return `graphics/species/front/${ID}.png`;
+  }
+
+  return null;
+}
+
+// Converts a fetched sprite blob into a data URL so the rest of the UI can use a single sprite source format.
+// Keeping sprites inline avoids mixing `data:` URLs and file-path URLs during rendering.
+function convertBlobToDataUrl(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(reader.error || new Error('Failed to read sprite data.'));
+    reader.readAsDataURL(blob);
+  });
+}
+
+// Hydrates species that still only exist as PNG assets into the shared `sprites` map at startup.
+// Once this finishes, species rendering can read every sprite from `sprites` without falling back to file paths.
+async function inlineMissingSpeciesSprites() {
+  if (!species || !sprites) return;
+
+  const pendingSpeciesIds = Object.values(species)
+    .filter((mon) => mon && sprites[mon.ID] === undefined)
+    .map((mon) => mon.ID);
+
+  await Promise.all(
+    pendingSpeciesIds.map(async (ID) => {
+      const fallbackPath = getFallbackSpeciesSpritePath(ID);
+      if (!fallbackPath) return;
+
+      try {
+        const response = await fetch(fallbackPath);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        sprites[ID] = await convertBlobToDataUrl(await response.blob());
+      } catch (error) {
+        console.warn(`Unable to inline sprite for species ${ID} from ${fallbackPath}.`, error);
+      }
+    })
+  );
+}
+
 function getSprite(ID) {
-  let sprite = sprites[ID];
-  if (sprite === undefined) sprite = sprites[0];
-  return sprite;
+  return sprites?.[ID] ?? sprites?.[0];
 }
 
 function loadChunk(tracker, toClear) {

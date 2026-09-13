@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="style.css?v=20260705-favorites-location-fix">
 	<link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/JwowSquared/Radical-Red-Pokedex/master/favicon.ico">
 	<title>RR Dex</title>
 </head>
@@ -15,6 +15,60 @@
 		<p>Loading Radical Red Pokedex...</p>
 	</div>
 	<main class="hide">
+		<div id="topLeftMenuRow">
+			<div id="favoritesWrapper" class="hide">
+				<button id="favoritesButton" type="button" aria-expanded="false">Favorites</button>
+				<div id="favoritesMenu" class="hide" tabindex="-1"></div>
+			</div>
+		</div>
+		<div id="topRightMenuRow">
+			<div id="advancedSearchShortcutsWrapper">
+				<button id="advancedSearchShortcutsButton" type="button" aria-expanded="false">Quick Search</button>
+				<div id="advancedSearchShortcutsMenu" class="hide" tabindex="-1"></div>
+			</div>
+			<div id="appearanceSettingsWrapper">
+				<button id="appearanceSettingsButton" type="button" aria-expanded="false">Settings</button>
+				<div id="appearanceSettingsMenu" class="hide" tabindex="-1">
+					<label id="appearanceAdvancedSearchSuggestionsOption" class="appearanceSettingsOption">
+						<input type="checkbox" id="appearanceAdvancedSearchSuggestionsToggle">
+						<span>Enable Adv.Search Suggestion</span>
+					</label>
+					<label class="appearanceSettingsOption">
+						<input type="checkbox" id="appearanceAvailableOnlyToggle">
+						<span>Available Pokemons Only</span>
+					</label>
+					<label class="appearanceSettingsOption">
+						<input type="checkbox" id="appearanceFavoritesToggle">
+						<span>Favorites</span>
+					</label>
+					<label class="appearanceSettingsOption">
+						<input type="checkbox" id="appearanceCurrentTeamToggle">
+						<span>Current Team</span>
+					</label>
+					<label class="appearanceSettingsOption">
+						<input type="checkbox" id="appearanceGameProgressionToggle">
+						<span>Game Progression</span>
+					</label>
+					<label class="appearanceSettingsOption">
+						<input type="checkbox" id="appearanceLocationBaseOrderToggle">
+						<span>Location Base Order</span>
+					</label>
+					<label class="appearanceSettingsOption">
+						<input type="checkbox" id="appearanceAllowTextSelectionToggle">
+						<span>Allow Text Selection</span>
+					</label>
+					<label class="appearanceSettingsOption">
+						<input type="checkbox" id="appearanceHardcoreChangesToggle">
+						<span>Randomized Changes</span>
+					</label>
+					<label class="appearanceSettingsOption">
+						<input type="checkbox" id="appearancePokemonOffensiveToggle">
+						<span>Show Pokemon Offensive</span>
+					</label>
+					<button id="settingsExportJsonButton" type="button" onclick="exportPokemonData()">Export JSON</button>
+				</div>
+			</div>
+		</div>
 		<div class="modal fade" id="speciesModal" tabindex="-1" role="dialog" aria-labelledby="Full Pokemon Info" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -65,6 +119,7 @@
 							<p><b>Move</b>: Show all species who can learn a certain move.</p>
 							<!--<p><b>Move Type</b>: Show all species who can learn a move of a certain type.</p>-->
 							<p><b>Ability</b>: Show all species who can have a certain ability.</p>
+							<p><b>Location</b>: Show all species obtainable at a certain location.</p>
 							<!--<p><b>Egg Group</b>: Show all species from a certain egg group.</p>
 							<p><b>Held Item</b>: Show all species who can be found in the wild holding a certain item.</p>
 							<p><b>Level Cap</b>: Show all species who are available before a certain major boss fight.</p>
@@ -97,25 +152,67 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" id="advancedSearchGuideModal" tabindex="-1" role="dialog" aria-labelledby="Advanced Search Guide" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<div id="advancedSearchGuideContent">
+							<h1>Advanced Search Guide</h1>
+							<p>Build queries with <b>and</b>, <b>or</b>, <b>not</b>, and parentheses.</p>
+							<p><b>Comparison</b>: use <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>=</code>, and <code>!=</code> for numbers and exact matches.</p>
+							<p><b>Text and list matching</b>: use <code>has</code> for contains, <code>~</code> for match-any in a tuple, and <code>!~</code> for exclude-any matching.</p>
+							<p><b>Useful attributes</b>: <code>name</code>, <code>type</code>, <code>ability</code>, <code>moveset</code>, <code>location</code>, <code>locationoriginal</code>, <code>originalpokemon</code>, <code>available</code>, <code>hp</code>, <code>atk</code>, <code>def</code>, <code>spa</code>, <code>spd</code>, <code>spe</code>, <code>bst</code>.</p>
+							<p><b>Examples</b></p>
+							<p><code>bst &gt;= 600 and type = dragon</code></p>
+							<p><code>atk &lt;= 95 and ability has 'guard'</code></p>
+							<p><code>location &gt; 'route 10'</code></p>
+							<p><code>locationoriginal &lt;= 'route 5'</code></p>
+							<p><code>ability ~ ('huge power', 'feline prowess')</code></p>
+							<p><code>name !~ ('arceus', 'mewtwo')</code></p>
+							<h2>Suggestion Quick Search</h2>
+							<div class="advancedSearchGuideSuggestions">
+								<button type="button" class="advancedSearchGuideSuggestionButton" onclick="addGuideSuggestedQuickSearch(0)">Sweeper</button>
+								<button type="button" class="advancedSearchGuideSuggestionButton" onclick="addGuideSuggestedQuickSearch(1)">Trade Pokemon</button>
+								<button type="button" class="advancedSearchGuideSuggestionButton" onclick="addGuideSuggestedQuickSearch(2)">Traded Pokemon</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<div id="headingWrapper">
 			<div id="credit" style="color: white">Inspired by Ydarissep</div>
 			<button id="showHelpButton" onclick="displayHelp()">Help</button>
-			<div id="saveWrapper">
-				<div id="currentSave" class="hide">
-					<span>Current Save:</span>
-					<span id="currentSaveName"></span>
-					<span id="currentSaveDash">-</span>
-					<i id="currentSaveFlags"></i>
-					<button id="clearCurrentSave" onclick="clearCurrentSave()">
-						Clear
+				<div id="saveWrapper">
+					<div id="currentSave" class="hide">
+						<span>Current Save:</span>
+						<span id="currentSaveName"></span>
+						<span id="currentSaveDash">-</span>
+						<i id="currentSaveFlags"></i>
+						<button id="clearCurrentSave" onclick="clearCurrentSave()">
+							Clear
+						</button>
+					</div>
+					<div id="currentSaveProgression" class="hide"></div>
+					<div id="currentSavePokemon" class="hide">
+						<details id="currentSaveTeamDetails" open>
+							<summary>Team (<span id="currentSaveTeamCount">0</span>)</summary>
+							<div id="currentSaveTeamList" class="savePokemonList"></div>
+						</details>
+						<details id="currentSaveBoxesDetails">
+							<summary>PC Boxes (<span id="currentSaveBoxesCount">0</span>)</summary>
+							<div id="currentSaveBoxesList"></div>
+						</details>
+					</div>
+					<button id="saveFileInputButton" onclick="openSaveFileDialog()">
+						Upload save file (v4.1)
 					</button>
+					<input id="saveFileInput" type="file" />
 				</div>
-				<button id="saveFileInputButton" onclick="openSaveFileDialog()">
-					Upload save file (v4.1)
-				</button>
-				<input id="saveFileInput" type="file" />
-			</div>
 			<div id="speciesControl">
 				<div id="speciesFilterCategoryWrapper">
 					<input type="button" id="speciesFilterCategory"></input>
@@ -128,20 +225,37 @@
 					</ul>
 				</div>
 			</div>
+			<div id="advancedSearchControl" class="hide">
+				<div id="advancedSearchActions">
+					<button id="advancedSearchButton" type="button" onclick="runAdvancedSearch()">Search</button>
+					<button id="advancedSearchClearButton" type="button" onclick="clearAdvancedSearch()">Clear</button>
+					<button id="advancedSearchSaveButton" type="button" onclick="saveCurrentAdvancedSearchShortcut()">Save Search</button>
+					<button id="advancedSearchGuideButton" type="button" onclick="showAdvancedSearchGuide()">Guide</button>
+				</div>
+				<div id="advancedSearchStatus"></div>
+			</div>
 			<div id="activeFilters">
 			</div>
 		</div>
+		<div id="speciesLocationGroups" class="hide"></div>
 		<div id="speciesTable" class="tableWrapper">
 		</div>
-	</main>
-	<!-- Optional JavaScript -->
-	<script src="src/globals.js"></script>
-	<script src="src/tableMethods.js"></script>
-	<script src="src/sortMethods.js"></script>
-	<script src="src/displayMethods.js"></script>
-	<script src="src/filterMethods.js"></script>
+		</main>
+		<!-- Optional JavaScript -->
+		<script src="src/globals.js"></script>
+		<script src="src/saveProgression.js"></script>
+		<script src="src/randomizerMetadata.js"></script>
+		<script src="src/locationMetadata.js"></script>
+		<script src="src/tableMethods.js"></script>
+		<script src="src/sortMethods.js"></script>
+		<script src="src/displayMethods.js?v=20260705-favorites-modal-fix"></script>
+	<script src="src/filterMethods.js?v=20260705-build-team"></script>
 	<script src="src/utility.js"></script>
 	<script src="src/abilityRandomizer.js"></script>
+	<script src="src/advancedSearchMetadata.js"></script>
+	<script src="src/advancedSearch.js?v=20260705-build-team"></script>
+	<script src="src/settings.js?v=20260803-export-json-restore"></script>
+	<script src="src/teamBuilder.js?v=20260705-favorites-modal-fix"></script>
 	<script src="src/onStartUp.js"></script>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

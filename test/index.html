@@ -1,0 +1,939 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>RR Dex Advanced Search Typing Benchmark</title>
+	<style>
+		:root {
+			--bg: #17181d;
+			--bg-accent: #20232b;
+			--panel: rgba(34, 37, 45, 0.92);
+			--panel-strong: rgba(25, 27, 33, 0.96);
+			--border: rgba(255, 255, 255, 0.12);
+			--text: #f3f2ee;
+			--muted: #b9bec9;
+			--accent: #ffd166;
+			--accent-strong: #f4a261;
+			--good: #7edc8a;
+			--bad: #ff8b8b;
+			--running: #8ec5ff;
+			--shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
+			--radius: 20px;
+			--radius-sm: 14px;
+			--font-sans: "Avenir Next", "Trebuchet MS", sans-serif;
+			--font-mono: "SFMono-Regular", "Menlo", "Consolas", monospace;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html {
+			min-height: 100%;
+			background:
+				radial-gradient(circle at top left, rgba(255, 209, 102, 0.18), transparent 32%),
+				radial-gradient(circle at top right, rgba(126, 220, 138, 0.12), transparent 28%),
+				linear-gradient(180deg, #1e2128 0%, #14161b 100%);
+		}
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			color: var(--text);
+			font-family: var(--font-sans);
+			background: transparent;
+		}
+
+		a {
+			color: inherit;
+		}
+
+		code,
+		pre,
+		input,
+		button {
+			font-family: var(--font-mono);
+		}
+
+		.pageShell {
+			width: min(1500px, calc(100vw - 32px));
+			margin: 0 auto;
+			padding: 28px 0 48px;
+		}
+
+		.hero {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) auto;
+			gap: 20px;
+			align-items: end;
+			margin-bottom: 20px;
+		}
+
+		.eyebrow {
+			margin: 0 0 8px;
+			font-size: 0.82rem;
+			letter-spacing: 0.18em;
+			text-transform: uppercase;
+			color: var(--accent);
+		}
+
+		h1 {
+			margin: 0;
+			font-size: clamp(2rem, 3vw, 3rem);
+			line-height: 1.05;
+		}
+
+		.lede {
+			max-width: 72ch;
+			margin: 12px 0 0;
+			color: var(--muted);
+			font-size: 1rem;
+			line-height: 1.6;
+		}
+
+		.heroLink {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			padding: 12px 18px;
+			border: 1px solid var(--border);
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.04);
+			text-decoration: none;
+			transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+		}
+
+		.heroLink:hover {
+			transform: translateY(-1px);
+			border-color: rgba(255, 209, 102, 0.45);
+			background: rgba(255, 255, 255, 0.08);
+		}
+
+		.panel {
+			background: var(--panel);
+			border: 1px solid var(--border);
+			border-radius: var(--radius);
+			box-shadow: var(--shadow);
+			padding: 20px;
+			backdrop-filter: blur(10px);
+		}
+
+		.panel + .panel {
+			margin-top: 18px;
+		}
+
+		.controlRow {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(130px, 180px)) auto;
+			gap: 14px;
+			align-items: end;
+		}
+
+		.field {
+			display: grid;
+			gap: 8px;
+		}
+
+		.field label {
+			font-size: 0.82rem;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+			color: var(--muted);
+		}
+
+		.field input {
+			width: 100%;
+			padding: 12px 14px;
+			border-radius: 12px;
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			background: var(--panel-strong);
+			color: var(--text);
+			font-size: 0.98rem;
+		}
+
+		.field small {
+			color: var(--muted);
+			line-height: 1.4;
+		}
+
+		.runButton {
+			min-height: 48px;
+			padding: 0 22px;
+			border: 0;
+			border-radius: 14px;
+			background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+			color: #231b08;
+			font-size: 0.98rem;
+			font-weight: 700;
+			cursor: pointer;
+			transition: transform 120ms ease, filter 120ms ease;
+		}
+
+		.runButton:hover:not(:disabled) {
+			transform: translateY(-1px);
+			filter: brightness(1.04);
+		}
+
+		.runButton:disabled {
+			cursor: wait;
+			opacity: 0.68;
+		}
+
+		.statusBar {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			align-items: center;
+			margin-top: 16px;
+		}
+
+		.statusBadge {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 10px 14px;
+			border-radius: 999px;
+			border: 1px solid var(--border);
+			background: rgba(255, 255, 255, 0.04);
+			font-weight: 600;
+		}
+
+		.statusBadge::before {
+			content: "";
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background: currentColor;
+		}
+
+		.statusBadge.idle {
+			color: var(--muted);
+		}
+
+		.statusBadge.running {
+			color: var(--running);
+		}
+
+		.statusBadge.success {
+			color: var(--good);
+		}
+
+		.statusBadge.error {
+			color: var(--bad);
+		}
+
+		.statusMeta {
+			color: var(--muted);
+			font-size: 0.94rem;
+		}
+
+		.sectionHeader {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			gap: 12px;
+			align-items: baseline;
+			margin-bottom: 16px;
+		}
+
+		h2 {
+			margin: 0;
+			font-size: 1.35rem;
+		}
+
+		.sectionHint {
+			margin: 0;
+			color: var(--muted);
+			font-size: 0.95rem;
+		}
+
+		.metricGrid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+			gap: 14px;
+		}
+
+		.metricCard {
+			padding: 15px;
+			border-radius: var(--radius-sm);
+			background: rgba(255, 255, 255, 0.04);
+			border: 1px solid rgba(255, 255, 255, 0.06);
+		}
+
+		.metricLabel {
+			margin: 0 0 8px;
+			color: var(--muted);
+			font-size: 0.82rem;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+		}
+
+		.metricValue {
+			margin: 0;
+			font-size: 1.22rem;
+			font-weight: 700;
+			line-height: 1.35;
+			overflow-wrap: anywhere;
+		}
+
+		.metricHint {
+			margin: 8px 0 0;
+			color: var(--muted);
+			font-size: 0.88rem;
+			line-height: 1.4;
+		}
+
+		.dualGrid {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 18px;
+		}
+
+		.queryPlanGrid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 14px;
+		}
+
+		.queryCard {
+			padding: 16px;
+			border-radius: var(--radius-sm);
+			background:
+				linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+				var(--panel-strong);
+			border: 1px solid rgba(255, 255, 255, 0.06);
+		}
+
+		.queryCardHeader {
+			display: flex;
+			justify-content: space-between;
+			gap: 12px;
+			align-items: center;
+			margin-bottom: 10px;
+		}
+
+		.queryBadge {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-width: 36px;
+			height: 36px;
+			padding: 0 12px;
+			border-radius: 999px;
+			background: rgba(255, 209, 102, 0.14);
+			color: var(--accent);
+			font-weight: 800;
+			font-size: 0.92rem;
+		}
+
+		.queryLabel {
+			margin: 0;
+			font-size: 1rem;
+			font-weight: 700;
+		}
+
+		.queryText {
+			margin: 0;
+			padding: 12px 14px;
+			border-radius: 12px;
+			background: rgba(0, 0, 0, 0.28);
+			color: #f9f1c7;
+			overflow-wrap: anywhere;
+			font-size: 0.94rem;
+			line-height: 1.45;
+		}
+
+		.tableWrap {
+			overflow-x: auto;
+			border-radius: var(--radius-sm);
+			border: 1px solid rgba(255, 255, 255, 0.06);
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			min-width: 1100px;
+			background: rgba(0, 0, 0, 0.12);
+		}
+
+		thead {
+			background: rgba(255, 255, 255, 0.06);
+		}
+
+		th,
+		td {
+			padding: 12px 14px;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+			text-align: left;
+			vertical-align: top;
+		}
+
+		th {
+			font-size: 0.82rem;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+			color: var(--muted);
+			white-space: nowrap;
+		}
+
+		tbody tr:nth-child(odd) {
+			background: rgba(255, 255, 255, 0.02);
+		}
+
+		td code {
+			display: inline-block;
+			padding: 4px 8px;
+			border-radius: 10px;
+			background: rgba(0, 0, 0, 0.24);
+			color: #f7e7b2;
+			white-space: normal;
+		}
+
+		.iterationList {
+			display: grid;
+			gap: 14px;
+		}
+
+		.iterationCard {
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			border-radius: var(--radius-sm);
+			background: rgba(255, 255, 255, 0.03);
+			overflow: hidden;
+		}
+
+		.iterationCard summary {
+			padding: 16px 18px;
+			cursor: pointer;
+			list-style: none;
+		}
+
+		.iterationCard summary::-webkit-details-marker {
+			display: none;
+		}
+
+		.iterationSummaryTop {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			gap: 10px;
+			align-items: baseline;
+		}
+
+		.iterationSummaryTitle {
+			margin: 0;
+			font-size: 1rem;
+			font-weight: 700;
+		}
+
+		.iterationSummaryMeta {
+			color: var(--muted);
+			font-size: 0.92rem;
+		}
+
+		.iterationBody {
+			padding: 0 18px 18px;
+		}
+
+		.iterationBody pre,
+		.rawJson {
+			margin: 0;
+			padding: 16px;
+			border-radius: 14px;
+			background: rgba(0, 0, 0, 0.28);
+			color: #d9e7ff;
+			overflow: auto;
+			font-size: 0.88rem;
+			line-height: 1.5;
+		}
+
+		.emptyState {
+			padding: 18px;
+			border-radius: var(--radius-sm);
+			background: rgba(255, 255, 255, 0.03);
+			border: 1px dashed rgba(255, 255, 255, 0.08);
+			color: var(--muted);
+		}
+
+		@media (max-width: 980px) {
+			.hero,
+			.dualGrid {
+				grid-template-columns: 1fr;
+			}
+
+			.controlRow {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+		}
+
+		@media (max-width: 640px) {
+			.pageShell {
+				width: min(100vw - 20px, 1500px);
+				padding-top: 18px;
+			}
+
+			.controlRow {
+				grid-template-columns: 1fr;
+			}
+
+			.panel {
+				padding: 16px;
+			}
+
+			.statusBar {
+				align-items: flex-start;
+				flex-direction: column;
+			}
+		}
+	</style>
+</head>
+<body>
+	<main class="pageShell">
+		<header class="hero">
+			<div>
+				<p class="eyebrow">RR Dex Test Runner</p>
+				<h1>Advanced Search Typing Benchmark</h1>
+				<p class="lede">
+					This page runs 10 advanced-search queries from simple to complicated by typing every character one by one,
+					then pressing <code>Enter</code> to submit inside a hidden RR Dex iframe.
+				</p>
+			</div>
+			<a class="heroLink" href="../index.html">Back To RR Dex</a>
+		</header>
+
+		<section class="panel">
+			<div class="sectionHeader">
+				<div>
+					<h2>Run Settings</h2>
+					<p class="sectionHint">The benchmark uses the same save/localStorage state as the main RR Dex page.</p>
+				</div>
+			</div>
+			<div class="controlRow">
+				<div class="field">
+					<label for="warmupIterationsInput">Warmups</label>
+					<input id="warmupIterationsInput" type="number" min="0" max="10" value="1">
+				</div>
+				<div class="field">
+					<label for="measuredIterationsInput">Measured Runs</label>
+					<input id="measuredIterationsInput" type="number" min="1" max="25" value="3">
+				</div>
+				<div class="field">
+					<label for="interKeyDelayInput">Inter-Key Delay (ms)</label>
+					<input id="interKeyDelayInput" type="number" min="0" max="1000" value="0">
+				</div>
+				<div class="field">
+					<label for="postSubmitFramesInput">Post-Submit Frames</label>
+					<input id="postSubmitFramesInput" type="number" min="0" max="4" value="1">
+				</div>
+				<button id="runBenchmarkButton" class="runButton" type="button">Run Benchmark</button>
+			</div>
+			<div class="statusBar">
+				<div id="statusBadge" class="statusBadge idle">Ready to run.</div>
+				<div id="statusMeta" class="statusMeta">The page will auto-run once after load.</div>
+			</div>
+		</section>
+
+		<section class="panel">
+			<div class="sectionHeader">
+				<div>
+					<h2>Query Plan</h2>
+					<p class="sectionHint">The suite stays ordered from lightweight parser cases to nested mixed filters.</p>
+				</div>
+			</div>
+			<div id="queryPlanGrid" class="queryPlanGrid"></div>
+		</section>
+
+		<section class="dualGrid">
+			<section class="panel">
+				<div class="sectionHeader">
+					<div>
+						<h2>Benchmark Context</h2>
+						<p class="sectionHint">Captured from the hidden RR Dex app instance used for the run.</p>
+					</div>
+				</div>
+				<div id="contextGrid" class="metricGrid">
+					<div class="emptyState">Run the benchmark to populate app context.</div>
+				</div>
+			</section>
+
+			<section class="panel">
+				<div class="sectionHeader">
+					<div>
+						<h2>Overall Summary</h2>
+						<p class="sectionHint">High-level timing rollup across all 10 benchmark queries.</p>
+					</div>
+				</div>
+				<div id="overallGrid" class="metricGrid">
+					<div class="emptyState">Run the benchmark to populate summary metrics.</div>
+				</div>
+			</section>
+		</section>
+
+		<section class="panel">
+			<div class="sectionHeader">
+				<div>
+					<h2>Query Results</h2>
+					<p class="sectionHint">Average and p95 timings are based on the measured runs only.</p>
+				</div>
+			</div>
+			<div class="tableWrap">
+				<table>
+					<thead>
+						<tr>
+							<th>Level</th>
+							<th>Label</th>
+							<th>Query</th>
+							<th>Chars</th>
+							<th>Avg Key</th>
+							<th>P95 Key</th>
+							<th>Avg Typing</th>
+							<th>Avg Submit</th>
+							<th>Avg Total</th>
+							<th>Results</th>
+						</tr>
+					</thead>
+					<tbody id="summaryTableBody">
+						<tr>
+							<td colspan="10">
+								<div class="emptyState">Run the benchmark to populate the summary table.</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<section class="panel">
+			<div class="sectionHeader">
+				<div>
+					<h2>Iteration Details</h2>
+					<p class="sectionHint">Each entry contains the raw measured iterations for one query.</p>
+				</div>
+			</div>
+			<div id="iterationList" class="iterationList">
+				<div class="emptyState">Run the benchmark to populate per-query iteration details.</div>
+			</div>
+		</section>
+
+		<section class="panel">
+			<div class="sectionHeader">
+				<div>
+					<h2>Raw JSON Report</h2>
+					<p class="sectionHint">Useful if you want to diff runs or copy the data elsewhere.</p>
+				</div>
+			</div>
+			<pre id="rawJsonOutput" class="rawJson">Run the benchmark to generate the JSON report.</pre>
+		</section>
+	</main>
+
+	<script src="./advancedSearchTypingPerformance.js"></script>
+	<script>
+		const benchmarkApi = window.__advancedSearchTypingPerf || null;
+		const defaultQueries = benchmarkApi?.defaultQueries || [];
+		const pageState = {
+			running: false,
+			report: null
+		};
+
+		const elements = {
+			runButton: document.getElementById('runBenchmarkButton'),
+			statusBadge: document.getElementById('statusBadge'),
+			statusMeta: document.getElementById('statusMeta'),
+			warmupInput: document.getElementById('warmupIterationsInput'),
+			measuredInput: document.getElementById('measuredIterationsInput'),
+			interKeyDelayInput: document.getElementById('interKeyDelayInput'),
+			postSubmitFramesInput: document.getElementById('postSubmitFramesInput'),
+			queryPlanGrid: document.getElementById('queryPlanGrid'),
+			contextGrid: document.getElementById('contextGrid'),
+			overallGrid: document.getElementById('overallGrid'),
+			summaryTableBody: document.getElementById('summaryTableBody'),
+			iterationList: document.getElementById('iterationList'),
+			rawJsonOutput: document.getElementById('rawJsonOutput')
+		};
+
+		// Creates a DOM node with optional class and text for small UI helpers.
+		function createElement(tag, className = '', text = null) {
+			const element = document.createElement(tag);
+			if (className) {
+				element.className = className;
+			}
+			if (text !== null) {
+				element.textContent = text;
+			}
+			return element;
+		}
+
+		// Empties one container before re-rendering fresh benchmark output into it.
+		function clearElement(element) {
+			element.replaceChildren();
+		}
+
+		// Formats timing numbers consistently so all metric cards and tables align.
+		function formatMilliseconds(value) {
+			if (!Number.isFinite(Number(value))) {
+				return '-';
+			}
+
+			return `${Number(value).toFixed(3)} ms`;
+		}
+
+		// Turns booleans and nullable values into readable compact UI strings.
+		function formatValue(value) {
+			if (value === true) {
+				return 'Yes';
+			}
+			if (value === false) {
+				return 'No';
+			}
+			if (value === null || value === undefined || value === '') {
+				return '-';
+			}
+			return String(value);
+		}
+
+		// Creates one reusable metric card for context and summary sections.
+		function createMetricCard(label, value, hint = '') {
+			const card = createElement('article', 'metricCard');
+			card.append(
+				createElement('p', 'metricLabel', label),
+				createElement('p', 'metricValue', formatValue(value))
+			);
+			if (hint) {
+				card.append(createElement('p', 'metricHint', hint));
+			}
+			return card;
+		}
+
+		// Updates the status badge and helper line during benchmark execution.
+		function setStatus(message, tone = 'idle', meta = '') {
+			elements.statusBadge.className = `statusBadge ${tone}`;
+			elements.statusBadge.textContent = message;
+			elements.statusMeta.textContent = meta;
+		}
+
+		// Reads the current numeric control values into the benchmark config object.
+		function readConfig() {
+			return {
+				queries: defaultQueries,
+				warmupIterations: Number(elements.warmupInput.value || 0),
+				measuredIterations: Number(elements.measuredInput.value || 0),
+				interKeyDelayMs: Number(elements.interKeyDelayInput.value || 0),
+				postSubmitFrames: Number(elements.postSubmitFramesInput.value || 0)
+			};
+		}
+
+		// Renders the fixed 10-query benchmark plan before the run starts.
+		function renderQueryPlan(queries) {
+			clearElement(elements.queryPlanGrid);
+			queries.forEach(query => {
+				const card = createElement('article', 'queryCard');
+				const header = createElement('div', 'queryCardHeader');
+				header.append(
+					createElement('span', 'queryBadge', `#${query.level}`),
+					createElement('h3', 'queryLabel', query.label)
+				);
+				card.append(
+					header,
+					createElement('pre', 'queryText', query.query)
+				);
+				elements.queryPlanGrid.append(card);
+			});
+		}
+
+		// Renders the app/save/randomizer context that the hidden benchmark used.
+		function renderContext(report) {
+			clearElement(elements.contextGrid);
+			const context = report.context || {};
+			const entries = [
+				['App URL', context.url],
+				['Runner URL', context.runnerUrl || window.location.href],
+				['Species Count', context.speciesCount],
+				['Save Loaded', context.saveLoaded],
+				['Randomized Species', context.randomizedSpecies],
+				['Randomized Abilities', context.randomizedAbilities],
+				['Randomized Learnset', context.randomizedLearnset],
+				['Hardmode', context.hardmode],
+				['Restricted', context.restricted]
+			];
+
+			entries.forEach(([label, value]) => {
+				elements.contextGrid.append(createMetricCard(label, value));
+			});
+		}
+
+		// Builds the top-level rollup metrics that summarize the whole benchmark run.
+		function renderOverall(report) {
+			clearElement(elements.overallGrid);
+			const rows = report.rows || [];
+			if (!rows.length) {
+				elements.overallGrid.append(createElement('div', 'emptyState', 'No benchmark rows were returned.'));
+				return;
+			}
+
+			const slowest = rows.reduce((current, row) => row.avgTotalMs > current.avgTotalMs ? row : current, rows[0]);
+			const averageOf = key => rows.reduce((sum, row) => sum + Number(row[key] || 0), 0) / rows.length;
+			const generatedAt = new Date(report.generatedAt).toLocaleString();
+			const totalCharacters = rows.reduce((sum, row) => sum + Number(row.characters || 0), 0);
+
+			const cards = [
+				createMetricCard('Queries', rows.length, `${totalCharacters} characters typed across the full suite.`),
+				createMetricCard('Average Total', formatMilliseconds(averageOf('avgTotalMs')), 'Typing plus Enter submit together.'),
+				createMetricCard('Average Submit', formatMilliseconds(averageOf('avgSubmitMs')), 'Time after Enter until results settle.'),
+				createMetricCard('Average Key', formatMilliseconds(averageOf('avgKeyMs')), 'Per-keystroke update cost while typing.'),
+				createMetricCard('Slowest Query', `${slowest.label}`, `${formatMilliseconds(slowest.avgTotalMs)} average total.`),
+				createMetricCard('Generated At', generatedAt, `Mode: ${report.mode}.`)
+			];
+
+			cards.forEach(card => elements.overallGrid.append(card));
+		}
+
+		// Renders the per-query summary table with the main timing columns.
+		function renderSummaryTable(report) {
+			clearElement(elements.summaryTableBody);
+			const rows = report.rows || [];
+			if (!rows.length) {
+				const tr = document.createElement('tr');
+				const td = document.createElement('td');
+				td.colSpan = 10;
+				td.append(createElement('div', 'emptyState', 'No query rows were returned.'));
+				tr.append(td);
+				elements.summaryTableBody.append(tr);
+				return;
+			}
+
+			rows.forEach(row => {
+				const tr = document.createElement('tr');
+				const queryCell = document.createElement('td');
+				const queryCode = document.createElement('code');
+				queryCode.textContent = row.query;
+				queryCell.append(queryCode);
+
+				[
+					row.level,
+					row.label
+				].forEach(value => {
+					tr.append(createElement('td', '', formatValue(value)));
+				});
+				tr.append(queryCell);
+				[
+					row.characters,
+					formatMilliseconds(row.avgKeyMs),
+					formatMilliseconds(row.p95KeyMs),
+					formatMilliseconds(row.avgTypingMs),
+					formatMilliseconds(row.avgSubmitMs),
+					formatMilliseconds(row.avgTotalMs),
+					row.resultCount
+				].forEach(value => {
+					tr.append(createElement('td', '', formatValue(value)));
+				});
+				elements.summaryTableBody.append(tr);
+			});
+		}
+
+		// Renders one expandable raw-iteration block per query for deeper inspection.
+		function renderIterationDetails(report) {
+			clearElement(elements.iterationList);
+			const groups = report.rawIterations || [];
+			if (!groups.length) {
+				elements.iterationList.append(createElement('div', 'emptyState', 'No raw iteration data was returned.'));
+				return;
+			}
+
+			groups.forEach(group => {
+				const matchingRow = report.rows.find(row => row.level === group.level);
+				const details = createElement('details', 'iterationCard');
+				details.open = group.level <= 2;
+
+				const summary = document.createElement('summary');
+				const summaryTop = createElement('div', 'iterationSummaryTop');
+				summaryTop.append(
+					createElement('p', 'iterationSummaryTitle', `#${group.level} ${group.label}`),
+					createElement('p', 'iterationSummaryMeta', `${formatMilliseconds(matchingRow?.avgTotalMs || 0)} average total`)
+				);
+				summary.append(summaryTop);
+
+				const body = createElement('div', 'iterationBody');
+				const metrics = createElement('div', 'metricGrid');
+				metrics.append(
+					createMetricCard('Query', group.query),
+					createMetricCard('Iterations', group.iterations.length),
+					createMetricCard('Average Typing', formatMilliseconds(matchingRow?.avgTypingMs || 0)),
+					createMetricCard('Average Submit', formatMilliseconds(matchingRow?.avgSubmitMs || 0))
+				);
+
+				const raw = createElement('pre', '', JSON.stringify(group.iterations, null, 2));
+				body.append(metrics, raw);
+				details.append(summary, body);
+				elements.iterationList.append(details);
+			});
+		}
+
+		// Writes the full report JSON into the final debug panel.
+		function renderRawJson(report) {
+			elements.rawJsonOutput.textContent = JSON.stringify(report, null, 2);
+		}
+
+		// Pushes one finished benchmark report into every output section on the page.
+		function renderReport(report) {
+			pageState.report = report;
+			renderContext(report);
+			renderOverall(report);
+			renderSummaryTable(report);
+			renderIterationDetails(report);
+			renderRawJson(report);
+		}
+
+		// Runs the hidden-iframe typing benchmark and keeps the page controls in sync.
+		async function runBenchmark() {
+			if (pageState.running) {
+				return;
+			}
+
+			if (typeof window.runAdvancedSearchTypingPerformanceTest !== 'function') {
+				setStatus('Benchmark script missing.', 'error', 'advancedSearchTypingPerformance.js did not load correctly.');
+				return;
+			}
+
+			pageState.running = true;
+			elements.runButton.disabled = true;
+			setStatus(
+				'Running typing benchmark...',
+				'running',
+				'Typing all 10 queries in a hidden RR Dex iframe. The page will update when the run finishes.'
+			);
+
+			try {
+				const report = await window.runAdvancedSearchTypingPerformanceTest(readConfig());
+				renderReport(report);
+				setStatus(
+					'Benchmark complete.',
+					'success',
+					`${report.rows.length} queries measured at ${new Date(report.generatedAt).toLocaleTimeString()}.`
+				);
+			}
+			catch (error) {
+				console.error(error);
+				setStatus(
+					'Benchmark failed.',
+					'error',
+					error?.message || 'The hidden iframe run did not complete.'
+				);
+			}
+			finally {
+				pageState.running = false;
+				elements.runButton.disabled = false;
+			}
+		}
+
+		renderQueryPlan(defaultQueries);
+		elements.runButton.addEventListener('click', runBenchmark);
+
+		if (!benchmarkApi) {
+			setStatus('Benchmark API missing.', 'error', 'The typing benchmark script failed to initialize.');
+		}
+		else {
+			runBenchmark();
+		}
+	</script>
+</body>
+</html>

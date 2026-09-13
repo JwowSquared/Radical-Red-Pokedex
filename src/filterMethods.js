@@ -6,6 +6,17 @@ let categoryDropdown = document.getElementById('speciesFilterCategoryDropdown');
 let categoryWrapper = document.getElementById('speciesFilterCategoryWrapper');
 let selectedFilter = null;
 
+// Hides the shared suggestion popup when no normal-search matches should be visible.
+function hideDefaultSearchDropdown() {
+	inputDropdown.innerHTML = '';
+	inputDropdown.className = 'hide';
+}
+
+// Reopens the shared suggestion popup for normal search after advanced search hides it.
+function showDefaultSearchDropdown() {
+	inputDropdown.className = '';
+}
+
 function setupFilters() {
 
 	buildFilter('Name', 1,
@@ -26,25 +37,28 @@ function setupFilters() {
 	);
 	
 	buildFilter('Ability', 3, Object.values(abilities),
-		o => o.names[0], //make alternate names filterable eventually
+		o => getAbilityDisplayNameById(o.ID), //make alternate names filterable eventually
 		(x,o) => x.abilities
 			.map(y => getMappedAbility(y, x.ID))	
 			.find(y => y[0] == o.ID)
 	);
-	
-	//default filter category
-	selectFilterCategory.value = 'Name';
-	categoryDropdown.className = 'hide';
+
+	buildFilter('Location', 1,
+		typeof getDefaultSearchLocationNames === 'function' ? getDefaultSearchLocationNames() : [],
+		o => o,
+		(x,o) => buildSpeciesSearchRecord(x).lists.location.includes(o)
+	);
+
+	buildFilter('Adv. Search', 0, [],
+		o => o,
+		() => true
+	);
 	
 	for (const filter of Object.values(filters)) {
 		let option = document.createElement('li');
 		option.innerText = filter.label;
 		option.addEventListener('mousedown', function() {
-			selectFilterCategory.value = filter.label;
-			selectedFilter = filter;
-			speciesInput.value = '';
-			selectFilterCategory.className = '';
-			categoryDropdown.className = 'hide';
+			selectFilterCategoryByLabel(filter.label, true);
 		});
 		categoryDropdown.append(option);
 	}
@@ -60,11 +74,12 @@ function setupFilters() {
 		}
 	});
 	
-	//also default here for some reason?
-	selectedFilter = filters['Name'];
+	selectFilterCategoryByLabel('Name');
 
 	speciesInput.addEventListener('keyup', function(event) {
 		event.preventDefault();
+		if (selectedFilter?.label === 'Adv. Search')
+			return;
 		if (event.key !== 'Enter')
 			return;
 		let input = speciesInput.value.trim().toLowerCase();
@@ -78,14 +93,73 @@ function setupFilters() {
 	speciesInput.addEventListener('mousedown', buildDropdown);
 	speciesInput.addEventListener('blur', function(event) {
 		event.preventDefault();
-		inputDropdown.innerHTML = '';
+		hideDefaultSearchDropdown();
 	});
 }
 
+// Switches the shared search-category dropdown and synchronizes the integrated advanced-search UI.
+function selectFilterCategoryByLabel(label, shouldFocus = false) {
+	const filter = filters[label];
+	if (!filter)
+		return;
+
+	const wasAdvancedSearch = selectedFilter?.label === 'Adv. Search';
+	const isAdvancedSearch = filter.label === 'Adv. Search';
+	const advancedSearchActions = document.getElementById('advancedSearchActions');
+	selectFilterCategory.value = filter.label;
+	selectedFilter = filter;
+	speciesInput.value = isAdvancedSearch ? (advancedSearchQuery || '') : '';
+	if (!wasAdvancedSearch && isAdvancedSearch && typeof removeFilters === 'function')
+		removeFilters();
+	if (wasAdvancedSearch && !isAdvancedSearch) {
+		advancedSearchLastInputValue = '';
+		if (typeof clearAdvancedSearchPredicateState === 'function')
+			clearAdvancedSearchPredicateState();
+		if (typeof hideAdvancedSearchAutocomplete === 'function')
+			hideAdvancedSearchAutocomplete();
+		if (typeof refreshSpeciesResults === 'function')
+			refreshSpeciesResults();
+	}
+	hideDefaultSearchDropdown();
+	advancedSearchActions?.classList.toggle('hide', !isAdvancedSearch);
+	advancedSearchActions?.classList.toggle('visible', isAdvancedSearch);
+	selectFilterCategory.className = '';
+	categoryDropdown.className = 'hide';
+	if (typeof updateIntegratedSearchControls === 'function')
+		updateIntegratedSearchControls();
+
+	if (!shouldFocus)
+		return;
+
+	if (isAdvancedSearch) {
+		advancedSearchLastInputValue = speciesInput.value;
+		speciesInput.focus();
+		speciesInput.setSelectionRange(speciesInput.value.length, speciesInput.value.length);
+		if (typeof refreshAdvancedSearchAutocomplete === 'function')
+			refreshAdvancedSearchAutocomplete();
+		return;
+	}
+
+	speciesInput.focus();
+}
+
 function buildDropdown(event) {
+	if (!selectedFilter) {
+		hideDefaultSearchDropdown();
+		return;
+	}
+	if (selectedFilter.label === 'Adv. Search')
+		return;
+
 	let input = speciesInput.value.trim().toLowerCase();
 	let options = selectedFilter.options.filter(x => selectedFilter.display(x).toLowerCase().includes(input));
+	if (!options.length) {
+		hideDefaultSearchDropdown();
+		return;
+	}
+
 	inputDropdown.innerHTML = '';
+	showDefaultSearchDropdown();
 	for (const option of options) {
 		let wrapper = document.createElement('li');
 		wrapper.innerText = selectedFilter.display(option);
@@ -305,12 +379,8 @@ function addFilter(filter, option) {
 	};
 	activeFiltersDisplay.append(active.button);
 
-	let results = Object.values(species);
-	for (const a of Object.values(filters).reduce((list, x) => list.concat(x.active), [])) {
-		results = results.filter(a.func);
-	}
-	
-	populateTable('speciesTable', results);
+	let results = getFilteredSpeciesResults();
+	renderSpeciesResults(results);
 
 	if (results.length === 1) {//&& filter.name === 'Name') {
 		removeFilter(filter, active);
@@ -323,12 +393,7 @@ function removeFilter(filter, active) {
 
 	filter.active.splice(filter.active.findIndex(x => x.option == active.option), 1);
 
-	let results = Object.values(species);
-	for (const a of Object.values(filters).reduce((list, x) => list.concat(x.active), [])) {
-		results = results.filter(a.func);
-	}
-	
-	populateTable('speciesTable', results);
+	renderSpeciesResults(getFilteredSpeciesResults());
 }
 
 function removeFilters() {
@@ -336,4 +401,5 @@ function removeFilters() {
 		filter.active.forEach(active => active.button.remove());
 		filter.active = [];
 	});
+	refreshSpeciesResults();
 }

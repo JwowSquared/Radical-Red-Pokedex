@@ -2,7 +2,26 @@ body {
 	background-color: #222222;
 }
 
+body.allowTextSelection,
+body.allowTextSelection *:not(button):not(input):not(label):not(summary) {
+	user-select: text !important;
+	-webkit-user-select: text !important;
+}
+
+body:not(.allowTextSelection) #appearanceSettingsMenu,
+body:not(.allowTextSelection) #appearanceSettingsMenu * {
+	user-select: none;
+	-webkit-user-select: none;
+}
+
 .hide {
+	display: none;
+}
+
+#speciesControl.hide,
+#advancedSearchControl.hide,
+#activeFilters.hide,
+#advancedSearchActions.hide {
 	display: none;
 }
 
@@ -16,11 +35,11 @@ body {
 	margin-top: 20px;
 }
 
-#speciesFilterInputWrapper, #speciesFilterCategoryWrapper {
+#speciesFilterInputWrapper, #speciesFilterCategoryWrapper, #advancedSearchInputWrapper {
 	position: relative;
 }
 
-#speciesFilterInputDropdown {
+#speciesFilterInputDropdown, #advancedSearchAutocompleteDropdown {
 	overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -58,6 +77,14 @@ li:hover {
 	color: white;
 }
 
+#advancedSearchGuideContent {
+	color: white;
+}
+
+#advancedSearchGuideContent code {
+	color: #9ee7ff;
+}
+
 .modal-content {
 	background-color: #222222;
     user-select: none;
@@ -72,9 +99,167 @@ li:hover {
 	float: right;
 }
 
+#advancedSearchControl {
+	color: white;
+	margin: 0 auto;
+	padding: 0 30px 15px 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+}
+
+#advancedSearchActions {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	opacity: 1;
+	transform: none;
+	transition: none;
+}
+
+#advancedSearchActions.visible {
+	opacity: 1;
+	transform: none;
+}
+
+#advancedSearchActions > button {
+	display: inline-block;
+	flex: 0 0 auto;
+}
+
+.advancedSearchAutocompleteItem {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 8px;
+}
+
+.advancedSearchAutocompleteItem.active,
+.advancedSearchAutocompleteItem:hover {
+	background: #3c3a3a;
+}
+
+.advancedSearchAutocompleteLabel {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.advancedSearchAutocompleteMeta {
+	color: #c0c0c0;
+	font-size: 0.85rem;
+	flex-shrink: 0;
+}
+
+#advancedSearchStatus {
+	margin-top: 6px;
+	min-height: 20px;
+	text-align: center;
+}
+
+#advancedSearchStatus.error {
+	color: #ff9a9a;
+}
+
+#advancedSearchStatus.success {
+	color: #9de59d;
+}
+
+#advancedSearchStatus.info {
+	color: white;
+}
+
+.infoHardcoreLabel,
+.infoHardcoreSubLabel,
+.infoItemsLabel,
+.infoCurrentMovesLabel,
+.coverageLabelWrapper,
+.infoTreeEvoLabel,
+.infoTreeFormsLabel,
+.infoChangelogLabel {
+	margin-top: 10px;
+	font-weight: 700;
+}
+
+.infoHardcoreMoveList,
+.infoHardcoreAbility,
+.infoCurrentMovesList {
+	max-width: 500px;
+}
+
+.infoCurrentMovesList {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 8px;
+}
+
+.infoCurrentMoveWrapper {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.2rem 0.6rem;
+	border: 1px solid rgba(255, 255, 255, 0.16);
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.06);
+}
+
+.infoHardcoreMoveLegend {
+	max-width: 500px;
+}
+
+.hardcoreUnavailableMarker {
+	color: #ff4d4d !important;
+	font-weight: 700;
+	margin-left: 0.2rem;
+}
+
+.hardcoreUnavailableMoveName {
+	color: #b7b7b7;
+}
+
+.customTooltipButton {
+	position: relative;
+}
+
+.customTooltipButton::after {
+	content: attr(data-tooltip);
+	position: absolute;
+	left: 50%;
+	top: calc(100% + 8px);
+	transform: translateX(-50%);
+	background: rgba(20, 20, 20, 0.96);
+	color: white;
+	border: 1px solid #666;
+	border-radius: 4px;
+	padding: 0.35rem 0.55rem;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.2;
+	white-space: nowrap;
+	opacity: 0;
+	pointer-events: none;
+	z-index: 5;
+	transition: opacity 0s linear;
+	transition-delay: 0s;
+}
+
+.customTooltipButton:hover::after,
+.customTooltipButton:focus::after {
+	opacity: 1;
+	transition-delay: 0.5s;
+}
+
+#speciesModal .modal-body {
+	position: relative;
+}
+
 #speciesPanelInfoDisplay {
 	color: white;
 	text-align: center;
+	width: 100%;
 	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
     display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
     display: -ms-flexbox;      /* TWEENER - IE 10 */
@@ -83,6 +268,22 @@ li:hover {
 	flex-direction: column;
 	align-items: center;
 	clear: right;
+}
+
+#speciesModal .speciesModalFavoritesToggle {
+	position: absolute;
+	top: 12px;
+	left: 12px;
+	width: 28px;
+	min-width: 28px;
+	font-size: 1.7rem;
+	transform: none;
+	z-index: 2;
+}
+
+#speciesModal .speciesModalFavoritesToggle.favoritesToggleEnabled {
+	opacity: 1;
+	pointer-events: auto;
 }
 
 .infoSprite {
@@ -316,6 +517,335 @@ li:hover {
 	gap: 15px;
 }
 
+#topLeftMenuRow {
+	position: fixed;
+	top: 24px;
+	left: 24px;
+	z-index: 10;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	align-items: flex-start;
+}
+
+#topRightMenuRow {
+	position: fixed;
+	top: 24px;
+	right: 24px;
+	z-index: 10;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	align-items: flex-start;
+}
+
+#favoritesWrapper,
+#appearanceSettingsWrapper,
+#advancedSearchShortcutsWrapper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+#favoritesWrapper {
+	align-items: flex-start;
+}
+
+#favoritesWrapper.hide {
+	display: none;
+}
+
+#favoritesButton,
+#appearanceSettingsButton,
+#advancedSearchShortcutsButton {
+	display: block;
+	padding: 0.25rem 0.65rem;
+	border-radius: 4px;
+	border: 2px solid gray;
+	background: rgba(34, 34, 34, 0.92);
+	color: white;
+	font-weight: 600;
+	appearance: none;
+}
+
+#favoritesMenu,
+#appearanceSettingsMenu,
+#advancedSearchShortcutsMenu {
+	position: absolute;
+	top: calc(100% + 8px);
+	right: 0;
+	min-width: 220px;
+	padding: 0.7rem 0.8rem;
+	border: 1px solid rgba(255, 255, 255, 0.16);
+	border-radius: 8px;
+	background: rgba(28, 28, 28, 0.97);
+	box-shadow: black 2px 2px 8px 0px;
+	color: white;
+	opacity: 0;
+	transform: translateY(-8px);
+	transition: opacity 0.1s ease, transform 0.1s ease;
+	transform-origin: top right;
+}
+
+#favoritesMenu {
+	left: 0;
+	right: auto;
+	min-width: min(320px, calc(100vw - 48px));
+	max-width: min(420px, calc(100vw - 32px));
+	max-height: min(78vh, 720px);
+	overflow-y: auto;
+	transform-origin: top left;
+}
+
+#advancedSearchShortcutsMenu {
+	min-width: min(360px, calc(100vw - 48px));
+	max-width: min(480px, calc(100vw - 32px));
+	max-height: min(78vh, 720px);
+	overflow-y: auto;
+}
+
+#favoritesMenu.visible,
+#appearanceSettingsMenu.visible,
+#advancedSearchShortcutsMenu.visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.appearanceSettingsGroup {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	margin-bottom: 0.6rem;
+}
+
+.appearanceSettingsGroupLabel {
+	font-weight: 700;
+}
+
+.appearanceSettingsOption {
+	display: flex;
+	align-items: center;
+	gap: 0.45rem;
+	margin: 0;
+	cursor: pointer;
+}
+
+.appearanceSettingsSubOption {
+	margin-left: 1.45rem;
+	font-size: 0.95rem;
+}
+
+.favoritesMenuRow {
+	display: flex;
+	align-items: center;
+	gap: 0.7rem;
+	padding: 0.4rem 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	min-width: 0;
+	cursor: pointer;
+}
+
+.favoritesMenuRow:hover,
+.favoritesMenuRow:focus-visible {
+	background: rgba(255, 255, 255, 0.05);
+	outline: none;
+}
+
+.favoritesMenuRow:last-of-type {
+	border-bottom: none;
+}
+
+.favoritesMenuSprite {
+	flex: 0 0 auto;
+	width: 44px;
+	height: 44px;
+	image-rendering: pixelated;
+}
+
+.favoritesMenuInfo {
+	flex: 1;
+	min-width: 0;
+	text-align: left;
+}
+
+.favoritesMenuName {
+	font-weight: 600;
+	line-height: 1.2;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.favoritesMenuAbility {
+	color: rgba(255, 255, 255, 0.72);
+	font-size: 0.85rem;
+	font-style: italic;
+	line-height: 1.2;
+	white-space: normal;
+	word-break: break-word;
+}
+
+.favoritesMenuRemoveButton {
+	flex: 0 0 auto;
+	padding: 0 0 0 0.5rem;
+	border: none;
+	background: none;
+	color: rgba(255, 255, 255, 0.82);
+	font-size: 1rem;
+	font-weight: 700;
+	line-height: 1;
+	appearance: none;
+}
+
+.favoritesMenuClearButton {
+	display: block;
+	width: auto;
+	margin-left: auto;
+	padding: 0.3rem 0 0;
+	border: none;
+	background: none;
+	color: rgba(255, 255, 255, 0.68);
+	font-size: 0.9rem;
+	text-align: right;
+	appearance: none;
+}
+
+.favoritesMenuClearButton:disabled {
+	opacity: 0.4;
+	cursor: default;
+}
+
+.favoritesEmptyState {
+	margin: 0;
+	color: rgba(255, 255, 255, 0.65);
+	font-size: 0.9rem;
+	padding: 0.2rem 0 0.45rem;
+}
+
+.advancedSearchShortcutButton {
+	display: flex;
+	align-items: center;
+	flex: 1;
+	min-width: 0;
+	padding: 0;
+	border: none;
+	background: none;
+	color: white;
+	text-align: left;
+	cursor: grab;
+	touch-action: none;
+	appearance: none;
+}
+
+.advancedSearchShortcutRemoveButton {
+	flex: 0 0 auto;
+	padding: 0 0 0 0.65rem;
+	border: none;
+	background: none;
+	color: rgba(255, 255, 255, 0.82);
+	font-size: 1rem;
+	font-weight: 700;
+	line-height: 1;
+	appearance: none;
+}
+
+.advancedSearchShortcutTitle {
+	display: block;
+	width: 100%;
+	font-weight: 400;
+	font-family: inherit;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.advancedSearchShortcutEmptyState {
+	margin: 0;
+	color: rgba(255, 255, 255, 0.65);
+	font-size: 0.9rem;
+	padding: 0.2rem 0;
+}
+
+.advancedSearchShortcutRow {
+	display: flex;
+	align-items: center;
+	padding: 0.38rem 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	min-width: 0;
+}
+
+.advancedSearchShortcutRow:first-of-type {
+	padding-top: 0;
+}
+
+.advancedSearchShortcutRow:last-child {
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+.advancedSearchShortcutRow.dragging {
+	opacity: 0.35;
+}
+
+.advancedSearchShortcutRow.dragging .advancedSearchShortcutButton {
+	cursor: grabbing;
+}
+
+.advancedSearchShortcutRow.drag-placeholder {
+	border-radius: 6px;
+	background: rgba(255, 255, 255, 0.06);
+}
+
+.advancedSearchShortcutDragPreview {
+	position: fixed;
+	z-index: 9999;
+	display: flex;
+	align-items: center;
+	padding: 0.38rem 0.55rem;
+	border-radius: 8px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	background: rgba(34, 34, 34, 0.96);
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+	pointer-events: none;
+	opacity: 0.95;
+}
+
+.advancedSearchShortcutDragPreview .advancedSearchShortcutButton {
+	cursor: grabbing;
+}
+
+.advancedSearchGuideSuggestions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-top: 0.65rem;
+}
+
+.advancedSearchGuideSuggestionButton {
+	padding: 0.35rem 0.55rem;
+	border-radius: 6px;
+	border: 1px solid rgba(255, 255, 255, 0.16);
+	background: rgba(255, 255, 255, 0.05);
+	color: white;
+	font-size: 0.9rem;
+	font-weight: 600;
+	appearance: none;
+}
+
+#settingsExportJsonButton {
+	display: block;
+	width: 100%;
+	margin-top: 0.7rem;
+	padding: 0.2rem 0.45rem;
+	border-radius: 3px;
+	border: 2px solid gray;
+	background: none;
+	color: white;
+	font-weight: 550;
+	appearance: none;
+}
+
 #speciesControl {
 	padding: 0px 30px 15px 30px;
     display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
@@ -327,7 +857,7 @@ li:hover {
     justify-content: center;
 }
 
-#speciesFilterInput, #speciesFilterCategory, #speciesFilterSeparator, #saveFileInputButton, #clearCurrentSave {
+#speciesFilterInput, #speciesFilterCategory, #speciesFilterSeparator, #saveFileInputButton, #clearCurrentSave, #advancedSearchInput, #advancedSearchButton, #advancedSearchClearButton, #advancedSearchSaveButton, #advancedSearchGuideButton, #showHelpButton {
 	display: block;
     padding: 0.2rem;
     border-radius: 3px;
@@ -363,8 +893,37 @@ li:hover {
     left: -1px;
 }
 
+#speciesControl.advancedSearchMode #speciesFilterInput {
+	width: clamp(180px, 48vw, 560px);
+}
+
+#speciesControl.advancedSearchMode #speciesFilterInputDropdown {
+	top: auto;
+	bottom: calc(100% + 2px);
+	max-height: 108px;
+	overflow-y: auto;
+}
+
+#advancedSearchButton, #advancedSearchClearButton, #advancedSearchSaveButton, #advancedSearchGuideButton {
+	min-width: 72px;
+	cursor: pointer;
+}
+
 #saveFileInput {
 	display: none;
+}
+
+@media only screen and (max-width: 767px) {
+	#speciesControl.advancedSearchMode #speciesFilterInput {
+		width: clamp(150px, 52vw, 420px);
+	}
+}
+
+@media (hover: none) {
+	.favoritesToggleEnabled:not(.favoritesToggleChecked):not(.favoritesToggleFullFlash) {
+		opacity: 1;
+		transition: none;
+	}
 }
 
 #activeFilters, #currentSave {
@@ -413,8 +972,49 @@ li:hover {
 	gap: 0px 0.4rem;
 }
 
+#currentSaveProgression {
+	color: rgba(255, 255, 255, 0.72);
+	font-size: 0.95rem;
+	text-align: center;
+}
+
+#currentSaveProgression.hide {
+	display: none;
+}
+
 #currentSave.hide, #saveFileInputButton.hide {
 	display: none;
+}
+
+#currentSavePokemon {
+	width: min(900px, 100%);
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	color: rgba(255, 255, 255, 0.8);
+}
+
+#currentSavePokemon.hide {
+	display: none;
+}
+
+#currentSavePokemon details {
+	width: 100%;
+	padding: 0.45rem 0.6rem;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	border-radius: 6px;
+	background: rgba(0, 0, 0, 0.12);
+	text-align: left;
+}
+
+#currentSavePokemon summary {
+	cursor: pointer;
+	color: white;
+	font-weight: 600;
+}
+
+#currentSavePokemon summary span {
+	color: rgba(255, 255, 255, 0.7);
 }
 
 #currentSaveName {
@@ -482,8 +1082,160 @@ tbody {
 	cursor: auto;
 }
 
-.active, .sortOption:hover, #speciesFilterInput:hover, #speciesFilterCategory:hover, #speciesFilterInput:focus, #showHelpButton:hover, #saveFileInputButton:hover, #clearCurrentSave:hover, .activeFilter:hover {
+.active, .sortOption:hover, #speciesFilterInput:hover, #speciesFilterCategory:hover, #speciesFilterInput:focus, #advancedSearchInput:hover, #advancedSearchInput:focus, #showHelpButton:hover, #saveFileInputButton:hover, #clearCurrentSave:hover, #advancedSearchButton:hover, #advancedSearchClearButton:hover, #advancedSearchSaveButton:hover, #advancedSearchGuideButton:hover, #favoritesButton:hover, #appearanceSettingsButton:hover, #advancedSearchShortcutsButton:hover, #settingsExportJsonButton:hover, .activeFilter:hover, .advancedSearchGuideSuggestionButton:hover, .advancedSearchShortcutRemoveButton:hover, .favoritesMenuRemoveButton:hover, .favoritesMenuClearButton:not(:disabled):hover {
 	background: rgba(255, 255, 255, 0.075);
+}
+
+.advancedSearchShortcutRow:hover {
+	background: rgba(255, 255, 255, 0.05);
+}
+
+.savePokemonList {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem;
+	margin-top: 0.55rem;
+}
+
+.savePokemonChip {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.18rem 0.5rem;
+	border: 1px solid rgba(255, 255, 255, 0.16);
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.07);
+	color: white;
+	font-size: 0.95rem;
+	line-height: 1.3;
+}
+
+.savePokemonChipInteractive {
+	cursor: pointer;
+	transition: background 0.12s ease, border-color 0.12s ease, transform 0.12s ease;
+}
+
+.savePokemonChipInteractive:hover {
+	background: rgba(255, 255, 255, 0.14);
+	border-color: rgba(255, 255, 255, 0.28);
+	transform: translateY(-1px);
+}
+
+.saveBoxSection + .saveBoxSection {
+	margin-top: 0.6rem;
+}
+
+.saveBoxTitle {
+	display: block;
+	color: white;
+	font-weight: 600;
+}
+
+#speciesLocationGroups {
+	max-width: 1200px;
+	margin: 0 auto 24px auto;
+	padding: 0;
+}
+
+.locationSpeciesGroup + .locationSpeciesGroup {
+	margin-top: 18px;
+}
+
+.locationSpeciesGroupTitle {
+	margin: 0 0 0.5rem 0;
+	color: white;
+	font-size: 1.35rem;
+	font-weight: 700;
+	text-align: left;
+	max-width: 1200px;
+	margin-inline: auto;
+}
+
+.locationSpeciesTableWrapper {
+	margin-top: 0;
+}
+
+.locationSpeciesEmpty {
+	color: rgba(255, 255, 255, 0.75);
+	text-align: center;
+	padding: 1rem 0;
+}
+
+#teamPageContent {
+	max-width: 1200px;
+	margin: 0 auto 32px auto;
+	padding: 0 20px;
+}
+
+#teamPageSummary {
+	color: rgba(255, 255, 255, 0.85);
+	text-align: center;
+	margin-bottom: 18px;
+}
+
+#teamPageEmptyState {
+	max-width: 700px;
+	margin: 24px auto 0 auto;
+	padding: 18px 20px;
+	text-align: center;
+	color: rgba(255, 255, 255, 0.85);
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	border-radius: 10px;
+	background: rgba(255, 255, 255, 0.05);
+}
+
+.teamCurrentMoves {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	justify-content: center;
+}
+
+.teamCurrentMove {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.18rem 0.5rem;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	color: rgba(255, 255, 255, 0.88);
+	font-size: 0.82rem;
+}
+
+.teamSpeciesRow {
+	height: auto;
+}
+
+.teamSpeciesName {
+	font-weight: 700;
+}
+
+.teamSpeciesNickname {
+	margin-top: 4px;
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 0.88rem;
+	font-style: italic;
+}
+
+.teamCurrentMovesCellWrapper {
+	min-width: 260px;
+}
+
+#teamTable.hide {
+	display: none;
+}
+
+#teamTable {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+#teamTable .table {
+	min-width: 1280px;
+}
+
+#teamTable .sortLocked:last-of-type,
+#teamTable .sortOption:last-of-type {
+	min-width: 260px;
 }
 
 .sortAscending::before {
@@ -506,6 +1258,97 @@ tbody {
 .speciesDexIDWrapper {
 	min-width: 67.9px;
 	font-weight: 700;
+	text-align: center;
+}
+
+.speciesDexIDValue {
+	display: inline-block;
+	min-width: 1.5ch;
+	text-align: center;
+}
+
+#speciesTable .speciesFavoriteToggleWrapper,
+.locationSpeciesTableWrapper .speciesFavoriteToggleWrapper {
+	width: 20px;
+	min-width: 20px;
+	padding-left: 0;
+	padding-right: 0;
+	text-align: center;
+	vertical-align: middle !important;
+}
+
+#speciesTable .speciesFavoriteToggleWrapper > .favoritesToggle,
+.locationSpeciesTableWrapper .speciesFavoriteToggleWrapper > .favoritesToggle {
+	position: relative;
+	left: 12px;
+	top: auto;
+	display: inline-block;
+	transform: none;
+}
+
+#speciesTable .speciesDexIDWrapper,
+.locationSpeciesTableWrapper .speciesDexIDWrapper {
+	min-width: 47.9px;
+	padding-left: 0;
+	padding-right: 0;
+	vertical-align: middle !important;
+}
+
+.favoritesToggle {
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 20px;
+	min-width: 20px;
+	padding: 0;
+	border: none;
+	background: none;
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 1.45rem;
+	line-height: 1;
+	opacity: 0;
+	pointer-events: none;
+	appearance: none;
+	transform: translateY(-50%);
+	transition: opacity 50ms linear, color 120ms ease;
+}
+
+.favoritesToggle::before {
+	content: "☆";
+}
+
+.favoritesToggleEnabled {
+	pointer-events: auto;
+}
+
+.speciesRow:hover .favoritesToggleEnabled:not(.favoritesToggleChecked):not(.favoritesToggleFullFlash),
+.favoritesToggleEnabled:focus-visible:not(.favoritesToggleChecked):not(.favoritesToggleFullFlash) {
+	opacity: 1;
+	transition-duration: 0ms, 120ms;
+}
+
+.favoritesToggleChecked {
+	opacity: 1;
+	color: #f1c232;
+	transition-duration: 0ms, 120ms;
+}
+
+.favoritesToggleChecked::before {
+	content: "★";
+}
+
+.favoritesToggleFullFlash {
+	opacity: 1;
+	color: #ff5c5c;
+	transition-duration: 0ms, 0ms;
+}
+
+.favoritesToggleFullFlash::before {
+	content: "★";
+}
+
+.favoritesToggle:disabled {
+	cursor: default;
 }
 
 .speciesSprite {
@@ -599,6 +1442,13 @@ td.moveNameWrapper {
 	width: 100%;
 }
 
+.moveName {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.15rem;
+}
+
 td.moveTypeWrapper {
 	width: 25%;
 }
@@ -633,12 +1483,24 @@ td.moveDescriptionWrapper {
 	#speciesTable tbody {
 		scroll-margin-top: 67px;
 	}
+
+	.locationSpeciesTableWrapper tbody {
+		scroll-margin-top: 67px;
+	}
 	
 	#speciesTable .sortLocked {
 		display: none;
 	}
+
+	.locationSpeciesTableWrapper .sortLocked {
+		display: none;
+	}
 	
 	#speciesTable .table td {
+		border: none;
+	}
+
+	.locationSpeciesTableWrapper .table td {
 		border: none;
 	}
 	
@@ -649,6 +1511,10 @@ td.moveDescriptionWrapper {
 		display: -webkit-flex;     /* NEW - Chrome */
 		display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 		flex-wrap: wrap;
+	}
+
+	.locationSpeciesTableWrapper .sortControls {
+		display: none;
 	}
 
 	#speciesTable .sortOption {
@@ -674,6 +1540,16 @@ td.moveDescriptionWrapper {
 		border-top: solid thin #757575;
 	}
 	
+		#speciesTable .speciesFavoriteToggleWrapper,
+		.locationSpeciesTableWrapper .speciesFavoriteToggleWrapper {
+			position: absolute;
+			left: 14%;
+			top: 12%;
+		width: 20px;
+		min-width: 20px;
+		padding: 0;
+	}
+
 	.speciesDexIDWrapper {
 		position: absolute;
 		left: 21%;
@@ -681,6 +1557,10 @@ td.moveDescriptionWrapper {
 	}
 	
 	.speciesSpriteWrapper, .speciesNameWrapper, #speciesTable .speciesTypesWrapper {
+		width: 33%;
+	}
+
+	.locationSpeciesTableWrapper .speciesTypesWrapper {
 		width: 33%;
 	}
 	
@@ -703,11 +1583,108 @@ td.moveDescriptionWrapper {
 		display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 		justify-content: space-evenly;
 	}
-	
-	.speciesStatWrapper {
-		width: 14%;
+		
+		.speciesStatWrapper {
+			width: 14%;
+		}
+
+		#teamTable tbody {
+			scroll-margin-top: 67px;
+		}
+
+		#teamTable .table {
+			min-width: 0;
+		}
+
+		#teamTable .sortLocked {
+			display: none;
+		}
+
+		#teamTable .table td {
+			border: none;
+		}
+
+		#teamTable .sortControls {
+			display: -webkit-box;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		#teamTable .sortOption {
+			width: 20%;
+			border: none;
+		}
+
+		#teamTable th:nth-of-type(1),
+		#teamTable th:nth-of-type(3),
+		#teamTable th:nth-of-type(5) {
+			width: 33.33%;
+		}
+
+		#teamTable .teamSpeciesRow {
+			position: relative;
+			height: fit-content;
+			height: -moz-max-content;
+			display: -webkit-box;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			border-top: solid thin #757575;
+		}
+
+		#teamTable .speciesDexIDWrapper {
+			position: absolute;
+			left: 21%;
+			top: 12%;
+		}
+
+		#teamTable .speciesSpriteWrapper,
+		#teamTable .speciesNameWrapper,
+		#teamTable .speciesTypesWrapper {
+			width: 33%;
+		}
+
+		#teamTable td.speciesNameWrapper {
+			display: -webkit-box;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+
+		#teamTable .speciesAbilitiesWrapper {
+			width: 100%;
+			display: -webkit-box;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-evenly;
+			gap: 4px 12px;
+		}
+
+		#teamTable .speciesStatWrapper {
+			width: 14%;
+		}
+
+		#teamTable .teamCurrentMovesCellWrapper {
+			width: 100%;
+			margin-top: 8px;
+		}
+
+		#teamTable .teamCurrentMoves {
+			justify-content: flex-start;
+		}
 	}
-}
 
 @media (max-width: 399.98px) {
 	.evoMethod {
@@ -719,6 +1696,22 @@ td.moveDescriptionWrapper {
 }
 
 @media (max-width: 768px) {
+	#speciesLocationGroups {
+		padding: 0 14px;
+	}
+
+	.locationSpeciesGroupTitle {
+		font-size: 1.15rem;
+	}
+
+	.locationSpeciesTableWrapper .table {
+		max-width: 100%;
+	}
+
+	#teamPageContent {
+		padding: 0 14px;
+	}
+
 	#saveWrapper {
 		max-width: 399px;
 	}
@@ -730,5 +1723,27 @@ td.moveDescriptionWrapper {
 	#clearCurrentSave {
 		margin-top: 8px;
 		padding: 0.2rem 4rem;
+	}
+
+	#teamTable .sortOption {
+		width: 25%;
+	}
+
+	#teamTable .speciesDexIDWrapper {
+		left: 24%;
+		top: 10%;
+	}
+
+	#teamTable .speciesSpriteWrapper,
+	#teamTable .speciesNameWrapper {
+		width: 50%;
+	}
+
+	#teamTable .speciesTypesWrapper {
+		width: 100%;
+	}
+
+	#teamTable .speciesStatWrapper {
+		width: 25%;
 	}
 }

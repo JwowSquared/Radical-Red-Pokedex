@@ -1,2 +1,46 @@
+# Keep the repository focused on the website source and assets.
 
+# Existing local assembler scratch files.
 *.s
+
+# macOS / editor noise.
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Reverse-engineering workspaces, caches, and local tooling state.
+TMP/
+save-hack/
+.ghidra-cache/
+.ghidra-settings/
+.ghidra-local/
+ghidra_*/
+__pycache__/
+.pydeps/
+.python-version
+.venv/
+venv/
+
+# ROM patching and emulator artifacts.
+*.gba
+*.ups
+*.ips
+*.bps
+*.sav
+*.ss0
+*.ss1
+*.ss2
+*.sgm
+*.state
+*.bin
+
+# Generated logs and lock files from reverse-engineering tools.
+*.log
+*.lock
+
+# Optional web tooling output if added later.
+node_modules/
+dist/
+build/
+.cache/
